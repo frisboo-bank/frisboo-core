@@ -1,0 +1,89 @@
+[versions]
+grpc = "1.76.0"
+grpc-kotlin = "1.4.1"
+kotlin = "2.2.20"
+openapi-generator = "7.16.0"
+postgres = "42.7.8"
+protobuf = "3.33.0"
+protobuf-plugin = "0.9.5"
+spring-boot = "3.5.6"
+spring-grpc-starter = "3.1.0.RELEASE"
+springdoc-openapi = "2.8.13"
+testcontainers = "1.21.3"
+
+[plugins]
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-spring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlin" }
+spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }
+openapi-generator = { id = "org.openapi.generator", version.ref = "openapi-generator" }
+protobuf = { id = "com.google.protobuf", version.ref = "protobuf-plugin" }
+
+[libraries]
+# Spring
+spring-boot-dependencies = { group = "org.springframework.boot", name = "spring-boot-dependencies", version.ref = "spring-boot" }
+
+# Spring starters (versions managed by Spring Boot BOM)
+spring-boot-starter-web = { module = "org.springframework.boot:spring-boot-starter-web" }
+spring-boot-starter-validation = { module = "org.springframework.boot:spring-boot-starter-validation" }
+spring-boot-starter-actuator = { module = "org.springframework.boot:spring-boot-starter-actuator" }
+spring-boot-starter-data-jpa = { module = "org.springframework.boot:spring-boot-starter-data-jpa" }
+spring-boot-starter-data-mongodb = { module = "org.springframework.boot:spring-boot-starter-data-mongodb" }
+
+# OpenAPI
+springdoc-openapi-starter-webmvc-ui = { module = "org.springdoc:springdoc-openapi-starter-webmvc-ui", version.ref = "springdoc-openapi" }
+springdoc-openapi-starter-webmvc-api = { module = "org.springdoc:springdoc-openapi-starter-webmvc-api", version.ref = "springdoc-openapi" }
+
+# Kafka
+spring-kafka = { module = "org.springframework.kafka:spring-kafka" }
+
+# Jackson
+jackson-module-kotlin = { module = "com.fasterxml.jackson.module:jackson-module-kotlin" }
+
+# DB tooling
+flyway-core = { module = "org.flywaydb:flyway-core" }
+postgresql = { module = "org.postgresql:postgresql", version.ref = "postgres" }
+
+# gRPC and Protobuf
+grpc-server-spring-boot-starter = { module = "net.devh:grpc-server-spring-boot-starter", version.ref = "spring-grpc-starter" }
+grpc-client-spring-boot-starter = { module = "net.devh:grpc-client-spring-boot-starter", version.ref = "spring-grpc-starter" }
+grpc-kotlin-stub = { module = "io.grpc:grpc-kotlin-stub", version.ref = "grpc-kotlin" }
+grpc-protobuf = { module = "io.grpc:grpc-protobuf", version.ref = "grpc" }
+protobuf-kotlin = { module = "com.google.protobuf:protobuf-kotlin", version.ref = "protobuf" }
+
+# Testing
+spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test" }
+testcontainers-kafka = { module = "org.testcontainers:testcontainers-kafka", version.ref = "testcontainers" }
+testcontainers-postgresql = { module = "org.testcontainers:testcontainers-postgresql", version.ref = "testcontainers" }
+testcontainers-mongodb = { module = "org.testcontainers:testcontainers-mongodb", version.ref = "testcontainers" }
+
+[bundles]
+spring-base = [
+    "spring-boot-starter-web",
+    "spring-boot-starter-validation",
+    "spring-boot-starter-actuator",
+    "jackson-module-kotlin"
+]
+openapi = [
+    "springdoc-openapi-starter-webmvc-ui",
+    "springdoc-openapi-starter-webmvc-api",
+]
+persistence = [
+    "spring-boot-starter-data-jpa",
+    "spring-boot-starter-data-mongodb",
+    "flyway-core",
+    "postgresql"
+]
+grpc = [
+    "grpc-server-spring-boot-starter",
+    "grpc-client-spring-boot-starter",
+    "grpc-kotlin-stub",
+    "grpc-protobuf",
+    "protobuf-kotlin"
+]
+kafka = [ "spring-kafka" ]
+testing = [
+    "spring-boot-starter-test",
+#    "testcontainers-kafka",
+#    "testcontainers-postgresql",
+#    "testcontainers-mongodb"
+]
