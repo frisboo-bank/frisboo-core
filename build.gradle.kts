@@ -17,12 +17,8 @@ java {
 }
 
 repositories {
-    gradlePluginPortal()
     mavenCentral()
     mavenLocal()
-}
-repositories {
-	mavenCentral()
 }
 
 kotlin {
