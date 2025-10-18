@@ -83,7 +83,7 @@ grpc = [
 kafka = [ "spring-kafka" ]
 testing = [
     "spring-boot-starter-test",
-#    "testcontainers-kafka",
-#    "testcontainers-postgresql",
-#    "testcontainers-mongodb"
+    "testcontainers-kafka",
+    "testcontainers-postgresql",
+    "testcontainers-mongodb"
 ]
