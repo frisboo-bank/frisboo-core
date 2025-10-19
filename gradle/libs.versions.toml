@@ -1,89 +1,214 @@
 [versions]
-grpc = "1.76.0"
-grpc-kotlin = "1.4.1"
-kotlin = "2.2.20"
-openapi-generator = "7.16.0"
-postgres = "42.7.8"
-protobuf = "3.33.0"
-protobuf-plugin = "0.9.5"
+# ==============================================================================
+# Core Framework
+# ==============================================================================
 spring-boot = "3.5.6"
-spring-grpc-starter = "3.1.0.RELEASE"
-springdoc-openapi = "2.8.13"
-testcontainers = "1.21.3"
+kotlin = "2.2.20"
+
+# ==============================================================================
+# Spring Ecosystem
+# ==============================================================================
+spring-grpc = "0.11.0"
+springdoc-openapi = "1.9.0"
+springdoc-openapi-starter = "2.8.13"
+
+# ==============================================================================
+# Observability
+# ==============================================================================
+micrometer-tracing = "1.4.3"
+opentelemetry = "1.44.1"
+logstash-encoder = "8.0"
+
+# ==============================================================================
+# Database & Persistence
+# ==============================================================================
+postgresql = "42.7.8"
+flyway-core = "11.14.1"
+
+# ==============================================================================
+# gRPC & Protocol Buffers
+# ==============================================================================
+grpc-protobuf = "1.76.0"
+grpc-stub = "1.76.0"
+grpc-kotlin-stub = "1.5.0"
+protobuf = "3.25.3"
+protobuf-plugin = "0.9.5"
+protobuf-kotlin = "3.25.3"
+protoc = "3.25.3"
+protoc-gen-grpc-java = "1.76.0"
+protoc-gen-grpc-kotlin = "1.5.0"
+
+# ==============================================================================
+# Testing
+# ==============================================================================
+kotest = "5.9.1"
+mockk = "1.14.6"
+testcontainers = "2.0.1"
+
+# ==============================================================================
+# Development & Tooling
+# ==============================================================================
+dependency-analysis = "3.1.0"
+detekt = "1.23.8"
+dokka = "2.1.0"
+gradle-versions = "0.53.0"
+openapi-generator = "7.16.0"
+spotless = "8.0.0"
+test-retry = "1.6.4"
+
+# ==============================================================================
+# Utilities
+# ==============================================================================
+javax-annotation = "1.3.2"
+jackson-module-kotlin = "2.20.0"
 
 [plugins]
+# ==============================================================================
+# Core Framework
+# ==============================================================================
+spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-spring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlin" }
-spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }
+
+# ==============================================================================
+# API & Documentation
+# ==============================================================================
+dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 openapi-generator = { id = "org.openapi.generator", version.ref = "openapi-generator" }
 protobuf = { id = "com.google.protobuf", version.ref = "protobuf-plugin" }
+springdoc-openapi = { id = "org.springdoc.openapi-gradle-plugin", version.ref = "springdoc-openapi" }
+
+# ==============================================================================
+# Code Quality & Tooling
+# ==============================================================================
+dependency-analysis = { id = "com.autonomousapps.dependency-analysis", version.ref = "dependency-analysis" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
+gradle-versions = { id = "com.github.ben-manes.versions", version.ref = "gradle-versions" }
+spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
+test-retry = { id = "org.gradle.test-retry", version.ref = "test-retry" }
 
 [libraries]
-# Spring
-spring-boot-dependencies = { group = "org.springframework.boot", name = "spring-boot-dependencies", version.ref = "spring-boot" }
+# ==============================================================================
+# BOMs (Bill of Materials)
+# ==============================================================================
+spring-boot-dependencies = { module = "org.springframework.boot:spring-boot-dependencies", version.ref = "spring-boot" }
+spring-grpc-dependencies = { module = "org.springframework.grpc:spring-grpc-dependencies", version.ref = "spring-grpc" }
+testcontainers-dependencies = { module = "org.testcontainers:testcontainers-bom", version.ref = "testcontainers" }
 
-# Spring starters (versions managed by Spring Boot BOM)
+# ==============================================================================
+# Spring Boot Starters
+# ==============================================================================
 spring-boot-starter-web = { module = "org.springframework.boot:spring-boot-starter-web" }
 spring-boot-starter-validation = { module = "org.springframework.boot:spring-boot-starter-validation" }
 spring-boot-starter-actuator = { module = "org.springframework.boot:spring-boot-starter-actuator" }
+spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test" }
 spring-boot-starter-data-jpa = { module = "org.springframework.boot:spring-boot-starter-data-jpa" }
 spring-boot-starter-data-mongodb = { module = "org.springframework.boot:spring-boot-starter-data-mongodb" }
 
-# OpenAPI
-springdoc-openapi-starter-webmvc-ui = { module = "org.springdoc:springdoc-openapi-starter-webmvc-ui", version.ref = "springdoc-openapi" }
-springdoc-openapi-starter-webmvc-api = { module = "org.springdoc:springdoc-openapi-starter-webmvc-api", version.ref = "springdoc-openapi" }
+# ==============================================================================
+# Observability
+# ==============================================================================
+micrometer-tracing-otel = { module = "io.micrometer:micrometer-tracing-bridge-otel", version.ref = "micrometer-tracing" }
+otel-exporter-otlp = { module = "io.opentelemetry:opentelemetry-exporter-otlp", version.ref = "opentelemetry" }
+logstash-logback-encoder = { module = "net.logstash.logback:logstash-logback-encoder", version.ref = "logstash-encoder" }
 
-# Kafka
+# ==============================================================================
+# Database & Persistence
+# ==============================================================================
+postgresql = { module = "org.postgresql:postgresql", version.ref = "postgresql" }
+flyway-core = { module = "org.flywaydb:flyway-core", version.ref = "flyway-core" }
+
+# ==============================================================================
+# gRPC & Protocol Buffers
+# ==============================================================================
+grpc-kotlin-stub = { module = "io.grpc:grpc-kotlin-stub", version.ref = "grpc-kotlin-stub" }
+grpc-netty-shaded = { module = "io.grpc:grpc-netty-shaded", version.ref = "grpc-protobuf" }
+grpc-protobuf = { module = "io.grpc:grpc-protobuf", version.ref = "grpc-protobuf" }
+grpc-services = { module = "io.grpc:grpc-services", version.ref = "grpc-protobuf" }
+grpc-stub = { module = "io.grpc:grpc-stub", version.ref = "grpc-stub" }
+protobuf-kotlin = { module = "com.google.protobuf:protobuf-kotlin", version.ref = "protobuf-kotlin" }
+protoc = { module = "com.google.protobuf:protoc", version.ref = "protoc" }
+protoc-gen-grpc-java = { module = "io.grpc:protoc-gen-grpc-java", version.ref = "protoc-gen-grpc-java" }
+protoc-gen-grpc-kotlin = { module = "io.grpc:protoc-gen-grpc-kotlin", version.ref = "protoc-gen-grpc-kotlin" }
+spring-grpc-starter = { module = "org.springframework.grpc:spring-grpc-spring-boot-starter" }
+
+# ==============================================================================
+# API Documentation
+# ==============================================================================
+springdoc-openapi-starter-webmvc-ui = { module = "org.springdoc:springdoc-openapi-starter-webmvc-ui", version.ref = "springdoc-openapi-starter" }
+springdoc-openapi-starter-webmvc-api = { module = "org.springdoc:springdoc-openapi-starter-webmvc-api", version.ref = "springdoc-openapi-starter" }
+
+# ==============================================================================
+# Messaging
+# ==============================================================================
 spring-kafka = { module = "org.springframework.kafka:spring-kafka" }
 
-# Jackson
-jackson-module-kotlin = { module = "com.fasterxml.jackson.module:jackson-module-kotlin" }
+# ==============================================================================
+# Serialization & Utilities
+# ==============================================================================
+jackson-module-kotlin = { module = "com.fasterxml.jackson.module:jackson-module-kotlin", version.ref = "jackson-module-kotlin" }
+javax-annotation-api = { module = "javax.annotation:javax.annotation-api", version.ref = "javax-annotation" }
 
-# DB tooling
-flyway-core = { module = "org.flywaydb:flyway-core" }
-postgresql = { module = "org.postgresql:postgresql", version.ref = "postgres" }
-
-# gRPC and Protobuf
-grpc-server-spring-boot-starter = { module = "net.devh:grpc-server-spring-boot-starter", version.ref = "spring-grpc-starter" }
-grpc-client-spring-boot-starter = { module = "net.devh:grpc-client-spring-boot-starter", version.ref = "spring-grpc-starter" }
-grpc-kotlin-stub = { module = "io.grpc:grpc-kotlin-stub", version.ref = "grpc-kotlin" }
-grpc-protobuf = { module = "io.grpc:grpc-protobuf", version.ref = "grpc" }
-protobuf-kotlin = { module = "com.google.protobuf:protobuf-kotlin", version.ref = "protobuf" }
-
+# ==============================================================================
 # Testing
-spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test" }
-testcontainers-kafka = { module = "org.testcontainers:testcontainers-kafka", version.ref = "testcontainers" }
-testcontainers-postgresql = { module = "org.testcontainers:testcontainers-postgresql", version.ref = "testcontainers" }
-testcontainers-mongodb = { module = "org.testcontainers:testcontainers-mongodb", version.ref = "testcontainers" }
+# ==============================================================================
+kotest-assertions = { module = "io.kotest:kotest-assertions-core", version.ref = "kotest" }
+kotest-runner = { module = "io.kotest:kotest-runner-junit5", version.ref = "kotest" }
+mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
+testcontainers-kafka = { module = "org.testcontainers:kafka" }
+testcontainers-mongodb = { module = "org.testcontainers:mongodb" }
+testcontainers-postgresql = { module = "org.testcontainers:postgresql" }
 
 [bundles]
-spring-base = [
+# ==============================================================================
+# Application Bundles
+# ==============================================================================
+spring-web = [
     "spring-boot-starter-web",
     "spring-boot-starter-validation",
     "spring-boot-starter-actuator",
-    "jackson-module-kotlin"
+    "jackson-module-kotlin",
 ]
-openapi = [
-    "springdoc-openapi-starter-webmvc-ui",
-    "springdoc-openapi-starter-webmvc-api",
+
+observability = [
+    "micrometer-tracing-otel",
+    "otel-exporter-otlp",
+    "logstash-logback-encoder",
 ]
+
 persistence = [
     "spring-boot-starter-data-jpa",
     "spring-boot-starter-data-mongodb",
     "flyway-core",
-    "postgresql"
+    "postgresql",
 ]
+
 grpc = [
-    "grpc-server-spring-boot-starter",
-    "grpc-client-spring-boot-starter",
     "grpc-kotlin-stub",
+    "grpc-netty-shaded",
     "grpc-protobuf",
-    "protobuf-kotlin"
+    "grpc-services",
+    "grpc-stub",
+    "javax-annotation-api",
+    "protobuf-kotlin",
+    "spring-grpc-starter",
 ]
-kafka = [ "spring-kafka" ]
+
+messaging = [
+    "spring-kafka",
+]
+
+openapi = [
+    "springdoc-openapi-starter-webmvc-ui",
+    "springdoc-openapi-starter-webmvc-api",
+]
+
 testing = [
+    "kotest-assertions",
+    "kotest-runner",
+    "mockk",
     "spring-boot-starter-test",
     "testcontainers-kafka",
+    "testcontainers-mongodb",
     "testcontainers-postgresql",
-    "testcontainers-mongodb"
 ]
