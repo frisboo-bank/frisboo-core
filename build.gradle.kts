@@ -15,6 +15,7 @@ plugins {
     // ==============================================================================
     alias(libs.plugins.test.retry)
     alias(libs.plugins.gradle.versions)
+    alias(libs.plugins.kover)
 
     // ==============================================================================
     // Analysis/quality
@@ -48,7 +49,7 @@ kotlin {
 
 spotless {
     kotlin {
-        ktlint() // uses latest ktlint by default; pin if desired
+        ktlint()
         target("**/*.kt")
     }
     kotlinGradle {
@@ -62,13 +63,6 @@ detekt {
     allRules = false
     autoCorrect = true
 }
-
-//tasks.jacocoTestReport {
-//    reports {
-//        xml.required.set(true)
-//        html.required.set(true)
-//    }
-//}
 
 tasks.withType<Test> {
 	useJUnitPlatform()
