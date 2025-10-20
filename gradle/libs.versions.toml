@@ -22,8 +22,10 @@ logstash-encoder = "8.0"
 # ==============================================================================
 # Database & Persistence
 # ==============================================================================
-postgresql = "42.7.8"
 flyway-core = "11.14.1"
+flyway-postgresql = "11.14.1"
+mongodb = "5.6.1"
+postgresql = "42.7.8"
 
 # ==============================================================================
 # gRPC & Protocol Buffers
@@ -52,6 +54,8 @@ dependency-analysis = "3.1.0"
 detekt = "1.23.8"
 dokka = "2.1.0"
 gradle-versions = "0.53.0"
+kover = "0.8.3"
+ktlint = "1.3.1"
 openapi-generator = "7.16.0"
 spotless = "8.0.0"
 test-retry = "1.6.4"
@@ -59,7 +63,8 @@ test-retry = "1.6.4"
 # ==============================================================================
 # Utilities
 # ==============================================================================
-javax-annotation = "1.3.2"
+#javax-annotation = "1.3.2"
+jakarta-annotation = "2.1.1"
 jackson-module-kotlin = "2.20.0"
 
 [plugins]
@@ -84,6 +89,7 @@ springdoc-openapi = { id = "org.springdoc.openapi-gradle-plugin", version.ref = 
 dependency-analysis = { id = "com.autonomousapps.dependency-analysis", version.ref = "dependency-analysis" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 gradle-versions = { id = "com.github.ben-manes.versions", version.ref = "gradle-versions" }
+kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
 test-retry = { id = "org.gradle.test-retry", version.ref = "test-retry" }
 
@@ -91,6 +97,7 @@ test-retry = { id = "org.gradle.test-retry", version.ref = "test-retry" }
 # ==============================================================================
 # BOMs (Bill of Materials)
 # ==============================================================================
+mongodb-dependencies =  { module = "org.mongodb:mongodb-driver-bom", version.ref = "mongodb" }
 spring-boot-dependencies = { module = "org.springframework.boot:spring-boot-dependencies", version.ref = "spring-boot" }
 spring-grpc-dependencies = { module = "org.springframework.grpc:spring-grpc-dependencies", version.ref = "spring-grpc" }
 testcontainers-dependencies = { module = "org.testcontainers:testcontainers-bom", version.ref = "testcontainers" }
@@ -115,8 +122,10 @@ logstash-logback-encoder = { module = "net.logstash.logback:logstash-logback-enc
 # ==============================================================================
 # Database & Persistence
 # ==============================================================================
-postgresql = { module = "org.postgresql:postgresql", version.ref = "postgresql" }
 flyway-core = { module = "org.flywaydb:flyway-core", version.ref = "flyway-core" }
+flyway-postgresql = { module = "org.flywaydb:flyway-database-postgresql", version.ref = "flyway-postgresql" }
+mongodb = { module = "org.mongodb:mongodb-driver-kotlin-coroutine" }
+postgresql = { module = "org.postgresql:postgresql", version.ref = "postgresql" }
 
 # ==============================================================================
 # gRPC & Protocol Buffers
@@ -147,7 +156,8 @@ spring-kafka = { module = "org.springframework.kafka:spring-kafka" }
 # Serialization & Utilities
 # ==============================================================================
 jackson-module-kotlin = { module = "com.fasterxml.jackson.module:jackson-module-kotlin", version.ref = "jackson-module-kotlin" }
-javax-annotation-api = { module = "javax.annotation:javax.annotation-api", version.ref = "javax-annotation" }
+#javax-annotation-api = { module = "javax.annotation:javax.annotation-api", version.ref = "javax-annotation" }
+jakarta-annotation-api = { module = "jakarta.annotation:jakarta.annotation-api", version.ref = "jakarta-annotation" }
 
 # ==============================================================================
 # Testing
@@ -177,10 +187,12 @@ observability = [
 ]
 
 persistence = [
+    "flyway-core",
+    "flyway-postgresql",
+    "mongodb",
+    "postgresql",
     "spring-boot-starter-data-jpa",
     "spring-boot-starter-data-mongodb",
-    "flyway-core",
-    "postgresql",
 ]
 
 grpc = [
@@ -189,7 +201,8 @@ grpc = [
     "grpc-protobuf",
     "grpc-services",
     "grpc-stub",
-    "javax-annotation-api",
+#    "javax-annotation-api",
+    "jakarta-annotation-api",
     "protobuf-kotlin",
     "spring-grpc-starter",
 ]
