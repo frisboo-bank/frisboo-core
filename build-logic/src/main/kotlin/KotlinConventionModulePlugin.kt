@@ -77,7 +77,7 @@ private fun Project.configureKotlin(extension: KotlinConventionsExtension, libs:
             languageVersion.set(JavaLanguageVersion.of(extension.jdkToolchain.get()))
         }
 
-//      Openpapi generated code is not working with explicitApi()
+//      OpenAPI generated code is not working with explicitApi()
 //        explicitApi()
         explicitApiWarning()
 
