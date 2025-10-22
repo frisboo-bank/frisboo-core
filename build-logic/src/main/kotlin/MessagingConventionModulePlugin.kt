@@ -6,9 +6,17 @@ import org.gradle.api.provider.Property
 import org.gradle.kotlin.dsl.dependencies
 import javax.inject.Inject
 
-public abstract class MessagingConventionExtension @Inject constructor(objects: ObjectFactory) {
-    public val useKafka: Property<Boolean> = objects.property(Boolean::class.java)
-    public val useTestcontainers: Property<Boolean> = objects.property(Boolean::class.java)
+public abstract class MessagingConventionExtension @Inject constructor(private val objects: ObjectFactory) {
+    private val _useKafka: Property<Boolean> = objects.property(Boolean::class.java).convention(false)
+    private val _useTestcontainers: Property<Boolean> = objects.property(Boolean::class.java).convention(true)
+
+    public var useKafka: Boolean
+        get() = _useKafka.get()
+        set(value) = _useKafka.set(value)
+
+    public var useTestcontainers: Boolean
+        get() = _useTestcontainers.get()
+        set(value) = _useTestcontainers.set(value)
 }
 
 internal class MessagingConventionModulePlugin : Plugin<Project> {
@@ -18,25 +26,18 @@ internal class MessagingConventionModulePlugin : Plugin<Project> {
         val extension = extensions.create("messagingConventions", MessagingConventionExtension::class.java)
 
         afterEvaluate {
-            configureDefaults(extension)
-
-            if (extension.useKafka.get()) {
+            if (extension.useKafka) {
                 configureKafka(extension, libs)
             }
         }
     }
 }
 
-private fun Project.configureDefaults(extension: MessagingConventionExtension) {
-    extension.useKafka.convention(false)
-    extension.useTestcontainers.convention(true)
-}
-
 private fun Project.configureKafka(extension: MessagingConventionExtension, libs: VersionCatalog) {
     dependencies {
         add("implementation", libs.libraryOrThrow("spring-kafka"))
 
-        if (extension.useTestcontainers.get()) {
+        if (extension.useTestcontainers) {
             // Align Testcontainers modules if BOM alias exists
             libs.findLibrary("testcontainers-bom").ifPresent { bom ->
                 add("testImplementation", platform(bom.get()))

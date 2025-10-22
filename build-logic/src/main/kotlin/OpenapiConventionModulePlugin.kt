@@ -146,8 +146,8 @@ private fun Project.configureDependencies(libs: VersionCatalog) {
             addBom(conf, springdocOpenapiBom)
         }
 
-        add("implementation", libs.libraryOrThrow("springdoc-openapi-starter-webmvc-ui"))
-        add("implementation", libs.libraryOrThrow("springdoc-openapi-starter-webmvc-api"))
+        add("implementation", libs.libraryOrThrow("springdoc-openapi-starter-webflux-ui"))
+        add("implementation", libs.libraryOrThrow("springdoc-openapi-starter-webflux-api"))
     }
 }
 
