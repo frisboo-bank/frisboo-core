@@ -1,86 +1,81 @@
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.artifacts.VersionCatalog
-import org.gradle.api.file.DirectoryProperty
-import org.gradle.api.model.ObjectFactory
-import org.gradle.api.provider.Property
 import org.gradle.api.tasks.Delete
 import org.gradle.api.tasks.SourceSetContainer
+import org.gradle.api.tasks.compile.JavaCompile
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.register
+import org.gradle.kotlin.dsl.withType
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.openapitools.generator.gradle.plugin.extensions.OpenApiGeneratorGenerateExtension
 import org.openapitools.generator.gradle.plugin.extensions.OpenApiGeneratorValidateExtension
-import javax.inject.Inject
-
-public abstract class OpenapiConventionExtension @Inject constructor(objects: ObjectFactory) {
-    public val outputDir: DirectoryProperty = objects.directoryProperty()
-    public val packageName: Property<String> = objects.property(String::class.java)
-    public val schemaDir: DirectoryProperty = objects.directoryProperty()
-    public val schemaFilename: Property<String> = objects.property(String::class.java)
-
-    public val groupId: Property<String> = objects.property(String::class.java)
-    public val artifactId: Property<String> = objects.property(String::class.java)
-    public val artifactVersion: Property<String> = objects.property(String::class.java)
-
-    // Toggles
-    public val cleanupOutput: Property<Boolean> = objects.property(Boolean::class.java)
-    public val generateApiDocumentation: Property<Boolean> = objects.property(Boolean::class.java)
-    public val generateApis: Property<Boolean> = objects.property(Boolean::class.java)
-    public val generateApiTests: Property<Boolean> = objects.property(Boolean::class.java)
-    public val generateModelDocumentation: Property<Boolean> = objects.property(Boolean::class.java)
-    public val generateModels: Property<Boolean> = objects.property(Boolean::class.java)
-    public val generateModelTests: Property<Boolean> = objects.property(Boolean::class.java)
-    public val validateSpec: Property<Boolean> = objects.property(Boolean::class.java)
-}
 
 internal class OpenapiConventionModulePlugin : Plugin<Project> {
     override fun apply(target: Project): Unit = with(target) {
-        val libs = getLibs()
-
         pluginManager.apply("org.openapi.generator")
         pluginManager.apply("org.springdoc.openapi-gradle-plugin")
 
+        val libs = getLibs()
         val extension = extensions.create("openapiConvention", OpenapiConventionExtension::class.java)
 
-        pluginManager.withPlugin("org.openapi.generator") {
-            project.afterEvaluate {
-                configureDefaults(extension)
-                configureOpenApiGenerate(extension)
-                configureOpenApiValidate(extension)
-                configureDependencies(libs)
-                configureTasks(extension)
-            }
+        afterEvaluate {
+            sanitizeConfig(extension)
+            configureOpenApiGenerate(extension, libs)
+            configureOpenApiTasks(extension, libs)
         }
     }
 }
 
-private fun Project.configureDefaults(extension: OpenapiConventionExtension) {
-    val cleanedName = project.name.replace(Regex("[-_]"), "")
+private fun Project.sanitizeConfig(extension: OpenapiConventionExtension) {
+    // Set default options with better naming and validation
+    extension.outputDir.convention(layout.buildDirectory.dir("generated/sources/openapi/"))
+    extension.schemaDir.convention(layout.projectDirectory.dir("src/api/schemas/"))
 
-    extension.outputDir.convention(layout.buildDirectory.dir("generated/sources/openapi"))
-    extension.packageName.convention("${project.group}.$cleanedName")
-    extension.schemaDir.convention(layout.projectDirectory.dir("src/api/schemas"))
-    extension.schemaFilename.convention("${project.name}.yaml")
-
-    extension.cleanupOutput.convention(true)
-    extension.generateApiDocumentation.convention(true)
+    // Set default generation flags
     extension.generateApis.convention(true)
-    extension.generateApiTests.convention(true)
-    extension.generateModelDocumentation.convention(true)
     extension.generateModels.convention(true)
-    extension.generateModelTests.convention(true)
+    extension.generateApiTests.convention(false)
+    extension.generateModelTests.convention(false)
+    extension.generateApiDocumentation.convention(false)
+    extension.generateModelDocumentation.convention(false)
     extension.validateSpec.convention(true)
+    extension.recommend.convention(true)
+
+    require(
+        extension.artifactVersion.isPresent && extension.artifactVersion.get().isNotBlank(),
+    ) { "openapiConvention.artifactVersion must be set and non-empty" }
+    require(
+        extension.groupId.isPresent && extension.groupId.get().isNotBlank(),
+    ) { "openapiConvention.groupId must be set and non-empty" }
+    require(extension.outputDir.isPresent) { "openapiConvention.outputDir must be set" }
+    require(
+        extension.packageName.isPresent && extension.packageName.get().isNotBlank(),
+    ) { "openapiConvention.packageName must be set and non-empty" }
+    require(extension.schemaDir.isPresent) { "openapiConvention.schemaDir must be set" }
+    require(
+        extension.schemaFilename.isPresent && extension.schemaFilename.get().isNotBlank(),
+    ) { "openapiConvention.schemaFilename must be set and non-empty" }
 }
 
-private fun Project.configureOpenApiGenerate(extension: OpenapiConventionExtension) {
-    extensions.configure<OpenApiGeneratorGenerateExtension> {
-        // Basic configuration
-        generatorName.set("kotlin-spring")
+private fun Project.configureOpenApiGenerate(extension: OpenapiConventionExtension, libs: VersionCatalog) {
+    dependencies {
+        add("implementation", platform(libs.libraryOrThrow("springdoc-openapi-bom")))
+        add("implementation", libs.libraryOrThrow("springdoc-openapi-starter-webflux-ui"))
+        add("implementation", libs.libraryOrThrow("springdoc-openapi-starter-webflux-api"))
+    }
 
-        inputSpec.set(extension.schemaDir.file(extension.schemaFilename).map { it.asFile.absolutePath })
-        outputDir.set(extension.outputDir.map { it.asFile.absolutePath })
+    val generatedInputSpec =
+        extension.schemaDir.zip(extension.schemaFilename) { dir, filename -> dir.file(filename).asFile.absolutePath }
+
+    // Configure the OpenAPI generator
+    extensions.configure<OpenApiGeneratorGenerateExtension> {
+        generatorName.set("kotlin-spring")
+        inputSpec.set(generatedInputSpec)
+        outputDir.set(extension.outputDir.get().asFile.absolutePath)
         packageName.set(extension.packageName)
+        id.set(extension.packageName)
 
         // Generation control
         generateApiTests.set(extension.generateApiTests)
@@ -88,23 +83,16 @@ private fun Project.configureOpenApiGenerate(extension: OpenapiConventionExtensi
         generateApiDocumentation.set(extension.generateApiDocumentation)
         generateModelDocumentation.set(extension.generateModelDocumentation)
 
-        // Build info for generated projects
-        groupId.set(project.group.toString())
-        id.set("${project.name}-openapi")
-        version.set(project.version.toString())
+        // Build info
+        groupId.set(extension.groupId)
+        version.set(extension.artifactVersion)
 
-        val globalProps = project.providers.provider {
-            fun toggle(v: Boolean) = if (v) "" else "false"
+        globalProperties.set(
             mapOf(
-                "apis" to toggle(extension.generateApis.getOrElse(true)),
-                "models" to toggle(extension.generateModels.getOrElse(true)),
-                "modelTests" to toggle(extension.generateModelTests.getOrElse(true)),
-                "modelDocs" to toggle(extension.generateModelDocumentation.getOrElse(true)),
-                "apiTests" to toggle(extension.generateApiTests.getOrElse(true)),
-                "apiDocs" to toggle(extension.generateApiDocumentation.getOrElse(true)),
-            )
-        }
-        globalProperties.set(globalProps)
+                "apis" to extension.generateApis.get().toString(),
+                "models" to extension.generateModels.get().toString(),
+            ),
+        )
 
         configOptions.set(
             mapOf(
@@ -114,80 +102,76 @@ private fun Project.configureOpenApiGenerate(extension: OpenapiConventionExtensi
                 "useTags" to "true",
                 "library" to "spring-boot",
                 "reactive" to "true",
-            ),
-        )
-
-        // Additional properties for templates
-        additionalProperties.set(
-            mapOf(
-                "title" to project.name,
-                "packageVersion" to project.version.toString(),
+                "documentationProvider" to "springdoc",
+                "useBeanValidation" to "true",
+                "useJakartaEe" to "true",
+                "serializationLibrary" to "jackson",
+                "serializableModel" to "true",
+                "skipDefaultInterface" to "true",
+                "exceptionHandler" to "false",
             ),
         )
     }
-}
 
-private fun Project.configureOpenApiValidate(extension: OpenapiConventionExtension) {
+    // Configure validation
     extensions.configure<OpenApiGeneratorValidateExtension> {
-        inputSpec.set(extension.schemaDir.file(extension.schemaFilename).map { it.asFile.absolutePath })
-        recommend.convention(true)
+        inputSpec.set(generatedInputSpec)
+        recommend.set(extension.recommend)
+    }
+
+    // Add generated sources to the main source set so they are compiled automatically
+    extensions.configure<SourceSetContainer> {
+        named("main") {
+            java.srcDir(extension.outputDir.get().file("src/main/java"))
+            java.srcDir(extension.outputDir.get().file("src/main/kotlin"))
+        }
     }
 }
 
-
-private fun Project.configureDependencies(libs: VersionCatalog) {
-    dependencies {
-        // Enforce BOMs across common configurations if enabled
-        val springdocOpenapiBom = libs.libraryOrThrow("springdoc-openapi-bom")
-        val addBom: (String, Any) -> Unit = { conf, bom ->
-            add(conf, enforcedPlatform(bom))
-        }
-        listOf("api", "implementation", "testImplementation").forEach { conf ->
-            addBom(conf, springdocOpenapiBom)
-        }
-
-        add("implementation", libs.libraryOrThrow("springdoc-openapi-starter-webflux-ui"))
-        add("implementation", libs.libraryOrThrow("springdoc-openapi-starter-webflux-api"))
-    }
-}
-
-private fun Project.configureTasks(extension: OpenapiConventionExtension) {
+private fun Project.configureOpenApiTasks(extension: OpenapiConventionExtension, libs: VersionCatalog) {
     // Clean task for generated sources
     val cleanOpenApi = tasks.register<Delete>("cleanOpenApi") {
         group = "build"
         description = "Cleans generated OpenAPI sources"
         delete(extension.outputDir)
     }
-    tasks.matching { it.name == "clean" }.configureEach {
-        dependsOn(cleanOpenApi)
+    tasks.named("clean").configure { dependsOn(cleanOpenApi) }
+
+    // Wire the generator task into the compilation lifecycle
+    val openApiGenerateTask = tasks.named("openApiGenerate")
+    tasks.withType<KotlinCompile>().configureEach {
+        dependsOn(openApiGenerateTask)
+    }
+    tasks.withType<JavaCompile>().configureEach {
+        dependsOn(openApiGenerateTask)
     }
 
-    val openApiGenerate = tasks.named("openApiGenerate")
+    tasks.named("openApiValidate") {
+        enabled = extension.validateSpec.get()
+        inputs.property("recommend", extension.recommend.get())
 
-    pluginManager.withPlugin("org.jetbrains.kotlin.jvm") {
-        tasks.named("compileKotlin").configure {
-            dependsOn(openApiGenerate)
-        }
-    }
-
-    pluginManager.withPlugin("java") {
-        tasks.named("compileJava").configure {
-            dependsOn(openApiGenerate)
-        }
-
-        // Add generated sources to the main source set so they are compiled automatically
-        extensions.configure<SourceSetContainer> {
-            named("main") {
-                java.srcDir(extension.outputDir.map { it.dir("src/main/java") })
-                java.srcDir(extension.outputDir.map { it.dir("src/main/kotlin") })
+        doFirst {
+            if (!extension.schemaDir.get().asFile.exists()) {
+                logger.warn("OpenAPI schema directory does not exist: ${extension.schemaDir.get()}")
             }
         }
     }
 
-    // Run validation as part of 'check' only when enabled
-    if (extension.validateSpec.orNull != false) {
-        tasks.matching { it.name == "check" }.configureEach {
-            dependsOn("openApiValidate")
+    tasks.named("check") {
+        dependsOn(tasks.named("openApiValidate"))
+    }
+
+    tasks.register("openApiConfig") {
+        group = "documentation"
+        description = "Shows the current OpenAPI configuration"
+
+        doLast {
+            logger.lifecycle("OpenAPI Configuration:")
+            logger.lifecycle("  Schema: ${extension.schemaDir.get().file(extension.schemaFilename.get())}")
+            logger.lifecycle("  Output: ${extension.outputDir.get()}")
+            logger.lifecycle("  Package: ${extension.packageName.get()}")
+            logger.lifecycle("  Generate APIs: ${extension.generateApis.get()}")
+            logger.lifecycle("  Generate Models: ${extension.generateModels.get()}")
         }
     }
 }
