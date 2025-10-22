@@ -1,7 +1,10 @@
 plugins {
-    `version-catalog`
     `maven-publish`
+    `version-catalog`
 }
+
+group = "com.frisboo.corebanking"
+version = "1.0.0"
 
 catalog {
     versionCatalog {

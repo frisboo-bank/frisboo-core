@@ -7,13 +7,6 @@ dependencyResolutionManagement {
         gradlePluginPortal()
         mavenLocal()
     }
-
-    versionCatalogs {
-        create(
-            "libs",
-            Action {
-                from(files("../version-catalog/libs.versions.toml"))
-            },
-        )
-    }
 }
+
+rootProject.name = "version-catalog"

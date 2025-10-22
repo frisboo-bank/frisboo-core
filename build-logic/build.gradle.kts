@@ -11,15 +11,15 @@ group = "com.frisboo.corebanking"
 version = "1.0.0"
 
 java {
-    val jvmTargetVersion = versionLibs.versions.jvmTarget
+    val jvmTargetVersion = libs.versions.jvmTarget
     toolchain {
         languageVersion.set(jvmTargetVersion.map(JavaLanguageVersion::of))
     }
 }
 
 kotlin {
-    val kotlinVersion = versionLibs.versions.kotlinLanguage
-    val jvmTargetVersion = versionLibs.versions.jvmTarget
+    val kotlinVersion = libs.versions.kotlinLanguage
+    val jvmTargetVersion = libs.versions.jvmTarget
 
     jvmToolchain {
         languageVersion.set(jvmTargetVersion.map(JavaLanguageVersion::of))
@@ -39,20 +39,55 @@ kotlin {
     }
 }
 
+gradlePlugin {
+    plugins {
+        register("kotlinConvention") {
+            id = libs.plugins.frisboo.convention.kotlin.get().pluginId
+            implementationClass = "KotlinConventionModulePlugin"
+        }
+
+        register("MessagingConvention") {
+            id = libs.plugins.frisboo.convention.messaging.get().pluginId
+            implementationClass = "MessagingConventionModulePlugin"
+        }
+
+        register("OpenapiConvention") {
+            id = libs.plugins.frisboo.convention.openapi.get().pluginId
+            implementationClass = "OpenapiConventionModulePlugin"
+        }
+
+        register("PersistenceConvention") {
+            id = libs.plugins.frisboo.convention.persistence.get().pluginId
+            implementationClass = "PersistenceConventionModulePlugin"
+        }
+
+        register("QualityConvention") {
+            id = libs.plugins.frisboo.convention.quality.get().pluginId
+            implementationClass = "QualityConventionModulePlugin"
+        }
+
+        register("SpringBootConvention") {
+            id = libs.plugins.frisboo.convention.spring.boot.get().pluginId
+            implementationClass = "SpringBootConventionModulePlugin"
+        }
+    }
+}
+
 dependencies {
-    implementation(plugin(versionLibs.plugins.dependency.analysis))
-    implementation(plugin(versionLibs.plugins.detekt))
-    implementation(plugin(versionLibs.plugins.dokka))
-    implementation(plugin(versionLibs.plugins.gradle.versions))
-    implementation(plugin(versionLibs.plugins.kotlin.jvm))
-    implementation(plugin(versionLibs.plugins.kotlin.spring))
-    implementation(plugin(versionLibs.plugins.kover))
-    implementation(plugin(versionLibs.plugins.openapi.generator))
-    implementation(plugin(versionLibs.plugins.protobuf))
-    implementation(plugin(versionLibs.plugins.spotless))
-    implementation(plugin(versionLibs.plugins.spring.boot))
-    implementation(plugin(versionLibs.plugins.springdoc.openapi))
-    implementation(plugin(versionLibs.plugins.test.retry))
+    implementation(plugin(libs.plugins.dependency.analysis))
+    implementation(plugin(libs.plugins.detekt))
+//    implementation(plugin(libs.plugins.dokka))
+    implementation(plugin(libs.plugins.gradle.versions))
+    implementation(plugin(libs.plugins.kotlin.jvm))
+    implementation(plugin(libs.plugins.kotlin.spring))
+//    implementation(plugin(libs.plugins.kover))
+    implementation(plugin(libs.plugins.openapi.generator))
+//    implementation(plugin(libs.plugins.protobuf))
+    implementation(plugin(libs.plugins.spotless))
+    implementation(plugin(libs.plugins.spring.boot))
+    implementation(plugin(libs.plugins.springdoc.openapi))
+//    implementation(plugin(libs.plugins.test.retry))
+    compileOnly(libs.kotlin.gradle.plugin)
 }
 
 // Helper function that transforms a Gradle Plugin alias from a
@@ -60,22 +95,3 @@ dependencies {
 // See https://docs.gradle.org/current/userguide/version_catalogs.html#sec:buildsrc-version-catalog
 fun plugin(plugin: Provider<PluginDependency>) =
     plugin.map { "${it.pluginId}:${it.pluginId}.gradle.plugin:${it.version}" }
-
-publishing {
-    publications {
-        create<MavenPublication>("buildLogic") {
-            from(components["java"])
-            groupId = project.group.toString()
-            artifactId = project.name
-            version = project.version.toString()
-
-            pom {
-                name.set("frisboo-core-banking-build-logic")
-                description.set("Shared build logic for Frisboo core banking services")
-            }
-        }
-    }
-    repositories {
-        mavenLocal()
-    }
-}

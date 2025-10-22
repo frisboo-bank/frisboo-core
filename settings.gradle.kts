@@ -5,10 +5,11 @@ pluginManagement {
         mavenLocal()
     }
     includeBuild("build-logic")
+    includeBuild("version-catalog")
 }
 
 plugins {
-//    id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
+    id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
 }
 
 @Suppress("UnstableApiUsage")
@@ -23,7 +24,7 @@ dependencyResolutionManagement {
 
     versionCatalogs {
         create(
-            "versionLibs",
+            "libs",
             Action {
                 from(files("version-catalog/libs.versions.toml"))
             },
@@ -32,5 +33,3 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "core"
-
-include("version-catalog")
