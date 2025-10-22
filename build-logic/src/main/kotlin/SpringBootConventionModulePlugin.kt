@@ -15,10 +15,17 @@ internal class SpringBootConventionModulePlugin : Plugin<Project> {
         pluginManager.apply("org.springframework.boot")
         pluginManager.apply("org.jetbrains.kotlin.plugin.spring")
 
-        pluginManager.withPlugin("org.springframework.boot") {
+        afterEvaluate {
             configureSpringboot()
             configureDependencies(libs)
             configureTasks()
+        }
+
+        afterEvaluate {
+            println("==================================")
+            println("Spring Boot Conventions Applied:")
+            println(" - Spring Boot Version: ${libs.requiredVersion("spring-boot")}")
+            println("==================================")
         }
     }
 }
@@ -31,18 +38,13 @@ private fun Project.configureSpringboot() {
 
 private fun Project.configureDependencies(libs: VersionCatalog) {
     dependencies {
-        // Enforce BOMs across common configurations if enabled
-        val springBootBom = libs.libraryOrThrow("spring-boot-bom")
-        val addBom: (String, Any) -> Unit = { conf, bom ->
-            add(conf, platform(bom))
-        }
-        listOf("api", "implementation", "testImplementation").forEach { conf ->
-            addBom(conf, springBootBom)
-        }
+        add("implementation", platform(libs.libraryOrThrow("spring-boot-bom")))
 
         add("implementation", libs.libraryOrThrow("spring-boot-starter-webflux"))
         add("implementation", libs.libraryOrThrow("spring-boot-starter-validation"))
         add("implementation", libs.libraryOrThrow("spring-boot-starter-actuator"))
+
+        add("testImplementation", libs.libraryOrThrow("spring-boot-starter-test"))
     }
 }
 

@@ -101,5 +101,13 @@ internal class QualityConventionModulePlugin : Plugin<Project> {
         tasks.named("check") {
             dependsOn("spotlessCheck", "detekt")
         }
+
+        afterEvaluate {
+            println("==================================")
+            println("Quality Conventions Applied:")
+            println(" - Spotless for code formatting")
+            println(" - Detekt for static code analysis")
+            println("==================================")
+        }
     }
 }

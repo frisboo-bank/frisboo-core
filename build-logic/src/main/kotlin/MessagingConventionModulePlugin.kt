@@ -13,6 +13,14 @@ internal class MessagingConventionModulePlugin : Plugin<Project> {
                 configureKafka(extension, libs)
             }
         }
+
+        afterEvaluate {
+            println("==================================")
+            println("Messaging Conventions Applied:")
+            println(" - Use Kafka: ${extension.useKafka.get()}")
+            println(" - Use Testcontainers: ${extension.useTestcontainers.get()}")
+            println("==================================")
+        }
     }
 }
 
