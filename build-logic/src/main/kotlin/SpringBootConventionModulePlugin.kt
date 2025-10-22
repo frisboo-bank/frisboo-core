@@ -40,7 +40,7 @@ private fun Project.configureDependencies(libs: VersionCatalog) {
             addBom(conf, springBootBom)
         }
 
-        add("implementation", libs.libraryOrThrow("spring-boot-starter-web"))
+        add("implementation", libs.libraryOrThrow("spring-boot-starter-webflux"))
         add("implementation", libs.libraryOrThrow("spring-boot-starter-validation"))
         add("implementation", libs.libraryOrThrow("spring-boot-starter-actuator"))
     }
