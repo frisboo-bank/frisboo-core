@@ -17,6 +17,16 @@ internal class PersistenceConventionModulePlugin : Plugin<Project> {
                 configurePostgres(extension, libs)
             }
         }
+
+        afterEvaluate {
+            println("==================================")
+            println("Persistence Conventions Applied:")
+            println(" - Use MongoDB: ${extension.useMongo.get()}")
+            println(" - Use PostgreSQL: ${extension.usePostgres.get()}")
+            println(" - Use Migration: ${extension.useMigration.get()}")
+            println(" - Use Testcontainers: ${extension.useTestcontainers.get()}")
+            println("==================================")
+        }
     }
 }
 
@@ -42,7 +52,11 @@ private fun Project.configureMongo(extension: PersistenceConventionExtension, li
 
 private fun Project.configurePostgres(extension: PersistenceConventionExtension, libs: VersionCatalog) {
     dependencies {
-        add("implementation", libs.libraryOrThrow("spring-boot-starter-data-jpa"))
+        add("implementation", platform(libs.libraryOrThrow("exposed-bom")))
+
+        add("implementation", libs.libraryOrThrow("exposed-spring-boot-starter"))
+        add("implementation", libs.libraryOrThrow("exposed-jdbc"))
+        add("implementation", libs.libraryOrThrow("h2"))
         add("runtimeOnly", libs.libraryOrThrow("postgresql"))
 
         if (extension.useMigration.get()) {
@@ -56,3 +70,5 @@ private fun Project.configurePostgres(extension: PersistenceConventionExtension,
         }
     }
 }
+
+

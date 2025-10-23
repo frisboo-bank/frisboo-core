@@ -25,6 +25,22 @@ internal class OpenapiConventionModulePlugin : Plugin<Project> {
             configureOpenApiGenerate(extension, libs)
             configureOpenApiTasks(extension, libs)
         }
+
+        afterEvaluate {
+            println("==================================")
+            println("OpenAPI Conventions Applied:")
+            println(" - Schema Directory: ${extension.schemaDir.get()}")
+            println(" - Schema Filename: ${extension.schemaFilename.get()}")
+            println(" - Output Directory: ${extension.outputDir.get()}")
+            println(" - Package Name: ${extension.packageName.get()}")
+            println(" - Artifact Version: ${extension.artifactVersion.get()}")
+            println(" - Group ID: ${extension.groupId.get()}")
+            println(" - Generate APIs: ${extension.generateApis.get()}")
+            println(" - Generate Models: ${extension.generateModels.get()}")
+            println(" - Validate Spec: ${extension.validateSpec.get()}")
+            println(" - Recommend Fixes: ${extension.recommend.get()}")
+            println("==================================")
+        }
     }
 }
 
@@ -89,26 +105,19 @@ private fun Project.configureOpenApiGenerate(extension: OpenapiConventionExtensi
 
         globalProperties.set(
             mapOf(
-                "apis" to extension.generateApis.get().toString(),
-                "models" to extension.generateModels.get().toString(),
+                "apis" to if (extension.generateApis.get()) "true" else "",
+                "models" to if (extension.generateModels.get()) "true" else "",
             ),
         )
 
         configOptions.set(
             mapOf(
-                "interfaceOnly" to "true",
                 "useSpringBoot3" to "true",
                 "useSwaggerUI" to "false",
                 "useTags" to "true",
                 "library" to "spring-boot",
                 "reactive" to "true",
-                "documentationProvider" to "springdoc",
-                "useBeanValidation" to "true",
-                "useJakartaEe" to "true",
-                "serializationLibrary" to "jackson",
-                "serializableModel" to "true",
-                "skipDefaultInterface" to "true",
-                "exceptionHandler" to "false",
+                "delegatePattern" to "true",
             ),
         )
     }
@@ -159,19 +168,5 @@ private fun Project.configureOpenApiTasks(extension: OpenapiConventionExtension,
 
     tasks.named("check") {
         dependsOn(tasks.named("openApiValidate"))
-    }
-
-    tasks.register("openApiConfig") {
-        group = "documentation"
-        description = "Shows the current OpenAPI configuration"
-
-        doLast {
-            logger.lifecycle("OpenAPI Configuration:")
-            logger.lifecycle("  Schema: ${extension.schemaDir.get().file(extension.schemaFilename.get())}")
-            logger.lifecycle("  Output: ${extension.outputDir.get()}")
-            logger.lifecycle("  Package: ${extension.packageName.get()}")
-            logger.lifecycle("  Generate APIs: ${extension.generateApis.get()}")
-            logger.lifecycle("  Generate Models: ${extension.generateModels.get()}")
-        }
     }
 }

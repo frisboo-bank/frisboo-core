@@ -16,14 +16,14 @@ public abstract class OpenapiConventionExtension @Inject constructor(objects: Ob
     public val artifactVersion: Property<String> = objects.property(String::class.java)
 
     // --- Generation Toggles ---
-    public val generateApiDocumentation: Property<Boolean> = objects.property(Boolean::class.java).convention(true)
-    public val generateApis: Property<Boolean> = objects.property(Boolean::class.java).convention(true)
-    public val generateApiTests: Property<Boolean> = objects.property(Boolean::class.java).convention(true)
-    public val generateModels: Property<Boolean> = objects.property(Boolean::class.java).convention(true)
-    public val generateModelDocumentation: Property<Boolean> = objects.property(Boolean::class.java).convention(true)
-    public val generateModelTests: Property<Boolean> = objects.property(Boolean::class.java).convention(true)
+    public val generateApiDocumentation: Property<Boolean> = objects.property(Boolean::class.java)
+    public val generateApis: Property<Boolean> = objects.property(Boolean::class.java)
+    public val generateApiTests: Property<Boolean> = objects.property(Boolean::class.java)
+    public val generateModels: Property<Boolean> = objects.property(Boolean::class.java)
+    public val generateModelDocumentation: Property<Boolean> = objects.property(Boolean::class.java)
+    public val generateModelTests: Property<Boolean> = objects.property(Boolean::class.java)
 
     // --- Validation ---
-    public val validateSpec: Property<Boolean> = objects.property(Boolean::class.java).convention(true)
-    public val recommend: Property<Boolean> = objects.property(Boolean::class.java).convention(true)
+    public val validateSpec: Property<Boolean> = objects.property(Boolean::class.java)
+    public val recommend: Property<Boolean> = objects.property(Boolean::class.java)
 }
