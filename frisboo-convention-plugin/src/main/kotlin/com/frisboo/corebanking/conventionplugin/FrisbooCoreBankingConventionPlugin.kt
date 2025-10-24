@@ -53,7 +53,7 @@ public class FrisbooCoreBankingConventionPlugin : Plugin<Project> {
             try {
                 BomManager(this, ext.bom).configure()
             } catch (e: IllegalStateException) {
-                error("Failed to configure Jenkins convention plugin: ${e.message}")
+                error("Failed to configure Frisboo Core Banking Convention Plugin: ${e.message}")
             }
         }
 
