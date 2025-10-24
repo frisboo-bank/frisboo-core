@@ -56,6 +56,7 @@ private fun Project.configurePostgres(extension: PersistenceConventionExtension,
 
         add("implementation", libs.libraryOrThrow("exposed-spring-boot-starter"))
         add("implementation", libs.libraryOrThrow("exposed-jdbc"))
+        add("implementation", libs.libraryOrThrow("exposed-kotlin-datetime"))
         add("implementation", libs.libraryOrThrow("h2"))
         add("runtimeOnly", libs.libraryOrThrow("postgresql"))
 

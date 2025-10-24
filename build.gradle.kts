@@ -1,6 +1,22 @@
 plugins {
-//    base
-    alias(libs.plugins.frisboo.convention.kotlin)
-    alias(libs.plugins.frisboo.convention.quality)
-    alias(libs.plugins.maven.gradle.publish) apply false
+    base
+    id("quality-conventions")
+    alias(libs.plugins.dokka)
+    alias(libs.plugins.maven.publish)
+}
+
+dokka {
+    dokkaPublications.html {
+        outputDirectory.set(project.file("docs/api"))
+    }
+}
+
+dependencies {
+//    dokka(projects.frisboo.frisbooCore)
+}
+
+allprojects {
+    if (this != rootProject) {
+        apply(plugin = "com.vanniktech.maven.publish")
+    }
 }
