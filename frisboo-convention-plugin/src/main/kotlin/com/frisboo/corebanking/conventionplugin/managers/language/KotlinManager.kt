@@ -25,8 +25,8 @@ public class KotlinManager(private val project: Project) {
 
             project.tasks.withType<KotlinCompile>().configureEach { t ->
                 t.compilerOptions {
-                    apiVersion.set(KotlinVersion.fromVersion(kotlinVersion))
-                    languageVersion.set(KotlinVersion.fromVersion(kotlinVersion))
+                    apiVersion.set(KotlinVersion.Companion.fromVersion(kotlinVersion))
+                    languageVersion.set(KotlinVersion.Companion.fromVersion(kotlinVersion))
                     jvmTarget.set(JvmTarget.fromTarget(jvmTargetVersion))
                     allWarningsAsErrors.set(true)
                     optIn.add("kotlin.RequiresOptIn")
