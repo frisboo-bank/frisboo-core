@@ -31,7 +31,7 @@ public class JavaManager(private val project: Project) {
             )
         }
 
-        project.tasks.withType<AbstractArchiveTask> {
+        project.tasks.withType<AbstractArchiveTask>().configureEach {
             isPreserveFileTimestamps = false
             isReproducibleFileOrder = true
         }
