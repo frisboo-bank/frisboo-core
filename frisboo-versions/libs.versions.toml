@@ -1,167 +1,125 @@
-# ==============================================================================
-#
-#
-# Versions
-#
-#
-# ==============================================================================
-
-
 [versions]
 # ==============================================================================
-# Core
+# Core Framework
 # ==============================================================================
+kotlin = "2.2.21"
 kotlinLanguage = "2.2"
 jvmTarget = "21"
-core = "1.0.0"
+spring-boot = "3.5.6"
+frisboo-corebanking = "1.0.0"
 
 # ==============================================================================
 # Kotlin Ecosystem
 # ==============================================================================
+kotlinx-coroutines = "1.10.2"
 arrowkt = "2.1.0"
 jetbrains-annotations = "26.0.2-1"
-kotlin = "2.2.20"
-kotlinx-coroutines = "1.10.2"
-reactor = "2024.0.11"
 
 # ==============================================================================
 # Spring Ecosystem
 # ==============================================================================
-spring-boot = "3.5.6"
 spring-grpc = "0.11.0"
 springdoc-openapi = "2.8.13"
-springdoc-openapi-plugin = "1.9.0"
-
-# ==============================================================================
-# Observability
-# ==============================================================================
-micrometer-tracing = "1.4.3"
-opentelemetry = "1.44.1"
-logstash-encoder = "8.0"
+reactor = "2024.0.11"
 
 # ==============================================================================
 # Database & Persistence
 # ==============================================================================
 exposed = "1.0.0-rc-2"
 flyway-core = "11.14.1"
-flyway-postgresql = "11.14.1"
-h2 = "2.4.240"
-mongodb = "5.6.1"
 postgresql = "42.7.8"
+mongodb = "5.6.1"
+h2 = "2.4.240"
 
 # ==============================================================================
 # gRPC & Protocol Buffers
 # ==============================================================================
 grpc-protobuf = "1.76.0"
-grpc-stub = "1.76.0"
 grpc-kotlin-stub = "1.5.0"
 protobuf = "3.25.3"
 protobuf-plugin = "0.9.5"
-protobuf-kotlin = "3.25.3"
-protoc = "3.25.3"
-protoc-gen-grpc-java = "1.76.0"
-protoc-gen-grpc-kotlin = "1.5.0"
 
 # ==============================================================================
 # Testing
 # ==============================================================================
 junit = "6.0.0"
-kotest = "5.9.1"
+kotest = "6.0.4"
 mockk = "1.14.6"
 testcontainers = "2.0.1"
 
 # ==============================================================================
-# Development & Tooling
+# Code Quality & Tooling
 # ==============================================================================
-dependency-analysis = "3.1.0"
 detekt = "1.23.8"
-dokka = "2.1.0"
-gradle-versions = "0.53.0"
-kover = "0.8.3"
-ktlint = "1.3.1"
-openapi-generator = "7.16.0"
+ktlint = "1.7.1"
 spotless = "8.0.0"
-test-retry = "1.6.4"
+kover = "0.9.3"
+dokka = "2.1.0"
+owaspCheck = "12.1.8"
 
 # ==============================================================================
-# Utilities
+# Development Utilities
 # ==============================================================================
-#javax-annotation = "1.3.2"
-jakarta-annotation = "2.1.1"
+gradle-versions = "0.53.0"
 jackson = "2.20.0"
-
-# ==============================================================================
-# Publish
-# ==============================================================================
-maven-gradle-publish = "0.34.0"
+maven-publish = "0.34.0"
+plugin-publish = "2.0.0"
 
 
-# ==============================================================================
-#
-#
-# Libraries
-#
-#
-# ==============================================================================
 
 
 [libraries]
 # ==============================================================================
-# BOMs (Bill of Materials)
+# BOMs (Bill of Materials) - Primary Dependencies
 # ==============================================================================
-arrowkt-bom = { module = "io.arrow-kt:arrow-stack", version.ref = "arrowkt" }
-exposed-bom = { module = "org.jetbrains.exposed:exposed-bom", version.ref = "exposed" }
+frisboo-corebanking-bom = { module = "com.frisboo.corebanking:frisboo-bom", version.ref = "frisboo-corebanking" }
+kotlin-bom = { module = "org.jetbrains.kotlin:kotlin-bom", version.ref = "kotlin" }
+spring-boot-bom = { module = "org.springframework.boot:spring-boot-dependencies", version.ref = "spring-boot" }
+kotlinx-coroutines-bom = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-bom", version.ref = "kotlinx-coroutines" }
 jackson-bom = { module = "com.fasterxml.jackson:jackson-bom", version.ref = "jackson" }
 junit-bom = { module = "org.junit:junit-bom", version.ref = "junit" }
-kotlin-bom = { module = "org.jetbrains.kotlin:kotlin-bom", version.ref = "kotlin" }
-kotlinx-coroutines-bom = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-bom", version.ref = "kotlinx-coroutines" }
-mongodb-bom = { module = "org.mongodb:mongodb-driver-bom", version.ref = "mongodb" }
-reactor-bom = { module = "io.projectreactor:reactor-bom", version.ref = "reactor" }
-spring-boot-bom = { module = "org.springframework.boot:spring-boot-dependencies", version.ref = "spring-boot" }
-spring-grpc-bom = { module = "org.springframework.grpc:spring-grpc-dependencies", version.ref = "spring-grpc" }
-springdoc-openapi-bom = { module = "org.springdoc:springdoc-openapi-bom", version.ref = "springdoc-openapi" }
 testcontainers-bom = { module = "org.testcontainers:testcontainers-bom", version.ref = "testcontainers" }
 
 # ==============================================================================
-# Kotlin and Gradle
+# Core Framework
 # ==============================================================================
-arrowkt-core = { module = "io.arrow-kt:arrow-core" }
-arrowkt-coroutines = { module = "io.arrow-kt:arrow-fx-coroutines" }
-jetbrains-annotations = { module = "org.jetbrains:annotations", version.ref = "jetbrains-annotations" }
+frisboo-corebanking-core = { module = "com.frisboo.corebanking:frisboo-core" }
+
+# ==============================================================================
+# Kotlin Core
+# ==============================================================================
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect" }
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core" }
 kotlinx-coroutines-reactor = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-reactor" }
-kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test" }
-reactor-kotlin-extensions = { module = "io.projectreactor.kotlin:reactor-kotlin-extensions" }
-reactor-reflect = { module = "io.projectreactor:reactor-reflect" }
+jetbrains-annotations = { module = "org.jetbrains:annotations", version.ref = "jetbrains-annotations" }
 
 # ==============================================================================
-# Spring Boot
+# Spring Boot Starters
 # ==============================================================================
 spring-boot-starter-webflux = { module = "org.springframework.boot:spring-boot-starter-webflux" }
 spring-boot-starter-validation = { module = "org.springframework.boot:spring-boot-starter-validation" }
 spring-boot-starter-actuator = { module = "org.springframework.boot:spring-boot-starter-actuator" }
-spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test" }
 spring-boot-starter-data-mongodb = { module = "org.springframework.boot:spring-boot-starter-data-mongodb" }
+spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test" }
 
 # ==============================================================================
-# Observability
+# Reactive & Reactor
 # ==============================================================================
-micrometer-tracing-otel = { module = "io.micrometer:micrometer-tracing-bridge-otel", version.ref = "micrometer-tracing" }
-otel-exporter-otlp = { module = "io.opentelemetry:opentelemetry-exporter-otlp", version.ref = "opentelemetry" }
-logstash-logback-encoder = { module = "net.logstash.logback:logstash-logback-encoder", version.ref = "logstash-encoder" }
+reactor-bom = { module = "io.projectreactor:reactor-bom", version.ref = "reactor" }
+reactor-kotlin-extensions = { module = "io.projectreactor.kotlin:reactor-kotlin-extensions" }
+reactor-test = { module = "io.projectreactor:reactor-test" }
 
 # ==============================================================================
 # Database & Persistence
 # ==============================================================================
+exposed-bom = { module = "org.jetbrains.exposed:exposed-bom", version.ref = "exposed" }
 exposed-spring-boot-starter = { module = "org.jetbrains.exposed:exposed-spring-boot-starter" }
 exposed-jdbc = { module = "org.jetbrains.exposed:exposed-jdbc" }
 flyway-core = { module = "org.flywaydb:flyway-core", version.ref = "flyway-core" }
-flyway-postgresql = { module = "org.flywaydb:flyway-database-postgresql", version.ref = "flyway-postgresql" }
-h2 = { module = "com.h2database:h2", version.ref = "h2" }
-mongodb = { module = "org.mongodb:mongodb-driver-kotlin-coroutine" }
 postgresql = { module = "org.postgresql:postgresql", version.ref = "postgresql" }
+mongodb-driver = { module = "org.mongodb:mongodb-driver-kotlin-coroutine" }
+h2 = { module = "com.h2database:h2", version.ref = "h2" }
 
 # ==============================================================================
 # gRPC & Protocol Buffers
@@ -169,69 +127,44 @@ postgresql = { module = "org.postgresql:postgresql", version.ref = "postgresql" 
 grpc-kotlin-stub = { module = "io.grpc:grpc-kotlin-stub", version.ref = "grpc-kotlin-stub" }
 grpc-netty-shaded = { module = "io.grpc:grpc-netty-shaded", version.ref = "grpc-protobuf" }
 grpc-protobuf = { module = "io.grpc:grpc-protobuf", version.ref = "grpc-protobuf" }
-grpc-services = { module = "io.grpc:grpc-services", version.ref = "grpc-protobuf" }
-grpc-stub = { module = "io.grpc:grpc-stub", version.ref = "grpc-stub" }
-protobuf-kotlin = { module = "com.google.protobuf:protobuf-kotlin", version.ref = "protobuf-kotlin" }
-protoc = { module = "com.google.protobuf:protoc", version.ref = "protoc" }
-protoc-gen-grpc-java = { module = "io.grpc:protoc-gen-grpc-java", version.ref = "protoc-gen-grpc-java" }
-protoc-gen-grpc-kotlin = { module = "io.grpc:protoc-gen-grpc-kotlin", version.ref = "protoc-gen-grpc-kotlin" }
+protobuf-kotlin = { module = "com.google.protobuf:protobuf-kotlin", version.ref = "protobuf" }
 spring-grpc-starter = { module = "org.springframework.grpc:spring-grpc-spring-boot-starter" }
 
 # ==============================================================================
 # API Documentation
 # ==============================================================================
+springdoc-openapi-bom = { module = "org.springdoc:springdoc-openapi-bom", version.ref = "springdoc-openapi" }
 springdoc-openapi-starter-webflux-ui = { module = "org.springdoc:springdoc-openapi-starter-webflux-ui" }
-springdoc-openapi-starter-webflux-api = { module = "org.springdoc:springdoc-openapi-starter-webflux-api" }
-
-# ==============================================================================
-# Messaging
-# ==============================================================================
-spring-kafka = { module = "org.springframework.kafka:spring-kafka" }
-
-# ==============================================================================
-# Serialization & Utilities
-# ==============================================================================
-jackson-module-kotlin = { module = "com.fasterxml.jackson.module:jackson-module-kotlin" }
-jakarta-annotation-api = { module = "jakarta.annotation:jakarta.annotation-api", version.ref = "jakarta-annotation" }
 
 # ==============================================================================
 # Testing
 # ==============================================================================
-junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher" }
-kotest-assertions = { module = "io.kotest:kotest-assertions-core", version.ref = "kotest" }
-kotest-runner = { module = "io.kotest:kotest-runner-junit5", version.ref = "kotest" }
-kotlin-test-junit5 = { module = "org.jetbrains.kotlin:kotlin-test-junit5" }
+kotest-assertions-core = { module = "io.kotest:kotest-assertions-core", version.ref = "kotest" }
+kotest-runner-junit5 = { module = "io.kotest:kotest-runner-junit5", version.ref = "kotest" }
 mockk = { module = "io.mockk:mockk", version.ref = "mockk" }
-reactor-test = { module = "io.projectreactor:reactor-test" }
 testcontainers-junit-jupiter = { module = "org.testcontainers:junit-jupiter" }
-testcontainers-kafka = { module = "org.testcontainers:kafka" }
-testcontainers-mongodb = { module = "org.testcontainers:mongodb" }
 testcontainers-postgresql = { module = "org.testcontainers:postgresql" }
-
+testcontainers-mongodb = { module = "org.testcontainers:mongodb" }
+junit-platform-launcher = { module = "org.junit.platform:junit-platform-launcher" }
 
 # ==============================================================================
-#
-#
-# Plugins
-#
-#
+# Serialization
 # ==============================================================================
+jackson-module-kotlin = { module = "com.fasterxml.jackson.module:jackson-module-kotlin" }
 
+# ==============================================================================
+# Code Quality Plugins
+# ==============================================================================
+detekt-gradle-plugin = { module = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin", version.ref = "detekt" }
+spotless-gradle-plugin = { module = "com.diffplug.spotless:com.diffplug.spotless.gradle.plugin", version.ref = "spotless" }
+kover-gradle-plugin = { module = "org.jetbrains.kotlinx:kover-gradle-plugin", version.ref = "kover" }
+owasp-depcheck-gradle-plugin = { module = "org.owasp:dependency-check-gradle", version.ref = "owaspCheck" }
 
 [plugins]
 # ==============================================================================
-# Core
-# ==============================================================================
-frisboo-convention-kotlin = { id = "com.frisboo.corebanking.kotlin.convention.module", version.ref = "core" }
-frisboo-convention-messaging = { id = "com.frisboo.corebanking.messaging.convention.module", version.ref = "core" }
-frisboo-convention-openapi = { id = "com.frisboo.corebanking.openapi.convention.module", version.ref = "core" }
-frisboo-convention-persistence = { id = "com.frisboo.corebanking.persistence.convention.module", version.ref = "core" }
-frisboo-convention-quality = { id = "com.frisboo.corebanking.quality.convention.module", version.ref = "core" }
-frisboo-convention-spring-boot = { id = "com.frisboo.corebanking.spring.boot.convention.module", version.ref = "core" }
-
-# ==============================================================================
 # Core Framework
 # ==============================================================================
+frisboo-corebanking = { id = "com.frisboo.corebanking.frisboo-convention-plugin", version.ref = "frisboo-corebanking" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-spring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlin" }
 spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }
@@ -240,25 +173,18 @@ spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot" }
 # API & Documentation
 # ==============================================================================
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
-openapi-generator = { id = "org.openapi.generator", version.ref = "openapi-generator" }
 protobuf = { id = "com.google.protobuf", version.ref = "protobuf-plugin" }
-springdoc-openapi = { id = "org.springdoc.openapi-gradle-plugin", version.ref = "springdoc-openapi-plugin" }
 
 # ==============================================================================
-# Code Quality & Tooling
+# Code Quality
 # ==============================================================================
-dependency-analysis = { id = "com.autonomousapps.dependency-analysis", version.ref = "dependency-analysis" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
-gradle-versions = { id = "com.github.ben-manes.versions", version.ref = "gradle-versions" }
 spotless = { id = "com.diffplug.spotless", version.ref = "spotless" }
-
-# ==============================================================================
-# Testing
-# ==============================================================================
 kover = { id = "org.jetbrains.kotlinx.kover", version.ref = "kover" }
-test-retry = { id = "org.gradle.test-retry", version.ref = "test-retry" }
 
 # ==============================================================================
-# Publish
+# Development & Publishing
 # ==============================================================================
-maven-gradle-publish = { id = "com.vanniktech.maven.publish", version.ref = "maven-gradle-publish" }
+maven-publish = { id = "com.vanniktech.maven.publish", version.ref = "maven-publish" }
+plugin-publish = { id = "com.gradle.plugin-publish", version.ref = "plugin-publish" }
+gradle-versions = { id = "com.github.ben-manes.versions", version.ref = "gradle-versions" }

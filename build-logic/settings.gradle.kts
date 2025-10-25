@@ -1,3 +1,5 @@
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
+
 @Suppress("UnstableApiUsage")
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
@@ -12,7 +14,7 @@ dependencyResolutionManagement {
         create(
             "libs",
             Action {
-                from(files("../version-catalog/libs.versions.toml"))
+                from(files("../frisboo-versions/libs.versions.toml"))
             },
         )
     }
