@@ -1,4 +1,4 @@
-package com.frisboo.corebanking.conventionplugin
+package com.frisboo.corebanking.conventionplugin.utils
 
 import org.gradle.api.artifacts.MinimalExternalModuleDependency
 import org.gradle.api.artifacts.VersionCatalog

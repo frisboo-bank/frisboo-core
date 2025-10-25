@@ -41,17 +41,6 @@ gitHooks {
     createHooks()
 }
 
-@Suppress("UnstableApiUsage")
-toolchainManagement {
-    jvm {
-        javaRepositories {
-            repository("foojay") {
-                resolverClass.set(org.gradle.toolchains.foojay.FoojayToolchainResolver::class.java)
-            }
-        }
-    }
-}
-
 include("frisboo-bom")
 include("frisboo-convention-plugin")
 //include("frisboo-core")
