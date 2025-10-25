@@ -105,8 +105,8 @@ private fun Project.configureOpenApiGenerate(extension: OpenapiConventionExtensi
 
         globalProperties.set(
             mapOf(
-                "apis" to if (extension.generateApis.get()) "" else "true",
-                "models" to if (extension.generateModels.get()) "" else "true",
+                "apis" to if (extension.generateApis.get()) "true" else "",
+                "models" to if (extension.generateModels.get()) "true" else "",
             ),
         )
 
