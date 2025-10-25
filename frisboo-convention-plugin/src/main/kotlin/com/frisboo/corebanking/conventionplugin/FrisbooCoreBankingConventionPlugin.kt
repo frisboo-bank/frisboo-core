@@ -1,6 +1,9 @@
 package com.frisboo.corebanking.conventionplugin
 
 import com.frisboo.corebanking.conventionplugin.managers.BomManager
+import com.frisboo.corebanking.conventionplugin.utils.getLibs
+import com.frisboo.corebanking.conventionplugin.utils.getVersionOrFail
+import com.frisboo.corebanking.conventionplugin.utils.libraryOrThrow
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
