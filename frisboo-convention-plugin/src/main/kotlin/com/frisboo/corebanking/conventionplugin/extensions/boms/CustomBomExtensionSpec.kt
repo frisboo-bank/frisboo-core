@@ -5,7 +5,7 @@ import org.gradle.api.provider.Property
 import org.gradle.kotlin.dsl.property
 import javax.inject.Inject
 
-public open class CustomBomExtension
+public open class CustomBomExtensionSpec
 @Inject constructor(
     public val name: String,
     objects: ObjectFactory,
