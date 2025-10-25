@@ -13,7 +13,7 @@ gradlePlugin {
             description = "Gradle plugin that provides conventions for core banking apis"
             tags = listOf(
                 "frisboo",
-                "firsboo-core-banking",
+                "frisboo-core-banking",
                 "convention-plugin",
             )
             implementationClass = "com.frisboo.corebanking.conventionplugin.FrisbooCoreBankingConventionPlugin"
