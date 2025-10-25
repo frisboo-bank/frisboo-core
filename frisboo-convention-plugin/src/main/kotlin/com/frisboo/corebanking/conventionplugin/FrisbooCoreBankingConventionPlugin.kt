@@ -1,6 +1,8 @@
 package com.frisboo.corebanking.conventionplugin
 
 import com.frisboo.corebanking.conventionplugin.managers.BomManager
+import com.frisboo.corebanking.conventionplugin.managers.language.JavaManager
+import com.frisboo.corebanking.conventionplugin.managers.language.KotlinManager
 import com.frisboo.corebanking.conventionplugin.utils.getLibs
 import com.frisboo.corebanking.conventionplugin.utils.getVersionOrFail
 import com.frisboo.corebanking.conventionplugin.utils.libraryOrThrow
@@ -27,30 +29,8 @@ public class FrisbooCoreBankingConventionPlugin : Plugin<Project> {
         val ext =
             extensions.create<FrisbooCoreBankingConventionExtension>("frisbooCoreBankingConventionExtension", libs)
 
-        val kotlinVersion = libs.getVersionOrFail("kotlinLanguage")
-        val jvmTargetVersion = libs.getVersionOrFail("jvmTarget")
-
-        project.plugins.withId("org.jetbrains.kotlin.jvm") {
-            project.configure<KotlinJvmProjectExtension> {
-                jvmToolchain(jvmTargetVersion.toInt())
-            }
-
-            project.tasks.withType<KotlinCompile>().configureEach { t ->
-                t.compilerOptions {
-                    apiVersion.set(KotlinVersion.Companion.fromVersion(kotlinVersion))
-                    languageVersion.set(KotlinVersion.Companion.fromVersion(kotlinVersion))
-                    jvmTarget.set(JvmTarget.fromTarget(jvmTargetVersion))
-                    allWarningsAsErrors.set(true)
-                    optIn.add("kotlin.RequiresOptIn")
-                    freeCompilerArgs.addAll(listOf("-Xjsr305=strict"))
-                }
-            }
-
-            project.dependencies {
-                add("implementation", platform(libs.libraryOrThrow("kotlin-bom")))
-                add("compileOnly", libs.libraryOrThrow("jetbrains-annotations"))
-            }
-        }
+        JavaManager(this).configure()
+        KotlinManager(this).configure()
 
         project.afterEvaluate {
             try {
