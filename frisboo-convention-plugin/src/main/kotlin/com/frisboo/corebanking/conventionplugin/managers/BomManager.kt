@@ -1,3 +1,18 @@
+/*
+ * Copyright 2025 Frisboo Bank
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing
+ * permissions and limitations under the License.
+ */
 package com.frisboo.corebanking.conventionplugin.managers
 
 import com.frisboo.corebanking.conventionplugin.extensions.boms.BomExtension
@@ -21,6 +36,8 @@ public class BomManager(
 
     private fun DependencyHandler.configurePredefined() {
         listOf(
+            Triple(ext.arrowKt.enabled, ext.arrowKt.coordinates, ext.arrowKt.testOnly),
+            Triple(ext.coreBanking.enabled, ext.coreBanking.coordinates, ext.coreBanking.testOnly),
             Triple(ext.exposed.enabled, ext.exposed.coordinates, ext.exposed.testOnly),
             Triple(ext.jackson.enabled, ext.jackson.coordinates, ext.jackson.testOnly),
             Triple(ext.junit.enabled, ext.junit.coordinates, ext.junit.testOnly),

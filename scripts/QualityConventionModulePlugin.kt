@@ -1,3 +1,18 @@
+/*
+ * Copyright 2025 Frisboo Bank
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing
+ * permissions and limitations under the License.
+ */
 import com.diffplug.gradle.spotless.SpotlessExtension
 import com.diffplug.spotless.LineEnding
 import io.gitlab.arturbosch.detekt.Detekt
@@ -12,29 +27,35 @@ internal class QualityConventionModulePlugin : Plugin<Project> {
     override fun apply(target: Project): Unit = with(target) {
         val libs = getLibs()
 
-        plugins.apply(libs.findPlugin("dependency-analysis").get().get().pluginId)
-        plugins.apply(libs.findPlugin("detekt").get().get().pluginId)
-        plugins.apply(libs.findPlugin("gradle-versions").get().get().pluginId)
-        plugins.apply(libs.findPlugin("spotless").get().get().pluginId)
+        plugins.apply(
+            libs.findPlugin("dependency-analysis").get().get().pluginId,
+        )
+        plugins.apply(
+            libs.findPlugin("detekt").get().get().pluginId,
+        )
+        plugins.apply(
+            libs.findPlugin("gradle-versions").get().get().pluginId,
+        )
+        plugins.apply(
+            libs.findPlugin("spotless").get().get().pluginId,
+        )
 
         val headerFile = rootProject.layout.projectDirectory.file("config/license-header.txt")
         val editorConfig = rootProject.layout.projectDirectory.file(".editorconfig")
-        val ktlintVersion = libs.findVersion("ktlint").get().requiredVersion
-        val delimiter =
-            "^\\s*(plugins|pluginManagement|import|buildscript|" +
-                    "dependencyResolutionManagement|enableFeaturePreview|include|rootProject)\\b"
+        val ktlintVersion = libs.findVersion("ktlint-version").get().requiredVersion
+        val delimiter = "^\\s*(plugins|pluginManagement|import|buildscript|"
+        +"dependencyResolutionManagement|enableFeaturePreview|include|rootProject)\\b"
 
         extensions.configure<SpotlessExtension> {
-            val commonExcludes =
-                listOf(
-                    "**/build/**",
-                    "**/build-*/**",
-                    "**/.gradle/**",
-                    "**/.idea/**",
-                    "**/.git/**",
-                    "**/generated/**",
-                    "**/.gradle-test-kit/**",
-                )
+            val commonExcludes = listOf(
+                "**/build/**",
+                "**/build-*/**",
+                "**/.gradle/**",
+                "**/.idea/**",
+                "**/.git/**",
+                "**/generated/**",
+                "**/.gradle-test-kit/**",
+            )
 
             kotlin {
                 target("**/*.kt")
@@ -73,12 +94,11 @@ internal class QualityConventionModulePlugin : Plugin<Project> {
             }
         }
 
-
         val detektConfig = rootProject.layout.projectDirectory.file("config/detekt/detekt.yml")
         val detektBaseline = rootProject.layout.projectDirectory.file("config/detekt/detekt-baseline.xml").asFile
 
         extensions.configure<DetektExtension> {
-            toolVersion = libs.findVersion("detekt").get().requiredVersion
+            toolVersion = libs.requiredVersion("detekt-version")
             parallel = true
             buildUponDefaultConfig = true
             config.setFrom(detektConfig)

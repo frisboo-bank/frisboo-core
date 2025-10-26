@@ -1,3 +1,18 @@
+/*
+ * Copyright 2025 Frisboo Bank
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing
+ * permissions and limitations under the License.
+ */
 package com.frisboo.corebanking.conventionplugin.extensions.boms
 
 import org.gradle.api.model.ObjectFactory
@@ -6,7 +21,8 @@ import org.gradle.kotlin.dsl.property
 import javax.inject.Inject
 
 public open class CustomBomExtensionSpec
-@Inject constructor(
+@Inject
+constructor(
     public val name: String,
     objects: ObjectFactory,
 ) {
@@ -15,6 +31,8 @@ public open class CustomBomExtensionSpec
     public val testOnly: Property<Boolean> = objects.property<Boolean>().convention(false)
 
     public fun coordinates(value: String): Unit = coordinates.set(value)
+
     public fun version(value: String): Unit = version.set(value)
+
     public fun testOnly(value: Boolean): Unit = testOnly.set(value)
 }

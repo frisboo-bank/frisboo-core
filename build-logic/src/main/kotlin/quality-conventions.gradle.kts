@@ -12,7 +12,7 @@ private val libs = extensions.getByType<VersionCatalogsExtension>().named("libs"
 
 private val headerFile = rootProject.layout.projectDirectory.file("config/license-header.txt")
 private val editorConfig = rootProject.layout.projectDirectory.file(".editorconfig")
-private val ktlintVersion = libs.findVersion("ktlint").get().requiredVersion
+private val ktlintVersion = libs.findVersion("ktlint-version").get().requiredVersion
 private val delimiter =
     "^\\s*(plugins|pluginManagement|import|buildscript|" +
             "dependencyResolutionManagement|enableFeaturePreview|include|rootProject)\\b"
@@ -72,7 +72,7 @@ private val detektBaseline =
         .asFile
 
 configure<DetektExtension> {
-    toolVersion = libs.findVersion("detekt").get().requiredVersion
+    toolVersion = libs.requiredVersion("detekt-version")
     parallel = true
     buildUponDefaultConfig = true
     config.setFrom(detektConfig)
