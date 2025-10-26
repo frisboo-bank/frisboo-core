@@ -13,13 +13,15 @@
  * or implied. See the License for the specific language governing
  * permissions and limitations under the License.
  */
-package com.frisboo.corebanking.core.api.domain.valueobjects
+package com.frisboo.corebanking.conventionplugin.managers.quality
 
-@JvmInline
-public value class UserAgent(
-    public val userAgent: String,
-) {
-    init {
-        require(userAgent.isNotBlank()) { "UserAgent cannot be blank" }
+import com.frisboo.corebanking.conventionplugin.utils.getLibs
+import org.gradle.api.Project
+
+
+public class QualityManager(private val project: Project, ext: Any) {
+    private val libs = project.getLibs()
+
+    public fun configure() {
     }
 }
