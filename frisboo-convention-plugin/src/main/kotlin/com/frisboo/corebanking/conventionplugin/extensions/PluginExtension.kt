@@ -1,6 +1,22 @@
-package com.frisboo.corebanking.conventionplugin
+/*
+ * Copyright 2025 Frisboo Bank
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing
+ * permissions and limitations under the License.
+ */
+package com.frisboo.corebanking.conventionplugin.extensions
 
 import com.frisboo.corebanking.conventionplugin.extensions.boms.BomExtension
+import com.frisboo.corebanking.conventionplugin.utils.getVersionOrFail
 import org.gradle.api.Action
 import org.gradle.api.artifacts.VersionCatalog
 import org.gradle.api.file.ProjectLayout
@@ -11,7 +27,7 @@ import org.gradle.kotlin.dsl.newInstance
 import org.gradle.kotlin.dsl.property
 import javax.inject.Inject
 
-public open class FrisbooCoreBankingConventionExtension
+public open class PluginExtension
 @Inject
 constructor(
     private val objects: ObjectFactory,
@@ -23,8 +39,9 @@ constructor(
 
     public val frisbooCoreBankingVersion: Property<String> =
         objects.property<String>().convention(
-            providers.gradleProperty("frisboo-corebanking")
-//                .orElse(libs.getVersionOrFail("frisboo-corebanking-core")),
+            providers
+                .gradleProperty("frisboo-corebanking-version")
+                .orElse(libs.getVersionOrFail("frisboo-corebanking-version")),
         )
 
     public val artifactId: Property<String> =
@@ -39,8 +56,11 @@ constructor(
             },
         )
 
+
     public fun frisbooCoreBankingVersion(value: String): Unit = frisbooCoreBankingVersion.set(value)
+
     public fun artifactId(value: String): Unit = artifactId.set(value)
+
     public fun displayName(value: String): Unit = displayName.set(value)
 
     public val bom: BomExtension = objects.newInstance<BomExtension>(libs)
@@ -49,13 +69,14 @@ constructor(
 //    public val openApi: OpenapiExtension = objects.newInstance<OpenapiExtension>(libs)
 //    public val persistence: PersistenceExtension = objects.newInstance<PersistenceExtension>(libs)
 //    public val quality: QualityExtension = objects.newInstance<QualityExtension>()
-//    public val springBoot: SpringBootExtension = objects.newInstance<SpringBootExtension>(libs)
+    public val springBoot: SpringBootExtension = objects.newInstance<SpringBootExtension>(libs)
 //    public val telemetry: TelemetryExtension = objects.newInstance<TelemetryExtension>(libs)
+    public val testing: TestingExtension = objects.newInstance<TestingExtension>(libs)
 
-    public fun bom(action: Action<BomExtension>) {
-        action.execute(bom)
-    }
-
+//    public fun bom(action: Action<BomExtension>) {
+//        action.execute(bom)
+//    }
+//
 //    public fun grpc(action: Action<GRPCExtension>) {
 //        action.execute(grpc)
 //    }
@@ -83,5 +104,8 @@ constructor(
 //    public fun telemetry(action: Action<TelemetryExtension>) {
 //        action.execute(telemetry)
 //    }
+//
+//    public fun testing(action: Action<TestingExtension>) {
+//        action.execute(testing)
+//    }
 }
-

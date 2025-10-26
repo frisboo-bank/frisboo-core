@@ -1,3 +1,18 @@
+/*
+ * Copyright 2025 Frisboo Bank
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing
+ * permissions and limitations under the License.
+ */
 package com.frisboo.corebanking.conventionplugin.managers.language
 
 import com.frisboo.corebanking.conventionplugin.utils.getLibs
@@ -12,10 +27,12 @@ import org.jetbrains.kotlin.gradle.dsl.KotlinJvmProjectExtension
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-public class KotlinManager(private val project: Project) {
+public class KotlinManager(
+    private val project: Project,
+) {
     private val libs = project.getLibs()
-    private val kotlinVersion = libs.getVersionOrFail("kotlinLanguage")
-    private val jvmTargetVersion = libs.getVersionOrFail("jvmTarget")
+    private val kotlinVersion = libs.getVersionOrFail("kotlin-language-version")
+    private val jvmTargetVersion = libs.getVersionOrFail("jvm-target-version")
 
     public fun configure() {
         project.plugins.withId("org.jetbrains.kotlin.jvm") {
@@ -25,8 +42,8 @@ public class KotlinManager(private val project: Project) {
 
             project.tasks.withType<KotlinCompile>().configureEach { t ->
                 t.compilerOptions {
-                    apiVersion.set(KotlinVersion.Companion.fromVersion(kotlinVersion))
-                    languageVersion.set(KotlinVersion.Companion.fromVersion(kotlinVersion))
+                    apiVersion.set(KotlinVersion.fromVersion(kotlinVersion))
+                    languageVersion.set(KotlinVersion.fromVersion(kotlinVersion))
                     jvmTarget.set(JvmTarget.fromTarget(jvmTargetVersion))
                     allWarningsAsErrors.set(true)
                     optIn.add("kotlin.RequiresOptIn")

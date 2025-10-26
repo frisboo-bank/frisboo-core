@@ -7,15 +7,15 @@ plugins {
 }
 
 java {
-    val jvmTargetVersion = libs.versions.jvmTarget
+    val jvmTargetVersion = libs.versions.jvm.target.version
     toolchain {
         languageVersion.set(jvmTargetVersion.map(JavaLanguageVersion::of))
     }
 }
 
 kotlin {
-    val kotlinVersion = libs.versions.kotlinLanguage
-    val jvmTargetVersion = libs.versions.jvmTarget
+    val kotlinVersion = libs.versions.kotlin.language.version
+    val jvmTargetVersion = libs.versions.jvm.target.version
 
     jvmToolchain {
         languageVersion.set(jvmTargetVersion.map(JavaLanguageVersion::of))
