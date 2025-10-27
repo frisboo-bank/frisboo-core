@@ -36,5 +36,3 @@ public open class TelemetryExtension
 
     public fun enabled(value: Boolean): Unit = enabled.set(value)
 }
-
-

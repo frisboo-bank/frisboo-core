@@ -1,3 +1,5 @@
+import org.gradle.toolchains.foojay.FoojayToolchainResolver
+
 /*
  * Copyright 2025 Frisboo Bank
  *
@@ -47,20 +49,20 @@ dependencyResolutionManagement {
 }
 
 plugins {
-    id("org.gradle.toolchains.foojay-resolver") version "1.0.0"
+    id("org.gradle.toolchains.foojay-resolver-convention") version "0.10.0"
     id("org.danilopianini.gradle-pre-commit-git-hooks") version "2.1.3"
 }
 
-@Suppress("UnstableApiUsage")
-toolchainManagement {
-    jvm {
-        javaRepositories {
-            repository("foojay") {
-                resolverClass.set(org.gradle.toolchains.foojay.FoojayToolchainResolver::class.java)
-            }
-        }
-    }
-}
+//@Suppress("UnstableApiUsage")
+//toolchainManagement {
+//    jvm {
+//        javaRepositories {
+//            repository("foojay") {
+//                resolverClass.set(FoojayToolchainResolver::class.java)
+//            }
+//        }
+//    }
+//}
 
 gitHooks {
     commitMsg { conventionalCommits() }

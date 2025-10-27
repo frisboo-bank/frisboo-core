@@ -1,7 +1,6 @@
 package com.frisboo.corebanking.conventionplugin.managers
 
 import com.frisboo.corebanking.conventionplugin.DependencyConstants
-import com.frisboo.corebanking.conventionplugin.extensions.KotlinExtention
 import com.frisboo.corebanking.conventionplugin.extensions.SpringBootExtension
 import com.frisboo.corebanking.conventionplugin.utils.getLibs
 import com.frisboo.corebanking.conventionplugin.utils.libraryOrThrow

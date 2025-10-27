@@ -1,7 +1,7 @@
 [versions]
 # Core Framework
 frisboo-corebanking-version = "1.0.0"
-jvm-target-version = "24"
+jvm-target-version = "21"
 kotlin-language-version = "2.2"
 kotlin-version = "2.2.21"
 spring-boot-version = "3.5.6"

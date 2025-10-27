@@ -33,45 +33,43 @@ import org.gradle.kotlin.dsl.create
 import org.gradle.kotlin.dsl.repositories
 
 public class FrisbooCoreBankingConventionPlugin : Plugin<Project> {
-    override fun apply(target: Project): Unit =
-        with(target) {
-            repositories {
-                mavenCentral()
-                gradlePluginPortal()
-                mavenLocal()
-            }
+    override fun apply(target: Project): Unit = with(target) {
+        repositories {
+            mavenCentral()
+            gradlePluginPortal()
+            mavenLocal()
+        }
 
-            val libs = getLibs()
-            val ext =
-                extensions.create<PluginExtension>("frisbooCoreBankingConventionExtension", libs)
+        val libs = getLibs()
+        val ext = extensions.create<PluginExtension>("frisbooCoreBankingConventionExtension", libs)
 
-            JavaLanguage(this).configure()
-            KotlinLanguage(this).configure()
+        JavaLanguage(this).configure()
+        KotlinLanguage(this).configure()
 
-            project.afterEvaluate {
-                try {
-                    BomManager(this, ext.bom).configure()
-                    RestrictImportsManager(this, ext).configure()
-                    KotlinManager(this, ext.kotlin).configure()
-                    QualityManager(this, ext.quality).configure()
-                    KotlinManager(this, ext.kotlin).configure()
-                    TestingManager(this, ext.testing).configure()
-                    SpringBootManager(this, ext.springBoot).configure()
-                    CoreBankingManager(this, ext.coreBanking).configure()
-                } catch (e: IllegalStateException) {
-                    error("Failed to configure Frisboo Core Banking Convention Plugin: ${e.message}")
-                }
-            }
-
-            tasks.register("frisbooCoreBankingConventionInfo") { t ->
-                group = "Help"
-                description = "Displays information about the Frisboo Core Banking Convention Plugin"
-
-                val version = libs.getVersionOrFail("frisboo-corebanking-version")
-
-                t.doLast {
-                    println("Frisboo Core Banking Convention Plugin Applied: $version")
-                }
+        project.afterEvaluate {
+            try {
+                BomManager(this, ext.bom).configure()
+                RestrictImportsManager(this, ext).configure()
+                KotlinManager(this, ext.kotlin).configure()
+                QualityManager(this, ext.quality).configure()
+                KotlinManager(this, ext.kotlin).configure()
+                TestingManager(this, ext.testing).configure()
+                SpringBootManager(this, ext.springBoot).configure()
+                CoreBankingManager(this, ext.coreBanking).configure()
+            } catch (e: IllegalStateException) {
+                error("Failed to configure Frisboo Core Banking Convention Plugin: ${e.message}")
             }
         }
+
+        tasks.register("frisbooCoreBankingConventionInfo") { t ->
+            group = "Help"
+            description = "Displays information about the Frisboo Core Banking Convention Plugin"
+
+            val version = libs.getVersionOrFail("frisboo-corebanking")
+
+            t.doLast {
+                println("Frisboo Core Banking Convention Plugin Applied: $version")
+            }
+        }
+    }
 }

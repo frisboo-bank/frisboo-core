@@ -29,9 +29,9 @@ import javax.inject.Inject
 public open class PluginExtension
 @Inject constructor(
     private val objects: ObjectFactory,
-    providers: ProviderFactory,
-    layout: ProjectLayout,
-    libs: VersionCatalog,
+    private val providers: ProviderFactory,
+    private val layout: ProjectLayout,
+    private val libs: VersionCatalog,
 ) {
     private val projectName = layout.projectDirectory.asFile.name
 
