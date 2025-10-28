@@ -52,7 +52,6 @@ public class FrisbooCoreBankingConventionPlugin : Plugin<Project> {
                 RestrictImportsManager(this, ext).configure()
                 KotlinManager(this, ext.kotlin).configure()
                 QualityManager(this, ext.quality).configure()
-                KotlinManager(this, ext.kotlin).configure()
                 TestingManager(this, ext.testing).configure()
                 SpringBootManager(this, ext.springBoot).configure()
                 CoreBankingManager(this, ext.coreBanking).configure()
