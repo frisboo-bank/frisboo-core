@@ -33,7 +33,7 @@ internal fun VersionCatalog.libraryOrThrow(alias: String): Provider<MinimalExter
     }
 
 internal fun VersionCatalog.pluginOrThrow(alias: String): Provider<PluginDependency> = findPlugin(alias).orElseThrow {
-    IllegalStateException("Missing plugin `$alias` in libs.versions.toml, available plugins")
+    IllegalStateException("Missing plugin `$alias` in libs.versions.toml, available plugins: ${toString()}")
 }
 
 internal fun VersionCatalog.pluginIdOrThrow(alias: String): String = pluginOrThrow(alias).get().pluginId
