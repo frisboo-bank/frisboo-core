@@ -10,8 +10,7 @@ import org.gradle.kotlin.dsl.property
 import javax.inject.Inject
 
 public open class CoreBankingExtension
-@Inject
-constructor(
+@Inject constructor(
     objects: ObjectFactory,
     providers: ProviderFactory,
     libs: VersionCatalog,
