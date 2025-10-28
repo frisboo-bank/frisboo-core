@@ -14,8 +14,6 @@
  * permissions and limitations under the License.
  */
 plugins {
-    kotlin("jvm")
-
     alias(libs.plugins.dokka)
 }
 

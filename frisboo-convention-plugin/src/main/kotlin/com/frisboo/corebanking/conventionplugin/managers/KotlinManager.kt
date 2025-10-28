@@ -1,7 +1,7 @@
 package com.frisboo.corebanking.conventionplugin.managers
 
 import com.frisboo.corebanking.conventionplugin.DependencyConstants
-import com.frisboo.corebanking.conventionplugin.extensions.KotlinExtention
+import com.frisboo.corebanking.conventionplugin.extensions.KotlinExtension
 import com.frisboo.corebanking.conventionplugin.utils.getLibs
 import com.frisboo.corebanking.conventionplugin.utils.libraryOrThrow
 import org.gradle.api.Project
@@ -9,7 +9,7 @@ import org.gradle.kotlin.dsl.dependencies
 
 public class KotlinManager(
     private val project: Project,
-    private val ext: KotlinExtention,
+    private val ext: KotlinExtension,
 ) {
     private val libs = project.getLibs()
 

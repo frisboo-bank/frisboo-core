@@ -1,6 +1,5 @@
 package com.frisboo.corebanking.conventionplugin.managers
 
-import com.frisboo.corebanking.conventionplugin.extensions.KotlinExtension
 import com.frisboo.corebanking.conventionplugin.extensions.PersistenceExtension
 import com.frisboo.corebanking.conventionplugin.utils.getLibs
 import org.gradle.api.Project
