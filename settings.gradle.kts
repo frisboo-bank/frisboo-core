@@ -1,4 +1,3 @@
-import org.gradle.toolchains.foojay.FoojayToolchainResolver
 
 /*
  * Copyright 2025 Frisboo Bank
