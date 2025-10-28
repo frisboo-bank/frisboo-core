@@ -59,7 +59,7 @@ public open class PluginExtension
     public val bom: BomExtension = objects.newInstance<BomExtension>(libs)
     public val coreBanking: CoreBankingExtension = objects.newInstance<CoreBankingExtension>(libs)
     public val grpc: GRPCExtension = objects.newInstance<GRPCExtension>(libs)
-    public val kotlin: KotlinExtention = objects.newInstance<KotlinExtention>(libs)
+    public val kotlin: KotlinExtension = objects.newInstance<KotlinExtension>(libs)
     public val messaging: MessagingExtension = objects.newInstance<MessagingExtension>(libs)
     public val openApi: OpenapiExtension = objects.newInstance<OpenapiExtension>(libs)
     public val persistence: PersistenceExtension = objects.newInstance<PersistenceExtension>(libs)
