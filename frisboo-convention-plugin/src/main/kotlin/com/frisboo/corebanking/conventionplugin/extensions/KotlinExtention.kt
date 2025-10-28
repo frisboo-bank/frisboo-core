@@ -5,7 +5,7 @@ import org.gradle.api.model.ObjectFactory
 import org.gradle.api.provider.ProviderFactory
 import javax.inject.Inject
 
-public open class KotlinExtention
+public open class KotlinExtension
 @Inject
 constructor(
     objects: ObjectFactory,
