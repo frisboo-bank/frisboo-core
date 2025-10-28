@@ -58,7 +58,7 @@ public object DependencyConstants {
 
     public object Libraries {
         // BOMs
-        public const val FRISBOO_COREBANKING_BOM: String = "frisboo-corebanking-bom"
+        public const val COREBANKING_BOM: String = "frisboo-corebanking-bom"
         public const val JACKSON_BOM: String = "jackson-bom"
         public const val JUNIT_BOM: String = "junit-bom"
         public const val KOTLIN_BOM: String = "kotlin-bom"
@@ -68,13 +68,18 @@ public object DependencyConstants {
 
         // Core Framework
         public const val COREBANKING_CORE: String = "corebanking-core"
+        public const val COREBANKING_SPRING_BOOT: String = "corebanking-spring-boot"
 
         // Kotlin Core
-        public const val KOTLIN_REFLECT: String = "kotlin-reflect"
-        public const val KOTLIN_GRADLE_PLUGIN: String = "kotlin-gradle-plugin"
+        public const val ARROW_KT_CORE: String = "arrow-kt-core"
+        public const val ARROW_KT_COROUTINES: String = "arrow-kt-coroutines"
+        public const val JETBRAINS_ANNOTATIONS: String = "jetbrains-annotations"
         public const val KOTLINX_COROUTINES_CORE: String = "kotlinx-coroutines-core"
         public const val KOTLINX_COROUTINES_REACTOR: String = "kotlinx-coroutines-reactor"
-        public const val JETBRAINS_ANNOTATIONS: String = "jetbrains-annotations"
+        public const val KOTLINX_COROUTINES_TEST: String = "kotlinx-coroutines-test"
+        public const val KOTLIN_GRADLE_PLUGIN: String = "kotlin-gradle-plugin"
+        public const val KOTLIN_REFLECT: String = "kotlin-reflect"
+        public const val KOTLIN_TEST_JUNIT5: String = "kotlin-test-junit5"
 
         // Spring Boot Starters
         public const val SPRING_BOOT_STARTER_WEBFLUX: String = "spring-boot-starter-webflux"
@@ -136,6 +141,7 @@ public object DependencyConstants {
         public const val KOTLIN_JVM: String = "kotlin-jvm"
         public const val KOTLIN_SPRING: String = "kotlin-spring"
         public const val SPRING_BOOT: String = "spring-boot"
+        public const val SPRING_DEPENDENCY_MANAGEMENT: String = "spring-dependency-management"
 
         // API & Documentation
         public const val DOKKA: String = "dokka"

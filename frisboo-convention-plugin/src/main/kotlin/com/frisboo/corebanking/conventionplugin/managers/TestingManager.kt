@@ -15,6 +15,7 @@
  */
 package com.frisboo.corebanking.conventionplugin.managers
 
+import com.frisboo.corebanking.conventionplugin.DependencyConstants
 import com.frisboo.corebanking.conventionplugin.extensions.TestingExtension
 import com.frisboo.corebanking.conventionplugin.utils.getLibs
 import com.frisboo.corebanking.conventionplugin.utils.libraryOrThrow
@@ -35,8 +36,9 @@ public class TestingManager(
 
     private fun addKotlinTestingDependencies() {
         project.dependencies {
-            add("testImplementation", libs.libraryOrThrow("kotest-assertions-core").get())
-            add("testImplementation", libs.libraryOrThrow("mockk").get())
+            add("testImplementation", libs.libraryOrThrow(DependencyConstants.Libraries.KOTEST_RUNNER_JUNIT5).get())
+            add("testImplementation", libs.libraryOrThrow(DependencyConstants.Libraries.KOTEST_ASSERTIONS_CORE).get())
+            add("testImplementation", libs.libraryOrThrow(DependencyConstants.Libraries.MOCKK).get())
         }
     }
 }

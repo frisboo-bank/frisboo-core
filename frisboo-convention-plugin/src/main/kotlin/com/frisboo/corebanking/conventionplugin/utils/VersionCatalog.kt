@@ -18,6 +18,7 @@ package com.frisboo.corebanking.conventionplugin.utils
 import org.gradle.api.artifacts.MinimalExternalModuleDependency
 import org.gradle.api.artifacts.VersionCatalog
 import org.gradle.api.provider.Provider
+import org.gradle.plugin.use.PluginDependency
 
 internal fun VersionCatalog.getVersionOrFail(alias: String): String = findVersion(alias).orElseThrow {
     IllegalStateException("Missing version `$alias` from libs.versions.toml")
@@ -30,3 +31,9 @@ internal fun VersionCatalog.libraryOrThrow(alias: String): Provider<MinimalExter
     findLibrary(alias).orElseThrow {
         IllegalStateException("Missing library `$alias` in libs.versions.toml, available libraries: ${toString()}")
     }
+
+internal fun VersionCatalog.pluginOrThrow(alias: String): Provider<PluginDependency> = findPlugin(alias).orElseThrow {
+    IllegalStateException("Missing plugin `$alias` in libs.versions.toml, available plugins: ${toString()}")
+}
+
+internal fun VersionCatalog.pluginIdOrThrow(alias: String): String = pluginOrThrow(alias).get().pluginId

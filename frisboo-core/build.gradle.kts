@@ -13,4 +13,10 @@
  * or implied. See the License for the specific language governing
  * permissions and limitations under the License.
  */
-plugins {}
+plugins {
+    kotlin("jvm")
+
+    alias(libs.plugins.dokka)
+}
+
+dependencies {}

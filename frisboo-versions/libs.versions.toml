@@ -1,10 +1,11 @@
 [versions]
 # Core Framework
-kotlin-version = "2.2.21"
-kotlin-language-version = "2.2"
-jvm-target-version = "21"
 frisboo-corebanking-version = "1.0.0"
+jvm-target-version = "21"
+kotlin-language-version = "2.2"
+kotlin-version = "2.2.21"
 spring-boot-version = "3.5.6"
+spring-dependency-management-version = "1.1.7"
 
 # Kotlin Ecosystem
 kotlinx-coroutines-version = "1.10.2"
@@ -56,27 +57,38 @@ restrict-imports-version = "3.0.0"
 # ==============================================================================
 # BOMs (Bill of Materials) - Primary Dependencies
 # ==============================================================================
+arrow-kt-bom = { module = "io.arrow-kt:arrow-stack", version.ref = "arrowkt-version" }
+exposed-bom = { module = "org.jetbrains.exposed:exposed-bom", version.ref = "exposed-version" }
 frisboo-corebanking-bom = { module = "com.frisboo.corebanking:frisboo-bom", version.ref = "frisboo-corebanking-version" }
 jackson-bom = { module = "com.fasterxml.jackson:jackson-bom", version.ref = "jackson-version" }
 junit-bom = { module = "org.junit:junit-bom", version.ref = "junit-version" }
 kotlin-bom = { module = "org.jetbrains.kotlin:kotlin-bom", version.ref = "kotlin-version" }
 kotlinx-coroutines-bom = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-bom", version.ref = "kotlinx-coroutines-version" }
+reactor-bom = { module = "io.projectreactor:reactor-bom", version.ref = "reactor-version" }
 spring-boot-bom = { module = "org.springframework.boot:spring-boot-dependencies", version.ref = "spring-boot-version" }
+springdoc-openapi-bom = { module = "org.springdoc:springdoc-openapi-bom", version.ref = "springdoc-openapi-version" }
 testcontainers-bom = { module = "org.testcontainers:testcontainers-bom", version.ref = "testcontainers-version" }
 
 # ==============================================================================
 # Core Framework
 # ==============================================================================
 corebanking-core = { module = "com.frisboo.corebanking:frisboo-core" }
+corebanking-spring-boot = { module = "com.frisboo.corebanking:frisboo-spring-boot" }
 
 # ==============================================================================
 # Kotlin Core
 # ==============================================================================
-kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect" }
+arrow-kt-core = { module = "io.arrow-kt:arrow-core" }
+arrow-kt-coroutines = { module = "io.arrow-kt:arrow-fx-coroutines" }
+jetbrains-annotations = { module = "org.jetbrains:annotations", version.ref = "jetbrains-annotations-version" }
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin" }
+kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect" }
+kotlin-test-junit5 = { module = "org.jetbrains.kotlin:kotlin-test-junit5" }
 kotlinx-coroutines-core = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core" }
 kotlinx-coroutines-reactor = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-reactor" }
-jetbrains-annotations = { module = "org.jetbrains:annotations", version.ref = "jetbrains-annotations-version" }
+kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test" }
+reactor-kotlin-extensions = { module = "io.projectreactor.kotlin:reactor-kotlin-extensions" }
+reactor-test = { module = "io.projectreactor:reactor-test" }
 
 # ==============================================================================
 # Spring Boot Starters
@@ -88,16 +100,8 @@ spring-boot-starter-data-mongodb = { module = "org.springframework.boot:spring-b
 spring-boot-starter-test = { module = "org.springframework.boot:spring-boot-starter-test" }
 
 # ==============================================================================
-# Reactive & Reactor
-# ==============================================================================
-reactor-bom = { module = "io.projectreactor:reactor-bom", version.ref = "reactor-version" }
-reactor-kotlin-extensions = { module = "io.projectreactor.kotlin:reactor-kotlin-extensions" }
-reactor-test = { module = "io.projectreactor:reactor-test" }
-
-# ==============================================================================
 # Database & Persistence
 # ==============================================================================
-exposed-bom = { module = "org.jetbrains.exposed:exposed-bom", version.ref = "exposed-version" }
 exposed-spring-boot-starter = { module = "org.jetbrains.exposed:exposed-spring-boot-starter" }
 exposed-jdbc = { module = "org.jetbrains.exposed:exposed-jdbc" }
 postgresql = { module = "org.postgresql:postgresql", version.ref = "postgresql-version" }
@@ -116,7 +120,6 @@ spring-grpc-starter = { module = "org.springframework.grpc:spring-grpc-spring-bo
 # ==============================================================================
 # API Documentation
 # ==============================================================================
-springdoc-openapi-bom = { module = "org.springdoc:springdoc-openapi-bom", version.ref = "springdoc-openapi-version" }
 springdoc-openapi-starter-webflux-ui = { module = "org.springdoc:springdoc-openapi-starter-webflux-ui" }
 
 # ==============================================================================
@@ -158,6 +161,7 @@ frisboo-corebanking-convention-plugin = { id = "com.frisboo.corebanking.frisboo-
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin-version" }
 kotlin-spring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlin-version" }
 spring-boot = { id = "org.springframework.boot", version.ref = "spring-boot-version" }
+spring-dependency-management = { id = "io.spring.dependency-management", version.ref = "spring-dependency-management-version" }
 
 # ==============================================================================
 # API & Documentation

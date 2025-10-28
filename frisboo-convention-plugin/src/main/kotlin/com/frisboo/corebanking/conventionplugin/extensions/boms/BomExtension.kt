@@ -27,6 +27,16 @@ public open class BomExtension
     objects: ObjectFactory,
     libs: VersionCatalog,
 ) {
+    public val customBoms: NamedDomainObjectContainer<CustomBomExtensionSpec> =
+        objects.domainObjectContainer(CustomBomExtensionSpec::class.java)
+
+    public val arrowKt: BomExtensionSpec = objects.newInstance(
+        BomExtensionSpec::class.java,
+        libs,
+        "arrow-kt-bom",
+        ConfigurationConstants.Bom.ARROW_KT,
+        false,
+    )
     public val coreBanking: BomExtensionSpec = objects.newInstance(
         BomExtensionSpec::class.java,
         libs,
@@ -34,8 +44,6 @@ public open class BomExtension
         ConfigurationConstants.Bom.CORE_BANKING,
         false,
     )
-    public val customBoms: NamedDomainObjectContainer<CustomBomExtensionSpec> =
-        objects.domainObjectContainer(CustomBomExtensionSpec::class.java)
     public val exposed: BomExtensionSpec = objects.newInstance(
         BomExtensionSpec::class.java,
         libs,
@@ -82,6 +90,10 @@ public open class BomExtension
         ConfigurationConstants.Bom.TESTCONTAINERS,
         true,
     )
+
+    public fun arrowKt(action: Action<BomExtensionSpec>) {
+        action.execute(arrowKt)
+    }
 
     public fun customBoms(action: Action<NamedDomainObjectContainer<CustomBomExtensionSpec>>) {
         action.execute(customBoms)

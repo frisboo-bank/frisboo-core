@@ -25,6 +25,7 @@ public object ConfigurationConstants {
     public object Bom {
         private const val BOM_PREFIX = "bom"
         public const val ENABLE_BOM: String = "${BOM_PREFIX}.enabled"
+        public const val ARROW_KT: String = "${BOM_PREFIX}.arrowKt.enabled"
         public const val CORE_BANKING: String = "${BOM_PREFIX}.coreBanking.enabled"
         public const val EXPOSED: String = "${BOM_PREFIX}.exposed.enabled"
         public const val JACKSON: String = "${BOM_PREFIX}.jackson.enabled"
@@ -116,10 +117,11 @@ public object ConfigurationConstants {
         public const val REACTOR_KOTLIN_EXTENSIONS_ENABLED: String = "${REACTOR_PREFIX}.kotlinExtensions.enabled"
     }
 
-    public object CoreFramework {
-        private const val CORE_FRAMEWORK_PREFIX = "core"
-        public const val ENABLE_CORE_FRAMEWORK: String = "${CORE_FRAMEWORK_PREFIX}.enabled"
-        public const val FRISBOO_COREBANKING_ENABLED: String = "${CORE_FRAMEWORK_PREFIX}.frisboo.enabled"
+    public object CoreBanking {
+        private const val CORE_FRAMEWORK_PREFIX = "coreBanking"
+        public const val ENABLE_COREBANKING: String = "${CORE_FRAMEWORK_PREFIX}.enabled"
+        public const val ENABLE_COREBANKING_CORE: String = "${CORE_FRAMEWORK_PREFIX}.core.enabled"
+        public const val ENABLE_COREBANKING_SPRING_BOOT: String = "${CORE_FRAMEWORK_PREFIX}.springBoot.enabled"
     }
 
     public object Telemetry {
