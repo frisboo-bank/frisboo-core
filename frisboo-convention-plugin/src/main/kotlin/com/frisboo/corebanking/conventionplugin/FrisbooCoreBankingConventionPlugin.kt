@@ -64,7 +64,7 @@ public class FrisbooCoreBankingConventionPlugin : Plugin<Project> {
             group = "Help"
             description = "Displays information about the Frisboo Core Banking Convention Plugin"
 
-            val version = libs.getVersionOrFail("frisboo-corebanking")
+            val version = libs.getVersionOrFail("frisboo-corebanking-version")
 
             t.doLast {
                 println("Frisboo Core Banking Convention Plugin Applied: $version")
