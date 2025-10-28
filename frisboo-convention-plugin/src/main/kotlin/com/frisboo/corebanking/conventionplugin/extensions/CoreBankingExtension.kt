@@ -17,7 +17,7 @@ constructor(
     libs: VersionCatalog,
 ) {
     public val enabled: Property<Boolean> = objects.property<Boolean>().convention(
-        providers.gradleProperty(ConfigurationConstants.Telemetry.ENABLE_TELEMETRY, String::toBoolean).orElse(true),
+        providers.gradleProperty(ConfigurationConstants.CoreBanking.ENABLE_COREBANKING, String::toBoolean).orElse(true),
     )
 
     public fun enabled(value: Boolean): Unit = enabled.set(value)
