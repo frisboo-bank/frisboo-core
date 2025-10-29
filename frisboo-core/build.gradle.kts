@@ -14,9 +14,20 @@
  * permissions and limitations under the License.
  */
 plugins {
-    kotlin("jvm")
-
+    id("kotlin-conventions")
     alias(libs.plugins.dokka)
+    alias(libs.plugins.maven.publish)
+}
+
+kotlin {
+    compilerOptions {
+        optIn.add("kotlin.time.ExperimentalTime")
+
+        @OptIn(org.jetbrains.kotlin.gradle.dsl.abi.ExperimentalAbiValidation::class)
+        abiValidation {
+            enabled.set(true)
+        }
+    }
 }
 
 dependencies {}

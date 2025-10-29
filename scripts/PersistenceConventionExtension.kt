@@ -22,8 +22,8 @@ public abstract class PersistenceConventionExtension
     constructor(
         private val objects: ObjectFactory,
     ) {
-        public val useMigration: Property<Boolean> = objects.property(Boolean::class.java).convention(false)
-        public val useMongo: Property<Boolean> = objects.property(Boolean::class.java).convention(false)
-        public val usePostgres: Property<Boolean> = objects.property(Boolean::class.java).convention(false)
-        public val useTestcontainers: Property<Boolean> = objects.property(Boolean::class.java).convention(false)
+        public val useMigration: Property<Boolean> = objects.property<Boolean>().convention(false)
+        public val useMongo: Property<Boolean> = objects.property<Boolean>().convention(false)
+        public val usePostgres: Property<Boolean> = objects.property<Boolean>().convention(false)
+        public val useTestcontainers: Property<Boolean> = objects.property<Boolean>().convention(false)
     }

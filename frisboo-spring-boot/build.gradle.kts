@@ -14,9 +14,17 @@
  * permissions and limitations under the License.
  */
 plugins {
+    id("kotlin-conventions")
     alias(libs.plugins.dokka)
 }
 
-dependencies {
-//    api(project(":frisboo-core"))
+kotlin {
+    compilerOptions {
+        optIn.add("kotlin.time.ExperimentalTime")
+    }
+
+    @OptIn(org.jetbrains.kotlin.gradle.dsl.abi.ExperimentalAbiValidation::class)
+    abiValidation {
+        enabled.set(true)
+    }
 }

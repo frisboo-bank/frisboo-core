@@ -13,12 +13,10 @@
  * or implied. See the License for the specific language governing
  * permissions and limitations under the License.
  */
-package com.frisboo.corebanking.conventionplugin.utils
+package com.frisboo.corebanking.core.api.domain.models
 
-import org.gradle.api.Project
-import org.gradle.api.artifacts.VersionCatalog
-import org.gradle.api.artifacts.VersionCatalogsExtension
+import com.frisboo.corebanking.http.domain.valueobjects.CorrelationId
 
-internal fun Project.getLibs(): VersionCatalog =
-    extensions.findByType(VersionCatalogsExtension::class.java)?.named("libs")
-        ?: error("Version catalog `libs` not found")
+public data class CorrelationIdContext(
+    val id: CorrelationId,
+)

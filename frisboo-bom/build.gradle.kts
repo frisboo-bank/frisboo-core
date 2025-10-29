@@ -18,8 +18,6 @@ plugins {
     alias(libs.plugins.maven.publish)
 }
 
-group = "com.frisboo.corebanking"
-
 javaPlatform.allowDependencies()
 
 dependencies {

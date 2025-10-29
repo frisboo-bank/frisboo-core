@@ -1,3 +1,4 @@
+rootProject.name = "build-logic"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 @Suppress("UnstableApiUsage") dependencyResolutionManagement {
@@ -13,7 +14,7 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
         create(
             "libs",
             Action {
-                from(files("../frisboo-versions/libs.versions.toml"))
+                from("com.frisboo.corebanking:version-catalog:0.0.1")
             },
         )
     }

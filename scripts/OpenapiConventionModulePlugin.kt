@@ -30,34 +30,34 @@ import org.openapitools.generator.gradle.plugin.extensions.OpenApiGeneratorValid
 internal class OpenapiConventionModulePlugin : Plugin<Project> {
     override fun apply(target: Project): Unit =
         with(target) {
-            pluginManager.apply("org.openapi.generator")
-            pluginManager.apply("org.springdoc.openapi-gradle-plugin")
-
-            val libs = getLibs()
-            val extension = extensions.create("openapiConvention", OpenapiConventionExtension::class.java)
-
-            afterEvaluate {
-                sanitizeConfig(extension)
-                configureOpenApiGenerate(extension, libs)
-                configureOpenApiTasks(extension, libs)
-            }
-
-            afterEvaluate {
-                println("==================================")
-                println("OpenAPI Conventions Applied:")
-                println(" - Schema Directory: ${extension.schemaDir.get()}")
-                println(" - Schema Filename: ${extension.schemaFilename.get()}")
-                println(" - Output Directory: ${extension.outputDir.get()}")
-                println(" - Package Name: ${extension.packageName.get()}")
-                println(" - Artifact Version: ${extension.artifactVersion.get()}")
-                println(" - Group ID: ${extension.groupId.get()}")
-                println(" - Generate APIs: ${extension.generateApis.get()}")
-                println(" - Generate Models: ${extension.generateModels.get()}")
-                println(" - Validate Spec: ${extension.validateSpec.get()}")
-                println(" - Recommend Fixes: ${extension.recommend.get()}")
-                println("==================================")
-            }
-        }
+//            pluginManager.apply("org.openapi.generator")
+//            pluginManager.apply("org.springdoc.openapi-gradle-plugin")
+//
+//            val libs = getLibs()
+//            val extension = extensions.create("openapiConvention", OpenapiConventionExtension::class.java)
+//
+//            afterEvaluate {
+//                sanitizeConfig(extension)
+//                configureOpenApiGenerate(extension, libs)
+//                configureOpenApiTasks(extension, libs)
+//            }
+//
+//            afterEvaluate {
+//                println("==================================")
+//                println("OpenAPI Conventions Applied:")
+//                println(" - Schema Directory: ${extension.schemaDir.get()}")
+//                println(" - Schema Filename: ${extension.schemaFilename.get()}")
+//                println(" - Output Directory: ${extension.outputDir.get()}")
+//                println(" - Package Name: ${extension.packageName.get()}")
+//                println(" - Artifact Version: ${extension.artifactVersion.get()}")
+//                println(" - Group ID: ${extension.groupId.get()}")
+//                println(" - Generate APIs: ${extension.generateApis.get()}")
+//                println(" - Generate Models: ${extension.generateModels.get()}")
+//                println(" - Validate Spec: ${extension.validateSpec.get()}")
+//                println(" - Recommend Fixes: ${extension.recommend.get()}")
+//                println("==================================")
+//            }
+//        }
 }
 
 private fun Project.sanitizeConfig(extension: OpenapiConventionExtension) {
