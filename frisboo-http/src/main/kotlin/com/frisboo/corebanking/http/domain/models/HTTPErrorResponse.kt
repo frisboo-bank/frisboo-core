@@ -13,12 +13,22 @@
  * or implied. See the License for the specific language governing
  * permissions and limitations under the License.
  */
-package com.frisboo.corebanking.conventionplugin.utils
+package com.frisboo.corebanking.http.domain.models
 
-import org.gradle.api.Project
-import org.gradle.api.artifacts.VersionCatalog
-import org.gradle.api.artifacts.VersionCatalogsExtension
+/**
+ * Represents an HTTP error response returned by the API.
+ *
+ * @property status The HTTP status code associated with the error.
+ * @property message A human-readable message describing the error.
+ */
+public data class HTTPErrorResponse(
+    /**
+     * The HTTP status code associated with the error.
+     */
+    val status: Int,
 
-internal fun Project.getLibs(): VersionCatalog =
-    extensions.findByType(VersionCatalogsExtension::class.java)?.named("libs")
-        ?: error("Version catalog `libs` not found")
+    /**
+     * A human-readable message describing the error.
+     */
+    val message: String,
+)

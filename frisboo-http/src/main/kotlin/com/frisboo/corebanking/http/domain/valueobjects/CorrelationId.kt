@@ -13,15 +13,13 @@
  * or implied. See the License for the specific language governing
  * permissions and limitations under the License.
  */
-package com.frisboo.corebanking.conventionplugin.managers.quality
+package com.frisboo.corebanking.http.domain.valueobjects
 
-import com.frisboo.corebanking.conventionplugin.utils.getLibs
-import org.gradle.api.Project
-
-
-public class QualityManager(private val project: Project, ext: Any) {
-    private val libs = project.getLibs()
-
-    public fun configure() {
+@JvmInline
+public value class CorrelationId(
+    public val correlationId: String,
+) {
+    init {
+        require(correlationId.isNotBlank()) { "CorrelationId cannot be blank" }
     }
 }

@@ -13,22 +13,13 @@
  * or implied. See the License for the specific language governing
  * permissions and limitations under the License.
  */
-plugins {
-    base
-    id("kotlin-conventions")
-    id("quality-conventions")
-    alias(libs.plugins.dokka)
-    alias(libs.plugins.maven.publish)
-}
+package com.frisboo.corebanking.http.domain.valueobjects
 
-dokka {
-    dokkaPublications.html {
-        outputDirectory.set(project.file("docs/api"))
-    }
-}
-
-allprojects {
-    if (this != rootProject) {
-        apply(plugin = "com.vanniktech.maven.publish")
+@JvmInline
+public value class UserAgent(
+    public val userAgent: String,
+) {
+    init {
+        require(userAgent.isNotBlank()) { "UserAgent cannot be blank" }
     }
 }

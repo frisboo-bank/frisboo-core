@@ -2,8 +2,8 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 
 plugins {
-    `kotlin-dsl`
     `java-gradle-plugin`
+    `kotlin-dsl`
 }
 
 java {

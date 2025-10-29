@@ -13,12 +13,10 @@
  * or implied. See the License for the specific language governing
  * permissions and limitations under the License.
  */
-package com.frisboo.corebanking.conventionplugin.utils
+package com.frisboo.corebanking.core.api.domain.models
 
-import org.gradle.api.provider.Provider
-import org.gradle.api.provider.ProviderFactory
+import com.frisboo.corebanking.http.domain.valueobjects.CorrelationId
 
-internal fun <T : Any> ProviderFactory.gradleProperty(
-    key: String,
-    converter: (String) -> T,
-): Provider<T> = gradleProperty(key).map(converter)
+public data class CorrelationIdContext(
+    val id: CorrelationId,
+)

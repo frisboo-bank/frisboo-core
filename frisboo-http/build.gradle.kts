@@ -14,21 +14,18 @@
  * permissions and limitations under the License.
  */
 plugins {
-    base
     id("kotlin-conventions")
-    id("quality-conventions")
     alias(libs.plugins.dokka)
     alias(libs.plugins.maven.publish)
 }
 
-dokka {
-    dokkaPublications.html {
-        outputDirectory.set(project.file("docs/api"))
+kotlin {
+    compilerOptions {
+        optIn.add("kotlin.time.ExperimentalTime")
     }
-}
 
-allprojects {
-    if (this != rootProject) {
-        apply(plugin = "com.vanniktech.maven.publish")
+    @OptIn(org.jetbrains.kotlin.gradle.dsl.abi.ExperimentalAbiValidation::class)
+    abiValidation {
+        enabled.set(true)
     }
 }

@@ -1,5 +1,3 @@
-import org.gradle.toolchains.foojay.FoojayToolchainResolver
-
 /*
  * Copyright 2025 Frisboo Bank
  *
@@ -18,6 +16,13 @@ import org.gradle.toolchains.foojay.FoojayToolchainResolver
 rootProject.name = "core"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
+include(
+    "frisboo-bom",
+    "frisboo-core",
+    "frisboo-http",
+    "frisboo-spring-boot",
+)
+
 pluginManagement {
     includeBuild("build-logic")
 
@@ -28,10 +33,29 @@ pluginManagement {
     }
 }
 
+// plugins {
+//    id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
+//    id("org.danilopianini.gradle-pre-commit-git-hooks") version "2.1.3"
+// }
+//
+// @Suppress("UnstableApiUsage")
+// toolchainManagement {
+//    jvm {
+//        javaRepositories {
+//            repository("foojay") {
+//                resolverClass.set(org.gradle.toolchains.foojay.FoojayToolchainResolver::class.java)
+//            }
+//        }
+//    }
+// }
+
+// gitHooks {
+//    commitMsg { conventionalCommits() }
+//    createHooks()
+// }
+
 @Suppress("UnstableApiUsage")
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
-
     repositories {
         mavenCentral()
         gradlePluginPortal()
@@ -42,35 +66,8 @@ dependencyResolutionManagement {
         create(
             "libs",
             Action {
-                from(files("frisboo-versions/libs.versions.toml"))
+                from("com.frisboo.corebanking:version-catalog:0.0.1")
             },
         )
     }
 }
-
-plugins {
-    id("org.gradle.toolchains.foojay-resolver-convention") version "0.10.0"
-    id("org.danilopianini.gradle-pre-commit-git-hooks") version "2.1.3"
-}
-
-//@Suppress("UnstableApiUsage")
-//toolchainManagement {
-//    jvm {
-//        javaRepositories {
-//            repository("foojay") {
-//                resolverClass.set(FoojayToolchainResolver::class.java)
-//            }
-//        }
-//    }
-//}
-
-gitHooks {
-    commitMsg { conventionalCommits() }
-    createHooks()
-}
-
-include("frisboo-bom")
-include("frisboo-convention-plugin")
-include("frisboo-core")
-include("frisboo-spring-boot")
-include("frisboo-versions")
