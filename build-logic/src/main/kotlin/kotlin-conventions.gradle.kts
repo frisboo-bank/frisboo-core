@@ -6,35 +6,35 @@ plugins {
     id("org.jetbrains.kotlin.jvm")
 }
 
-private val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
+//private val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
 
 kotlin {
-    val kotlinVersion = libs.requiredVersion("kotlin-language-version")
-    val jvmTargetVersion = libs.requiredVersion("jvm-target-version")
+//    val kotlinVersion = libs.requiredVersion("kotlin-language-version")
+//    val jvmTargetVersion = libs.requiredVersion("jvm-target-version")
 
     jvmToolchain {
-        languageVersion.set(JavaLanguageVersion.of(jvmTargetVersion))
+//        languageVersion.set(JavaLanguageVersion.of(jvmTargetVersion))
     }
 
     explicitApi()
 
     compilerOptions {
-        apiVersion.set(KotlinVersion.fromVersion(kotlinVersion))
-        languageVersion.set(KotlinVersion.fromVersion(kotlinVersion))
-        jvmTarget.set(JvmTarget.fromTarget(jvmTargetVersion))
+//        apiVersion.set(KotlinVersion.fromVersion(kotlinVersion))
+//        languageVersion.set(KotlinVersion.fromVersion(kotlinVersion))
+//        jvmTarget.set(JvmTarget.fromTarget(jvmTargetVersion))
 
-        allWarningsAsErrors.set(true)
-        progressiveMode.set(true)
-        optIn.add("kotlin.RequiresOptIn")
-        jvmDefault.set(JvmDefaultMode.ENABLE)
-        freeCompilerArgs.addAll(listOf("-Xjsr305=strict"))
+//        allWarningsAsErrors.set(true)
+//        progressiveMode.set(true)
+//        optIn.add("kotlin.RequiresOptIn")
+//        jvmDefault.set(JvmDefaultMode.ENABLE)
+//        freeCompilerArgs.addAll(listOf("-Xjsr305=strict"))
     }
 }
 
 dependencies {
-    implementation(gradleApi())
-    implementation(gradleKotlinDsl())
-    implementation(libs.libraryOrThrow("kotlin-gradle-plugin"))
-    implementation(platform(libs.libraryOrThrow("kotlin-bom")))
-    compileOnly(libs.libraryOrThrow("jetbrains-annotations"))
+//    implementation(gradleApi())
+//    implementation(gradleKotlinDsl())
+//    implementation(libs.libraryOrThrow("kotlin-gradle-plugin"))
+//    implementation(platform(libs.libraryOrThrow("kotlin-bom")))
+//    compileOnly(libs.libraryOrThrow("jetbrains-annotations"))
 }
