@@ -96,13 +96,13 @@ private fun Project.configureOpenApiGenerate(
     libs: VersionCatalog,
 ) {
     dependencies {
-        add("implementation", platform(libs.libraryOrThrow("springdoc-openapi-bom")))
-        add("implementation", libs.libraryOrThrow("springdoc-openapi-starter-webflux-ui"))
-        add("implementation", libs.libraryOrThrow("springdoc-openapi-starter-webflux-api"))
+//        add("implementation", platform(libs.libraryOrThrow("springdoc-openapi-bom")))
+//        add("implementation", libs.libraryOrThrow("springdoc-openapi-starter-webflux-ui"))
+//        add("implementation", libs.libraryOrThrow("springdoc-openapi-starter-webflux-api"))
     }
 
-    val generatedInputSpec =
-        extension.schemaDir.zip(extension.schemaFilename) { dir, filename -> dir.file(filename).asFile.absolutePath }
+//    val generatedInputSpec =
+//        extension.schemaDir.zip(extension.schemaFilename) { dir, filename -> dir.file(filename).asFile.absolutePath }
 
     // Configure the OpenAPI generator
     extensions.configure<OpenApiGeneratorGenerateExtension> {

@@ -13,13 +13,19 @@
  * or implied. See the License for the specific language governing
  * permissions and limitations under the License.
  */
-package com.frisboo.corebanking.core.api.domain.valueobjects
-
-@JvmInline
-public value class UserAgent(
-    public val userAgent: String,
-) {
-    init {
-        require(userAgent.isNotBlank()) { "UserAgent cannot be blank" }
-    }
+plugins {
+    id("kotlin-conventions")
+    alias(libs.plugins.dokka)
+    alias(libs.plugins.maven.publish)
 }
+
+//kotlin {
+//    compilerOptions {
+//        optIn.add("kotlin.time.ExperimentalTime")
+//    }
+//
+//    @OptIn(org.jetbrains.kotlin.gradle.dsl.abi.ExperimentalAbiValidation::class)
+//    abiValidation {
+//        enabled.set(true)
+//    }
+//}

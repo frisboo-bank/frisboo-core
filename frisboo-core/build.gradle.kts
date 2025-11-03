@@ -30,4 +30,10 @@ kotlin {
     }
 }
 
-dependencies {}
+dependencies {
+    api(platform(libs.arrow.kt.bom))
+    api(platform(libs.kotlinx.coroutines.bom))
+    api(libs.arrow.kt.core)
+    api(libs.arrow.kt.coroutines)
+    api(libs.kotlinx.coroutines.core)
+}
