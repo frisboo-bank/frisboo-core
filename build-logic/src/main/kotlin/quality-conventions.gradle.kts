@@ -1,7 +1,8 @@
 import com.diffplug.gradle.spotless.SpotlessExtension
 import com.diffplug.spotless.LineEnding
+import io.gitlab.arturbosch.detekt.Detekt
+import io.gitlab.arturbosch.detekt.DetektCreateBaselineTask
 import io.gitlab.arturbosch.detekt.extensions.DetektExtension
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     id("com.diffplug.spotless")
@@ -14,21 +15,18 @@ private val headerFile = rootProject.layout.projectDirectory.file("config/licens
 private val editorConfig = rootProject.layout.projectDirectory.file(".editorconfig")
 private val ktlintVersion = libs.findVersion("ktlint-version").get().requiredVersion
 private val delimiter =
-    "^\\s*(plugins|pluginManagement|import|buildscript|" +
-            "dependencyResolutionManagement|enableFeaturePreview|include|rootProject)\\b"
+    "^\\s*(plugins|pluginManagement|import|buildscript|" + "dependencyResolutionManagement|enableFeaturePreview|include|rootProject)\\b"
 
 configure<SpotlessExtension> {
-
-    val commonExcludes =
-        listOf(
-            "**/build/**",
-            "**/build-*/**",
-            "**/.gradle/**",
-            "**/.idea/**",
-            "**/.git/**",
-            "**/generated/**",
-            "**/.gradle-test-kit/**",
-        )
+    val commonExcludes = listOf(
+        "**/build/**",
+        "**/build-*/**",
+        "**/.gradle/**",
+        "**/.idea/**",
+        "**/.git/**",
+        "**/generated/**",
+        "**/.gradle-test-kit/**",
+    )
 
     kotlin {
         target("**/*.kt")
@@ -66,13 +64,10 @@ configure<SpotlessExtension> {
 }
 
 private val detektConfig = rootProject.layout.projectDirectory.file("config/detekt/detekt.yml")
-private val detektBaseline =
-    rootProject.layout.projectDirectory
-        .file("config/detekt/detekt-baseline.xml")
-        .asFile
+private val detektBaseline = rootProject.layout.projectDirectory.file("config/detekt/detekt-baseline.xml").asFile
 
 configure<DetektExtension> {
-    toolVersion = libs.requiredVersion("detekt-version")
+    toolVersion = libs.getVersionOrFail("detekt-version")
     parallel = true
     buildUponDefaultConfig = true
     config.setFrom(detektConfig)
@@ -80,7 +75,7 @@ configure<DetektExtension> {
 }
 
 tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
-    jvmTarget = JvmTarget.JVM_21.target
+    jvmTarget = libs.getVersionOrFail("jvm-target-version")
     autoCorrect = false
 
     reports {

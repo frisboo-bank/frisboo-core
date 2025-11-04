@@ -1,3 +1,18 @@
+/*
+ * Copyright 2025 Frisboo Bank
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing
+ * permissions and limitations under the License.
+ */
 package com.frisboo.corebanking.core.coroutine.raise
 
 import arrow.core.Either
@@ -20,7 +35,9 @@ private val scope = CoroutineScope(Job() + Dispatchers.IO)
  *
  * @param Left The type of the error that can be raised in this context.
  */
-public interface EitherContext<Left> : Raise<Left>, CoroutineScope
+public interface EitherContext<Left> :
+    Raise<Left>,
+    CoroutineScope
 
 /**
  * A concrete implementation of `EitherContext` that delegates error handling
@@ -33,7 +50,9 @@ public interface EitherContext<Left> : Raise<Left>, CoroutineScope
 public class EitherCoroutine<L>(
     public val raiseErr: Raise<L>,
     public val scope: CoroutineScope,
-) : Raise<L> by raiseErr, CoroutineScope by scope, EitherContext<L>
+) : Raise<L> by raiseErr,
+    CoroutineScope by scope,
+    EitherContext<L>
 
 /**
  * Executes a block of code within a service-specific coroutine scope.
@@ -63,11 +82,12 @@ public suspend fun <T> serviceScope(
 public suspend fun <L, R> scopedEither(
     context: CoroutineContext = EmptyCoroutineContext,
     block: suspend EitherContext<L>.() -> R,
-): Either<L, R> = either {
-    serviceScope {
-        block(EitherCoroutine(raiseErr = this@either, scope = this@serviceScope + context))
+): Either<L, R> =
+    either {
+        serviceScope {
+            block(EitherCoroutine(raiseErr = this@either, scope = this@serviceScope + context))
+        }
     }
-}
 
 /**
  * Executes a block of code within an `Either` context specifically for handling `AppError` errors.
@@ -83,5 +103,3 @@ public suspend fun <R> scopedEitherWithError(
     context: CoroutineContext = EmptyCoroutineContext,
     block: suspend EitherContext<AppError>.() -> R,
 ): Either<AppError, R> = scopedEither<AppError, R>(context, block)
-
-

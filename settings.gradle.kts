@@ -19,8 +19,6 @@ include(
     "frisboo-bom",
     "frisboo-core",
     "frisboo-http",
-    "frisboo-openapi",
-    "frisboo-openapi:convention-plugin",
     "frisboo-spring-boot",
     "frisboo-transaction",
 )
@@ -34,10 +32,10 @@ pluginManagement {
     }
 }
 
-//plugins {
+// plugins {
 //    id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
 //    id("org.danilopianini.gradle-pre-commit-git-hooks") version "2.1.3"
-//}
+// }
 
 // @Suppress("UnstableApiUsage")
 // toolchainManagement {
@@ -55,7 +53,8 @@ pluginManagement {
 //    createHooks()
 // }
 
-@Suppress("UnstableApiUsage") dependencyResolutionManagement {
+@Suppress("UnstableApiUsage")
+dependencyResolutionManagement {
     repositories {
         mavenCentral()
         gradlePluginPortal()
