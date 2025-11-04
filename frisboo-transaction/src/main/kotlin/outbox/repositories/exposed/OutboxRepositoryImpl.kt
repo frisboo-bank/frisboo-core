@@ -1,3 +1,18 @@
+/*
+ * Copyright 2025 Frisboo Bank
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing
+ * permissions and limitations under the License.
+ */
 package outbox.repositories.exposed
 
 import arrow.core.Either
@@ -16,7 +31,6 @@ import java.time.OffsetDateTime
 @Component
 @Transactional
 public class OutboxRepositoryImpl : OutboxRepository {
-
     /**
      * Saves an outbox event to the database.
      *
@@ -26,15 +40,18 @@ public class OutboxRepositoryImpl : OutboxRepository {
     override suspend fun saveEvent(event: OutboxEvent): Either<AppError, OutboxEvent> =
         scopedEither<AppError, OutboxEvent>(ctx) {
             suspendTransaction {
-                OutboxTable.insert {
-                    it[name] = event.name
-                    it[subject] = event.subject
-                    it[data] = event.data
-                    it[metadata] = event.metadata
-                    it[sentAt] = OffsetDateTime.ofInstant(event.sentAt, java.time.ZoneOffset.UTC)
-                }.resultedValues?.singleOrNull()?.let { event } ?: event
+                OutboxTable
+                    .insert {
+                        it[name] = event.name
+                        it[subject] = event.subject
+                        it[data] = event.data
+                        it[metadata] = event.metadata
+                        it[sentAt] = OffsetDateTime.ofInstant(event.sentAt, java.time.ZoneOffset.UTC)
+                    }.resultedValues
+                    ?.singleOrNull()
+                    ?.let { event } ?: event
             }
-        }.onLeft { logger.error { "Failed to save outbox event with error: ${it}" } }
+        }.onLeft { logger.error { "Failed to save outbox event with error: $it" } }
             .onRight { logger.info { "Successfully saved outbox event with ID: ${it.eventId}" } }
 
     /**
