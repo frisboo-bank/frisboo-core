@@ -1,12 +1,11 @@
 import com.diffplug.gradle.spotless.SpotlessExtension
 import com.diffplug.spotless.LineEnding
-import io.gitlab.arturbosch.detekt.Detekt
-import io.gitlab.arturbosch.detekt.DetektCreateBaselineTask
-import io.gitlab.arturbosch.detekt.extensions.DetektExtension
+import dev.detekt.gradle.Detekt
+import dev.detekt.gradle.extensions.DetektExtension
 
 plugins {
     id("com.diffplug.spotless")
-    id("io.gitlab.arturbosch.detekt")
+    id("dev.detekt")
 }
 
 private val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
@@ -18,6 +17,7 @@ private val delimiter =
     "^\\s*(plugins|pluginManagement|import|buildscript|" + "dependencyResolutionManagement|enableFeaturePreview|include|rootProject)\\b"
 
 configure<SpotlessExtension> {
+
     val commonExcludes = listOf(
         "**/build/**",
         "**/build-*/**",
@@ -74,16 +74,13 @@ configure<DetektExtension> {
     baseline = detektBaseline
 }
 
-tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
+tasks.withType<Detekt>().configureEach {
     jvmTarget = libs.getVersionOrFail("jvm-target-version")
     autoCorrect = false
 
     reports {
-        xml.required.set(true)
         html.required.set(true)
         sarif.required.set(true)
-        txt.required.set(false)
-        md.required.set(false)
     }
 }
 

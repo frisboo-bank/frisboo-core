@@ -12,6 +12,11 @@ kotlin {
     val kotlinVersion = libs.getVersionOrFail("kotlin-language-version")
     val jvmTargetVersion = libs.getVersionOrFail("jvm-target-version")
 
+    logger.debug("kotlinVersion: $kotlinVersion")
+    logger.debug("jvmTargetVersion: $jvmTargetVersion")
+    logger.debug("languageVersion: ${JavaLanguageVersion.of(jvmTargetVersion)}")
+    logger.debug("KotlinVersion: ${KotlinVersion.fromVersion(kotlinVersion)}")
+
     jvmToolchain {
         languageVersion.set(JavaLanguageVersion.of(jvmTargetVersion))
     }
@@ -27,7 +32,12 @@ kotlin {
         progressiveMode.set(true)
         optIn.add("kotlin.RequiresOptIn")
         jvmDefault.set(JvmDefaultMode.ENABLE)
-        freeCompilerArgs.addAll(listOf("-Xjsr305=strict"))
+        freeCompilerArgs.addAll(
+            listOf(
+                "-Xjsr305=strict",
+                "-Xannotation-default-target=param-property",
+            ),
+        )
     }
 }
 
