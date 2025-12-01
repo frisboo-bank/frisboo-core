@@ -18,9 +18,12 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 include(
     "frisboo-bom",
     "frisboo-core",
+    "frisboo-data",
+    "frisboo-grpc",
     "frisboo-http",
-    "frisboo-spring-boot",
-    "frisboo-transaction",
+    "frisboo-messaging",
+    "frisboo-persistence",
+    "frisboo-tests",
 )
 
 pluginManagement {
@@ -32,10 +35,10 @@ pluginManagement {
     }
 }
 
-// plugins {
-//    id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
-//    id("org.danilopianini.gradle-pre-commit-git-hooks") version "2.1.3"
-// }
+plugins {
+    id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
+    id("org.danilopianini.gradle-pre-commit-git-hooks") version "2.1.3"
+}
 
 // @Suppress("UnstableApiUsage")
 // toolchainManagement {
@@ -53,8 +56,7 @@ pluginManagement {
 //    createHooks()
 // }
 
-@Suppress("UnstableApiUsage")
-dependencyResolutionManagement {
+@Suppress("UnstableApiUsage") dependencyResolutionManagement {
     repositories {
         mavenCentral()
         gradlePluginPortal()

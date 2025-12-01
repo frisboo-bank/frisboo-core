@@ -19,12 +19,30 @@ plugins {
     id("quality-conventions")
     alias(libs.plugins.dokka)
     alias(libs.plugins.maven.publish)
+    alias(libs.plugins.kover)
 }
 
 dokka {
     dokkaPublications.html {
         outputDirectory.set(project.file("docs/api"))
     }
+}
+
+dependencies{
+    dokka(projects.core.frisbooCore)
+    dokka(projects.core.frisbooData)
+    dokka(projects.core.frisbooGrpc)
+    dokka(projects.core.frisbooHttp)
+    dokka(projects.core.frisbooMessaging)
+    dokka(projects.core.frisbooPersistence)
+    dokka(projects.core.frisbooTests)
+
+    kover(project(":frisboo-core"))
+    kover(project(":frisboo-grpc"))
+    kover(project(":frisboo-http"))
+    kover(project(":frisboo-messaging"))
+    kover(project(":frisboo-persistence"))
+    kover(project(":frisboo-tests"))
 }
 
 allprojects {

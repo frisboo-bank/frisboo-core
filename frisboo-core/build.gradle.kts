@@ -15,25 +15,42 @@
  */
 plugins {
     id("kotlin-conventions")
+    alias(libs.plugins.kover)
     alias(libs.plugins.dokka)
     alias(libs.plugins.maven.publish)
 }
 
-kotlin {
-    compilerOptions {
-        optIn.add("kotlin.time.ExperimentalTime")
+dependencies {
+    arrayOf(
+        libs.arrow.kt.bom,
+        libs.kotlin.bom,
+        libs.kotlinx.coroutines.bom,
+        libs.jackson.bom,
+        libs.reactor.bom,
+        libs.spring.boot.bom,
+    ).map { api(platform(it)) }
 
-        @OptIn(org.jetbrains.kotlin.gradle.dsl.abi.ExperimentalAbiValidation::class)
-        abiValidation {
-            enabled.set(true)
-        }
-    }
+    arrayOf(
+        libs.arrow.kt.core,
+        libs.arrow.kt.coroutines,
+        libs.bundles.serialization,
+        libs.jetbrains.annotations,
+        libs.kotlin.logging,
+        libs.kotlin.reflect,
+        libs.kotlinx.coroutines.core,
+        libs.kotlinx.coroutines.debug,
+        libs.kotlinx.coroutines.reactor,
+        libs.kotlinx.datetime,
+        libs.reactor.kotlin.extensions,
+        libs.spring.boot.autoconfigure,
+    ).map { api(it) }
+
+    testApi(platform(libs.junit.bom))
+    testApi(platform(libs.kotest.bom))
+
+    testRuntimeOnly(libs.kotest.runner.junit5)
 }
 
-dependencies {
-    api(platform(libs.arrow.kt.bom))
-    api(platform(libs.kotlinx.coroutines.bom))
-    api(libs.arrow.kt.core)
-    api(libs.arrow.kt.coroutines)
-    api(libs.kotlinx.coroutines.core)
+tasks.test {
+    useJUnitPlatform()
 }

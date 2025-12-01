@@ -19,13 +19,6 @@ plugins {
     alias(libs.plugins.maven.publish)
 }
 
-kotlin {
-    compilerOptions {
-        optIn.add("kotlin.time.ExperimentalTime")
-    }
-
-    @OptIn(org.jetbrains.kotlin.gradle.dsl.abi.ExperimentalAbiValidation::class)
-    abiValidation {
-        enabled.set(true)
-    }
+dependencies {
+    implementation(project(":frisboo-core"))
 }
