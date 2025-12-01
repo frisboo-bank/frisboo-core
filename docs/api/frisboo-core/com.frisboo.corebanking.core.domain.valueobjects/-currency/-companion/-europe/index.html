@@ -1,0 +1,712 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>Europe</title>
+<link href="../../../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async></script>
+<script type="text/javascript" src="../../../../../scripts/sourceset_dependencies.js" async></script>
+<link href="../../../../../styles/style.css" rel="Stylesheet">
+<link href="../../../../../styles/main.css" rel="Stylesheet">
+<link href="../../../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../../../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../../../../../scripts/navigation-loader.js" async></script>
+<script type="text/javascript" src="../../../../../scripts/platform-content-handler.js" async></script>
+<script type="text/javascript" src="../../../../../scripts/main.js" defer></script>
+<script type="text/javascript" src="../../../../../scripts/prism.js" async></script>
+<script type="text/javascript" src="../../../../../ui-kit/ui-kit.min.js" defer></script></head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+<a class="library-name--link" href="../../../../../index.html" tabindex="1">
+                    core
+            </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">0.0.1
+        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true" data-filter=":frisboo-core/main">jvm</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":frisboo-core/main" data-filter=":frisboo-core/main">
+                                <span class="checkbox--icon"></span>
+                                jvm
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config="{&quot;defaultSize&quot;: 280, &quot;minSize&quot;: 200, &quot;maxSize&quot;: 400}">
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    core
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="classlike" id="content" pageids="frisboo-core::com.frisboo.corebanking.core.domain.valueobjects/Currency.Companion.Europe///PointingToDeclaration//1277446848">
+  <div class="breadcrumbs"><a href="../../../../index.html">frisboo-core</a><span class="delimiter">/</span><a href="../../../index.html">com.frisboo.corebanking.core.domain.valueobjects</a><span class="delimiter">/</span><a href="../../index.html">Currency</a><span class="delimiter">/</span><a href="../index.html">Companion</a><span class="delimiter">/</span><span class="current">Europe</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span><span>Europe</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><span class="token keyword">object </span><a href="index.html">Europe</a></div></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="PROPERTY">
+        <h2 class="tableheader">Properties</h2>
+        <div class="table"><a data-name="1527294469%2FProperties%2F1277446848" anchor-label="ALL" id="1527294469%2FProperties%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-a-l-l.html"><span><span>ALL</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1527294469%2FProperties%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="-a-l-l.html">ALL</a><span class="token operator">: </span><a href="../../index.html">Currency</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2054217266%2FProperties%2F1277446848" anchor-label="AMD" id="-2054217266%2FProperties%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-a-m-d.html"><span><span>AMD</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2054217266%2FProperties%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="-a-m-d.html">AMD</a><span class="token operator">: </span><a href="../../index.html">Currency</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-2127938863%2FProperties%2F1277446848" anchor-label="AZN" id="-2127938863%2FProperties%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-a-z-n.html"><span><span>AZN</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-2127938863%2FProperties%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="-a-z-n.html">AZN</a><span class="token operator">: </span><a href="../../index.html">Currency</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-684241864%2FProperties%2F1277446848" anchor-label="BAM" id="-684241864%2FProperties%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-b-a-m.html"><span><span>BAM</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-684241864%2FProperties%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="-b-a-m.html">BAM</a><span class="token operator">: </span><a href="../../index.html">Currency</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="821494749%2FProperties%2F1277446848" anchor-label="BGN" id="821494749%2FProperties%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-b-g-n.html"><span><span>BGN</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="821494749%2FProperties%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="-b-g-n.html">BGN</a><span class="token operator">: </span><a href="../../index.html">Currency</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="950677871%2FProperties%2F1277446848" anchor-label="BYN" id="950677871%2FProperties%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-b-y-n.html"><span><span>BYN</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="950677871%2FProperties%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="-b-y-n.html">BYN</a><span class="token operator">: </span><a href="../../index.html">Currency</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1280213765%2FProperties%2F1277446848" anchor-label="CHF" id="1280213765%2FProperties%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-c-h-f.html"><span><span>CHF</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1280213765%2FProperties%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="-c-h-f.html">CHF</a><span class="token operator">: </span><a href="../../index.html">Currency</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1348364813%2FProperties%2F1277446848" anchor-label="Czech" id="-1348364813%2FProperties%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-czech.html"><span><span>Czech</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1348364813%2FProperties%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="-czech.html">Czech</a><span class="token operator">: </span><a href="../../index.html">Currency</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1564495922%2FProperties%2F1277446848" anchor-label="CZK" id="1564495922%2FProperties%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-c-z-k.html"><span><span>CZK</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1564495922%2FProperties%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="-c-z-k.html">CZK</a><span class="token operator">: </span><a href="../../index.html">Currency</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1888573204%2FProperties%2F1277446848" anchor-label="Denmark" id="-1888573204%2FProperties%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-denmark.html"><span><span>Denmark</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1888573204%2FProperties%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="-denmark.html">Denmark</a><span class="token operator">: </span><a href="../../index.html">Currency</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-229548990%2FProperties%2F1277446848" anchor-label="DKK" id="-229548990%2FProperties%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-d-k-k.html"><span><span>DKK</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-229548990%2FProperties%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="-d-k-k.html">DKK</a><span class="token operator">: </span><a href="../../index.html">Currency</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="759058692%2FProperties%2F1277446848" anchor-label="EUR" id="759058692%2FProperties%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-e-u-r.html"><span><span>EUR</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="759058692%2FProperties%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="-e-u-r.html">EUR</a><span class="token operator">: </span><a href="../../index.html">Currency</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-637227365%2FProperties%2F1277446848" anchor-label="Eurozone" id="-637227365%2FProperties%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-eurozone.html"><span><span>Eurozone</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-637227365%2FProperties%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="-eurozone.html">Eurozone</a><span class="token operator">: </span><a href="../../index.html">Currency</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-903251151%2FProperties%2F1277446848" anchor-label="GBP" id="-903251151%2FProperties%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-g-b-p.html"><span><span>GBP</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-903251151%2FProperties%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="-g-b-p.html">GBP</a><span class="token operator">: </span><a href="../../index.html">Currency</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1857511672%2FProperties%2F1277446848" anchor-label="GEL" id="1857511672%2FProperties%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-g-e-l.html"><span><span>GEL</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1857511672%2FProperties%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="-g-e-l.html">GEL</a><span class="token operator">: </span><a href="../../index.html">Currency</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1533079672%2FProperties%2F1277446848" anchor-label="GIP" id="1533079672%2FProperties%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-g-i-p.html"><span><span>GIP</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1533079672%2FProperties%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="-g-i-p.html">GIP</a><span class="token operator">: </span><a href="../../index.html">Currency</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1187835653%2FProperties%2F1277446848" anchor-label="HRK" id="1187835653%2FProperties%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-h-r-k.html"><span><span>HRK</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1187835653%2FProperties%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="-h-r-k.html">HRK</a><span class="token operator">: </span><a href="../../index.html">Currency</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-377388627%2FProperties%2F1277446848" anchor-label="HUF" id="-377388627%2FProperties%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-h-u-f.html"><span><span>HUF</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-377388627%2FProperties%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="-h-u-f.html">HUF</a><span class="token operator">: </span><a href="../../index.html">Currency</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="549412132%2FProperties%2F1277446848" anchor-label="Hungary" id="549412132%2FProperties%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-hungary.html"><span><span>Hungary</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="549412132%2FProperties%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="-hungary.html">Hungary</a><span class="token operator">: </span><a href="../../index.html">Currency</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1894713125%2FProperties%2F1277446848" anchor-label="ISK" id="1894713125%2FProperties%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-i-s-k.html"><span><span>ISK</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1894713125%2FProperties%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="-i-s-k.html">ISK</a><span class="token operator">: </span><a href="../../index.html">Currency</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-632521615%2FProperties%2F1277446848" anchor-label="MDL" id="-632521615%2FProperties%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-m-d-l.html"><span><span>MDL</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-632521615%2FProperties%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="-m-d-l.html">MDL</a><span class="token operator">: </span><a href="../../index.html">Currency</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1555650752%2FProperties%2F1277446848" anchor-label="MKD" id="1555650752%2FProperties%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-m-k-d.html"><span><span>MKD</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1555650752%2FProperties%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="-m-k-d.html">MKD</a><span class="token operator">: </span><a href="../../index.html">Currency</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1069541628%2FProperties%2F1277446848" anchor-label="NOK" id="1069541628%2FProperties%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-n-o-k.html"><span><span>NOK</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1069541628%2FProperties%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="-n-o-k.html">NOK</a><span class="token operator">: </span><a href="../../index.html">Currency</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-473614954%2FProperties%2F1277446848" anchor-label="Norway" id="-473614954%2FProperties%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-norway.html"><span><span>Norway</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-473614954%2FProperties%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="-norway.html">Norway</a><span class="token operator">: </span><a href="../../index.html">Currency</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2063253204%2FProperties%2F1277446848" anchor-label="PLN" id="2063253204%2FProperties%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-p-l-n.html"><span><span>PLN</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2063253204%2FProperties%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="-p-l-n.html">PLN</a><span class="token operator">: </span><a href="../../index.html">Currency</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="638243114%2FProperties%2F1277446848" anchor-label="Poland" id="638243114%2FProperties%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-poland.html"><span><span>Poland</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="638243114%2FProperties%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="-poland.html">Poland</a><span class="token operator">: </span><a href="../../index.html">Currency</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="117776849%2FProperties%2F1277446848" anchor-label="Romania" id="117776849%2FProperties%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-romania.html"><span><span>Romania</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="117776849%2FProperties%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="-romania.html">Romania</a><span class="token operator">: </span><a href="../../index.html">Currency</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="143654869%2FProperties%2F1277446848" anchor-label="RON" id="143654869%2FProperties%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-r-o-n.html"><span><span>RON</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="143654869%2FProperties%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="-r-o-n.html">RON</a><span class="token operator">: </span><a href="../../index.html">Currency</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-615054429%2FProperties%2F1277446848" anchor-label="RSD" id="-615054429%2FProperties%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-r-s-d.html"><span><span>RSD</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-615054429%2FProperties%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="-r-s-d.html">RSD</a><span class="token operator">: </span><a href="../../index.html">Currency</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1246133991%2FProperties%2F1277446848" anchor-label="RUB" id="1246133991%2FProperties%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-r-u-b.html"><span><span>RUB</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1246133991%2FProperties%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="-r-u-b.html">RUB</a><span class="token operator">: </span><a href="../../index.html">Currency</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1068031609%2FProperties%2F1277446848" anchor-label="Russia" id="1068031609%2FProperties%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-russia.html"><span><span>Russia</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1068031609%2FProperties%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="-russia.html">Russia</a><span class="token operator">: </span><a href="../../index.html">Currency</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1230346675%2FProperties%2F1277446848" anchor-label="SEK" id="-1230346675%2FProperties%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-s-e-k.html"><span><span>SEK</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1230346675%2FProperties%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="-s-e-k.html">SEK</a><span class="token operator">: </span><a href="../../index.html">Currency</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="705824232%2FProperties%2F1277446848" anchor-label="Sweden" id="705824232%2FProperties%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-sweden.html"><span><span>Sweden</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="705824232%2FProperties%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="-sweden.html">Sweden</a><span class="token operator">: </span><a href="../../index.html">Currency</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-948817597%2FProperties%2F1277446848" anchor-label="Switzerland" id="-948817597%2FProperties%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-switzerland.html"><span><span>Switzerland</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-948817597%2FProperties%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="-switzerland.html">Switzerland</a><span class="token operator">: </span><a href="../../index.html">Currency</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1434725589%2FProperties%2F1277446848" anchor-label="TRY" id="-1434725589%2FProperties%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-t-r-y.html"><span><span>TRY</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1434725589%2FProperties%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="-t-r-y.html">TRY</a><span class="token operator">: </span><a href="../../index.html">Currency</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="12441446%2FProperties%2F1277446848" anchor-label="Turkey" id="12441446%2FProperties%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-turkey.html"><span><span>Turkey</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="12441446%2FProperties%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="-turkey.html">Turkey</a><span class="token operator">: </span><a href="../../index.html">Currency</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1384367958%2FProperties%2F1277446848" anchor-label="UAH" id="-1384367958%2FProperties%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-u-a-h.html"><span><span>UAH</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1384367958%2FProperties%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="-u-a-h.html">UAH</a><span class="token operator">: </span><a href="../../index.html">Currency</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-394204514%2FProperties%2F1277446848" anchor-label="UnitedKingdom" id="-394204514%2FProperties%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-united-kingdom.html"><span>United</span><wbr><span><span>Kingdom</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-394204514%2FProperties%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="-united-kingdom.html">UnitedKingdom</a><span class="token operator">: </span><a href="../../index.html">Currency</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-671308840%2FProperties%2F1277446848" anchor-label="XPF" id="-671308840%2FProperties%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-x-p-f.html"><span><span>XPF</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-671308840%2FProperties%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="-x-p-f.html">XPF</a><span class="token operator">: </span><a href="../../index.html">Currency</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2025 Copyright</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,679 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>AccountType</title>
+<link href="../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async></script>
+<script type="text/javascript" src="../../../scripts/sourceset_dependencies.js" async></script>
+<link href="../../../styles/style.css" rel="Stylesheet">
+<link href="../../../styles/main.css" rel="Stylesheet">
+<link href="../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../../../scripts/navigation-loader.js" async></script>
+<script type="text/javascript" src="../../../scripts/platform-content-handler.js" async></script>
+<script type="text/javascript" src="../../../scripts/main.js" defer></script>
+<script type="text/javascript" src="../../../scripts/prism.js" async></script>
+<script type="text/javascript" src="../../../ui-kit/ui-kit.min.js" defer></script></head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+<a class="library-name--link" href="../../../index.html" tabindex="1">
+                    core
+            </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">0.0.1
+        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true" data-filter=":frisboo-core/main">jvm</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":frisboo-core/main" data-filter=":frisboo-core/main">
+                                <span class="checkbox--icon"></span>
+                                jvm
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config="{&quot;defaultSize&quot;: 280, &quot;minSize&quot;: 200, &quot;maxSize&quot;: 400}">
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    core
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="classlike" id="content" pageids="frisboo-core::com.frisboo.corebanking.core.domain.valueobjects/AccountType///PointingToDeclaration//1277446848">
+  <div class="breadcrumbs"><a href="../../index.html">frisboo-core</a><span class="delimiter">/</span><a href="../index.html">com.frisboo.corebanking.core.domain.valueobjects</a><span class="delimiter">/</span><span class="current">AccountType</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span>Account</span><wbr><span><span>Type</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><span class="token keyword">enum </span><a href="index.html">AccountType</a> : <a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-enum/index.html">Enum</a><span class="token operator">&lt;</span><a href="index.html">AccountType</a><span class="token operator">&gt; </span></div><p class="paragraph">Represents the various types of accounts that can exist in the core banking system.</p></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="CONSTRUCTOR,TYPE,PROPERTY,FUNCTION">Members</button><button class="section-tab" data-togglable="ENTRY">Entries</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="ENTRY">
+        <h2 class="tableheader">Entries</h2>
+        <div class="table"><a data-name="984816856%2FClasslikes%2F1277446848" anchor-label="BROKERAGE" id="984816856%2FClasslikes%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-b-r-o-k-e-r-a-g-e/index.html">BROKERAGE</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="984816856%2FClasslikes%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><div class="block"><a href="-b-r-o-k-e-r-a-g-e/index.html">BROKERAGE</a></div></div><div class="brief "><p class="paragraph">A brokerage account used for trading and managing investments.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-68078026%2FClasslikes%2F1277446848" anchor-label="BUSINESS" id="-68078026%2FClasslikes%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-b-u-s-i-n-e-s-s/index.html">BUSINESS</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-68078026%2FClasslikes%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><div class="block"><a href="-b-u-s-i-n-e-s-s/index.html">BUSINESS</a></div></div><div class="brief "><p class="paragraph">A general business account.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1377427627%2FClasslikes%2F1277446848" anchor-label="BUSINESS_CHECKING" id="1377427627%2FClasslikes%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-b-u-s-i-n-e-s-s_-c-h-e-c-k-i-n-g/index.html">BUSINESS_CHECKING</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1377427627%2FClasslikes%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><div class="block"><a href="-b-u-s-i-n-e-s-s_-c-h-e-c-k-i-n-g/index.html">BUSINESS_CHECKING</a></div></div><div class="brief "><p class="paragraph">A checking account for business purposes.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="562299408%2FClasslikes%2F1277446848" anchor-label="BUSINESS_SAVINGS" id="562299408%2FClasslikes%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-b-u-s-i-n-e-s-s_-s-a-v-i-n-g-s/index.html">BUSINESS_SAVINGS</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="562299408%2FClasslikes%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><div class="block"><a href="-b-u-s-i-n-e-s-s_-s-a-v-i-n-g-s/index.html">BUSINESS_SAVINGS</a></div></div><div class="brief "><p class="paragraph">A savings account for business purposes.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1742941780%2FClasslikes%2F1277446848" anchor-label="CERTIFICATE_OF_DEPOSIT" id="1742941780%2FClasslikes%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-c-e-r-t-i-f-i-c-a-t-e_-o-f_-d-e-p-o-s-i-t/index.html">CERTIFICATE_OF_DEPOSIT</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1742941780%2FClasslikes%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><div class="block"><a href="-c-e-r-t-i-f-i-c-a-t-e_-o-f_-d-e-p-o-s-i-t/index.html">CERTIFICATE_OF_DEPOSIT</a></div></div><div class="brief "><p class="paragraph">A certificate of deposit account, typically with a fixed term and interest rate.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1828637392%2FClasslikes%2F1277446848" anchor-label="CHECKING" id="1828637392%2FClasslikes%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-c-h-e-c-k-i-n-g/index.html">CHECKING</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1828637392%2FClasslikes%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><div class="block"><a href="-c-h-e-c-k-i-n-g/index.html">CHECKING</a></div></div><div class="brief "><p class="paragraph">A standard checking account for personal use.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1147676041%2FClasslikes%2F1277446848" anchor-label="CORPORATE" id="-1147676041%2FClasslikes%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-c-o-r-p-o-r-a-t-e/index.html">CORPORATE</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1147676041%2FClasslikes%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><div class="block"><a href="-c-o-r-p-o-r-a-t-e/index.html">CORPORATE</a></div></div><div class="brief "><p class="paragraph">A corporate account used by large organizations.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1062515592%2FClasslikes%2F1277446848" anchor-label="CREDIT_CARD" id="1062515592%2FClasslikes%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-c-r-e-d-i-t_-c-a-r-d/index.html">CREDIT_CARD</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1062515592%2FClasslikes%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><div class="block"><a href="-c-r-e-d-i-t_-c-a-r-d/index.html">CREDIT_CARD</a></div></div><div class="brief "><p class="paragraph">A credit card account.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1013025214%2FClasslikes%2F1277446848" anchor-label="CUSTODIAL" id="1013025214%2FClasslikes%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-c-u-s-t-o-d-i-a-l/index.html">CUSTODIAL</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1013025214%2FClasslikes%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><div class="block"><a href="-c-u-s-t-o-d-i-a-l/index.html">CUSTODIAL</a></div></div><div class="brief "><p class="paragraph">A custodial account managed on behalf of a minor or dependent.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-757950341%2FClasslikes%2F1277446848" anchor-label="ESCROW" id="-757950341%2FClasslikes%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-e-s-c-r-o-w/index.html">ESCROW</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-757950341%2FClasslikes%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><div class="block"><a href="-e-s-c-r-o-w/index.html">ESCROW</a></div></div><div class="brief "><p class="paragraph">An escrow account used to hold funds temporarily during transactions.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="455588162%2FClasslikes%2F1277446848" anchor-label="ESTATE" id="455588162%2FClasslikes%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-e-s-t-a-t-e/index.html">ESTATE</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="455588162%2FClasslikes%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><div class="block"><a href="-e-s-t-a-t-e/index.html">ESTATE</a></div></div><div class="brief "><p class="paragraph">An estate account used to manage the assets of a deceased individual.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="787871914%2FClasslikes%2F1277446848" anchor-label="FLEXIBLE_SPENDING" id="787871914%2FClasslikes%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-f-l-e-x-i-b-l-e_-s-p-e-n-d-i-n-g/index.html">FLEXIBLE_SPENDING</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="787871914%2FClasslikes%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><div class="block"><a href="-f-l-e-x-i-b-l-e_-s-p-e-n-d-i-n-g/index.html">FLEXIBLE_SPENDING</a></div></div><div class="brief "><p class="paragraph">A flexible spending account, often used for healthcare or dependent care expenses.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1625100762%2FClasslikes%2F1277446848" anchor-label="FOREIGN" id="-1625100762%2FClasslikes%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-f-o-r-e-i-g-n/index.html">FOREIGN</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1625100762%2FClasslikes%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><div class="block"><a href="-f-o-r-e-i-g-n/index.html">FOREIGN</a></div></div><div class="brief "><p class="paragraph">A foreign account used for international banking.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1564318681%2FClasslikes%2F1277446848" anchor-label="GOVERNMENT" id="-1564318681%2FClasslikes%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-g-o-v-e-r-n-m-e-n-t/index.html">GOVERNMENT</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1564318681%2FClasslikes%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><div class="block"><a href="-g-o-v-e-r-n-m-e-n-t/index.html">GOVERNMENT</a></div></div><div class="brief "><p class="paragraph">A government account used by public sector entities.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="2126443564%2FClasslikes%2F1277446848" anchor-label="HEALTH_SAVINGS" id="2126443564%2FClasslikes%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-h-e-a-l-t-h_-s-a-v-i-n-g-s/index.html">HEALTH_SAVINGS</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2126443564%2FClasslikes%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><div class="block"><a href="-h-e-a-l-t-h_-s-a-v-i-n-g-s/index.html">HEALTH_SAVINGS</a></div></div><div class="brief "><p class="paragraph">A health savings account used for medical expenses.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1267995375%2FClasslikes%2F1277446848" anchor-label="INDIVIDUAL_RETIREMENT" id="-1267995375%2FClasslikes%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-i-n-d-i-v-i-d-u-a-l_-r-e-t-i-r-e-m-e-n-t/index.html">INDIVIDUAL_RETIREMENT</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1267995375%2FClasslikes%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><div class="block"><a href="-i-n-d-i-v-i-d-u-a-l_-r-e-t-i-r-e-m-e-n-t/index.html">INDIVIDUAL_RETIREMENT</a></div></div><div class="brief "><p class="paragraph">An individual retirement account (IRA) for retirement savings.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1188631159%2FClasslikes%2F1277446848" anchor-label="INVESTMENT" id="-1188631159%2FClasslikes%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-i-n-v-e-s-t-m-e-n-t/index.html">INVESTMENT</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1188631159%2FClasslikes%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><div class="block"><a href="-i-n-v-e-s-t-m-e-n-t/index.html">INVESTMENT</a></div></div><div class="brief "><p class="paragraph">An investment account used for managing securities and other assets.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1367041756%2FClasslikes%2F1277446848" anchor-label="JOINT" id="1367041756%2FClasslikes%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-j-o-i-n-t/index.html">JOINT</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1367041756%2FClasslikes%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><div class="block"><a href="-j-o-i-n-t/index.html">JOINT</a></div></div><div class="brief "><p class="paragraph">A joint account shared by two or more individuals.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="813655544%2FClasslikes%2F1277446848" anchor-label="LIMITED_LIABILITY_COMPANY" id="813655544%2FClasslikes%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-l-i-m-i-t-e-d_-l-i-a-b-i-l-i-t-y_-c-o-m-p-a-n-y/index.html">LIMITED_LIABILITY_COMPANY</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="813655544%2FClasslikes%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><div class="block"><a href="-l-i-m-i-t-e-d_-l-i-a-b-i-l-i-t-y_-c-o-m-p-a-n-y/index.html">LIMITED_LIABILITY_COMPANY</a></div></div><div class="brief "><p class="paragraph">An account for a limited liability company (LLC).</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-522426804%2FClasslikes%2F1277446848" anchor-label="LINE_OF_CREDIT" id="-522426804%2FClasslikes%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-l-i-n-e_-o-f_-c-r-e-d-i-t/index.html">LINE_OF_CREDIT</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-522426804%2FClasslikes%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><div class="block"><a href="-l-i-n-e_-o-f_-c-r-e-d-i-t/index.html">LINE_OF_CREDIT</a></div></div><div class="brief "><p class="paragraph">A line of credit account allowing borrowing up to a specified limit.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1589350502%2FClasslikes%2F1277446848" anchor-label="LOAN" id="1589350502%2FClasslikes%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-l-o-a-n/index.html">LOAN</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1589350502%2FClasslikes%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><div class="block"><a href="-l-o-a-n/index.html">LOAN</a></div></div><div class="brief "><p class="paragraph">A loan account used to track borrowed funds and repayments.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-676289986%2FClasslikes%2F1277446848" anchor-label="MERCHANT" id="-676289986%2FClasslikes%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-m-e-r-c-h-a-n-t/index.html">MERCHANT</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-676289986%2FClasslikes%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><div class="block"><a href="-m-e-r-c-h-a-n-t/index.html">MERCHANT</a></div></div><div class="brief "><p class="paragraph">A merchant account used for processing payments and transactions.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-529399567%2FClasslikes%2F1277446848" anchor-label="MONEY_MARKET" id="-529399567%2FClasslikes%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-m-o-n-e-y_-m-a-r-k-e-t/index.html">MONEY_MARKET</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-529399567%2FClasslikes%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><div class="block"><a href="-m-o-n-e-y_-m-a-r-k-e-t/index.html">MONEY_MARKET</a></div></div><div class="brief "><p class="paragraph">A money market account offering higher interest rates than standard savings accounts.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1477538322%2FClasslikes%2F1277446848" anchor-label="MORTGAGE" id="1477538322%2FClasslikes%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-m-o-r-t-g-a-g-e/index.html">MORTGAGE</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1477538322%2FClasslikes%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><div class="block"><a href="-m-o-r-t-g-a-g-e/index.html">MORTGAGE</a></div></div><div class="brief "><p class="paragraph">A mortgage account used for home loans.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="640198540%2FClasslikes%2F1277446848" anchor-label="NON_PROFIT" id="640198540%2FClasslikes%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-n-o-n_-p-r-o-f-i-t/index.html">NON_PROFIT</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="640198540%2FClasslikes%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><div class="block"><a href="-n-o-n_-p-r-o-f-i-t/index.html">NON_PROFIT</a></div></div><div class="brief "><p class="paragraph">A non-profit account used by charitable organizations.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="683084847%2FClasslikes%2F1277446848" anchor-label="RETIREMENT" id="683084847%2FClasslikes%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-r-e-t-i-r-e-m-e-n-t/index.html">RETIREMENT</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="683084847%2FClasslikes%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><div class="block"><a href="-r-e-t-i-r-e-m-e-n-t/index.html">RETIREMENT</a></div></div><div class="brief "><p class="paragraph">A retirement account used for saving and investing for retirement.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1962327883%2FClasslikes%2F1277446848" anchor-label="SAVINGS" id="1962327883%2FClasslikes%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-s-a-v-i-n-g-s/index.html">SAVINGS</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1962327883%2FClasslikes%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><div class="block"><a href="-s-a-v-i-n-g-s/index.html">SAVINGS</a></div></div><div class="brief "><p class="paragraph">A standard savings account for personal use.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="997961037%2FClasslikes%2F1277446848" anchor-label="STUDENT" id="997961037%2FClasslikes%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-s-t-u-d-e-n-t/index.html">STUDENT</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="997961037%2FClasslikes%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><div class="block"><a href="-s-t-u-d-e-n-t/index.html">STUDENT</a></div></div><div class="brief "><p class="paragraph">A student account designed for individuals in education.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="1702186489%2FClasslikes%2F1277446848" anchor-label="TREASURY" id="1702186489%2FClasslikes%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-t-r-e-a-s-u-r-y/index.html">TREASURY</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="1702186489%2FClasslikes%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><div class="block"><a href="-t-r-e-a-s-u-r-y/index.html">TREASURY</a></div></div><div class="brief "><p class="paragraph">A treasury account used for managing government or institutional funds.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1052370902%2FClasslikes%2F1277446848" anchor-label="TRUST" id="-1052370902%2FClasslikes%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-togglable="ENTRY" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-t-r-u-s-t/index.html">TRUST</a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1052370902%2FClasslikes%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><div class="block"><a href="-t-r-u-s-t/index.html">TRUST</a></div></div><div class="brief "><p class="paragraph">A trust account managed on behalf of a beneficiary.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="TYPE">
+        <h2 class="tableheader">Types</h2>
+        <div class="table"><a data-name="562390183%2FClasslikes%2F1277446848" anchor-label="Companion" id="562390183%2FClasslikes%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-companion/index.html"><span><span>Companion</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="562390183%2FClasslikes%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><span class="token keyword">object </span><a href="-companion/index.html">Companion</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="PROPERTY">
+        <h2 class="tableheader">Properties</h2>
+        <div class="table"><a data-name="-118563440%2FProperties%2F1277446848" anchor-label="entries" id="-118563440%2FProperties%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="entries.html"><span><span>entries</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-118563440%2FProperties%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="entries.html">entries</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.enums/-enum-entries/index.html">EnumEntries</a><span class="token operator">&lt;</span><a href="index.html">AccountType</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Returns a representation of an immutable list of all enum entries, in the order they're declared.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-372974862%2FProperties%2F1277446848" anchor-label="name" id="-372974862%2FProperties%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-currency/-x-p-f/index.html#-372974862%2FProperties%2F1277446848"><span><span>name</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-372974862%2FProperties%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="../-currency/-x-p-f/index.html#-372974862%2FProperties%2F1277446848">name</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-739389684%2FProperties%2F1277446848" anchor-label="ordinal" id="-739389684%2FProperties%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="../-currency/-x-p-f/index.html#-739389684%2FProperties%2F1277446848"><span><span>ordinal</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-739389684%2FProperties%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><span class="token keyword">val </span><a href="../-currency/-x-p-f/index.html#-739389684%2FProperties%2F1277446848">ordinal</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-int/index.html">Int</a></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="FUNCTION">
+        <h2 class="tableheader">Functions</h2>
+        <div class="table"><a data-name="-76707316%2FFunctions%2F1277446848" anchor-label="valueOf" id="-76707316%2FFunctions%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="value-of.html"><span>value</span><wbr><span><span>Of</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-76707316%2FFunctions%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="value-of.html"><span class="token function">valueOf</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">value<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-string/index.html">String</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="index.html">AccountType</a></div><div class="brief "><p class="paragraph">Returns the enum constant of this type with the specified name. The string must match exactly an identifier used to declare an enum constant in this type. (Extraneous whitespace characters are not permitted.)</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1603757032%2FFunctions%2F1277446848" anchor-label="values" id="-1603757032%2FFunctions%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="values.html"><span><span>values</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1603757032%2FFunctions%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><span class="token keyword">fun </span><a href="values.html"><span class="token function">values</span></a><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin/-array/index.html">Array</a><span class="token operator">&lt;</span><a href="index.html">AccountType</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Returns an array containing the constants of this enum type, in the order they're declared.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2025 Copyright</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

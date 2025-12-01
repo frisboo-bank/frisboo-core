@@ -1,0 +1,16 @@
+{
+    "properties": [
+        {
+            "name": "frisboo.corebanking.persistence.postgres.enabled",
+            "type": "java.lang.Boolean",
+            "description": "Enable Postgres database",
+            "defaultValue": false
+        },
+        {
+            "name": "frisboo.corebanking.persistence.mongodb.enabled",
+            "type": "java.lang.Boolean",
+            "description": "Enable Mongo database",
+            "defaultValue": false
+        }
+    ]
+}

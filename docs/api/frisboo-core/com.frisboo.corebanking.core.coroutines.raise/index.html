@@ -1,0 +1,205 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>com.frisboo.corebanking.core.coroutines.raise</title>
+<link href="../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../";</script>
+    <script>document.documentElement.classList.replace("no-js", "js");</script>
+    <script>const storage = localStorage.getItem("dokka-dark-mode")
+      if (storage == null) {
+        const osDarkSchemePreferred = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+        if (osDarkSchemePreferred === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      } else {
+        const savedDarkMode = JSON.parse(storage)
+        if (savedDarkMode === true) {
+          document.getElementsByTagName("html")[0].classList.add("theme-dark")
+        }
+      }
+    </script>
+<script type="text/javascript" src="https://unpkg.com/kotlin-playground@1/dist/playground.min.js" async></script>
+<script type="text/javascript" src="../../scripts/sourceset_dependencies.js" async></script>
+<link href="../../styles/style.css" rel="Stylesheet">
+<link href="../../styles/main.css" rel="Stylesheet">
+<link href="../../styles/prism.css" rel="Stylesheet">
+<link href="../../styles/logo-styles.css" rel="Stylesheet">
+<link href="../../ui-kit/ui-kit.min.css" rel="Stylesheet">
+<script type="text/javascript" src="../../scripts/safe-local-storage_blocking.js"></script>
+<script type="text/javascript" src="../../scripts/navigation-loader.js" async></script>
+<script type="text/javascript" src="../../scripts/platform-content-handler.js" async></script>
+<script type="text/javascript" src="../../scripts/main.js" defer></script>
+<script type="text/javascript" src="../../scripts/prism.js" async></script>
+<script type="text/javascript" src="../../ui-kit/ui-kit.min.js" defer></script></head>
+<body>
+<div class="root">
+    <header class="navigation theme-dark" id="navigation-wrapper" role="banner">
+<a class="library-name--link" href="../../index.html" tabindex="1">
+                    core
+            </a>        <button class="navigation-controls--btn navigation-controls--btn_toc ui-kit_mobile-only" id="toc-toggle" type="button">Toggle table of contents
+        </button>
+        <div class="navigation-controls--break ui-kit_mobile-only"></div>
+        <div class="library-version" id="library-version">0.0.1
+        </div>
+        <div class="navigation-controls">
+        <ul class="filter-section filter-section_loading" id="filter-section" aria-label="Target filter">
+                <button class="platform-tag platform-selector jvm-like" data-active="" aria-pressed="true" data-filter=":frisboo-core/main">jvm</button>
+            <div class="dropdown filter-section--dropdown" data-role="dropdown" id="filter-section-dropdown">
+                <button class="button button_dropdown filter-section--dropdown-toggle" role="combobox" data-role="dropdown-toggle" aria-controls="platform-tags-listbox" aria-haspopup="listbox" aria-expanded="false" aria-label="Toggle source sets"></button>
+                <ul role="listbox" id="platform-tags-listbox" class="dropdown--list" data-role="dropdown-listbox" aria-label="Target filter">
+                    <div class="dropdown--header"><span>Target filter</span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close target filter">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                        <li role="option" class="dropdown--option platform-selector-option jvm-like" tabindex="0">
+                            <label class="checkbox">
+                                <input type="checkbox" class="checkbox--input" id=":frisboo-core/main" data-filter=":frisboo-core/main">
+                                <span class="checkbox--icon"></span>
+                                jvm
+                            </label>
+                        </li>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </ul>
+            <button class="navigation-controls--btn navigation-controls--btn_theme" id="theme-toggle-button" type="button">Switch theme
+            </button>
+            <div class="navigation-controls--btn navigation-controls--btn_search" id="searchBar" role="button">Search in
+                API
+            </div>
+        </div>
+    </header>
+    <div id="container">
+        <nav id="leftColumn" class="sidebar" data-item-type="SECTION" data-item-config="{&quot;defaultSize&quot;: 280, &quot;minSize&quot;: 200, &quot;maxSize&quot;: 400}">
+            <a class="toc--skip-link" href="#main">Skip to content</a>
+            <div class="dropdown theme-dark_mobile" data-role="dropdown" id="toc-dropdown">
+                <ul role="listbox" id="toc-listbox" class="dropdown--list dropdown--list_toc-list" data-role="dropdown-listbox" aria-label="Table of contents">
+                    <div class="dropdown--header">
+                            <span>
+                                    core
+                            </span>
+                        <button class="button" data-role="dropdown-toggle" aria-label="Close table of contents">
+                            <i class="ui-kit-icon ui-kit-icon_cross"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar--inner" id="sideMenu"></div>
+                </ul>
+                <div class="dropdown--overlay"></div>
+            </div>
+        </nav>
+        <div id="resizer" class="resizer" data-item-type="BAR"></div>
+        <div id="main" data-item-type="SECTION" role="main">
+<div class="main-content" data-page-type="package" id="content" pageids="frisboo-core::com.frisboo.corebanking.core.coroutines.raise////PointingToDeclaration//1277446848">
+  <div class="breadcrumbs"><a href="../index.html">frisboo-core</a><span class="delimiter">/</span><span class="current">com.frisboo.corebanking.core.coroutines.raise</span></div>
+  <div class="cover ">
+    <h1 class="cover"><span><span>Package-level</span></span> <span><span>declarations</span></span></h1>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="TYPE">Types</button><button class="section-tab" data-togglable="FUNCTION,EXTENSION_FUNCTION">Functions</button></div>
+    <div class="tabs-section-body">
+      <div data-togglable="TYPE">
+        <h2 class="tableheader">Types</h2>
+        <div class="table"><a data-name="-949089436%2FClasslikes%2F1277446848" anchor-label="EitherContext" id="-949089436%2FClasslikes%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-either-context/index.html"><span>Either</span><wbr><span><span>Context</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-949089436%2FClasslikes%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><span class="token keyword">interface </span><a href="-either-context/index.html">EitherContext</a><span class="token operator">&lt;</span><a href="-either-context/index.html">Left</a><span class="token operator">&gt;</span> : <span data-unresolved-link="arrow.core.raise/Raise///PointingToDeclaration/">Raise</span><span class="token operator">&lt;</span><a href="-either-context/index.html">Left</a><span class="token operator">&gt; </span>, <span data-unresolved-link="kotlinx.coroutines/CoroutineScope///PointingToDeclaration/">CoroutineScope</span></div><div class="brief "><p class="paragraph">Represents a context that combines the <code class="lang-kotlin">Raise</code> interface for error handling with a <code class="lang-kotlin">CoroutineScope</code> for coroutine execution.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-1783794213%2FClasslikes%2F1277446848" anchor-label="EitherCoroutine" id="-1783794213%2FClasslikes%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="-either-coroutine/index.html"><span>Either</span><wbr><span><span>Coroutine</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1783794213%2FClasslikes%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><span class="token keyword">class </span><a href="-either-coroutine/index.html">EitherCoroutine</a><span class="token operator">&lt;</span><a href="-either-coroutine/index.html">L</a><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="parameters "><span class="parameter "><span class="token keyword">val </span>raiseErr<span class="token operator">: </span><span data-unresolved-link="arrow.core.raise/Raise///PointingToDeclaration/">Raise</span><span class="token operator">&lt;</span><a href="-either-coroutine/index.html">L</a><span class="token operator">&gt;</span><span class="token punctuation">, </span></span><span class="parameter "><span class="token keyword">val </span>scope<span class="token operator">: </span><span data-unresolved-link="kotlinx.coroutines/CoroutineScope///PointingToDeclaration/">CoroutineScope</span></span></span><span class="token punctuation">)</span> : <span data-unresolved-link="arrow.core.raise/Raise///PointingToDeclaration/">Raise</span><span class="token operator">&lt;</span><a href="-either-coroutine/index.html">L</a><span class="token operator">&gt; </span>, <span data-unresolved-link="kotlinx.coroutines/CoroutineScope///PointingToDeclaration/">CoroutineScope</span>, <a href="-either-context/index.html">EitherContext</a><span class="token operator">&lt;</span><a href="-either-coroutine/index.html">L</a><span class="token operator">&gt; </span></div><div class="brief "><p class="paragraph">A concrete implementation of <code class="lang-kotlin">EitherContext</code> that delegates error handling to a <code class="lang-kotlin">Raise</code> instance and coroutine execution to a <code class="lang-kotlin">CoroutineScope</code>.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div data-togglable="FUNCTION">
+        <h2 class="tableheader">Functions</h2>
+        <div class="table"><a data-name="-493226529%2FFunctions%2F1277446848" anchor-label="scopedEither" id="-493226529%2FFunctions%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="scoped-either.html"><span>scoped</span><wbr><span><span>Either</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-493226529%2FFunctions%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><span class="token keyword">suspend </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="scoped-either.html">L</a><span class="token punctuation">, </span><a href="scoped-either.html">R</a><span class="token operator">&gt; </span><a href="scoped-either.html"><span class="token function">scopedEither</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">context<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a><span class="token operator"> = </span>EmptyCoroutineContext<span class="token punctuation">, </span></span><span class="parameter ">block<span class="token operator">: </span><span class="token keyword">suspend </span><a href="-either-context/index.html">EitherContext</a><span class="token operator">&lt;</span><a href="scoped-either.html">L</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="scoped-either.html">R</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="arrow.core/Either///PointingToDeclaration/">Either</span><span class="token operator">&lt;</span><a href="scoped-either.html">L</a><span class="token punctuation">, </span><a href="scoped-either.html">R</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Executes a block of code within an <code class="lang-kotlin">Either</code> context, allowing for error handling and coroutine execution. This function combines the <code class="lang-kotlin">Raise</code> interface for error handling with a <code class="lang-kotlin">CoroutineScope</code> for coroutine execution, enabling structured error management within a coroutine context.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="802016062%2FFunctions%2F1277446848" anchor-label="scopedEitherWithError" id="802016062%2FFunctions%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="scoped-either-with-error.html"><span>scoped</span><wbr><span>Either</span><wbr><span>With</span><wbr><span><span>Error</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="802016062%2FFunctions%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><span class="token keyword">suspend </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="scoped-either-with-error.html">R</a><span class="token operator">&gt; </span><a href="scoped-either-with-error.html"><span class="token function">scopedEitherWithError</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">context<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a><span class="token operator"> = </span>EmptyCoroutineContext<span class="token punctuation">, </span></span><span class="parameter ">block<span class="token operator">: </span><span class="token keyword">suspend </span><a href="-either-context/index.html">EitherContext</a><span class="token operator">&lt;</span><a href="../com.frisboo.corebanking.core.domain.errors/-app-error/index.html">AppError</a><span class="token operator">&gt;</span><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="scoped-either-with-error.html">R</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><span data-unresolved-link="arrow.core/Either///PointingToDeclaration/">Either</span><span class="token operator">&lt;</span><a href="../com.frisboo.corebanking.core.domain.errors/-app-error/index.html">AppError</a><span class="token punctuation">, </span><a href="scoped-either-with-error.html">R</a><span class="token operator">&gt;</span></div><div class="brief "><p class="paragraph">Executes a block of code within an <code class="lang-kotlin">Either</code> context specifically for handling <code class="lang-kotlin">AppError</code> errors. This is a specialized version of <code class="lang-kotlin">scopedEither</code> that uses <code class="lang-kotlin">AppError</code> as the error type.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+<a data-name="-439596371%2FFunctions%2F1277446848" anchor-label="serviceScope" id="-439596371%2FFunctions%2F1277446848" data-filterable-set=":frisboo-core/main"></a>
+          <div class="table-row table-row_content" data-filterable-current=":frisboo-core/main" data-filterable-set=":frisboo-core/main">
+            <div class="main-subrow keyValue ">
+              <div class=""><span class="inline-flex">
+                  <div><a href="service-scope.html"><span>service</span><wbr><span><span>Scope</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-439596371%2FFunctions%2F1277446848"></span>
+                    <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                  </span></span></div>
+              <div>
+                <div class="title">
+                  <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-dependent-content" data-active="" data-togglable=":frisboo-core/main"><div class="symbol monospace"><span class="token keyword">suspend </span><span class="token keyword">fun </span><span class="token operator">&lt;</span><a href="service-scope.html">T</a><span class="token operator">&gt; </span><a href="service-scope.html"><span class="token function">serviceScope</span></a><span class="token punctuation">(</span><span class="parameters "><span class="parameter ">context<span class="token operator">: </span><a href="https://kotlinlang.org/api/core/kotlin-stdlib/kotlin.coroutines/-coroutine-context/index.html">CoroutineContext</a><span class="token operator"> = </span>EmptyCoroutineContext<span class="token punctuation">, </span></span><span class="parameter ">block<span class="token operator">: </span><span class="token keyword">suspend </span><span data-unresolved-link="kotlinx.coroutines/CoroutineScope///PointingToDeclaration/">CoroutineScope</span><span class="token punctuation">.</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><a href="service-scope.html">T</a></span></span><span class="token punctuation">)</span><span class="token operator">: </span><a href="service-scope.html">T</a></div><div class="brief "><p class="paragraph">Executes a block of code within a service-specific coroutine scope.</p></div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    <div class="footer">
+        <div class="footer--container">
+            <a href="#content" id="go-to-top-link" class="footer--button footer--button_go-to-top"></a>
+            <div class="footer--content">
+                <div>
+                    <span>Generated by </span>
+                    <a class="footer--link footer--link_external" href="https://github.com/Kotlin/dokka">
+                        Dokka
+                    </a>
+                    <div>© 2025 Copyright</div>
+                </div>
+            </div>
+        </div>
+    </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
