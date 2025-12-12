@@ -60,42 +60,46 @@ public fun timestampArb(baseTimestamp: CharSequence = "2020-01-01T00:00:00Z"): A
     arbitrary {
         val createdAt: Instant = Arb.kotlinInstant(maxValue = Clock.System.now()).bind()
         val updatedAt: Instant = Arb.kotlinInstant(minValue = createdAt).bind()
-        val processedAt: Instant? = Arb.frequency(
-            7 to Arb.constant(null),
-            3 to Arb.kotlinInstant(minValue = createdAt, maxValue = updatedAt),
-        ).bind()
+        val processedAt: Instant? =
+            Arb
+                .frequency(
+                    7 to Arb.constant(null),
+                    3 to Arb.kotlinInstant(minValue = createdAt, maxValue = updatedAt),
+                ).bind()
         Tuple3(createdAt, updatedAt, processedAt)
     }
 
-public fun customerArb(): Arb<Customer> = arbitrary {
-    val customerId = Arb.uuid().bind()
-    val firstName = Arb.firstName().bind()
-    val lastName = Arb.lastName().bind()
-    val email = Arb.email().bind()
+public fun customerArb(): Arb<Customer> =
+    arbitrary {
+        val customerId = Arb.uuid().bind()
+        val firstName = Arb.firstName().bind()
+        val lastName = Arb.lastName().bind()
+        val email = Arb.email().bind()
 
-    Customer(
-        customerId,
-        firstName = firstName.toString(),
-        lastName = lastName.toString(),
-        email,
-    )
-}
+        Customer(
+            customerId,
+            firstName = firstName.toString(),
+            lastName = lastName.toString(),
+            email,
+        )
+    }
 
-public fun accountArb(): Arb<Account> = arbitrary {
-    val accountId = Arb.uuid().bind()
-    val accountNumber = accountNumberArb().bind()
-    val accountType = accountTypeArb().bind()
-    val balance = moneyAmountArb().bind()
-    val currency = currencyArb().bind()
+public fun accountArb(): Arb<Account> =
+    arbitrary {
+        val accountId = Arb.uuid().bind()
+        val accountNumber = accountNumberArb().bind()
+        val accountType = accountTypeArb().bind()
+        val balance = moneyAmountArb().bind()
+        val currency = currencyArb().bind()
 
-    Account(
-        accountId,
-        accountNumber,
-        accountType,
-        balance,
-        currency,
-    )
-}
+        Account(
+            accountId,
+            accountNumber,
+            accountType,
+            balance,
+            currency,
+        )
+    }
 
 public fun accountTypeArb(): Arb<AccountType> = Arb.element(AccountType.entries)
 
@@ -108,18 +112,24 @@ public fun moneyAmountArb(
     max: Double = 1_0000_0000_0000_0000.0,
     scale: Int = 4,
     rounding: RoundingMode = RoundingMode.HALF_EVEN,
-): Arb<BigDecimal> = Arb.double(min, max).map {
-    BigDecimal(it).setScale(scale, rounding)
-}
+): Arb<BigDecimal> =
+    Arb.double(min, max).map {
+        BigDecimal(it).setScale(scale, rounding)
+    }
 
 public fun accountOverdraftLimitsArb(): Arb<Pair<BigDecimal, BigDecimal>> {
     val oldLimit = moneyAmountArb(min = 0.0, max = 1000.0)
-    val newLimit = oldLimit.flatMap {
-        val changePercentage = (10..50).random() / 100.0
-        val amountChange = it * BigDecimal(changePercentage)
-        val newLimit = if (listOf(true, false).random()) it + amountChange
-        else (it - amountChange).max(BigDecimal.ZERO)
-        Arb.constant(newLimit)
-    }
+    val newLimit =
+        oldLimit.flatMap {
+            val changePercentage = (10..50).random() / 100.0
+            val amountChange = it * BigDecimal(changePercentage)
+            val newLimit =
+                if (listOf(true, false).random()) {
+                    it + amountChange
+                } else {
+                    (it - amountChange).max(BigDecimal.ZERO)
+                }
+            Arb.constant(newLimit)
+        }
     return Arb.bind(oldLimit, newLimit, ::Pair)
 }

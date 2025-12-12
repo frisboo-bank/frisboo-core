@@ -13,25 +13,25 @@
  * or implied. See the License for the specific language governing
  * permissions and limitations under the License.
  */
+rootProject.name = "core"
+
+enableFeaturePreview("STABLE_CONFIGURATION_CACHE")
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
-include(
-    "frisboo-bom",
-    "frisboo-core",
-    "frisboo-data",
-    "frisboo-grpc",
-    "frisboo-http",
-    "frisboo-messaging",
-    "frisboo-persistence",
-    "frisboo-tests",
-)
+include("frisboo-bom")
+include("frisboo-core")
+include("frisboo-tests")
+
+include("frisboo-data")
+include("frisboo-grpc")
+include("frisboo-http")
+include("frisboo-messaging")
+include("frisboo-persistence")
 
 pluginManagement {
     includeBuild("build-logic")
     repositories {
-        mavenCentral()
         gradlePluginPortal()
-        mavenLocal()
     }
 }
 
@@ -40,35 +40,31 @@ plugins {
     id("org.danilopianini.gradle-pre-commit-git-hooks") version "2.1.3"
 }
 
-// @Suppress("UnstableApiUsage")
-// toolchainManagement {
-//    jvm {
-//        javaRepositories {
-//            repository("foojay") {
-//                resolverClass.set(org.gradle.toolchains.foojay.FoojayToolchainResolver::class.java)
-//            }
-//        }
-//    }
-// }
+gitHooks {
+    commitMsg { conventionalCommits() }
+    createHooks()
+}
 
-// gitHooks {
-//    commitMsg { conventionalCommits() }
-//    createHooks()
-// }
-
-@Suppress("UnstableApiUsage") dependencyResolutionManagement {
+@Suppress("UnstableApiUsage")
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         mavenCentral()
         gradlePluginPortal()
+        maven {
+            name = "FrisbooGitHubPackages"
+            url = uri("https://maven.pkg.github.com/jolafrite/frisboo-core-banking")
+            credentials {
+                username = providers.gradleProperty("frisboo.gpr.user").orNull ?: System.getenv("FRISBOO_GPR_USERNAME")
+                password = providers.gradleProperty("frisboo.gpr.key").orNull ?: System.getenv("FRISBOO_GPR_TOKEN")
+            }
+        }
         mavenLocal()
     }
 
     versionCatalogs {
-        create(
-            "libs",
-            Action {
-                from("com.frisboo.corebanking:version-catalog:0.0.1")
-            },
-        )
+        create("baseLibs") {
+            from("com.frisboo.corebanking:version-catalog:0.0.1-alpha1")
+        }
     }
 }

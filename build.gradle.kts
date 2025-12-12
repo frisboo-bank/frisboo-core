@@ -17,9 +17,9 @@ plugins {
     base
     id("kotlin-conventions")
     id("quality-conventions")
-    alias(libs.plugins.dokka)
-    alias(libs.plugins.maven.publish)
-    alias(libs.plugins.kover)
+    alias(baseLibs.plugins.dokka)
+    alias(baseLibs.plugins.maven.publish)
+    alias(baseLibs.plugins.kover)
 }
 
 dokka {
@@ -28,7 +28,7 @@ dokka {
     }
 }
 
-dependencies{
+dependencies {
     dokka(projects.core.frisbooCore)
     dokka(projects.core.frisbooData)
     dokka(projects.core.frisbooGrpc)
@@ -46,7 +46,23 @@ dependencies{
 }
 
 allprojects {
-    if (this != rootProject) {
-        apply(plugin = "com.vanniktech.maven.publish")
+    if (this == rootProject) {
+        return@allprojects
+    }
+
+    apply(plugin = "com.vanniktech.maven.publish")
+
+    this@allprojects.publishing {
+        repositories {
+            maven {
+                name = "FrisbooGitHubPackages"
+                url = uri("https://maven.pkg.github.com/jolafrite/frisboo-core-banking")
+                credentials {
+                    username =
+                        project.findProperty("frisboo.gpr.user") as String? ?: System.getenv("FRISBOO_GPR_USERNAME")
+                    password = project.findProperty("frisboo.gpr.key") as String? ?: System.getenv("FRISBOO_GPR_TOKEN")
+                }
+            }
+        }
     }
 }

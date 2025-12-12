@@ -15,26 +15,22 @@
  */
 plugins {
     id("kotlin-conventions")
-    alias(libs.plugins.dokka)
-    alias(libs.plugins.maven.publish)
+    alias(baseLibs.plugins.dokka)
+    alias(baseLibs.plugins.maven.publish)
 }
 
 dependencies {
-    implementation(project(":frisboo-core"))
-    implementation(project(":frisboo-data"))
+    api(project(":frisboo-core"))
+    api(project(":frisboo-data"))
 
     arrayOf(
-        libs.spring.boot.bom,
-        libs.exposed.bom,
-    ).forEach { implementation(platform(it)) }
+        baseLibs.spring.boot.bom,
+        baseLibs.exposed.bom,
+    ).forEach { api(platform(it)) }
 
     arrayOf(
-        libs.spring.boot.autoconfigure,
-        libs.spring.boot.starter.data.jpa,
-        libs.exposed.spring.boot.starter,
-        libs.exposed.kotlin.datetime,
-    ).forEach { implementation(it) }
-
-
-    testImplementation(project(":frisboo-tests"))
+        baseLibs.spring.boot.autoconfigure,
+        baseLibs.exposed.spring.boot.starter,
+        baseLibs.exposed.kotlin.datetime,
+    ).forEach { api(it) }
 }

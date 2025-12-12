@@ -15,40 +15,42 @@
  */
 plugins {
     id("kotlin-conventions")
-    alias(libs.plugins.kover)
-    alias(libs.plugins.dokka)
-    alias(libs.plugins.maven.publish)
+    alias(baseLibs.plugins.kover)
+    alias(baseLibs.plugins.dokka)
+    alias(baseLibs.plugins.maven.publish)
 }
 
 dependencies {
     arrayOf(
-        libs.arrow.kt.bom,
-        libs.kotlin.bom,
-        libs.kotlinx.coroutines.bom,
-        libs.jackson.bom,
-        libs.reactor.bom,
-        libs.spring.boot.bom,
-    ).map { api(platform(it)) }
+        baseLibs.arrow.kt.bom,
+        baseLibs.kotlin.bom,
+        baseLibs.kotlinx.coroutines.bom,
+        baseLibs.jackson.bom,
+        baseLibs.reactor.bom,
+        baseLibs.spring.boot.bom,
+    ).forEach { api(platform(it)) }
 
     arrayOf(
-        libs.arrow.kt.core,
-        libs.arrow.kt.coroutines,
-        libs.bundles.serialization,
-        libs.jetbrains.annotations,
-        libs.kotlin.logging,
-        libs.kotlin.reflect,
-        libs.kotlinx.coroutines.core,
-        libs.kotlinx.coroutines.debug,
-        libs.kotlinx.coroutines.reactor,
-        libs.kotlinx.datetime,
-        libs.reactor.kotlin.extensions,
-        libs.spring.boot.autoconfigure,
-    ).map { api(it) }
+        baseLibs.arrow.kt.core,
+        baseLibs.arrow.kt.coroutines,
+        baseLibs.bundles.serialization,
+        baseLibs.jetbrains.annotations,
+        baseLibs.kotlin.logging,
+        baseLibs.kotlin.reflect,
+        baseLibs.kotlinx.coroutines.core,
+        baseLibs.kotlinx.coroutines.debug,
+        baseLibs.kotlinx.coroutines.reactor,
+        baseLibs.kotlinx.datetime,
+        baseLibs.reactor.kotlin.extensions,
+        baseLibs.spring.boot.autoconfigure,
+    ).forEach { api(it) }
 
-    testApi(platform(libs.junit.bom))
-    testApi(platform(libs.kotest.bom))
+    testApi(platform(baseLibs.junit.bom))
+    testApi(platform(baseLibs.kotest.bom))
 
-    testRuntimeOnly(libs.kotest.runner.junit5)
+    testApi(baseLibs.kotest.property.arbs)
+
+    testRuntimeOnly(baseLibs.kotest.runner.junit5)
 }
 
 tasks.test {

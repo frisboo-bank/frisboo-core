@@ -21,26 +21,28 @@ import io.kotest.property.arbitrary.arbitrary
 import io.kotest.property.arbitrary.of
 import io.kotest.property.arbitrary.uuid
 
-public val sagaEventArb: Arb<MockSagaDraftCreatedEvent<Any>> = arbitrary {
-    val (createdAt, updatedAt, processedAt) = timestampArb().bind()
-    val aggregateId = Arb.uuid().bind()
-    val event = accountEventArb.bind()
-    val eventId = Arb.uuid().bind()
-    val version = versionArb.bind()
+public val SagaEventArb: Arb<MockSagaDraftCreatedEvent<Any>> =
+    arbitrary {
+        val (createdAt, updatedAt, processedAt) = timestampArb().bind()
+        val aggregateId = Arb.uuid().bind()
+        val event = AccountEventArb.bind()
+        val eventId = Arb.uuid().bind()
+        val version = versionArb.bind()
 
-    Arb.of(
-        listOf(
-            MockSagaDraftCreatedEvent(
-                eventId,
-                aggregateId,
-                description = "New saga draft created for aggregate $aggregateId",
-                data = event.data,
-                metaData = event.metaData,
-                processedAt,
-                createdAt,
-                updatedAt,
-                version,
-            ),
+        Arb
+            .of(
+                listOf(
+                    MockSagaDraftCreatedEvent(
+                        eventId,
+                        aggregateId,
+                        description = "New saga draft created for aggregate $aggregateId",
+                        data = event.data,
+                        metaData = event.metaData,
+                        processedAt,
+                        createdAt,
+                        updatedAt,
+                        version,
+                    ),
 //                MockSagaPendingApprovalEvent(),
 //                MockSagaApprovedEvent(),
 //                MockSagaPendingExecutionEvent(),
@@ -54,10 +56,9 @@ public val sagaEventArb: Arb<MockSagaDraftCreatedEvent<Any>> = arbitrary {
 //                MockSagaCompensatingEvent(),
 //                MockSagaCompensatedEvent(),
 //                MockSagaCompensationFailedEvent(),
-        ),
-    ).bind()
-}
-
+                ),
+            ).bind()
+    }
 
 //    public fun sagaEvent(): Arb<MockSagaEvent<MockSagaPayload>> {
 //        Arb.of(

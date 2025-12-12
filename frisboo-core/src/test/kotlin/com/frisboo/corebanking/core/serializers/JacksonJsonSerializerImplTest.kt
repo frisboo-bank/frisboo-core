@@ -58,7 +58,7 @@ private data class Person(
 )
 
 private val personArb: Arb<Person> =
-    arbitrary {
+    arbitrary { rs ->
         val firstName = Arb.firstName().bind()
         val middleName = Arb.firstName().orNull(nullProbability = .8).bind()
         val lastName = Arb.lastName().bind()
@@ -70,8 +70,8 @@ private val personArb: Arb<Person> =
         val transactions: Map<UUID, Transaction> =
             Arb
                 .transactions()
-                .take((0..20).random())
-                .map { transaction ->
+                .take((0..20).random(), rs)
+                .associate { transaction ->
                     Pair(
                         UUID.randomUUID(),
                         Transaction(
@@ -80,7 +80,7 @@ private val personArb: Arb<Person> =
                             createdAt = transaction.date.toJavaLocalDateTime(),
                         ),
                     )
-                }.toMap()
+                }
         val createdAt = Arb.javaInstant().bind()
 
         Person(

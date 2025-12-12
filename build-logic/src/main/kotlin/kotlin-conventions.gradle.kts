@@ -5,16 +5,16 @@ import org.jetbrains.kotlin.gradle.dsl.abi.ExperimentalAbiValidation
 
 // Apply the Kotlin JVM plugin
 plugins {
-    kotlin("jvm")
+    id("org.jetbrains.kotlin.jvm")
 }
 
 // Retrieve the version catalog for dependency management
-private val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
+private val libs = extensions.getByType<VersionCatalogsExtension>().named("baseLibs")
 
 kotlin {
     // Retrieve Kotlin language version and JVM target version from the version catalog
-    val kotlinVersion = libs.getVersionOrFail("kotlin-language-version")
-    val jvmTargetVersion = libs.getVersionOrFail("jvm-target-version")
+    val kotlinVersion = libs.getVersionOrFail("kotlin-language")
+    val jvmTargetVersion = libs.getVersionOrFail("jvm-target")
 
     // Log the retrieved versions for debugging purposes
     logger.debug("kotlinVersion: {}", kotlinVersion)
