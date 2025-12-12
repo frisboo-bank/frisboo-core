@@ -16,19 +16,18 @@
 
 plugins {
     id("kotlin-conventions")
-    alias(libs.plugins.dokka)
-    alias(libs.plugins.maven.publish)
+    alias(baseLibs.plugins.dokka)
+    alias(baseLibs.plugins.maven.publish)
 }
 
 dependencies {
-    implementation(project(":frisboo-core"))
-    implementation(project(":frisboo-data"))
+    api(project(":frisboo-core"))
+    api(project(":frisboo-data"))
 
-    implementation(libs.protobuf.kotlin)
+    api(baseLibs.protobuf.kotlin)
+    api(baseLibs.spring.boot.grpc.starter)
 
-    testImplementation(project(":frisboo-tests"))
-
-    testRuntimeOnly(libs.kotest.runner.junit5)
+    testRuntimeOnly(baseLibs.kotest.runner.junit5)
 }
 
 tasks.withType<Test> {

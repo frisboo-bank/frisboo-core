@@ -16,51 +16,51 @@
 
 plugins {
     id("kotlin-conventions")
-    alias(libs.plugins.dokka)
-    alias(libs.plugins.maven.publish)
+    alias(baseLibs.plugins.dokka)
+    alias(baseLibs.plugins.maven.publish)
 }
 
 dependencies {
-    implementation(project(":frisboo-core"))
+    api(project(":frisboo-core"))
     implementation(project(":frisboo-data"))
 
     arrayOf(
-        libs.exposed.bom,
-        libs.junit.bom,
-        libs.kotest.bom,
-        libs.reactor.bom,
-        libs.spring.boot.bom,
-        libs.testcontainers.bom,
+        baseLibs.exposed.bom,
+        baseLibs.junit.bom,
+        baseLibs.kotest.bom,
+        baseLibs.reactor.bom,
+        baseLibs.spring.boot.bom,
+        baseLibs.testcontainers.bom,
     ).map {
         api(platform(it))
         testApi(platform(it))
     }
 
     arrayOf(
-        libs.exposed.kotlin.datetime,
-        libs.exposed.spring.boot.starter,
-        libs.flyway.core,
-        libs.flyway.database.postgresql,
-        libs.kotest.assertions.core,
-        libs.kotest.property,
-        libs.kotest.property.arbs,
-        libs.kotest.property.datetime,
-        libs.kotlin.test.junit5,
-        libs.kotlinx.coroutines.test,
-        libs.mockk,
-        libs.postgresql,
-        libs.reactor.test,
-        libs.spring.boot.starter.test,
-        libs.spring.boot.testcontainers,
-        libs.testcontainers.junit.jupiter,
-        libs.testcontainers.postgresql,
+        baseLibs.exposed.kotlin.datetime,
+        baseLibs.exposed.spring.boot.starter,
+        baseLibs.flyway.core,
+        baseLibs.flyway.database.postgresql,
+        baseLibs.kotest.assertions.core,
+        baseLibs.kotest.property,
+        baseLibs.kotest.property.arbs,
+        baseLibs.kotest.property.datetime,
+        baseLibs.kotlin.test.junit5,
+        baseLibs.kotlinx.coroutines.test,
+        baseLibs.mockk,
+        baseLibs.postgresql,
+        baseLibs.reactor.test,
+        baseLibs.spring.boot.starter.test,
+        baseLibs.spring.boot.testcontainers,
+        baseLibs.testcontainers.junit.jupiter,
+        baseLibs.testcontainers.postgresql,
     ).map {
         api(it)
         testApi(it)
     }
 
-    testRuntimeOnly(libs.postgresql)
-    testRuntimeOnly(libs.kotest.runner.junit5)
+    testRuntimeOnly(baseLibs.postgresql)
+    testRuntimeOnly(baseLibs.kotest.runner.junit5)
 }
 
 tasks.withType<Test> {

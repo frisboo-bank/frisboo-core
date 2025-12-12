@@ -15,7 +15,7 @@
  */
 plugins {
     `java-platform`
-    alias(libs.plugins.maven.publish)
+    alias(baseLibs.plugins.maven.publish)
 }
 
 javaPlatform.allowDependencies()

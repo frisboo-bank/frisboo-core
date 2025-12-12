@@ -46,7 +46,7 @@ BEGIN
 END;
 $$ language 'plpgsql';
 
--- This function sets the `expired_at` column based on the `ttl_in_seconds` value.
+-- This function sets the `expired_at` column based on the `ttl_in_second` value.
 CREATE OR REPLACE FUNCTION public.fcb_update_expired_at()
     RETURNS TRIGGER AS
 $$
@@ -55,7 +55,7 @@ BEGIN
         RETURN NEW;
     END IF;
 
-    NEW.expired_at = NOW() + INTERVAL '1 second' * NEW.ttl_in_seconds;
+    NEW.expired_at = statement_timestamp() + INTERVAL '1 second' * NEW.ttl_in_second;
     RETURN NEW;
 END;
 $$ language 'plpgsql';

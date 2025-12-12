@@ -8,11 +8,11 @@ plugins {
     id("dev.detekt")
 }
 
-private val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
+private val libs = extensions.getByType<VersionCatalogsExtension>().named("baseLibs")
 
 private val headerFile = rootProject.layout.projectDirectory.file("config/license-header.txt")
 private val editorConfig = rootProject.layout.projectDirectory.file(".editorconfig")
-private val ktlintVersion = libs.findVersion("ktlint-version").get().requiredVersion
+private val ktlintVersion = libs.findVersion("ktlint").get().requiredVersion
 private val delimiter =
     "^\\s*(plugins|pluginManagement|import|buildscript|" + "dependencyResolutionManagement|enableFeaturePreview|include|rootProject)\\b"
 
@@ -67,7 +67,7 @@ private val detektConfig = rootProject.layout.projectDirectory.file("config/dete
 private val detektBaseline = rootProject.layout.projectDirectory.file("config/detekt/detekt-baseline.xml").asFile
 
 configure<DetektExtension> {
-    toolVersion = libs.getVersionOrFail("detekt-version")
+    toolVersion = libs.getVersionOrFail("detekt")
     parallel = true
     buildUponDefaultConfig = true
     config.setFrom(detektConfig)
@@ -75,7 +75,7 @@ configure<DetektExtension> {
 }
 
 tasks.withType<Detekt>().configureEach {
-    jvmTarget = libs.getVersionOrFail("jvm-target-version")
+    jvmTarget = libs.getVersionOrFail("jvm-target")
     autoCorrect = false
 
     reports {

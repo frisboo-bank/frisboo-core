@@ -15,10 +15,10 @@
  */
 plugins {
     id("kotlin-conventions")
-    alias(libs.plugins.dokka)
-    alias(libs.plugins.maven.publish)
+    alias(baseLibs.plugins.dokka)
+    alias(baseLibs.plugins.maven.publish)
 }
 
 dependencies {
-    implementation(project(":frisboo-core"))
+    api(project(":frisboo-core"))
 }

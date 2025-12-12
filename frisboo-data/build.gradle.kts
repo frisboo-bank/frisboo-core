@@ -15,18 +15,17 @@
  */
 plugins {
     id("kotlin-conventions")
-    alias(libs.plugins.dokka)
-    alias(libs.plugins.maven.publish)
+    alias(baseLibs.plugins.dokka)
+    alias(baseLibs.plugins.maven.publish)
 }
 
 dependencies {
-    implementation(project(":frisboo-core"))
+    api(project(":frisboo-core"))
 
-    implementation(platform(libs.arrow.kt.bom))
-    implementation(platform(libs.kotlin.bom))
-    implementation(platform(libs.reactor.bom))
-    implementation(platform(libs.kotlinx.coroutines.bom))
-    implementation(platform(libs.kotest.bom))
+    api(platform(baseLibs.kotest.bom))
+    api(baseLibs.kotest.property.arbs)
 
-    implementation(libs.kotest.property.arbs)
+    testApi(platform(baseLibs.junit.bom))
+
+    testRuntimeOnly(baseLibs.kotest.runner.junit5)
 }

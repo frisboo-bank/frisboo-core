@@ -22,7 +22,7 @@ import org.gradle.plugin.use.PluginDependency
 internal fun VersionCatalog.getVersionOrFail(alias: String): String =
     findVersion(alias)
         .orElseThrow {
-            IllegalStateException("Missing version `$alias` from libs.versions.toml")
+            IllegalStateException("Missing version `$alias` from baseLibs.versions.toml")
         }.requiredVersion
 
 internal fun VersionCatalog.optionalVersion(alias: String): String? =
@@ -30,12 +30,12 @@ internal fun VersionCatalog.optionalVersion(alias: String): String? =
 
 internal fun VersionCatalog.libraryOrThrow(alias: String): Provider<MinimalExternalModuleDependency> =
     findLibrary(alias).orElseThrow {
-        IllegalStateException("Missing library `$alias` in libs.versions.toml, available libraries: ${toString()}")
+        IllegalStateException("Missing library `$alias` in baseLibs.versions.toml, available libraries: ${toString()}")
     }
 
 internal fun VersionCatalog.pluginOrThrow(alias: String): Provider<PluginDependency> =
     findPlugin(alias).orElseThrow {
-        IllegalStateException("Missing plugin `$alias` in libs.versions.toml, available plugins: ${toString()}")
+        IllegalStateException("Missing plugin `$alias` in baseLibs.versions.toml, available plugins: ${toString()}")
     }
 
 internal fun VersionCatalog.pluginIdOrThrow(alias: String): String = pluginOrThrow(alias).get().pluginId
