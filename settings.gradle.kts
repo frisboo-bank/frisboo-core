@@ -27,6 +27,7 @@ include("frisboo-grpc")
 include("frisboo-http")
 include("frisboo-messaging")
 include("frisboo-persistence")
+include("frisboo-security")
 
 pluginManagement {
     includeBuild("build-logic")
@@ -64,7 +65,7 @@ dependencyResolutionManagement {
 
     versionCatalogs {
         create("baseLibs") {
-            from("com.frisboo.corebanking:version-catalog:0.0.1-alpha1")
+            from("com.frisboo.corebanking:version-catalog:0.0.1-alpha.1-SNAPSHOT")
         }
     }
 }

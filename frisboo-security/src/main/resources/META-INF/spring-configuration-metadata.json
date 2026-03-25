@@ -1,0 +1,106 @@
+{
+    "groups": [
+        {
+            "name": "frisboo.security.circuitbreaker",
+            "type": "com.frisboo.corebanking.security.circuitbreaker.config.CircuitBreakerProperties",
+            "description": "Circuit breaker configuration for Core Banking security."
+        },
+        {
+            "name": "frisboo.security.circuitbreaker.actuator",
+            "type": "org.springframework.boot.context.properties.ConfigurationProperties",
+            "description": "Actuator endpoint configuration."
+        }
+    ],
+    "properties": [
+        {
+            "name": "frisboo.security.circuitbreaker.cleanup-initial-delay-minutes",
+            "type": "java.lang.Long",
+            "description": "Initial delay in minutes before first cleanup run.",
+            "defaultValue": 60
+        },
+        {
+            "name": "frisboo.security.circuitbreaker.cleanup-period-minutes",
+            "type": "java.lang.Long",
+            "description": "Interval in minutes between cleanup runs.",
+            "defaultValue": 60
+        },
+        {
+            "name": "frisboo.security.circuitbreaker.cleanup-time-budget-ms",
+            "type": "java.lang.Long",
+            "description": "Maximum time in milliseconds allowed for each cleanup run.",
+            "defaultValue": 100
+        },
+        {
+            "name": "frisboo.security.circuitbreaker.dynamic-breaker-ttl",
+            "type": "java.time.Duration",
+            "description": "Time-to-live for dynamic circuit breakers.",
+            "defaultValue": "1h"
+        },
+        {
+            "name": "frisboo.security.circuitbreaker.max-dynamic-breakers",
+            "type": "java.lang.Integer",
+            "description": "Maximum number of dynamic circuit breakers allowed.",
+            "defaultValue": 1000
+        },
+        {
+            "name": "frisboo.security.circuitbreaker.shutdown-timeout-seconds",
+            "type": "java.lang.Long",
+            "description": "Timeout in seconds for graceful shutdown of the cleanup executor.",
+            "defaultValue": 5
+        },
+        {
+            "name": "frisboo.security.circuitbreaker.failure-rate-threshold",
+            "type": "java.lang.Float",
+            "description": "Failure rate threshold percentage that triggers OPEN state.",
+            "defaultValue": 50.0
+        },
+        {
+            "name": "frisboo.security.circuitbreaker.wait-duration-in-open-state",
+            "type": "java.time.Duration",
+            "description": "Duration to wait before transitioning from OPEN to HALF_OPEN.",
+            "defaultValue": "30s"
+        },
+        {
+            "name": "frisboo.security.circuitbreaker.sliding-window-size",
+            "type": "java.lang.Integer",
+            "description": "Size of the sliding window used to aggregate metrics.",
+            "defaultValue": 100
+        },
+        {
+            "name": "frisboo.security.circuitbreaker.minimum-number-of-calls",
+            "type": "java.lang.Integer",
+            "description": "Minimum number of calls required before calculating failure rate.",
+            "defaultValue": 10
+        },
+        {
+            "name": "frisboo.security.circuitbreaker.permitted-number-of-calls-in-half-open-state",
+            "type": "java.lang.Integer",
+            "description": "Number of calls allowed in HALF_OPEN state.",
+            "defaultValue": 10
+        },
+        {
+            "name": "frisboo.security.circuitbreaker.slow-call-duration-threshold",
+            "type": "java.time.Duration",
+            "description": "Duration threshold for slow calls.",
+            "defaultValue": "5s"
+        },
+        {
+            "name": "frisboo.security.circuitbreaker.slow-call-rate-threshold",
+            "type": "java.lang.Float",
+            "description": "Slow call rate threshold that triggers OPEN state.",
+            "defaultValue": 80.0
+        },
+        {
+            "name": "frisboo.security.circuitbreaker.max-wait-duration-in-half-open-state",
+            "type": "java.time.Duration",
+            "description": "Maximum wait time in HALF_OPEN state.",
+            "defaultValue": "1m"
+        },
+        {
+            "name": "frisboo.security.circuitbreaker.actuator.enabled",
+            "type": "java.lang.Boolean",
+            "description": "Enable the /actuator/circuitbreakers endpoint.",
+            "defaultValue": false
+        }
+    ]
+}
