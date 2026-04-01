@@ -27,23 +27,29 @@ public data class InvalidVersion(
     val msg: String,
 ) : AppError
 
-public data class LowerEventVersionError(
-    val id: Any?,
-    val expectedVersion: Any,
-    val eventVersion: Any,
-) : AppError
+public sealed class EventVersionError(
+    public open val id: Any?,
+    public open val expectedVersion: Any,
+    public open val eventVersion: Any,
+) : AppError {
+    public data class Lower(
+        override val id: Any?,
+        override val expectedVersion: Any,
+        override val eventVersion: Any,
+    ) : EventVersionError(id, expectedVersion, eventVersion)
 
-public data class SameEventVersionError(
-    val id: Any?,
-    val expectedVersion: Any,
-    val eventVersion: Any,
-) : AppError
+    public data class Same(
+        override val id: Any?,
+        override val expectedVersion: Any,
+        override val eventVersion: Any,
+    ) : EventVersionError(id, expectedVersion, eventVersion)
 
-public data class UpperEventVersionError(
-    val id: Any?,
-    val expectedVersion: Any,
-    val eventVersion: Any,
-) : AppError
+    public data class Upper(
+        override val id: Any?,
+        override val expectedVersion: Any,
+        override val eventVersion: Any,
+    ) : EventVersionError(id, expectedVersion, eventVersion)
+}
 
 public data class InvalidTransactionError(
     val msg: String,

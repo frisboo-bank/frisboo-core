@@ -29,19 +29,33 @@ dokka {
 }
 
 dependencies {
+    dokka(projects.core.frisbooAuth)
+    dokka(projects.core.frisbooConfig)
     dokka(projects.core.frisbooCore)
+    dokka(projects.core.frisbooCoordination)
+    dokka(projects.core.frisbooCrypto)
     dokka(projects.core.frisbooData)
     dokka(projects.core.frisbooGrpc)
     dokka(projects.core.frisbooHttp)
     dokka(projects.core.frisbooMessaging)
+    dokka(projects.core.frisbooObservability)
     dokka(projects.core.frisbooPersistence)
+    dokka(projects.core.frisbooQuota)
+    dokka(projects.core.frisbooResilience)
     dokka(projects.core.frisbooTests)
 
+    kover(project(":frisboo-auth"))
+    kover(project(":frisboo-config"))
     kover(project(":frisboo-core"))
+    kover(project(":frisboo-coordination"))
+    kover(project(":frisboo-crypto"))
     kover(project(":frisboo-grpc"))
     kover(project(":frisboo-http"))
     kover(project(":frisboo-messaging"))
+    kover(project(":frisboo-observability"))
     kover(project(":frisboo-persistence"))
+    kover(project(":frisboo-quota"))
+    kover(project(":frisboo-resilience"))
     kover(project(":frisboo-tests"))
 }
 

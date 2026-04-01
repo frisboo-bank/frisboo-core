@@ -163,7 +163,7 @@ public enum class Currency(
     PAB("PAB", "B/.", "Panamanian Balboa"),
     PEN("PEN", "S/", "Peruvian Sol"),
     PYG("PYG", "₲", "Paraguayan Guarani"),
-    UYU("UYU", $$"$U", "Uruguayan Peso"),
+    UYU("UYU", "\$U", "Uruguayan Peso"),
     VES("VES", "Bs", "Venezuelan Bolívar"),
 
     // ========================================
@@ -176,176 +176,51 @@ public enum class Currency(
     ;
 
     // ========================================
-    // REGIONAL GROUPS
+    // LOOKUP HELPERS
     // ========================================
     public companion object {
-        public object AsiaPacific {
-            public val AED: Currency = Currency.AED
-            public val AFN: Currency = Currency.AFN
-            public val AUD: Currency = Currency.AUD
-            public val BDT: Currency = Currency.BDT
-            public val BND: Currency = Currency.BND
-            public val BTN: Currency = Currency.BTN
-            public val CNY: Currency = Currency.CNY
-            public val FJD: Currency = Currency.FJD
-            public val HKD: Currency = Currency.HKD
-            public val IDR: Currency = Currency.IDR
-            public val INR: Currency = Currency.INR
-            public val JPY: Currency = Currency.JPY
-            public val KHR: Currency = Currency.KHR
-            public val KRW: Currency = Currency.KRW
-            public val KWD: Currency = Currency.KWD
-            public val KYD: Currency = Currency.KYD
-            public val LAK: Currency = Currency.LAK
-            public val LKR: Currency = Currency.LKR
-            public val MNT: Currency = Currency.MNT
-            public val MOP: Currency = Currency.MOP
-            public val MVR: Currency = Currency.MVR
-            public val MYR: Currency = Currency.MYR
-            public val NPR: Currency = Currency.NPR
-            public val NZD: Currency = Currency.NZD
-            public val OMR: Currency = Currency.OMR
-            public val PGK: Currency = Currency.PGK
-            public val PHP: Currency = Currency.PHP
-            public val PKR: Currency = Currency.PKR
-            public val QAR: Currency = Currency.QAR
-            public val SAR: Currency = Currency.SAR
-            public val SBD: Currency = Currency.SBD
-            public val SCR: Currency = Currency.SCR
-            public val SGD: Currency = Currency.SGD
-            public val THB: Currency = Currency.THB
-            public val TJS: Currency = Currency.TJS
-            public val TOP: Currency = Currency.TOP
-            public val TWD: Currency = Currency.TWD
-            public val VUV: Currency = Currency.VUV
-        }
+        private val byCode: Map<String, Currency> = entries.associateBy { it.code.uppercase() }
+        private val bySymbol: Map<String, Currency> = entries.associateBy { it.symbol }
 
-        public object Europe {
-            public val ALL: Currency = Currency.ALL
-            public val AMD: Currency = Currency.AMD
-            public val AZN: Currency = Currency.AZN
-            public val BAM: Currency = Currency.BAM
-            public val BGN: Currency = Currency.BGN
-            public val BYN: Currency = Currency.BYN
-            public val CHF: Currency = Currency.CHF
-            public val CZK: Currency = Currency.CZK
-            public val DKK: Currency = Currency.DKK
-            public val EUR: Currency = Currency.EUR
-            public val GBP: Currency = Currency.GBP
-            public val GEL: Currency = Currency.GEL
-            public val GIP: Currency = Currency.GIP
-            public val HRK: Currency = Currency.HRK
-            public val HUF: Currency = Currency.HUF
-            public val ISK: Currency = Currency.ISK
-            public val MDL: Currency = Currency.MDL
-            public val MKD: Currency = Currency.MKD
-            public val NOK: Currency = Currency.NOK
-            public val PLN: Currency = Currency.PLN
-            public val RON: Currency = Currency.RON
-            public val RSD: Currency = Currency.RSD
-            public val RUB: Currency = Currency.RUB
-            public val SEK: Currency = Currency.SEK
-            public val TRY: Currency = Currency.TRY
-            public val UAH: Currency = Currency.UAH
-            public val XPF: Currency = Currency.XPF
+        public fun fromCode(code: String): Currency? = byCode[code.uppercase()]
 
-            // Country-specific accessors
-            public val Eurozone: Currency = Currency.EUR
-            public val UnitedKingdom: Currency = Currency.GBP
-            public val Switzerland: Currency = Currency.CHF
-            public val Sweden: Currency = Currency.SEK
-            public val Norway: Currency = Currency.NOK
-            public val Denmark: Currency = Currency.DKK
-            public val Poland: Currency = Currency.PLN
-            public val Turkey: Currency = Currency.TRY
-            public val Russia: Currency = Currency.RUB
-            public val Czech: Currency = Currency.CZK
-            public val Hungary: Currency = Currency.HUF
-            public val Romania: Currency = Currency.RON
-        }
+        public fun fromSymbol(symbol: String): Currency? = bySymbol[symbol]
 
-        public object MiddleEast {
-            public val AED: Currency = Currency.AED
-            public val BHD: Currency = Currency.BHD
-            public val ILS: Currency = Currency.ILS
-            public val IRR: Currency = Currency.IRR
-            public val JOD: Currency = Currency.JOD
-            public val KWD: Currency = Currency.KWD
-            public val LBP: Currency = Currency.LBP
-            public val SAR: Currency = Currency.SAR
-            public val SYP: Currency = Currency.SYP
-            public val YER: Currency = Currency.YER
-        }
+        // ========================================
+        // REGIONAL GROUPS
+        // ========================================
+        public val asiaPacific: Set<Currency> =
+            setOf(
+                AED, AFN, AUD, BDT, BND, BTN, CNY, FJD, HKD, IDR,
+                INR, JPY, KHR, KRW, KWD, KYD, LAK, LKR, MNT, MOP,
+                MVR, MYR, NPR, NZD, OMR, PGK, PHP, PKR, QAR, SAR,
+                SBD, SCR, SGD, THB, TJS, TOP, TWD, VUV,
+            )
 
-        public object Africa {
-            public val AOA: Currency = Currency.AOA
-            public val BIF: Currency = Currency.BIF
-            public val CVE: Currency = Currency.CVE
-            public val CDF: Currency = Currency.CDF
-            public val DJF: Currency = Currency.DJF
-            public val DZD: Currency = Currency.DZD
-            public val ETB: Currency = Currency.ETB
-            public val GHS: Currency = Currency.GHS
-            public val GMD: Currency = Currency.GMD
-            public val GNF: Currency = Currency.GNF
-            public val KES: Currency = Currency.KES
-            public val LRD: Currency = Currency.LRD
-            public val LSL: Currency = Currency.LSL
-            public val LYD: Currency = Currency.LYD
-            public val MAD: Currency = Currency.MAD
-            public val MRU: Currency = Currency.MRU
-            public val MUR: Currency = Currency.MUR
-            public val MWK: Currency = Currency.MWK
-            public val MZN: Currency = Currency.MZN
-            public val NAD: Currency = Currency.NAD
-            public val NGN: Currency = Currency.NGN
-            public val RWF: Currency = Currency.RWF
-            public val SDG: Currency = Currency.SDG
-            public val SOS: Currency = Currency.SOS
-            public val SSP: Currency = Currency.SSP
-            public val STN: Currency = Currency.STN
-            public val SZL: Currency = Currency.SZL
-            public val TND: Currency = Currency.TND
-            public val TZS: Currency = Currency.TZS
-            public val UGX: Currency = Currency.UGX
-            public val XAF: Currency = Currency.XAF
-            public val XOF: Currency = Currency.XOF
-            public val ZAR: Currency = Currency.ZAR
-            public val ZMW: Currency = Currency.ZMW
-            public val ZWL: Currency = Currency.ZWL
-        }
+        public val europe: Set<Currency> =
+            setOf(
+                ALL, AMD, AZN, BAM, BGN, BYN, CHF, CZK, DKK, EUR,
+                GBP, GEL, GIP, HRK, HUF, ISK, MDL, MKD, NOK, PLN,
+                RON, RSD, RUB, SEK, TRY, UAH, XPF,
+            )
 
-        public object NorthAmerica {
-            public val CAD: Currency = Currency.CAD
-            public val USD: Currency = Currency.USD
-            public val MXN: Currency = Currency.MXN
-        }
+        public val middleEast: Set<Currency> =
+            setOf(AED, BHD, ILS, IRR, JOD, KWD, LBP, SAR, SYP, YER)
 
-        public object SouthAmerica {
-            public val ARS: Currency = Currency.ARS
-            public val BOB: Currency = Currency.BOB
-            public val BRL: Currency = Currency.BRL
-            public val CLP: Currency = Currency.CLP
-            public val COP: Currency = Currency.COP
-            public val GTQ: Currency = Currency.GTQ
-            public val GYD: Currency = Currency.GYD
-            public val HNL: Currency = Currency.HNL
-            public val NIO: Currency = Currency.NIO
-            public val PAB: Currency = Currency.PAB
-            public val PEN: Currency = Currency.PEN
-            public val PYG: Currency = Currency.PYG
-            public val UYU: Currency = Currency.UYU
-            public val VES: Currency = Currency.VES
-        }
+        public val africa: Set<Currency> =
+            setOf(
+                AOA, BIF, CDF, CVE, DJF, DZD, ETB, GHS, GMD, GNF,
+                KES, LRD, LSL, LYD, MAD, MRU, MUR, MWK, MZN, NAD,
+                NGN, RWF, SDG, SOS, SSP, STN, SZL, TND, TZS, UGX,
+                XAF, XOF, ZAR, ZMW, ZWL,
+            )
 
-        public fun fromCode(code: String): Currency? =
-            entries.find {
-                it.code.equals(code, ignoreCase = true)
-            }
+        public val northAmerica: Set<Currency> = setOf(CAD, MXN, USD)
 
-        public fun fromSymbol(symbol: String): Currency? =
-            entries.find {
-                it.symbol == symbol
-            }
+        public val southAmerica: Set<Currency> =
+            setOf(
+                ARS, BOB, BRL, CLP, COP, GTQ, GYD, HNL, NIO, PAB,
+                PEN, PYG, UYU, VES,
+            )
     }
 }

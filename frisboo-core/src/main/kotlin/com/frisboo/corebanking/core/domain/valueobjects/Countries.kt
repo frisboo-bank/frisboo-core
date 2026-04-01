@@ -276,272 +276,67 @@ public enum class Countries(
     ;
 
     // ========================================
-    // REGIONAL GROUPS
+    // LOOKUP HELPERS
     // ========================================
     public companion object {
-        public object AsiaPacific {
-            public val AF: Countries = Countries.AF
-            public val AS: Countries = Countries.AS
-            public val AU: Countries = Countries.AU
-            public val BD: Countries = Countries.BD
-            public val BH: Countries = Countries.BH
-            public val BN: Countries = Countries.BN
-            public val BT: Countries = Countries.BT
-            public val CC: Countries = Countries.CC
-            public val CK: Countries = Countries.CK
-            public val CN: Countries = Countries.CN
-            public val CX: Countries = Countries.CX
-            public val FJ: Countries = Countries.FJ
-            public val FM: Countries = Countries.FM
-            public val GU: Countries = Countries.GU
-            public val HK: Countries = Countries.HK
-            public val ID: Countries = Countries.ID
-            public val IN: Countries = Countries.IN
-            public val JP: Countries = Countries.JP
-            public val KH: Countries = Countries.KH
-            public val KI: Countries = Countries.KI
-            public val KP: Countries = Countries.KP
-            public val KR: Countries = Countries.KR
-            public val KW: Countries = Countries.KW
-            public val KZ: Countries = Countries.KZ
-            public val LA: Countries = Countries.LA
-            public val LK: Countries = Countries.LK
-            public val MM: Countries = Countries.MM
-            public val MN: Countries = Countries.MN
-            public val MO: Countries = Countries.MO
-            public val MV: Countries = Countries.MV
-            public val MY: Countries = Countries.MY
-            public val NP: Countries = Countries.NP
-            public val NR: Countries = Countries.NR
-            public val NU: Countries = Countries.NU
-            public val NZ: Countries = Countries.NZ
-            public val OM: Countries = Countries.OM
-            public val PF: Countries = Countries.PF
-            public val PG: Countries = Countries.PG
-            public val PH: Countries = Countries.PH
-            public val PK: Countries = Countries.PK
-            public val PN: Countries = Countries.PN
-            public val PW: Countries = Countries.PW
-            public val QA: Countries = Countries.QA
-            public val SA: Countries = Countries.SA
-            public val SB: Countries = Countries.SB
-            public val SG: Countries = Countries.SG
-            public val TH: Countries = Countries.TH
-            public val TJ: Countries = Countries.TJ
-            public val TK: Countries = Countries.TK
-            public val TL: Countries = Countries.TL
-            public val TM: Countries = Countries.TM
-            public val TV: Countries = Countries.TV
-            public val TW: Countries = Countries.TW
-            public val UZ: Countries = Countries.UZ
-            public val VN: Countries = Countries.VN
-            public val VU: Countries = Countries.VU
-            public val WS: Countries = Countries.WS
-        }
+        private val byCode: Map<String, Countries> = entries.associateBy { it.code.uppercase() }
+        private val byName: Map<String, Countries> = entries.associateBy { it.displayName.uppercase() }
 
-        public object Europe {
-            public val AD: Countries = Countries.AD
-            public val AL: Countries = Countries.AL
-            public val AM: Countries = Countries.AM
-            public val AT: Countries = Countries.AT
-            public val AX: Countries = Countries.AX
-            public val AZ: Countries = Countries.AZ
-            public val BA: Countries = Countries.BA
-            public val BE: Countries = Countries.BE
-            public val BG: Countries = Countries.BG
-            public val BY: Countries = Countries.BY
-            public val CH: Countries = Countries.CH
-            public val CY: Countries = Countries.CY
-            public val CZ: Countries = Countries.CZ
-            public val DE: Countries = Countries.DE
-            public val DK: Countries = Countries.DK
-            public val EE: Countries = Countries.EE
-            public val ES: Countries = Countries.ES
-            public val FI: Countries = Countries.FI
-            public val FO: Countries = Countries.FO
-            public val FR: Countries = Countries.FR
-            public val GB: Countries = Countries.GB
-            public val GE: Countries = Countries.GE
-            public val GG: Countries = Countries.GG
-            public val GI: Countries = Countries.GI
-            public val GR: Countries = Countries.GR
-            public val HR: Countries = Countries.HR
-            public val HU: Countries = Countries.HU
-            public val IE: Countries = Countries.IE
-            public val IM: Countries = Countries.IM
-            public val IS: Countries = Countries.IS
-            public val IT: Countries = Countries.IT
-            public val JE: Countries = Countries.JE
-            public val LI: Countries = Countries.LI
-            public val LT: Countries = Countries.LT
-            public val LU: Countries = Countries.LU
-            public val LV: Countries = Countries.LV
-            public val MC: Countries = Countries.MC
-            public val MD: Countries = Countries.MD
-            public val ME: Countries = Countries.ME
-            public val MK: Countries = Countries.MK
-            public val MT: Countries = Countries.MT
-            public val NL: Countries = Countries.NL
-            public val NO: Countries = Countries.NO
-            public val PL: Countries = Countries.PL
-            public val PT: Countries = Countries.PT
-            public val RO: Countries = Countries.RO
-            public val RS: Countries = Countries.RS
-            public val RU: Countries = Countries.RU
-            public val SE: Countries = Countries.SE
-            public val SI: Countries = Countries.SI
-            public val SJ: Countries = Countries.SJ
-            public val SK: Countries = Countries.SK
-            public val SM: Countries = Countries.SM
-            public val TR: Countries = Countries.TR
-            public val UA: Countries = Countries.UA
-            public val VA: Countries = Countries.VA
-        }
+        public fun fromCode(code: String): Countries? = byCode[code.uppercase()]
 
-        public object MiddleEast {
-            public val AE: Countries = Countries.AE
-            public val BH: Countries = Countries.BH
-            public val CY: Countries = Countries.CY
-            public val EG: Countries = Countries.EG
-            public val IL: Countries = Countries.IL
-            public val IQ: Countries = Countries.IQ
-            public val IR: Countries = Countries.IR
-            public val JO: Countries = Countries.JO
-            public val KW: Countries = Countries.KW
-            public val LB: Countries = Countries.LB
-            public val OM: Countries = Countries.OM
-            public val PS: Countries = Countries.PS
-            public val SA: Countries = Countries.SA
-            public val SY: Countries = Countries.SY
-            public val YE: Countries = Countries.YE
-        }
+        public fun fromName(name: String): Countries? = byName[name.uppercase()]
 
-        public object Africa {
-            public val AO: Countries = Countries.AO
-            public val BF: Countries = Countries.BF
-            public val BI: Countries = Countries.BI
-            public val BJ: Countries = Countries.BJ
-            public val BW: Countries = Countries.BW
-            public val CD: Countries = Countries.CD
-            public val CF: Countries = Countries.CF
-            public val CG: Countries = Countries.CG
-            public val CI: Countries = Countries.CI
-            public val CM: Countries = Countries.CM
-            public val CV: Countries = Countries.CV
-            public val DJ: Countries = Countries.DJ
-            public val DZ: Countries = Countries.DZ
-            public val EH: Countries = Countries.EH
-            public val ER: Countries = Countries.ER
-            public val ET: Countries = Countries.ET
-            public val GA: Countries = Countries.GA
-            public val GH: Countries = Countries.GH
-            public val GM: Countries = Countries.GM
-            public val GN: Countries = Countries.GN
-            public val GQ: Countries = Countries.GQ
-            public val GW: Countries = Countries.GW
-            public val KE: Countries = Countries.KE
-            public val KM: Countries = Countries.KM
-            public val LR: Countries = Countries.LR
-            public val LS: Countries = Countries.LS
-            public val LY: Countries = Countries.LY
-            public val MA: Countries = Countries.MA
-            public val MG: Countries = Countries.MG
-            public val ML: Countries = Countries.ML
-            public val MR: Countries = Countries.MR
-            public val MU: Countries = Countries.MU
-            public val MW: Countries = Countries.MW
-            public val MZ: Countries = Countries.MZ
-            public val NA: Countries = Countries.NA
-            public val NE: Countries = Countries.NE
-            public val NG: Countries = Countries.NG
-            public val RE: Countries = Countries.RE
-            public val RW: Countries = Countries.RW
-            public val SC: Countries = Countries.SC
-            public val SD: Countries = Countries.SD
-            public val SH: Countries = Countries.SH
-            public val SL: Countries = Countries.SL
-            public val SN: Countries = Countries.SN
-            public val SO: Countries = Countries.SO
-            public val SS: Countries = Countries.SS
-            public val ST: Countries = Countries.ST
-            public val SZ: Countries = Countries.SZ
-            public val TD: Countries = Countries.TD
-            public val TG: Countries = Countries.TG
-            public val TN: Countries = Countries.TN
-            public val TZ: Countries = Countries.TZ
-            public val UG: Countries = Countries.UG
-            public val YT: Countries = Countries.YT
-            public val ZA: Countries = Countries.ZA
-            public val ZM: Countries = Countries.ZM
-            public val ZW: Countries = Countries.ZW
-        }
+        // ========================================
+        // REGIONAL GROUPS
+        // ========================================
+        public val asiaPacific: Set<Countries> =
+            setOf(
+                AF, AS, AU, BD, BN, BT, CC, CK, CN, CX,
+                FJ, FM, GU, HK, ID, IN, JP, KH, KI, KP,
+                KR, KZ, LA, LK, MM, MN, MO, MV, MY, NP,
+                NR, NU, NZ, PF, PG, PH, PK, PN, PW, SB,
+                SG, TH, TJ, TK, TL, TM, TV, TW, UZ, VN,
+                VU, WS,
+            )
 
-        public object NorthAmerica {
-            public val AG: Countries = Countries.AG
-            public val AI: Countries = Countries.AI
-            public val AW: Countries = Countries.AW
-            public val BB: Countries = Countries.BB
-            public val BL: Countries = Countries.BL
-            public val BM: Countries = Countries.BM
-            public val BS: Countries = Countries.BS
-            public val BZ: Countries = Countries.BZ
-            public val CA: Countries = Countries.CA
-            public val CR: Countries = Countries.CR
-            public val CU: Countries = Countries.CU
-            public val DM: Countries = Countries.DM
-            public val DO: Countries = Countries.DO
-            public val GD: Countries = Countries.GD
-            public val GL: Countries = Countries.GL
-            public val GP: Countries = Countries.GP
-            public val GT: Countries = Countries.GT
-            public val HN: Countries = Countries.HN
-            public val HT: Countries = Countries.HT
-            public val JM: Countries = Countries.JM
-            public val KN: Countries = Countries.KN
-            public val LC: Countries = Countries.LC
-            public val MF: Countries = Countries.MF
-            public val MQ: Countries = Countries.MQ
-            public val MS: Countries = Countries.MS
-            public val MX: Countries = Countries.MX
-            public val NI: Countries = Countries.NI
-            public val PA: Countries = Countries.PA
-            public val PM: Countries = Countries.PM
-            public val PR: Countries = Countries.PR
-            public val SV: Countries = Countries.SV
-            public val TC: Countries = Countries.TC
-            public val TT: Countries = Countries.TT
-            public val US: Countries = Countries.US
-            public val VC: Countries = Countries.VC
-            public val VG: Countries = Countries.VG
-            public val VI: Countries = Countries.VI
-        }
+        public val europe: Set<Countries> =
+            setOf(
+                AD, AL, AM, AT, AX, AZ, BA, BE, BG, BY,
+                CH, CZ, DE, DK, EE, ES, FI, FO, FR, GB,
+                GE, GG, GI, GR, HR, HU, IE, IM, IS, IT,
+                JE, LI, LT, LU, LV, MC, MD, ME, MK, MT,
+                NL, NO, PL, PT, RO, RS, RU, SE, SI, SJ,
+                SK, SM, TR, UA, VA,
+            )
 
-        public object SouthAmerica {
-            public val AR: Countries = Countries.AR
-            public val BO: Countries = Countries.BO
-            public val BR: Countries = Countries.BR
-            public val CL: Countries = Countries.CL
-            public val CO: Countries = Countries.CO
-            public val EC: Countries = Countries.EC
-            public val FK: Countries = Countries.FK
-            public val GF: Countries = Countries.GF
-            public val GY: Countries = Countries.GY
-            public val PE: Countries = Countries.PE
-            public val PY: Countries = Countries.PY
-            public val SR: Countries = Countries.SR
-            public val UY: Countries = Countries.UY
-            public val VE: Countries = Countries.VE
-        }
+        public val middleEast: Set<Countries> =
+            setOf(
+                AE, BH, CY, EG, IL, IQ, IR, JO, KW, LB,
+                OM, PS, QA, SA, SY, YE,
+            )
+
+        public val africa: Set<Countries> =
+            setOf(
+                AO, BF, BI, BJ, BW, CD, CF, CG, CI, CM,
+                CV, DJ, DZ, EH, ER, ET, GA, GH, GM, GN,
+                GQ, GW, KE, KM, LR, LS, LY, MA, MG, ML,
+                MR, MU, MW, MZ, NA, NE, NG, RE, RW, SC,
+                SD, SH, SL, SN, SO, SS, ST, SZ, TD, TG,
+                TN, TZ, UG, YT, ZA, ZM, ZW,
+            )
+
+        public val northAmerica: Set<Countries> =
+            setOf(
+                AG, AI, AW, BB, BL, BM, BS, BZ, CA, CR,
+                CU, DM, DO, GD, GL, GP, GT, HN, HT, JM,
+                KN, LC, MF, MQ, MS, MX, NI, PA, PM, PR,
+                SV, TC, TT, US, VC, VG, VI,
+            )
+
+        public val southAmerica: Set<Countries> =
+            setOf(
+                AR, BO, BR, CL, CO, EC, FK, GF, GY, PE,
+                PY, SR, UY, VE,
+            )
     }
-
-    // Helper functions
-    public fun fromCode(code: String): Countries? =
-        entries.find {
-            it.code.equals(code, ignoreCase = true)
-        }
-
-    public fun fromName(name: String): Countries? =
-        entries.find {
-            it.displayName.equals(name, ignoreCase = true)
-        }
 }

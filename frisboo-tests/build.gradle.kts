@@ -42,6 +42,7 @@ dependencies {
         baseLibs.flyway.core,
         baseLibs.flyway.database.postgresql,
         baseLibs.kotest.assertions.core,
+        baseLibs.kotest.extensions,
         baseLibs.kotest.property,
         baseLibs.kotest.property.arbs,
         baseLibs.kotest.property.datetime,

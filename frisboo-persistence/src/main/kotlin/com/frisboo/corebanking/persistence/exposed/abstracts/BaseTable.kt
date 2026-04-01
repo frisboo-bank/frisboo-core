@@ -21,13 +21,19 @@ import org.jetbrains.exposed.v1.datetime.timestampWithTimeZone
 import java.time.OffsetDateTime
 
 /**
- * BaseTable is an abstract class that extends Exposed's Table class.
- * It includes common timestamp columns for tracking creation and update times.
+ * Abstract base table providing audit columns and an application-managed optimistic locking version.
+ *
+ * **Version**: Managed exclusively by [com.frisboo.corebanking.persistence.exposed.extensions.optimisticUpdate].
+ * Initial value is `1` (set by the database `DEFAULT`). Incremented by the application on every successful update.
+ * Do **not** attach a database trigger that also modifies this column.
+ *
+ * **Timestamps**: Managed exclusively by the database via the `fcb_handle_timestamps()` trigger.
+ * Each concrete table migration must create a `BEFORE INSERT OR UPDATE` trigger calling that function.
  */
 public abstract class BaseTable(
     name: String,
 ) : Table(name) {
-    public val version: Column<Long> = long("version").default(0).autoIncrement()
+    public val version: Column<Long> = long("version").default(1)
 
     public val createdAt: Column<OffsetDateTime> = timestampWithTimeZone("created_at").databaseGenerated()
     public val updatedAt: Column<OffsetDateTime> = timestampWithTimeZone("updated_at").databaseGenerated()

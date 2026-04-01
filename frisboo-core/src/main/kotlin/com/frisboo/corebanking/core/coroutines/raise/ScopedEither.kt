@@ -21,13 +21,16 @@ import arrow.core.raise.either
 import com.frisboo.corebanking.core.domain.errors.AppError
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.plus
 import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
 
-// A default CoroutineScope with a Job and IO dispatcher.
-private val scope = CoroutineScope(Job() + Dispatchers.IO)
+// A default CoroutineScope with a SupervisorJob and IO dispatcher.
+// SupervisorJob prevents child failures from cancelling siblings and avoids the leak
+// that a plain Job() would cause (a regular Job completes once cancelled, making the
+// scope unusable afterward, whereas SupervisorJob stays active).
+private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
 
 /**
  * Represents a context that combines the `Raise` interface for error handling

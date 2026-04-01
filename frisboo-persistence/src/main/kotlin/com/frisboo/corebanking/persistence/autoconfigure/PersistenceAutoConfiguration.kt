@@ -15,29 +15,43 @@
  */
 package com.frisboo.corebanking.persistence.autoconfigure
 
-import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.autoconfigure.AutoConfiguration
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.annotation.Configuration
 
+/**
+ * Persistence auto-configuration.
+ *
+ * Registers [PersistenceProperties] and provides conditional [Configuration] markers that
+ * downstream services can use with `@ConditionalOnBean` to gate their own persistence beans.
+ *
+ * Unlike [com.frisboo.corebanking.crypto.autoconfigure.CryptoAutoConfiguration], this module
+ * does not create beans itself — it supplies shared schema migrations and Exposed extensions.
+ * The marker configurations exist so that services can write:
+ *
+ * ```kotlin
+ * @ConditionalOnBean(PersistenceAutoConfiguration.Postgres::class)
+ * fun myDataSource(): DataSource = ...
+ * ```
+ */
 @AutoConfiguration(after = [DataSourceAutoConfiguration::class])
+@EnableConfigurationProperties(PersistenceProperties::class)
 public open class PersistenceAutoConfiguration {
     @Configuration
-    @ConditionalOnProperty(value = ["frisboo.corebanking.persistence.postgres.enabled"], havingValue = "true")
-    public open class Postgres {
-        @Value($$"${frisboo.corebanking.persistence.postgres.enabled:false}")
-        private var enabled: Boolean = false
-
-        public fun isEnabled(): Boolean = enabled
-    }
+    @ConditionalOnProperty(
+        prefix = "frisboo.corebanking.persistence.postgres",
+        name = ["enabled"],
+        havingValue = "true",
+    )
+    public open class Postgres
 
     @Configuration
-    @ConditionalOnProperty(value = ["frisboo.corebanking.persistence.mongodb.enabled"], havingValue = "true")
-    public open class Inbox {
-        @Value($$"${frisboo.corebanking.persistence.mongodb.enabled:false}")
-        private var enabled: Boolean = false
-
-        public fun isEnabled(): Boolean = enabled
-    }
+    @ConditionalOnProperty(
+        prefix = "frisboo.corebanking.persistence.mongodb",
+        name = ["enabled"],
+        havingValue = "true",
+    )
+    public open class MongoDb
 }

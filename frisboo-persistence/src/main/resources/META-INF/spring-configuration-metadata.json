@@ -1,16 +1,35 @@
 {
+    "groups": [
+        {
+            "name": "frisboo.corebanking.persistence",
+            "type": "com.frisboo.corebanking.persistence.autoconfigure.PersistenceProperties",
+            "sourceType": "com.frisboo.corebanking.persistence.autoconfigure.PersistenceProperties"
+        },
+        {
+            "name": "frisboo.corebanking.persistence.postgres",
+            "type": "com.frisboo.corebanking.persistence.autoconfigure.PersistenceProperties$PostgresProperties",
+            "sourceType": "com.frisboo.corebanking.persistence.autoconfigure.PersistenceProperties"
+        },
+        {
+            "name": "frisboo.corebanking.persistence.mongodb",
+            "type": "com.frisboo.corebanking.persistence.autoconfigure.PersistenceProperties$MongoDbProperties",
+            "sourceType": "com.frisboo.corebanking.persistence.autoconfigure.PersistenceProperties"
+        }
+    ],
     "properties": [
         {
             "name": "frisboo.corebanking.persistence.postgres.enabled",
             "type": "java.lang.Boolean",
-            "description": "Enable Postgres database",
-            "defaultValue": false
+            "description": "Enable PostgreSQL persistence layer.",
+            "defaultValue": false,
+            "sourceType": "com.frisboo.corebanking.persistence.autoconfigure.PersistenceProperties$PostgresProperties"
         },
         {
             "name": "frisboo.corebanking.persistence.mongodb.enabled",
             "type": "java.lang.Boolean",
-            "description": "Enable Mongo database",
-            "defaultValue": false
+            "description": "Enable MongoDB persistence layer.",
+            "defaultValue": false,
+            "sourceType": "com.frisboo.corebanking.persistence.autoconfigure.PersistenceProperties$MongoDbProperties"
         }
     ]
 }
