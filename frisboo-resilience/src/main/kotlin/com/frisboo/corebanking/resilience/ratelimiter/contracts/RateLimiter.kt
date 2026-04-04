@@ -15,32 +15,16 @@
  */
 package com.frisboo.corebanking.resilience.ratelimiter.contracts
 
-/**
- * Core contract for rate limiter implementations.
- *
- * Controls the rate of operations by limiting the number of permits
- * available within a configurable time window.
- *
- * Thread-safety: implementations must be safe for concurrent use.
- */
-public interface RateLimiter {
-    /**
-     * Attempts to acquire a single permit without blocking.
-     *
-     * @return `true` if a permit was acquired, `false` if the rate limit is exceeded.
-     */
-    public suspend fun tryAcquire(): Boolean
+import com.frisboo.corebanking.resilience.ratelimiter.model.RateLimiterConfig
 
-    /**
-     * Attempts to acquire the specified number of permits without blocking.
-     *
-     * @param permits the number of permits to acquire.
-     * @return `true` if all permits were acquired, `false` if the rate limit is exceeded.
-     */
-    public suspend fun tryAcquire(permits: Int): Boolean
+public interface RateLimiter<out C : Any> :
+    RateLimiterAcquirer,
+    RateLimiterRecorder,
+    RateLimiterConfigured<C> {
 
-    /**
-     * Returns the number of permits currently available.
-     */
-    public suspend fun availablePermits(): Int
+    public val metrics: RateLimiterMetrics
+
+    public val config: RateLimiterConfig
+
+    public suspend fun <T> executeSuspend(block: suspend () -> T): RateLimiterResult<T>
 }

@@ -21,16 +21,9 @@ import com.frisboo.corebanking.registry.models.SetTtlResult
 import kotlin.time.Duration
 
 /**
- * Administrative operations on a scoped registry.
- *
- * These operations are typically audit-logged in banking deployments
- * (PCI-DSS 10.x, SOC 2 CC6/CC7).
+ * Administrative operations on a registry.
  */
 public interface RegistryAdmin<K : Any, V : Any> {
-    /**
-     * Returns all non-expired keys. O(N) full scan — prefer [keysPage] in production.
-     */
-    public suspend fun keys(): Set<K>
 
     /**
      * Returns a cursor-based page of keys.
@@ -38,10 +31,7 @@ public interface RegistryAdmin<K : Any, V : Any> {
      * @param cursor opaque cursor from a previous page, or `null` for the first page.
      * @param limit maximum number of keys to return.
      */
-    public suspend fun keysPage(
-        cursor: String?,
-        limit: Int,
-    ): RegistryPage<K>
+    public suspend fun keysPage(cursor: String?, limit: Int): RegistryPage<K>
 
     /**
      * Updates the time-to-live for an existing [key].
@@ -50,8 +40,5 @@ public interface RegistryAdmin<K : Any, V : Any> {
      *         or [SetTtlResult.Failed] with [RegistryError.InvalidTtl] if [ttl] is not positive
      *         (distributed implementations require [ttl] >= 1ms).
      */
-    public suspend fun setTTL(
-        key: K,
-        ttl: Duration,
-    ): SetTtlResult
+    public suspend fun setTTL(key: K, ttl: Duration): SetTtlResult
 }

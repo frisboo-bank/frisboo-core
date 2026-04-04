@@ -23,19 +23,30 @@ package com.frisboo.corebanking.registry.contracts
  * without affecting registry throughput.
  */
 public interface RegistryMetrics {
-    /** Total cache hits (successful [Registry.get] or [Registry.contains] lookups). */
+
+    /**
+     * Total cache hits
+     */
     public val hitCount: Long
 
-    /** Total cache misses ([Registry.get] returning `null` or [Registry.contains] returning `false`). */
+    /**
+     * Total cache misses.
+     */
     public val missCount: Long
 
-    /** Total entries written ([Registry.put] created/updated or [Registry.getOrPut] factory invoked). */
+    /**
+     * Total entries written
+     */
     public val putCount: Long
 
-    /** Total entries removed via [Registry.evict]. */
+    /**
+     * Total entries removed
+     */
     public val evictionCount: Long
 
-    /** Total operations that returned a `Failed` result. */
+    /**
+     * Total operations that returned a `Failed`
+     */
     public val failureCount: Long
 
     public companion object

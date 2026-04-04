@@ -103,11 +103,6 @@ public class CaffeineRegistryImpl<K : Any, V : Any>(
         return if (existed) EvictResult.Evicted else EvictResult.NotFound
     }
 
-    override suspend fun keys(): Set<K> {
-        cache.cleanUp()
-        return cache.asMap().keys.toSet()
-    }
-
     override suspend fun keysPage(
         cursor: String?,
         limit: Int,

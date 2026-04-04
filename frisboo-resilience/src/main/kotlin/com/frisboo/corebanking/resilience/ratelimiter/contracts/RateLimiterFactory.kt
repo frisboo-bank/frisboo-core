@@ -21,15 +21,11 @@ import com.frisboo.corebanking.resilience.ratelimiter.model.RateLimiterConfig
  * Factory for creating [RateLimiter] instances.
  */
 public interface RateLimiterFactory {
-    /**
-     * Creates a rate limiter with the given name and configuration.
-     *
-     * @param name unique identifier for the rate limiter.
-     * @param config the configuration parameters.
-     * @return a new [RateLimiter] instance.
-     */
-    public fun create(
+
+    public suspend fun create(
         name: String,
         config: RateLimiterConfig,
-    ): RateLimiter
+    ): RateLimiter<*>
+
+    public suspend fun create(name: String): RateLimiter<*>
 }

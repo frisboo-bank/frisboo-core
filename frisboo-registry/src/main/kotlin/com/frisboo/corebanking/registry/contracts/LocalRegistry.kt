@@ -21,6 +21,7 @@ package com.frisboo.corebanking.registry.contracts
  * Adds [cleanupExpired] for eager eviction — local stores manage expiry themselves.
  */
 public interface LocalRegistry<K : Any, V : Any> : Registry<K, V> {
-    /** Eagerly removes expired entries. Returns the count removed. */
+
+    /** Removes expired entries. Returns the count removed. */
     public suspend fun cleanupExpired(): Int
 }

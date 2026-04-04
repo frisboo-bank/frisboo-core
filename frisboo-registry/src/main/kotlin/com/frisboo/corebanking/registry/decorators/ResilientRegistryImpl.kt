@@ -90,12 +90,6 @@ public class ResilientRegistryImpl<K : Any, V : Any>(
             fallbackOption = { fallback.evict(key) },
         )
 
-    override suspend fun keys(): Set<K> =
-        resilient(
-            primaryOption = { primary.keys() },
-            fallbackOption = { fallback.keys() },
-        )
-
     override suspend fun keysPage(
         cursor: String?,
         limit: Int,

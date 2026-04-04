@@ -22,7 +22,14 @@ package com.frisboo.corebanking.registry.contracts
  * as required by the security policy for sensitive data classifications.
  */
 public interface RegistrySerializer<T> {
+
+    /**
+     * Serializes the given value to a byte array
+     */
     public fun serialize(value: T): ByteArray
 
+    /**
+     * Deserializes the given byte array back to the original value
+     */
     public fun deserialize(data: ByteArray): T
 }

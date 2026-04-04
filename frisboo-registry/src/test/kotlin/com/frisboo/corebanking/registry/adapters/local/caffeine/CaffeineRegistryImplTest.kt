@@ -138,7 +138,7 @@ internal class CaffeineRegistryImplTest :
             }
         }
 
-        "keys returns all non-expired keys" {
+        "keysPage returns only non-expired keys" {
             runBlocking {
                 val registry = CaffeineRegistryImpl<String, String>(scope = scope)
 
@@ -146,7 +146,7 @@ internal class CaffeineRegistryImplTest :
                 registry.put("long", "v2", ttl = 5.seconds)
                 Thread.sleep(200)
 
-                registry.keys() shouldBe setOf("long")
+                registry.keysPage(null, Int.MAX_VALUE).items.toSet() shouldBe setOf("long")
             }
         }
 

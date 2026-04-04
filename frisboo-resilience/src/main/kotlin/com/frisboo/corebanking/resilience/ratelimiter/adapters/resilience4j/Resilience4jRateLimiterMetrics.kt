@@ -1,0 +1,35 @@
+/*
+ * Copyright 2025 Frisboo Bank
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing
+ * permissions and limitations under the License.
+ */
+package com.frisboo.corebanking.resilience.ratelimiter.adapters.resilience4j
+
+import com.frisboo.corebanking.resilience.ratelimiter.contracts.RateLimiterMetrics
+import io.github.resilience4j.ratelimiter.RateLimiter as R4jRateLimiter
+import java.util.concurrent.atomic.AtomicLong
+
+internal fun RateLimiterMetrics.Companion.from(
+    limiter: R4jRateLimiter,
+    successfulCalls: AtomicLong,
+    rejectedCalls: AtomicLong,
+): RateLimiterMetrics {
+    val metrics = limiter.metrics
+
+    return object : RateLimiterMetrics {
+        override val availablePermits: Long get() = metrics.availablePermissions.toLong()
+        override val waitingThreads: Long get() = metrics.numberOfWaitingThreads.toLong()
+        override val successfulCalls: Long get() = successfulCalls.get()
+        override val rejectedCalls: Long get() = rejectedCalls.get()
+    }
+}

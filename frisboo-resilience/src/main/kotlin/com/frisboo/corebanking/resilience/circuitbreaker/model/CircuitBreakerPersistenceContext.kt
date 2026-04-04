@@ -13,15 +13,12 @@
  * or implied. See the License for the specific language governing
  * permissions and limitations under the License.
  */
-package com.frisboo.corebanking.resilience.circuitbreaker.contracts
+package com.frisboo.corebanking.resilience.circuitbreaker.model
 
-/**
- * Thrown or passed to fallbacks when the circuit breaker denies a call.
- *
- * @param circuitBreakerName the name of the breaker that rejected the call.
- * @param cause optional underlying implementation-specific exception.
- */
-public class CallNotPermittedException(
-    public val circuitBreakerName: String,
-    cause: Throwable? = null,
-) : RuntimeException("CircuitBreaker '$circuitBreakerName' does not permit calls", cause)
+import com.frisboo.corebanking.registry.contracts.Registry
+import kotlinx.coroutines.CoroutineScope
+
+internal data class CircuitBreakerPersistenceContext(
+    val stateRegistry: Registry<String, String>,
+    val coroutineScope: CoroutineScope,
+)

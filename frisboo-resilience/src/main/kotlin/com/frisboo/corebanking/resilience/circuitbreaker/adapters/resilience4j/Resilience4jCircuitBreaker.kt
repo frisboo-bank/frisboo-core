@@ -15,15 +15,17 @@
  */
 package com.frisboo.corebanking.resilience.circuitbreaker.adapters.resilience4j
 
-import com.frisboo.corebanking.resilience.circuitbreaker.contracts.CallNotPermittedException
 import com.frisboo.corebanking.resilience.circuitbreaker.contracts.CircuitBreaker
 import com.frisboo.corebanking.resilience.circuitbreaker.contracts.CircuitBreakerMetrics
+import com.frisboo.corebanking.resilience.circuitbreaker.contracts.CircuitBreakerResult
+import com.frisboo.corebanking.resilience.circuitbreaker.errors.CircuitBreakerError
+import com.frisboo.corebanking.resilience.circuitbreaker.model.CircuitBreakerConfig
 import io.github.resilience4j.circuitbreaker.CircuitBreaker as R4jCircuitBreaker
+import io.github.resilience4j.circuitbreaker.CircuitBreakerConfig as R4jConfig
 import java.util.concurrent.TimeUnit
 import kotlin.coroutines.cancellation.CancellationException
 import kotlin.time.Duration
 import kotlin.time.toJavaDuration
-import io.github.resilience4j.circuitbreaker.CallNotPermittedException as R4jCallNotPermittedException
 
 /**
  * Resilience4j-backed [CircuitBreaker] implementation.
@@ -35,30 +37,41 @@ import io.github.resilience4j.circuitbreaker.CallNotPermittedException as R4jCal
  */
 internal class Resilience4jCircuitBreaker(
     private val delegate: R4jCircuitBreaker,
-) : CircuitBreaker {
+    override val config: CircuitBreakerConfig,
+) : CircuitBreaker<R4jConfig> {
 
     override val metrics: CircuitBreakerMetrics = CircuitBreakerMetrics.from(delegate)
 
-    override suspend fun <T> executeSuspend(block: suspend () -> T): T =
-        executeWithPermission(
-            block = block,
-            onNotPermitted = {
-                throw newCallNotPermittedException()
-            },
-            onFailure = { throw it },
-        )
+    override val internalConfig: R4jConfig get() = delegate.circuitBreakerConfig
 
-    override suspend fun <T> executeSuspend(
-        block: suspend () -> T,
-        fallback: suspend (Throwable) -> T,
-    ): T =
-        executeWithPermission(
-            block = block,
-            onNotPermitted = {
-                fallback(newCallNotPermittedException())
-            },
-            onFailure = { fallback(it) },
-        )
+    override suspend fun <T> executeSuspend(block: suspend () -> T): CircuitBreakerResult<T> {
+        if (!delegate.tryAcquirePermission()) {
+            return CircuitBreakerResult.Rejected(
+                CircuitBreakerError.CallNotPermitted(
+                    message = "CircuitBreaker '${delegate.name}' is OPEN and does not permit further calls",
+                ),
+            )
+        }
+
+        val start = System.nanoTime()
+        return try {
+            val result = block()
+            delegate.onSuccess(System.nanoTime() - start, TimeUnit.NANOSECONDS)
+            CircuitBreakerResult.Success(result)
+        } catch (e: CancellationException) {
+            delegate.releasePermission()
+            throw e
+        } catch (e: VirtualMachineError) {
+            delegate.releasePermission()
+            throw e
+        } catch (e: Error) {
+            delegate.onError(System.nanoTime() - start, TimeUnit.NANOSECONDS, e)
+            throw e
+        } catch (e: Throwable) {
+            delegate.onError(System.nanoTime() - start, TimeUnit.NANOSECONDS, e)
+            CircuitBreakerResult.Failure(e)
+        }
+    }
 
     override fun tryAcquirePermission(): Boolean = delegate.tryAcquirePermission()
 
@@ -73,50 +86,4 @@ internal class Resilience4jCircuitBreaker(
         duration: Duration,
         throwable: Throwable,
     ): Unit = delegate.onError(duration.toJavaDuration().toNanos(), TimeUnit.NANOSECONDS, throwable)
-
-    private fun newCallNotPermittedException(): CallNotPermittedException =
-        CallNotPermittedException(
-            circuitBreakerName = delegate.name,
-            cause = R4jCallNotPermittedException.createCallNotPermittedException(delegate),
-        )
-
-    /**
-     * Shared permission-aware execution scaffold.
-     *
-     * Acquires a permit, times [block], and records the outcome atomically.
-     * [CancellationException] releases the permit and propagates (structured concurrency).
-     * [VirtualMachineError] releases the permit and propagates without recording.
-     * Other JVM [Error]s are recorded and rethrown — never sent to fallbacks.
-     *
-     * @param block the protected operation.
-     * @param onNotPermitted invoked when the circuit is open (no permit acquired).
-     * @param onFailure invoked after [onError] is recorded; may throw or return a fallback.
-     */
-    private suspend fun <T> executeWithPermission(
-        block: suspend () -> T,
-        onNotPermitted: suspend () -> T,
-        onFailure: suspend (Throwable) -> T,
-    ): T {
-        if (!delegate.tryAcquirePermission()) {
-            return onNotPermitted()
-        }
-        val start = System.nanoTime()
-        return try {
-            val result = block()
-            delegate.onSuccess(System.nanoTime() - start, TimeUnit.NANOSECONDS)
-            result
-        } catch (e: CancellationException) {
-            delegate.releasePermission()
-            throw e
-        } catch (e: VirtualMachineError) {
-            delegate.releasePermission()
-            throw e
-        } catch (e: Error) {
-            delegate.onError(System.nanoTime() - start, TimeUnit.NANOSECONDS, e)
-            throw e
-        } catch (e: Throwable) {
-            delegate.onError(System.nanoTime() - start, TimeUnit.NANOSECONDS, e)
-            onFailure(e)
-        }
-    }
 }

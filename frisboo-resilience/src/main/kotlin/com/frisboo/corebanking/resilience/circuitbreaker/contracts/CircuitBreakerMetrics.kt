@@ -16,6 +16,7 @@
 package com.frisboo.corebanking.resilience.circuitbreaker.contracts
 
 public interface CircuitBreakerMetrics {
+
     /** Current circuit breaker state. */
     public val state: CircuitBreakerState
 

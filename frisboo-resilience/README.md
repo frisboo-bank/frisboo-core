@@ -1,20 +1,22 @@
 # frisboo-resilience
 
-Protect downstream services from cascading failures with circuit breakers
+Protect downstream services from cascading failures with circuit breakers and rate limiters
 
-## What does it do?
+## Circuit Breaker
+
+### What does it do?
 
 When a downstream service starts failing, a circuit breaker **stops calling it** for a cooldown period instead of hammering it with requests that will also fail. After the cooldown, it lets a few trial calls through to check if the service has recovered.
 
 | State | What happens |
 |-------|--------------|
 | **CLOSED** | All calls pass through normally. Failures are tracked in a sliding window. |
-| **OPEN** | All calls are rejected immediately with `CallNotPermittedException`. No network call is made. |
+| **OPEN** | All calls are rejected immediately — `executeSuspend` returns `CircuitBreakerResult.Rejected`. No network call is made. |
 | **HALF_OPEN** | A limited number of trial calls are allowed through. If they succeed, the circuit closes. If they fail, it opens again. |
 
-## Getting started
+### Getting started
 
-### 1. Create a circuit breaker
+#### 1. Create a circuit breaker
 
 ```kotlin
 val factory: CircuitBreakerFactory = CircuitBreakerFactoryImpl(
@@ -41,54 +43,48 @@ val breaker = factory.create(
 
 The factory is **idempotent by name** — calling `create("payment-gateway", sameConfig)` again returns the same instance.
 
-### 2. Execute a protected call
+#### 2. Execute a protected call
 
 ```kotlin
-val response = breaker.executeSuspend {
+val result = breaker.executeSuspend {
     paymentGateway.charge(amount)
 }
-// response => PaymentResponse(transactionId = "txn_abc123", status = APPROVED)
-// If the circuit is open: throws CallNotPermittedException
+// result => CircuitBreakerResult.Success(PaymentResponse(transactionId = "txn_abc123", status = APPROVED))
+// If the circuit is open: CircuitBreakerResult.Rejected(CallNotPermitted(...))
+// If the call throws: CircuitBreakerResult.Failure(cause = ...)
 ```
 
-### 3. Execute with a fallback
+#### 3. Handle results
+
+`executeSuspend` never throws (except `CancellationException`). Pattern-match on the sealed result:
 
 ```kotlin
-val response = breaker.executeSuspend(
-    block = { paymentGateway.charge(amount) },
-    fallback = { error ->
-        // error is CallNotPermittedException when circuit is open,
-        // or the original exception when the call itself fails
-        PaymentResponse.fallback(reason = error.message)
-    },
-)
-// response => PaymentResponse(transactionId = "txn_abc123", status = APPROVED)
-//   — or on failure —
-// response => PaymentResponse(transactionId = null, status = FALLBACK, reason = "CircuitBreaker 'payment-gateway' does not permit calls")
-```
-
-### 4. Handle errors
-
-Circuit breaker failures are all subclasses you can catch precisely:
-
-```kotlin
-try {
-    breaker.executeSuspend { paymentGateway.charge(amount) }
-} catch (e: CallNotPermittedException) {
-    // Circuit is open — the call was never made
-    // e.circuitBreakerName => "payment-gateway"
-    // e.message => "CircuitBreaker 'payment-gateway' does not permit calls"
-    log.warn { "Circuit open for ${e.circuitBreakerName}, using cached response" }
+when (val result = breaker.executeSuspend { paymentGateway.charge(amount) }) {
+    is CircuitBreakerResult.Success -> result.value
+    is CircuitBreakerResult.Rejected -> {
+        // Circuit is open — the call was never made
+        // result.error.message => "CircuitBreaker 'payment-gateway' does not permit calls"
+        log.warn { "Circuit open: ${result.error.message}, using cached response" }
+        cachedResponse
+    }
+    is CircuitBreakerResult.Failure -> {
+        // The call was made but threw an exception
+        // result.cause => the original exception
+        log.error(result.cause) { "Payment call failed" }
+        fallbackResponse
+    }
 }
 ```
 
-**Exception handling rules:**
+#### 4. Exception handling rules
+
 - `CancellationException` — always propagated (structured concurrency), the permit is released without recording
 - `VirtualMachineError` (`OutOfMemoryError`, `StackOverflowError`) — always propagated, permit released without recording
-- Other `Error` subclasses — recorded as failures and rethrown (never sent to fallbacks)
-- All other `Throwable` — recorded as failures, sent to fallback if provided, otherwise rethrown
+- Other `Error` subclasses — wrapped in `CircuitBreakerResult.Failure` and returned
+- All other `Throwable` — wrapped in `CircuitBreakerResult.Failure` and returned
+- Circuit open — returned as `CircuitBreakerResult.Rejected` (no network call made)
 
-### 5. Check metrics
+#### 5. Check metrics
 
 ```kotlin
 val metrics = breaker.metrics
@@ -102,7 +98,7 @@ metrics.numberOfSuccessfulCalls    // => 41
 metrics.numberOfNotPermittedCalls  // => 0 (only non-zero when circuit was OPEN)
 ```
 
-### 6. Manual state control
+#### 6. Manual state control
 
 For operational emergencies (kill-switch, forced recovery):
 
@@ -111,7 +107,7 @@ breaker.trip()   // force circuit OPEN — all calls rejected immediately
 breaker.reset()  // force circuit CLOSED — resume normal operation
 ```
 
-### 7. Low-level manual recording
+#### 7. Low-level manual recording
 
 For cases where `executeSuspend` doesn't fit (e.g. fire-and-forget, streaming):
 
@@ -132,7 +128,7 @@ if (breaker.tryAcquirePermission()) {
 
 **Warning:** Do not call `tryAcquirePermission()` before `executeSuspend` — it acquires its own permission internally. Acquiring twice leaks a permit.
 
-## Configuration reference
+### Configuration reference
 
 | Parameter | Type | Default | Constraints |
 |-----------|------|---------|-------------|
@@ -151,7 +147,7 @@ if (breaker.tryAcquirePermission()) {
 
 All parameters without defaults are **required**. Invalid values throw `IllegalArgumentException` at construction time — you can't create a misconfigured circuit breaker.
 
-### Exception classification
+#### Exception classification
 
 By default, all exceptions are recorded as failures. To customize:
 
@@ -166,11 +162,11 @@ CircuitBreakerConfig(
 // recordExceptions and ignoreExceptions must not overlap — throws IllegalArgumentException if they do.
 ```
 
-## Using with Spring Boot
+### Using with Spring Boot
 
 The module ships with auto-configuration. Enable it in your `application.yml` and provide a state registry bean.
 
-### Configuration
+#### Configuration
 
 Define global defaults and per-instance overrides in YAML. Instance values override global defaults, and global defaults override hardcoded defaults.
 
@@ -207,7 +203,7 @@ frisboo:
 
 With this config, `payment-gateway` inherits all global defaults but overrides `failure-rate-threshold` to 5 and `wait-duration-in-open-state` to 120s.
 
-### Config-driven creation
+#### Config-driven creation
 
 When using Spring auto-configuration, you can create circuit breakers by name — the config comes from YAML:
 
@@ -246,7 +242,7 @@ breaker = circuitBreakerFactory.create(
 )
 ```
 
-### Provide a state registry
+#### Provide a state registry
 
 Define a `circuitBreakerStateRegistry` bean — the auto-configuration uses it to persist circuit breaker state across restarts:
 
@@ -282,7 +278,7 @@ class PaymentService(
 
 If you need to override the default factory, define your own `CircuitBreakerFactory` bean — the auto-configured one backs off.
 
-### Test configuration
+#### Test configuration
 
 For tests, use an in-memory registry so no external storage is needed:
 
@@ -315,7 +311,7 @@ class TestResilienceConfig {
 }
 ```
 
-## Config drift protection
+### Config drift protection
 
 If two call sites create a breaker with the same name but different configs, the factory **does not crash**. It replaces the existing breaker with the new config and logs a warning:
 
@@ -326,7 +322,7 @@ WARN — CircuitBreaker 'payment-gateway' already exists with a different config
 
 This keeps the API running while surfacing the misconfiguration for operators to fix.
 
-## Config resolution order
+### Config resolution order
 
 When calling `create("payment-gateway")` without explicit config, values are resolved in this order (first non-null wins):
 
@@ -336,15 +332,126 @@ When calling `create("payment-gateway")` without explicit config, values are res
 
 When calling `create("payment-gateway", config)` with explicit config, YAML is ignored entirely.
 
-## State persistence
+### State persistence
 
 Circuit breaker state (CLOSED, OPEN, HALF_OPEN, etc.) is persisted to the `stateRegistry` on every state transition. On restart, the factory restores the last known state so a circuit that was OPEN before a deploy stays OPEN until it naturally recovers.
 
 If state persistence fails (e.g. Redis is down), the failure is logged and the breaker continues with its in-memory state. Persistence is best-effort — it never blocks or crash the breaker.
 
-## Operational notes
+### Operational notes
 
 - **Eviction**: The factory caches up to `maxBreakers` (default 10,000) instances with a 30-minute access-based TTL. Evicted breakers are recreated on next `create()` call with their persisted state restored.
 - **Thread safety**: All operations are thread-safe. The underlying Resilience4j breaker handles concurrency internally.
 - **Coroutine-friendly**: `executeSuspend` is a proper suspend function — it never blocks threads.
 - **No Micrometer bridge yet**: The circuit breaker exposes metrics via `CircuitBreakerMetrics` but does not currently publish to Micrometer. The `frisboo-observability` module provides a `MetricsRecorder` abstraction — a Micrometer bridge will be added when the observability module gains a Micrometer binding.
+
+---
+
+## Rate Limiter
+
+### What does it do?
+
+A rate limiter controls **how many calls** a service can receive within a time window. When the limit is reached, excess calls are rejected immediately instead of overwhelming the downstream service.
+
+### Getting started
+
+#### 1. Create a rate limiter
+
+```kotlin
+val factory: RateLimiterFactory = RateLimiterFactoryImpl(
+    stateRegistry = stateRegistry,
+    coroutineScope = coroutineScope,
+)
+
+val limiter = factory.create(
+    name = "payment-gateway",
+    config = RateLimiterConfig(
+        limitForPeriod = 100,                                // 100 calls per period
+        limitRefreshPeriod = Duration.ofSeconds(1),          // period resets every second
+        timeoutDuration = Duration.ofMillis(500),            // wait up to 500ms for a permit
+    ),
+)
+```
+
+The factory is **idempotent by name** — calling `create("payment-gateway", sameConfig)` again returns the same instance.
+
+#### 2. Execute a rate-limited call
+
+```kotlin
+val result = limiter.executeSuspend {
+    paymentGateway.charge(amount)
+}
+// result => RateLimiterResult.Success(PaymentResponse(...))
+// If the limit is exceeded: RateLimiterResult.Rejected(LimitExceeded(requestedPermits = 1))
+// If the call throws: RateLimiterResult.Failure(cause = ...)
+```
+
+#### 3. Handle results
+
+`executeSuspend` never throws. Pattern-match on the sealed result:
+
+```kotlin
+when (val result = limiter.executeSuspend { paymentGateway.charge(amount) }) {
+    is RateLimiterResult.Success -> result.value
+    is RateLimiterResult.Rejected -> {
+        log.warn { "Rate limited: requested ${result.error.requestedPermits} permits" }
+        fallbackResponse
+    }
+    is RateLimiterResult.Failure -> {
+        log.error(result.cause) { "Payment call failed" }
+        errorResponse
+    }
+}
+```
+
+#### 4. Acquire permits directly
+
+For cases where `executeSuspend` doesn't fit (e.g. batch processing, pre-flight checks):
+
+```kotlin
+when (val acquired = limiter.acquire(permits = 5)) {
+    is Either.Right -> processBatch()
+    is Either.Left -> {
+        when (acquired.value) {
+            is RateLimiterError.LimitExceeded -> log.warn { "Limit exceeded" }
+            is RateLimiterError.Unavailable -> log.error { "Rate limiter unavailable: ${acquired.value.reason}" }
+        }
+    }
+}
+```
+
+#### 5. Check metrics
+
+```kotlin
+val metrics = limiter.metrics
+
+metrics.availablePermits   // => 87 — permits remaining in the current period
+metrics.waitingThreads     // => 0 — threads blocked waiting for a permit
+metrics.successfulCalls    // => 13
+metrics.rejectedCalls      // => 2
+```
+
+### Configuration reference
+
+| Parameter | Type | Default | Constraints |
+|-----------|------|---------|-------------|
+| `limitForPeriod` | `Int` | — | > 0 |
+| `limitRefreshPeriod` | `java.time.Duration` | — | must be positive |
+| `timeoutDuration` | `java.time.Duration` | — | >= 0 (0 = no wait) |
+
+All parameters are **required**. Invalid values throw `IllegalArgumentException` at construction time.
+
+### Config drift protection
+
+Same behavior as circuit breaker — if two call sites create a limiter with the same name but different configs, the factory replaces the existing limiter and logs a warning:
+
+```
+WARN — RateLimiter 'payment-gateway' already exists with a different configuration —
+       replacing with the new config. This indicates a config drift that should be fixed.
+```
+
+### Operational notes
+
+- **Eviction**: The factory caches up to `maxLimiters` (default 10,000) instances with a 30-minute access-based TTL.
+- **Thread safety**: All operations are thread-safe. The underlying Resilience4j rate limiter handles concurrency internally.
+- **Coroutine-friendly**: `executeSuspend` is a proper suspend function — it never blocks threads.

@@ -16,32 +16,7 @@
 package com.frisboo.corebanking.resilience.ratelimiter.contracts
 
 import arrow.core.Either
-import kotlin.time.Duration
-
-/**
- * Error model for rate limiter acquisition operations.
- */
-public sealed interface RateLimiterError {
-    /**
-     * Indicates permit acquisition was rejected due to exceeded limits.
-     *
-     * @property requestedPermits number of permits requested.
-     */
-    public data class LimitExceeded(
-        public val requestedPermits: Int,
-    ) : RateLimiterError
-
-    /**
-     * Indicates the rate limiter backend is unavailable.
-     *
-     * @property reason human-readable failure reason.
-     * @property retryAfter suggested retry delay.
-     */
-    public data class Unavailable(
-        public val reason: String,
-        public val retryAfter: Duration? = null,
-    ) : RateLimiterError
-}
+import com.frisboo.corebanking.resilience.ratelimiter.errors.RateLimiterError
 
 /**
  * Contract for acquiring permits from a rate limiter.
