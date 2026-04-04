@@ -15,6 +15,8 @@
  */
 package com.frisboo.corebanking.resilience.circuitbreaker.contracts
 
+import com.frisboo.corebanking.resilience.circuitbreaker.model.CircuitBreakerConfig
+
 /**
  * Core contract for circuit breaker implementations.
  *
@@ -26,9 +28,14 @@ package com.frisboo.corebanking.resilience.circuitbreaker.contracts
  */
 public interface CircuitBreaker :
     CircuitBreakerDecision,
-    CircuitBreakerRecorder {
+    CircuitBreakerRecorder,
+    CircuitBreakerConfigured {
+
     /** Read‑only metrics and state. */
     public val metrics: CircuitBreakerMetrics
+
+    /** Read‑only domain configuration as originally supplied at creation time. */
+    public val config: CircuitBreakerConfig
 
     /**
      * Executes the given [block] within the circuit breaker's protection.

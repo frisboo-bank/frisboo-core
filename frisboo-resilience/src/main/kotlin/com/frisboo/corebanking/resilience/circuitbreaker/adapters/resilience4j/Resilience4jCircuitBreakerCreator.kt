@@ -18,10 +18,10 @@ package com.frisboo.corebanking.resilience.circuitbreaker.adapters.resilience4j
 import com.frisboo.corebanking.registry.contracts.Registry
 import com.frisboo.corebanking.resilience.circuitbreaker.contracts.CircuitBreakerState
 import com.frisboo.corebanking.resilience.circuitbreaker.model.CircuitBreakerConfig
+import com.frisboo.corebanking.resilience.circuitbreaker.model.CircuitBreakerPersistenceContext
 import io.github.oshai.kotlinlogging.KotlinLogging
-import kotlin.coroutines.cancellation.CancellationException
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+import kotlin.coroutines.cancellation.CancellationException
 import io.github.resilience4j.circuitbreaker.CircuitBreaker as R4jCircuitBreaker
 
 private val logger = KotlinLogging.logger {}
@@ -29,11 +29,11 @@ private val logger = KotlinLogging.logger {}
 internal suspend fun createResilience4jBreaker(
     name: String,
     config: CircuitBreakerConfig,
-    stateRegistry: Registry<String, String>,
-    coroutineScope: CoroutineScope,
+    persistence: CircuitBreakerPersistenceContext,
 ): Resilience4jCircuitBreaker {
     val r4jConfig = config.toResilience4jConfig()
     val r4jBreaker = R4jCircuitBreaker.of(name, r4jConfig)
+    val (stateRegistry, coroutineScope) = persistence
 
     r4jBreaker.eventPublisher.onStateTransition { event ->
         val newState = CircuitBreakerState.from(event.stateTransition.toState)
@@ -50,7 +50,7 @@ internal suspend fun createResilience4jBreaker(
 
     restoreState(name, r4jBreaker, stateRegistry)
 
-    return Resilience4jCircuitBreaker(r4jBreaker)
+    return Resilience4jCircuitBreaker(r4jBreaker, config)
 }
 
 private suspend fun restoreState(
