@@ -1,0 +1,42 @@
+/*
+ * Copyright 2025 Frisboo Bank
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing
+ * permissions and limitations under the License.
+ */
+package com.frisboo.corebanking.core.domain.events
+
+import java.util.UUID
+import kotlin.time.Instant
+
+/**
+ * Base envelope for all domain events in the system.
+ *
+ * Carries the standard metadata required for event sourcing, auditing, and replication.
+ * Concrete events implement this interface with their domain-specific [Data] payload.
+ *
+ * @param Data the type of the event payload.
+ */
+public interface DomainEvent<Data> {
+    public val eventId: UUID
+    public val eventType: String
+    public val aggregateId: UUID
+    public val aggregateType: String
+    public val topic: String
+    public val description: String
+    public val data: Data
+    public val metaData: Map<String, String>
+    public val processedAt: Instant?
+    public val createdAt: Instant
+    public val updatedAt: Instant
+    public val version: Long
+}

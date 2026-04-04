@@ -1,0 +1,22 @@
+{
+    "properties": [
+        {
+            "name": "frisboo.corebanking.crypto.enabled",
+            "type": "java.lang.Boolean",
+            "description": "Enable crypto auto-configuration (Tink initialization and service beans)",
+            "defaultValue": false
+        },
+        {
+            "name": "frisboo.corebanking.crypto.aead.enabled",
+            "type": "java.lang.Boolean",
+            "description": "Enable AEAD symmetric encryption (requires an aeadKeysetHandle bean)",
+            "defaultValue": false
+        },
+        {
+            "name": "frisboo.corebanking.crypto.hybrid.enabled",
+            "type": "java.lang.Boolean",
+            "description": "Enable hybrid asymmetric encryption (requires a hybridKeysetHandle bean)",
+            "defaultValue": false
+        }
+    ]
+}

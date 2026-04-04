@@ -15,9 +15,9 @@
  */
 package com.frisboo.corebanking.core.domain.errors
 
-public data class SerializationException(
+public class SerializationException(
     override val cause: Throwable,
-    val clazz: Class<*>,
+    public val clazz: Class<*>,
 ) : IllegalArgumentException(
         "Serialization error for class: ${clazz.name}",
         cause,

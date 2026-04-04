@@ -29,8 +29,33 @@ dependencies {
     ).forEach { api(platform(it)) }
 
     arrayOf(
-        baseLibs.spring.boot.autoconfigure,
         baseLibs.exposed.spring.boot.starter,
         baseLibs.exposed.kotlin.datetime,
     ).forEach { api(it) }
+
+    implementation(baseLibs.spring.boot.autoconfigure)
+
+    testApi(platform(baseLibs.junit.bom))
+    testApi(platform(baseLibs.kotest.bom))
+    testApi(platform(baseLibs.testcontainers.bom))
+
+    testApi(baseLibs.kotest.assertions.core)
+    testApi(baseLibs.kotest.assertions.arrow)
+    testApi(baseLibs.kotest.property)
+    testApi(baseLibs.kotest.property.arbs)
+
+    testApi(baseLibs.spring.boot.testcontainers)
+    testApi(baseLibs.testcontainers.junit.jupiter)
+    testApi(baseLibs.testcontainers.postgresql)
+
+    testApi(baseLibs.flyway.core)
+    testApi(baseLibs.flyway.database.postgresql)
+    testApi(baseLibs.kotlinx.coroutines.test)
+
+    testRuntimeOnly(baseLibs.postgresql)
+    testRuntimeOnly(baseLibs.kotest.runner.junit5)
+}
+
+tasks.withType<Test> {
+    useJUnitPlatform()
 }

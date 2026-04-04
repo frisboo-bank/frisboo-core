@@ -112,6 +112,6 @@ public enum class AccountType {
     ;
 
     public companion object {
-        public fun all(): List<AccountType> = values().toList()
+        public fun all(): List<AccountType> = entries
     }
 }

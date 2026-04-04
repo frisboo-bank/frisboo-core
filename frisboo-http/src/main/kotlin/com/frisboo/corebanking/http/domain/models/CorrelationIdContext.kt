@@ -13,7 +13,7 @@
  * or implied. See the License for the specific language governing
  * permissions and limitations under the License.
  */
-package com.frisboo.corebanking.core.api.domain.models
+package com.frisboo.corebanking.http.domain.models
 
 import com.frisboo.corebanking.http.domain.valueobjects.CorrelationId
 

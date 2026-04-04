@@ -24,6 +24,17 @@ import io.grpc.ServerInterceptor
 public class LoggingInterceptor : ServerInterceptor {
     private companion object {
         private val logger = KotlinLogging.logger { }
+
+        /** Header names whose values must never appear in logs. */
+        private val SENSITIVE_HEADERS: Set<String> =
+            setOf(
+                "authorization",
+                "cookie",
+                "set-cookie",
+                "x-api-key",
+                "x-auth-token",
+                "proxy-authorization",
+            )
     }
 
     override fun <ReqT : Any, RespT : Any> interceptCall(
@@ -35,8 +46,14 @@ public class LoggingInterceptor : ServerInterceptor {
             "Grpc call on " +
                 "service: ${call.methodDescriptor.serviceName}, " +
                 "method: ${call.methodDescriptor.bareMethodName}, " +
-                "headers: $headers"
+                "headers: ${redactHeaders(headers)}"
         }
         return next.startCall(call, headers)
     }
+
+    private fun redactHeaders(headers: Metadata): String =
+        headers.keys()
+            .joinToString { key ->
+                if (key.lowercase() in SENSITIVE_HEADERS) "$key=<REDACTED>" else "$key=${headers.get(Metadata.Key.of(key, Metadata.ASCII_STRING_MARSHALLER))}"
+            }
 }

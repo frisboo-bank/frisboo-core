@@ -1,1 +1,0 @@
-sourceset_dependencies = '{":frisboo-tests/main":[],":frisboo-http/main":[],":frisboo-core/main":[],":frisboo-grpc/main":[],":frisboo-persistence/main":[],":frisboo-data/main":[]}'
