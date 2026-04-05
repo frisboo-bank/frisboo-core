@@ -57,6 +57,7 @@ dependencies {
 
     testApi(baseLibs.kotest.property.arbs)
     testApi(baseLibs.kotest.extensions)
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test")
 
     testRuntimeOnly(baseLibs.kotest.runner.junit5)
 }

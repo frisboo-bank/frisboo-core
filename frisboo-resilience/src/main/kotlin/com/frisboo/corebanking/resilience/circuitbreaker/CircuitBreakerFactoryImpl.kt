@@ -21,11 +21,16 @@ import com.frisboo.corebanking.resilience.circuitbreaker.contracts.CircuitBreake
 import com.frisboo.corebanking.resilience.circuitbreaker.contracts.CircuitBreakerConfigSource
 import com.frisboo.corebanking.resilience.circuitbreaker.contracts.CircuitBreakerFactory
 import com.frisboo.corebanking.resilience.circuitbreaker.model.CircuitBreakerConfig
+import com.frisboo.corebanking.resilience.circuitbreaker.model.CircuitBreakerPersistenceContext
 import com.github.benmanes.caffeine.cache.Caffeine
+import com.github.benmanes.caffeine.cache.RemovalListener
 import dev.hsbrysk.caffeine.CoroutineCache
 import dev.hsbrysk.caffeine.buildCoroutine
 import io.github.oshai.kotlinlogging.KotlinLogging
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.sync.Mutex
+import java.util.concurrent.ConcurrentHashMap
 import kotlin.time.Duration.Companion.minutes
 import kotlin.time.toJavaDuration
 
@@ -44,15 +49,23 @@ public class CircuitBreakerFactoryImpl(
     private val configSource: CircuitBreakerConfigSource? = null,
 ) : CircuitBreakerFactory {
 
+    private val creationLocks = ConcurrentHashMap<String, Mutex>()
+    private val persistenceScope = CoroutineScope(coroutineScope.coroutineContext + SupervisorJob())
+
     private companion object {
         private val logger = KotlinLogging.logger {}
     }
 
-    private val breakers: CoroutineCache<String, CachedEntry> =
+    private val breakers: CoroutineCache<String, CircuitBreaker> =
         Caffeine
             .newBuilder()
             .maximumSize(maxBreakers)
             .expireAfterAccess(30.minutes.toJavaDuration())
+            .evictionListener(
+                RemovalListener<String, CircuitBreaker> { key, _, _ ->
+                    creationLocks.remove(key)
+                },
+            )
             .buildCoroutine()
 
     override suspend fun create(
@@ -61,36 +74,33 @@ public class CircuitBreakerFactoryImpl(
     ): CircuitBreaker {
         val existing = breakers.getIfPresent(name)
         if (existing != null && existing.config == config) {
-            return existing.breaker
+            return existing
         }
         if (existing != null) {
             logger.warn {
                 "CircuitBreaker '$name' already exists with a different configuration — " +
-                    "replacing with the new config. This indicates a config drift that should be fixed."
+                        "replacing with the new config. This indicates a config drift that should be fixed."
             }
         }
-        val newEntry = CachedEntry(
-            breaker = createResilience4jBreaker(name, config, stateRegistry, coroutineScope),
-            config = config,
+        val breaker = createResilience4jBreaker(
+            name,
+            config,
+            CircuitBreakerPersistenceContext(stateRegistry, persistenceScope),
         )
-        breakers.put(name, newEntry)
-        return newEntry.breaker
+        breakers.put(name, breaker)
+        return breaker
     }
 
     override suspend fun create(name: String): CircuitBreaker {
         val source = checkNotNull(configSource) {
             "No CircuitBreakerConfigSource configured. " +
-                "Either provide a config source or call create(name, config) with explicit configuration."
+                    "Either provide a config source or call create(name, config) with explicit configuration."
         }
         val config = checkNotNull(source.resolve(name)) {
             "No circuit breaker configuration found for '$name'. " +
-                "Define it in your configuration source or call create(name, config) with explicit configuration."
+                    "Define it in your configuration source or call create(name, config) with explicit configuration."
         }
         return create(name, config)
     }
-
-    private data class CachedEntry(
-        val breaker: CircuitBreaker,
-        val config: CircuitBreakerConfig,
-    )
 }
+

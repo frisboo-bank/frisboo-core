@@ -81,14 +81,14 @@ internal class PropertiesCircuitBreakerConfigSource(
 
         private fun hasAnyGlobalDefault(global: ResilienceProperties.CircuitBreakerProperties): Boolean =
             global.failureRateThreshold != null ||
-                global.slowCallDurationThreshold != null ||
-                global.slowCallRateThreshold != null ||
-                global.waitDurationInOpenState != null ||
-                global.slidingWindowSize != null ||
-                global.slidingWindowType != null ||
-                global.minimumNumberOfCalls != null ||
-                global.permittedNumberOfCallsInHalfOpenState != null ||
-                global.maxWaitDurationInHalfOpenState != null ||
-                global.writableStackTraceEnabled != null
+                    global.slowCallDurationThreshold != null ||
+                    global.slowCallRateThreshold != null ||
+                    global.waitDurationInOpenState != null ||
+                    global.slidingWindowSize != null ||
+                    global.slidingWindowType != null ||
+                    global.minimumNumberOfCalls != null ||
+                    global.permittedNumberOfCallsInHalfOpenState != null ||
+                    global.maxWaitDurationInHalfOpenState != null ||
+                    global.writableStackTraceEnabled != null
     }
 }

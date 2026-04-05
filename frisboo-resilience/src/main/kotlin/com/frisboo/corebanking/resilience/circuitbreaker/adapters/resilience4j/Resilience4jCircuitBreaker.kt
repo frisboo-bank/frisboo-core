@@ -18,6 +18,7 @@ package com.frisboo.corebanking.resilience.circuitbreaker.adapters.resilience4j
 import com.frisboo.corebanking.resilience.circuitbreaker.contracts.CallNotPermittedException
 import com.frisboo.corebanking.resilience.circuitbreaker.contracts.CircuitBreaker
 import com.frisboo.corebanking.resilience.circuitbreaker.contracts.CircuitBreakerMetrics
+import com.frisboo.corebanking.resilience.circuitbreaker.model.CircuitBreakerConfig
 import io.github.resilience4j.circuitbreaker.CircuitBreaker as R4jCircuitBreaker
 import java.util.concurrent.TimeUnit
 import kotlin.coroutines.cancellation.CancellationException
@@ -35,9 +36,12 @@ import io.github.resilience4j.circuitbreaker.CallNotPermittedException as R4jCal
  */
 internal class Resilience4jCircuitBreaker(
     private val delegate: R4jCircuitBreaker,
+    override val config: CircuitBreakerConfig,
 ) : CircuitBreaker {
 
     override val metrics: CircuitBreakerMetrics = CircuitBreakerMetrics.from(delegate)
+
+    override fun getInternalConfig(): Any = delegate.circuitBreakerConfig
 
     override suspend fun <T> executeSuspend(block: suspend () -> T): T =
         executeWithPermission(
@@ -100,6 +104,7 @@ internal class Resilience4jCircuitBreaker(
         if (!delegate.tryAcquirePermission()) {
             return onNotPermitted()
         }
+
         val start = System.nanoTime()
         return try {
             val result = block()
