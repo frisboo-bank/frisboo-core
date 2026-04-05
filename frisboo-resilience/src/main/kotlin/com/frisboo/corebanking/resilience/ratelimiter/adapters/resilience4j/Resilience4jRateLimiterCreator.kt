@@ -17,9 +17,13 @@ package com.frisboo.corebanking.resilience.ratelimiter.adapters.resilience4j
 
 import com.frisboo.corebanking.resilience.ratelimiter.model.RateLimiterConfig
 import com.frisboo.corebanking.resilience.ratelimiter.model.RateLimiterPersistenceContext
+import io.github.oshai.kotlinlogging.KotlinLogging
+import kotlinx.coroutines.launch
+import kotlin.coroutines.cancellation.CancellationException
 import io.github.resilience4j.ratelimiter.RateLimiter as R4jRateLimiter
 
-@Suppress("unused_parameter")
+private val logger = KotlinLogging.logger {}
+
 internal suspend fun createResilience4jLimiter(
     name: String,
     config: RateLimiterConfig,
@@ -27,5 +31,29 @@ internal suspend fun createResilience4jLimiter(
 ): Resilience4jRateLimiter {
     val r4jConfig = config.toResilience4jConfig()
     val r4jLimiter = R4jRateLimiter.of(name, r4jConfig)
+    val (stateRegistry, coroutineScope) = persistence
+
+    val configValue = "${config.limitForPeriod}:${config.limitRefreshPeriod}:${config.timeoutDuration}"
+
+    r4jLimiter.eventPublisher.onSuccess {
+        coroutineScope.launch {
+            try {
+                stateRegistry.put(name, configValue)
+            } catch (e: CancellationException) {
+                throw e
+            } catch (e: Exception) {
+                logger.warn(e) { "Failed to persist rate limiter config for '$name'" }
+            }
+        }
+    }
+
+    try {
+        stateRegistry.put(name, configValue)
+    } catch (e: CancellationException) {
+        throw e
+    } catch (e: Exception) {
+        logger.warn(e) { "Failed to persist initial rate limiter config for '$name'" }
+    }
+
     return Resilience4jRateLimiter(r4jLimiter, config)
 }

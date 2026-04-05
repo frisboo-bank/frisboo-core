@@ -18,6 +18,9 @@ package com.frisboo.corebanking.resilience.circuitbreaker.autoconfigure
 import com.frisboo.corebanking.registry.contracts.Registry
 import com.frisboo.corebanking.resilience.circuitbreaker.CircuitBreakerFactoryImpl
 import com.frisboo.corebanking.resilience.circuitbreaker.contracts.CircuitBreakerFactory
+import com.frisboo.corebanking.resilience.ratelimiter.RateLimiterFactoryImpl
+import com.frisboo.corebanking.resilience.ratelimiter.autoconfigure.PropertiesRateLimiterConfigSource
+import com.frisboo.corebanking.resilience.ratelimiter.contracts.RateLimiterFactory
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -51,5 +54,24 @@ public open class ResilienceAutoConfiguration {
             coroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Default),
             maxBreakers = properties.circuitBreaker.maxBreakers,
             configSource = PropertiesCircuitBreakerConfigSource(properties),
+        )
+
+    @Bean
+    @ConditionalOnProperty(
+        prefix = "frisboo.corebanking.resilience.rate-limiter",
+        name = ["enabled"],
+        havingValue = "true",
+    )
+    @ConditionalOnBean(name = ["rateLimiterStateRegistry"])
+    @ConditionalOnMissingBean(RateLimiterFactory::class)
+    public open fun rateLimiterFactory(
+        @Qualifier("rateLimiterStateRegistry") stateRegistry: Registry<String, String>,
+        properties: ResilienceProperties,
+    ): RateLimiterFactory =
+        RateLimiterFactoryImpl(
+            stateRegistry = stateRegistry,
+            coroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Default),
+            maxLimiters = properties.rateLimiter.maxLimiters,
+            configSource = PropertiesRateLimiterConfigSource(properties),
         )
 }

@@ -17,6 +17,7 @@ package com.frisboo.corebanking.resilience.circuitbreaker.autoconfigure
 
 import com.frisboo.corebanking.resilience.circuitbreaker.model.CircuitBreakerConfig
 import com.frisboo.corebanking.resilience.circuitbreaker.model.SlidingWindowType
+import com.frisboo.corebanking.resilience.ratelimiter.model.RateLimiterConfig
 import java.time.Duration
 import kotlin.time.toKotlinDuration
 import org.springframework.boot.context.properties.ConfigurationProperties
@@ -25,6 +26,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties
 public data class ResilienceProperties(
     val enabled: Boolean = false,
     val circuitBreaker: CircuitBreakerProperties = CircuitBreakerProperties(),
+    val rateLimiter: RateLimiterProperties = RateLimiterProperties(),
 ) {
 
     public data class CircuitBreakerProperties(
@@ -46,14 +48,6 @@ public data class ResilienceProperties(
             require(maxBreakers > 0) { "maxBreakers must be positive, got $maxBreakers" }
         }
 
-        /**
-         * Resolves the [CircuitBreakerConfig] for the given [name].
-         *
-         * Resolution priority: instance config → global config → hardcoded defaults.
-         * Global fields are always non-null, so an unset instance property
-         * falls through to the global value (which itself defaults to the
-         * hardcoded constant).
-         */
         public fun resolveConfig(name: String): CircuitBreakerConfig {
             val instance = instances[name]
             return CircuitBreakerConfig(
@@ -106,5 +100,43 @@ public data class ResilienceProperties(
         val permittedNumberOfCallsInHalfOpenState: Int? = null,
         val maxWaitDurationInHalfOpenState: Duration? = null,
         val writableStackTraceEnabled: Boolean? = null,
+    )
+
+    public data class RateLimiterProperties(
+        val enabled: Boolean = false,
+        val maxLimiters: Long = DEFAULT_MAX_LIMITERS,
+        val limitForPeriod: Int = DEFAULT_LIMIT_FOR_PERIOD,
+        val limitRefreshPeriod: Duration = DEFAULT_LIMIT_REFRESH_PERIOD,
+        val timeoutDuration: Duration = DEFAULT_TIMEOUT_DURATION,
+        val instances: Map<String, RateLimiterInstanceProperties> = emptyMap(),
+    ) {
+        init {
+            require(maxLimiters > 0) { "maxLimiters must be positive, got $maxLimiters" }
+        }
+
+        public fun resolveConfig(name: String): RateLimiterConfig {
+            val instance = instances[name]
+            return RateLimiterConfig(
+                limitForPeriod = instance?.limitForPeriod
+                    ?: limitForPeriod,
+                limitRefreshPeriod = (instance?.limitRefreshPeriod
+                    ?: limitRefreshPeriod).toKotlinDuration(),
+                timeoutDuration = (instance?.timeoutDuration
+                    ?: timeoutDuration).toKotlinDuration(),
+            )
+        }
+
+        public companion object {
+            public const val DEFAULT_MAX_LIMITERS: Long = 10_000
+            public const val DEFAULT_LIMIT_FOR_PERIOD: Int = 50
+            public val DEFAULT_LIMIT_REFRESH_PERIOD: Duration = Duration.ofSeconds(1)
+            public val DEFAULT_TIMEOUT_DURATION: Duration = Duration.ofMillis(500)
+        }
+    }
+
+    public data class RateLimiterInstanceProperties(
+        val limitForPeriod: Int? = null,
+        val limitRefreshPeriod: Duration? = null,
+        val timeoutDuration: Duration? = null,
     )
 }

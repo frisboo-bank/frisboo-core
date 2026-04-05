@@ -51,7 +51,7 @@ internal class CircuitBreakerFactoryImplTest : StringSpec(
                     serviceNameArb,
                     createCircuitBreakerConfigArb(),
                 ) { name: String, config: CircuitBreakerConfig ->
-                    val factory = CircuitBreakerFactoryImpl(testRegistry(), scope)
+                    val factory = CircuitBreakerFactoryImpl(testRegistry(), coroutineScope = scope)
 
                     val first = factory.create(name, config)
                     val second = factory.create(name, config)
@@ -69,7 +69,7 @@ internal class CircuitBreakerFactoryImplTest : StringSpec(
                     createCircuitBreakerConfigArb(),
                     createCircuitBreakerConfigArb(),
                 ) { name: String, configA: CircuitBreakerConfig, configB: CircuitBreakerConfig ->
-                    val factory = CircuitBreakerFactoryImpl(testRegistry(), scope)
+                    val factory = CircuitBreakerFactoryImpl(testRegistry(), coroutineScope = scope)
 
                     val first = factory.create(name, configA)
                     val second = factory.create(name, configB)
@@ -89,7 +89,7 @@ internal class CircuitBreakerFactoryImplTest : StringSpec(
                 ) { name1, name2, config ->
                     if (name1 == name2) return@checkAll
 
-                    val factory = CircuitBreakerFactoryImpl(testRegistry(), scope)
+                    val factory = CircuitBreakerFactoryImpl(testRegistry(), coroutineScope = scope)
 
                     val a = factory.create(name1, config)
                     val b = factory.create(name2, config)
@@ -123,7 +123,7 @@ internal class CircuitBreakerFactoryImplTest : StringSpec(
             runTest {
                 val scope = this
                 checkAll(serviceNameArb) { name ->
-                    val factory = CircuitBreakerFactoryImpl(testRegistry(), scope)
+                    val factory = CircuitBreakerFactoryImpl(testRegistry(), coroutineScope = scope)
                     val exception = shouldThrow<IllegalStateException> {
                         factory.create(name)
                     }
@@ -156,7 +156,7 @@ internal class CircuitBreakerFactoryImplTest : StringSpec(
                 checkAll(serviceNameArb, createCircuitBreakerConfigArb()) { name, config ->
                     val factory = CircuitBreakerFactoryImpl(
                         testRegistry(),
-                        scope,
+                        coroutineScope = scope,
                     )
                     val results = withContext(Dispatchers.Default) {
                         (1..50).map {

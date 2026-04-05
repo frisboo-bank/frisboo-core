@@ -18,19 +18,19 @@ package com.frisboo.corebanking.resilience.ratelimiter.testutils
 import com.frisboo.corebanking.resilience.ratelimiter.model.RateLimiterConfig
 import io.kotest.property.Arb
 import io.kotest.property.arbitrary.bind
+import io.kotest.property.arbitrary.duration
 import io.kotest.property.arbitrary.int
-import io.kotest.property.arbitrary.long
-import java.time.Duration
+import kotlin.time.Duration.Companion.milliseconds
 
 internal fun createRateLimiterConfigArb(): Arb<RateLimiterConfig> =
     Arb.bind(
         Arb.int(1, 10_000),
-        Arb.long(1, 60_000),
-        Arb.long(0, 30_000),
-    ) { limitForPeriod, refreshPeriodMs, timeoutMs ->
+        Arb.duration(1.milliseconds..60_000.milliseconds),
+        Arb.duration(0.milliseconds..30_000.milliseconds),
+    ) { limitForPeriod, refreshPeriod, timeout ->
         RateLimiterConfig(
             limitForPeriod = limitForPeriod,
-            limitRefreshPeriod = Duration.ofMillis(refreshPeriodMs),
-            timeoutDuration = Duration.ofMillis(timeoutMs),
+            limitRefreshPeriod = refreshPeriod,
+            timeoutDuration = timeout,
         )
     }
