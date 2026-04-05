@@ -16,17 +16,13 @@
 package com.frisboo.corebanking.resilience.circuitbreaker.contracts
 
 /**
- * Configuration-oriented operations for circuit breaker permission and state control.
+ * Exposes the adapter's native configuration object in a type-safe way.
+ *
+ * @param C the adapter-specific configuration type (e.g.
+ *   `io.github.resilience4j.circuitbreaker.CircuitBreakerConfig`).
  */
-public interface CircuitBreakerConfigured {
+public interface CircuitBreakerConfigured<out C : Any> {
 
-    /**
-     * Returns the adapter's native configuration object.
-     *
-     * The actual type depends on the underlying implementation (e.g.
-     * `io.github.resilience4j.circuitbreaker.CircuitBreakerConfig` for the
-     * Resilience4j adapter). Consumers must cast the result to the expected type.
-     */
-    public fun getInternalConfig(): Any
-
+    /** The adapter's native configuration as originally supplied at creation time. */
+    public val internalConfig: C
 }

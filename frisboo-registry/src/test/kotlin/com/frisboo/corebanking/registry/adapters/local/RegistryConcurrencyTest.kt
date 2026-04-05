@@ -91,7 +91,7 @@ internal class RegistryConcurrencyTest :
             evictJobs.awaitAll()
 
             val size = registry.size()
-            val keys = registry.keys()
+            val keys = registry.keysPage(null, Int.MAX_VALUE).items
             size shouldBe keys.size.toLong()
         }
 
@@ -152,7 +152,7 @@ internal class RegistryConcurrencyTest :
             evictJobs.awaitAll()
 
             val size = registry.size()
-            val keys = registry.keys()
+            val keys = registry.keysPage(null, Int.MAX_VALUE).items
             size shouldBe keys.size.toLong()
         }
 

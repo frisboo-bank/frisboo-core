@@ -18,7 +18,7 @@ package com.frisboo.corebanking.resilience.circuitbreaker.adapters.resilience4j
 import com.frisboo.corebanking.registry.adapters.local.inmemory.InMemoryRegistryImpl
 import com.frisboo.corebanking.registry.contracts.Registry
 import com.frisboo.corebanking.registry.models.RegistryScope
-import com.frisboo.corebanking.resilience.circuitbreaker.contracts.CallNotPermittedException
+import com.frisboo.corebanking.resilience.circuitbreaker.contracts.CircuitBreakerResult
 import com.frisboo.corebanking.resilience.circuitbreaker.contracts.CircuitBreakerState
 import com.frisboo.corebanking.resilience.circuitbreaker.model.CircuitBreakerConfig
 import com.frisboo.corebanking.resilience.circuitbreaker.model.CircuitBreakerPersistenceContext
@@ -26,6 +26,7 @@ import com.frisboo.corebanking.resilience.circuitbreaker.testutils.createCircuit
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
+import io.kotest.matchers.string.shouldContain
 import io.kotest.matchers.types.shouldBeInstanceOf
 import io.kotest.property.Arb
 import io.kotest.property.arbitrary.string
@@ -55,67 +56,40 @@ internal class Resilience4jCircuitBreakerTest : StringSpec(
             persistence = CircuitBreakerPersistenceContext(registry, scope),
         )
 
-        "successful call returns value" {
+        "successful call returns Success with value" {
             runTest {
                 val testScope = this
                 checkAll(breakerNameArb, createCircuitBreakerConfigArb()) { name, config ->
                     val cb = createBreaker(name, config, scope = testScope)
                     val result = cb.executeSuspend { "hello" }
-                    result shouldBe "hello"
+                    result.shouldBeInstanceOf<CircuitBreakerResult.Success<String>>()
+                    result.value shouldBe "hello"
                 }
             }
         }
 
-        "failed call throws the original exception" {
+        "failed call returns Failure with original exception" {
             runTest {
                 val testScope = this
                 checkAll(breakerNameArb, createCircuitBreakerConfigArb()) { name, config ->
                     val cb = createBreaker(name, config, scope = testScope)
-                    shouldThrow<RuntimeException> {
-                        cb.executeSuspend { throw RuntimeException("boom") }
-                    }.message shouldBe "boom"
+                    val result = cb.executeSuspend { throw RuntimeException("boom") }
+                    result.shouldBeInstanceOf<CircuitBreakerResult.Failure>()
+                    result.cause.shouldBeInstanceOf<RuntimeException>()
+                    result.cause.message shouldBe "boom"
                 }
             }
         }
 
-        "fallback receives the original exception" {
-            runTest {
-                val testScope = this
-                checkAll(breakerNameArb, createCircuitBreakerConfigArb()) { name, config ->
-                    val cb = createBreaker(name, config, scope = testScope)
-                    val result = cb.executeSuspend(
-                        block = { throw RuntimeException("boom") },
-                        fallback = { e -> "recovered: ${e.message}" },
-                    )
-                    result shouldBe "recovered: boom"
-                }
-            }
-        }
-
-        "open circuit throws CallNotPermittedException" {
+        "open circuit returns Rejected with CallNotPermitted error" {
             runTest {
                 val testScope = this
                 checkAll(breakerNameArb, createCircuitBreakerConfigArb()) { name, config ->
                     val cb = createBreaker(name, config, scope = testScope)
                     cb.trip()
-                    shouldThrow<CallNotPermittedException> {
-                        cb.executeSuspend { "never" }
-                    }.circuitBreakerName shouldBe name
-                }
-            }
-        }
-
-        "open circuit with fallback invokes fallback" {
-            runTest {
-                val testScope = this
-                checkAll(breakerNameArb, createCircuitBreakerConfigArb()) { name, config ->
-                    val cb = createBreaker(name, config, scope = testScope)
-                    cb.trip()
-                    val result = cb.executeSuspend(
-                        block = { "never" },
-                        fallback = { e -> "fallback: ${e.javaClass.simpleName}" },
-                    )
-                    result shouldBe "fallback: CallNotPermittedException"
+                    val result = cb.executeSuspend { "never" }
+                    result.shouldBeInstanceOf<CircuitBreakerResult.Rejected>()
+                    result.error.message shouldContain name
                 }
             }
         }
@@ -140,7 +114,7 @@ internal class Resilience4jCircuitBreakerTest : StringSpec(
                 checkAll(breakerNameArb, createCircuitBreakerConfigArb()) { name, config ->
                     val cb = createBreaker(name, config, scope = testScope)
                     cb.executeSuspend { "ok" }
-                    runCatching { cb.executeSuspend { throw RuntimeException("fail") } }
+                    cb.executeSuspend { throw RuntimeException("fail") }
                     cb.metrics.numberOfSuccessfulCalls shouldBe 1
                     cb.metrics.numberOfFailedCalls shouldBe 1
                     cb.metrics.numberOfBufferedCalls shouldBe 2
@@ -172,12 +146,12 @@ internal class Resilience4jCircuitBreakerTest : StringSpec(
             }
         }
 
-        "getInternalConfig returns the Resilience4j native config" {
+        "internalConfig returns the Resilience4j native config" {
             runTest {
                 val testScope = this
                 checkAll(breakerNameArb, createCircuitBreakerConfigArb()) { name, config ->
                     val cb = createBreaker(name, config, scope = testScope)
-                    val internal = cb.getInternalConfig()
+                    val internal = cb.internalConfig
                     internal.shouldBeInstanceOf<R4jConfig>()
                     internal.failureRateThreshold shouldBe config.failureRateThreshold
                     internal.slidingWindowSize shouldBe config.slidingWindowSize

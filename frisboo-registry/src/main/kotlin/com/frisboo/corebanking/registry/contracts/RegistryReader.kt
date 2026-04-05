@@ -21,6 +21,7 @@ package com.frisboo.corebanking.registry.contracts
  * Implementations must be safe for concurrent use from coroutines.
  */
 public interface RegistryReader<K : Any, V : Any> {
+
     /**
      * Returns the value associated with [key], or `null` if absent or expired.
      */

@@ -27,6 +27,7 @@ import kotlin.time.Duration
  * Implementations must be safe for concurrent use from coroutines.
  */
 public interface RegistryWriter<K : Any, V : Any> {
+
     /**
      * Stores [value] under [key] with an optional time-to-live.
      *

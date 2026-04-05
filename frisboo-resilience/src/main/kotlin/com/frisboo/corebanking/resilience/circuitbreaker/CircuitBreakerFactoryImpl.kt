@@ -15,6 +15,9 @@
  */
 package com.frisboo.corebanking.resilience.circuitbreaker
 
+import com.frisboo.corebanking.core.factory.AsyncFactoryBuilder
+import com.frisboo.corebanking.core.factory.models.AsyncFactoryCachingConfig
+import com.frisboo.corebanking.core.factory.models.AsyncFactoryLoggingConfig
 import com.frisboo.corebanking.registry.contracts.Registry
 import com.frisboo.corebanking.resilience.circuitbreaker.adapters.resilience4j.createResilience4jBreaker
 import com.frisboo.corebanking.resilience.circuitbreaker.contracts.CircuitBreaker
@@ -22,76 +25,56 @@ import com.frisboo.corebanking.resilience.circuitbreaker.contracts.CircuitBreake
 import com.frisboo.corebanking.resilience.circuitbreaker.contracts.CircuitBreakerFactory
 import com.frisboo.corebanking.resilience.circuitbreaker.model.CircuitBreakerConfig
 import com.frisboo.corebanking.resilience.circuitbreaker.model.CircuitBreakerPersistenceContext
-import com.github.benmanes.caffeine.cache.Caffeine
-import com.github.benmanes.caffeine.cache.RemovalListener
-import dev.hsbrysk.caffeine.CoroutineCache
-import dev.hsbrysk.caffeine.buildCoroutine
-import io.github.oshai.kotlinlogging.KotlinLogging
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.sync.Mutex
-import java.util.concurrent.ConcurrentHashMap
+import kotlin.time.Duration
 import kotlin.time.Duration.Companion.minutes
-import kotlin.time.toJavaDuration
 
 /**
- * @param stateRegistry persistent store for circuit breaker state across restarts.
- * @param coroutineScope scope for background state-persistence coroutines.
- * @param maxBreakers upper bound on cached breaker instances. When exceeded, the
- *   least-recently-accessed entry is evicted. Evicted breakers are recreated on
- *   next [create] call with their persisted state restored from [stateRegistry].
- *   Default is 10 000 — sufficient for most deployments.
+ * Create and manage circuit breakers with automatic caching and optional external configuration source.
+ *
+ * @param stateRegistry Registry for persisting circuit breaker state across instances.
+ * @param maxBreakers Maximum number of circuit breakers to cache before evicting old ones.
+ * @param expireAfterAccess Duration after which an unused circuit breaker will be evicted from the cache.
+ * @param configSource Optional source for resolving circuit breaker configurations by name.
  */
 public class CircuitBreakerFactoryImpl(
     private val stateRegistry: Registry<String, String>,
-    private val coroutineScope: CoroutineScope,
     private val maxBreakers: Long = 10_000,
+    private val expireAfterAccess: Duration = 30.minutes,
     private val configSource: CircuitBreakerConfigSource? = null,
+    coroutineScope: CoroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Default), // default
 ) : CircuitBreakerFactory {
 
-    private val creationLocks = ConcurrentHashMap<String, Mutex>()
     private val persistenceScope = CoroutineScope(coroutineScope.coroutineContext + SupervisorJob())
 
-    private companion object {
-        private val logger = KotlinLogging.logger {}
+    private val factory by lazy {
+        AsyncFactoryBuilder.builder<CircuitBreakerConfig, CircuitBreaker<*>>(
+            constructor = { name, config ->
+                createResilience4jBreaker(
+                    name = name,
+                    config = config,
+                    persistence = CircuitBreakerPersistenceContext(stateRegistry, persistenceScope),
+                )
+            },
+            caching = AsyncFactoryCachingConfig(
+                maxSize = maxBreakers,
+                expireAfterAccess = expireAfterAccess,
+                matchesConfig = { existing, newConfig -> existing.config == newConfig },
+                recordStats = true,
+            ),
+            logging = AsyncFactoryLoggingConfig(enabled = true),
+            metrics = null,
+        )
     }
-
-    private val breakers: CoroutineCache<String, CircuitBreaker> =
-        Caffeine
-            .newBuilder()
-            .maximumSize(maxBreakers)
-            .expireAfterAccess(30.minutes.toJavaDuration())
-            .evictionListener(
-                RemovalListener<String, CircuitBreaker> { key, _, _ ->
-                    creationLocks.remove(key)
-                },
-            )
-            .buildCoroutine()
 
     override suspend fun create(
         name: String,
         config: CircuitBreakerConfig,
-    ): CircuitBreaker {
-        val existing = breakers.getIfPresent(name)
-        if (existing != null && existing.config == config) {
-            return existing
-        }
-        if (existing != null) {
-            logger.warn {
-                "CircuitBreaker '$name' already exists with a different configuration — " +
-                        "replacing with the new config. This indicates a config drift that should be fixed."
-            }
-        }
-        val breaker = createResilience4jBreaker(
-            name,
-            config,
-            CircuitBreakerPersistenceContext(stateRegistry, persistenceScope),
-        )
-        breakers.put(name, breaker)
-        return breaker
-    }
+    ): CircuitBreaker<*> = factory.getOrCreate(name, config)
 
-    override suspend fun create(name: String): CircuitBreaker {
+    override suspend fun create(name: String): CircuitBreaker<*> {
         val source = checkNotNull(configSource) {
             "No CircuitBreakerConfigSource configured. " +
                     "Either provide a config source or call create(name, config) with explicit configuration."

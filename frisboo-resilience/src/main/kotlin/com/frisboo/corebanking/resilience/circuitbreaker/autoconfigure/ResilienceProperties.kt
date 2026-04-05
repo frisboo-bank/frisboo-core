@@ -15,8 +15,10 @@
  */
 package com.frisboo.corebanking.resilience.circuitbreaker.autoconfigure
 
+import com.frisboo.corebanking.resilience.circuitbreaker.model.CircuitBreakerConfig
 import com.frisboo.corebanking.resilience.circuitbreaker.model.SlidingWindowType
 import java.time.Duration
+import kotlin.time.toKotlinDuration
 import org.springframework.boot.context.properties.ConfigurationProperties
 
 @ConfigurationProperties(prefix = "frisboo.corebanking.resilience")
@@ -27,19 +29,71 @@ public data class ResilienceProperties(
 
     public data class CircuitBreakerProperties(
         val enabled: Boolean = false,
-        val maxBreakers: Long = 10_000,
-        val failureRateThreshold: Float? = null,
-        val slowCallDurationThreshold: Duration? = null,
-        val slowCallRateThreshold: Float? = null,
-        val waitDurationInOpenState: Duration? = null,
-        val slidingWindowSize: Int? = null,
-        val slidingWindowType: SlidingWindowType? = null,
-        val minimumNumberOfCalls: Int? = null,
-        val permittedNumberOfCallsInHalfOpenState: Int? = null,
-        val maxWaitDurationInHalfOpenState: Duration? = null,
-        val writableStackTraceEnabled: Boolean? = null,
+        val maxBreakers: Long = DEFAULT_MAX_BREAKERS,
+        val failureRateThreshold: Float = DEFAULT_FAILURE_RATE_THRESHOLD,
+        val slowCallDurationThreshold: Duration = DEFAULT_SLOW_CALL_DURATION_THRESHOLD,
+        val slowCallRateThreshold: Float = DEFAULT_SLOW_CALL_RATE_THRESHOLD,
+        val waitDurationInOpenState: Duration = DEFAULT_WAIT_DURATION_IN_OPEN_STATE,
+        val slidingWindowSize: Int = DEFAULT_SLIDING_WINDOW_SIZE,
+        val slidingWindowType: SlidingWindowType = DEFAULT_SLIDING_WINDOW_TYPE,
+        val minimumNumberOfCalls: Int = DEFAULT_MINIMUM_NUMBER_OF_CALLS,
+        val permittedNumberOfCallsInHalfOpenState: Int = DEFAULT_PERMITTED_CALLS_IN_HALF_OPEN,
+        val maxWaitDurationInHalfOpenState: Duration = DEFAULT_MAX_WAIT_DURATION_IN_HALF_OPEN,
+        val writableStackTraceEnabled: Boolean = DEFAULT_WRITABLE_STACK_TRACE_ENABLED,
         val instances: Map<String, CircuitBreakerInstanceProperties> = emptyMap(),
-    )
+    ) {
+        init {
+            require(maxBreakers > 0) { "maxBreakers must be positive, got $maxBreakers" }
+        }
+
+        /**
+         * Resolves the [CircuitBreakerConfig] for the given [name].
+         *
+         * Resolution priority: instance config → global config → hardcoded defaults.
+         * Global fields are always non-null, so an unset instance property
+         * falls through to the global value (which itself defaults to the
+         * hardcoded constant).
+         */
+        public fun resolveConfig(name: String): CircuitBreakerConfig {
+            val instance = instances[name]
+            return CircuitBreakerConfig(
+                failureRateThreshold = instance?.failureRateThreshold
+                    ?: failureRateThreshold,
+                slowCallDurationThreshold = (instance?.slowCallDurationThreshold
+                    ?: slowCallDurationThreshold).toKotlinDuration(),
+                slowCallRateThreshold = instance?.slowCallRateThreshold
+                    ?: slowCallRateThreshold,
+                waitDurationInOpenState = (instance?.waitDurationInOpenState
+                    ?: waitDurationInOpenState).toKotlinDuration(),
+                slidingWindowSize = instance?.slidingWindowSize
+                    ?: slidingWindowSize,
+                slidingWindowType = instance?.slidingWindowType
+                    ?: slidingWindowType,
+                minimumNumberOfCalls = instance?.minimumNumberOfCalls
+                    ?: minimumNumberOfCalls,
+                permittedNumberOfCallsInHalfOpenState = instance?.permittedNumberOfCallsInHalfOpenState
+                    ?: permittedNumberOfCallsInHalfOpenState,
+                maxWaitDurationInHalfOpenState = (instance?.maxWaitDurationInHalfOpenState
+                    ?: maxWaitDurationInHalfOpenState).toKotlinDuration(),
+                writableStackTraceEnabled = instance?.writableStackTraceEnabled
+                    ?: writableStackTraceEnabled,
+            )
+        }
+
+        public companion object {
+            public const val DEFAULT_MAX_BREAKERS: Long = 10_000
+            public const val DEFAULT_FAILURE_RATE_THRESHOLD: Float = 50f
+            public const val DEFAULT_SLOW_CALL_RATE_THRESHOLD: Float = 100f
+            public val DEFAULT_SLOW_CALL_DURATION_THRESHOLD: Duration = Duration.ofSeconds(2)
+            public val DEFAULT_WAIT_DURATION_IN_OPEN_STATE: Duration = Duration.ofSeconds(60)
+            public const val DEFAULT_SLIDING_WINDOW_SIZE: Int = 100
+            public val DEFAULT_SLIDING_WINDOW_TYPE: SlidingWindowType = SlidingWindowType.COUNT_BASED
+            public const val DEFAULT_MINIMUM_NUMBER_OF_CALLS: Int = 10
+            public const val DEFAULT_PERMITTED_CALLS_IN_HALF_OPEN: Int = 10
+            public val DEFAULT_MAX_WAIT_DURATION_IN_HALF_OPEN: Duration = Duration.ZERO
+            public const val DEFAULT_WRITABLE_STACK_TRACE_ENABLED: Boolean = true
+        }
+    }
 
     public data class CircuitBreakerInstanceProperties(
         val failureRateThreshold: Float? = null,

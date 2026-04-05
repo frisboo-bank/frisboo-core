@@ -19,10 +19,10 @@ package com.frisboo.corebanking.resilience.ratelimiter.contracts
  * Read-only metrics view for rate limiter state.
  */
 public interface RateLimiterMetrics {
+    public val availablePermits: Long
+    public val waitingThreads: Long
+    public val successfulCalls: Long
+    public val rejectedCalls: Long
 
-    /** Number of currently available permissions. */
-    public val availablePermissions: Int
-
-    /** Number of threads/coroutines currently waiting for permits. */
-    public val numberOfWaitingThreads: Int
+    public companion object
 }

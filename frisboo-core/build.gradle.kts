@@ -34,6 +34,8 @@ dependencies {
         baseLibs.arrow.kt.core,
         baseLibs.arrow.kt.coroutines,
         baseLibs.bundles.serialization,
+        baseLibs.caffeine,
+        baseLibs.caffeine.coroutines,
         baseLibs.jetbrains.annotations,
         baseLibs.kotlin.logging,
         baseLibs.kotlin.reflect,

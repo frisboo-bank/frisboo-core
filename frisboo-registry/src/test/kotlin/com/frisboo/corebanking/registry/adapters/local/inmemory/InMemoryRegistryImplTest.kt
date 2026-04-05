@@ -180,7 +180,7 @@ internal class InMemoryRegistryImplTest :
             }
         }
 
-        "keys returns only non-expired keys" {
+        "keysPage returns only non-expired keys" {
             runBlocking {
                 val testClock = WrappedTestClock()
                 val registry = InMemoryRegistryImpl<String, String>(scope = scope, clock = testClock)
@@ -189,7 +189,7 @@ internal class InMemoryRegistryImplTest :
                 registry.put("expired", "v2", ttl = 1.seconds) shouldBe PutResult.Created
                 testClock.advanceBy(2.seconds)
 
-                registry.keys() shouldBe setOf("alive")
+                registry.keysPage(null, Int.MAX_VALUE).items.toSet() shouldBe setOf("alive")
             }
         }
 
@@ -255,7 +255,7 @@ internal class InMemoryRegistryImplTest :
 
                 registry.cleanupExpired() shouldBe 2
                 registry.size() shouldBe 1L
-                registry.keys() shouldBe setOf("k3")
+                registry.keysPage(null, Int.MAX_VALUE).items.toSet() shouldBe setOf("k3")
             }
         }
     })

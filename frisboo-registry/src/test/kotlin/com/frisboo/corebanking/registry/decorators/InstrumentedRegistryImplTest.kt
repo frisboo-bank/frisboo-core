@@ -245,7 +245,7 @@ internal class InstrumentedRegistryImplTest :
                 registry.get("k1") shouldBe "v1"
                 registry.contains("k1") shouldBe true
                 registry.size() shouldBe 1L
-                registry.keys() shouldBe setOf("k1")
+                registry.keysPage(null, Int.MAX_VALUE).items.toSet() shouldBe setOf("k1")
             }
         }
     })

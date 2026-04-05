@@ -27,37 +27,44 @@ dependencies {
         baseLibs.arrow.kt.bom,
         baseLibs.kotlin.bom,
         baseLibs.kotlinx.coroutines.bom,
+        baseLibs.spring.boot.bom,
+    ).forEach { api(platform(it)) }
+
+    arrayOf(
         baseLibs.jackson.bom,
         baseLibs.reactor.bom,
-        baseLibs.spring.boot.bom,
         baseLibs.resilience4j.bom,
-    ).forEach { api(platform(it)) }
+    ).forEach { implementation(platform(it)) }
 
     arrayOf(
         baseLibs.arrow.kt.core,
         baseLibs.arrow.kt.coroutines,
+        baseLibs.kotlinx.coroutines.core,
+        baseLibs.spring.boot.autoconfigure,
+    ).forEach { api(it) }
+
+    arrayOf(
         baseLibs.bundles.serialization,
         baseLibs.caffeine,
         baseLibs.caffeine.coroutines,
         baseLibs.jetbrains.annotations,
         baseLibs.kotlin.logging,
         baseLibs.kotlin.reflect,
-        baseLibs.kotlinx.coroutines.core,
         baseLibs.kotlinx.coroutines.debug,
         baseLibs.kotlinx.coroutines.reactor,
         baseLibs.kotlinx.datetime,
         baseLibs.reactor.kotlin.extensions,
         baseLibs.resilience4j.circuitbreaker,
+        baseLibs.resilience4j.ratelimiter,
         baseLibs.resilience4j.kotlin,
-        baseLibs.spring.boot.autoconfigure,
-    ).forEach { api(it) }
+    ).forEach { implementation(it) }
 
     testApi(platform(baseLibs.junit.bom))
     testApi(platform(baseLibs.kotest.bom))
 
     testApi(baseLibs.kotest.property.arbs)
     testApi(baseLibs.kotest.extensions)
-    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test")
+    testImplementation(baseLibs.kotlinx.coroutines.test)
 
     testRuntimeOnly(baseLibs.kotest.runner.junit5)
 }

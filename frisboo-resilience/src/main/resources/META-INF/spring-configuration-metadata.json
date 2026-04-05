@@ -21,52 +21,62 @@
         {
             "name": "frisboo.corebanking.resilience.circuit-breaker.failure-rate-threshold",
             "type": "java.lang.Float",
-            "description": "Default failure rate threshold (1-100) for all instances. Overridable per instance."
+            "description": "Default failure rate threshold (1-100) for all instances. Overridable per instance.",
+            "defaultValue": 50
         },
         {
             "name": "frisboo.corebanking.resilience.circuit-breaker.slow-call-duration-threshold",
             "type": "java.time.Duration",
-            "description": "Default slow call duration threshold for all instances. Overridable per instance."
+            "description": "Default slow call duration threshold for all instances. Overridable per instance.",
+            "defaultValue": "2s"
         },
         {
             "name": "frisboo.corebanking.resilience.circuit-breaker.slow-call-rate-threshold",
             "type": "java.lang.Float",
-            "description": "Default slow call rate threshold (1-100) for all instances. Overridable per instance."
+            "description": "Default slow call rate threshold (1-100) for all instances. Overridable per instance.",
+            "defaultValue": 100
         },
         {
             "name": "frisboo.corebanking.resilience.circuit-breaker.wait-duration-in-open-state",
             "type": "java.time.Duration",
-            "description": "Default wait duration in open state for all instances. Overridable per instance."
+            "description": "Default wait duration in open state for all instances. Overridable per instance.",
+            "defaultValue": "60s"
         },
         {
             "name": "frisboo.corebanking.resilience.circuit-breaker.sliding-window-size",
             "type": "java.lang.Integer",
-            "description": "Default sliding window size (>= 10) for all instances. Overridable per instance."
+            "description": "Default sliding window size (>= 10) for all instances. Overridable per instance.",
+            "defaultValue": 100
         },
         {
             "name": "frisboo.corebanking.resilience.circuit-breaker.sliding-window-type",
             "type": "com.frisboo.corebanking.resilience.circuitbreaker.model.SlidingWindowType",
-            "description": "Default sliding window type (COUNT_BASED or TIME_BASED) for all instances. Overridable per instance."
+            "description": "Default sliding window type (COUNT_BASED or TIME_BASED) for all instances. Overridable per instance.",
+            "defaultValue": "COUNT_BASED"
         },
         {
             "name": "frisboo.corebanking.resilience.circuit-breaker.minimum-number-of-calls",
             "type": "java.lang.Integer",
-            "description": "Default minimum number of calls before evaluating (1..slidingWindowSize). Overridable per instance."
+            "description": "Default minimum number of calls before evaluating (1..slidingWindowSize). Overridable per instance.",
+            "defaultValue": 10
         },
         {
             "name": "frisboo.corebanking.resilience.circuit-breaker.permitted-number-of-calls-in-half-open-state",
             "type": "java.lang.Integer",
-            "description": "Default number of trial calls in half-open state (> 0). Overridable per instance."
+            "description": "Default number of trial calls in half-open state (> 0). Overridable per instance.",
+            "defaultValue": 10
         },
         {
             "name": "frisboo.corebanking.resilience.circuit-breaker.max-wait-duration-in-half-open-state",
             "type": "java.time.Duration",
-            "description": "Default max wait duration in half-open state (>= 0, 0 = infinite). Overridable per instance."
+            "description": "Default max wait duration in half-open state (>= 0, 0 = infinite). Overridable per instance.",
+            "defaultValue": "0s"
         },
         {
             "name": "frisboo.corebanking.resilience.circuit-breaker.writable-stack-trace-enabled",
             "type": "java.lang.Boolean",
-            "description": "Default writable stack trace setting. Overridable per instance."
+            "description": "Default writable stack trace setting. Overridable per instance.",
+            "defaultValue": true
         },
         {
             "name": "frisboo.corebanking.resilience.circuit-breaker.instances",

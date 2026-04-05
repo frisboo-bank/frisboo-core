@@ -221,24 +221,6 @@ public class RedisRegistryImpl<K : Any, V : Any>(
         return if (removed > 0) EvictResult.Evicted else EvictResult.NotFound
     }
 
-    override suspend fun keys(): Set<K> =
-        withTimeout(timeoutMs) {
-            val result = mutableSetOf<K>()
-            var cursor = ScanCursor.of("0")
-            var iterations = 0
-            do {
-                val scan = commands.scan(cursor, codec.scopedScanArgs()).await()
-                scan.keys.forEach { redisKeyBytes ->
-                    if (result.size < MAX_KEYS_RESULT_SIZE) {
-                        result.add(keySerializer.deserialize(codec.stripPrefix(redisKeyBytes)))
-                    }
-                }
-                cursor = scan
-                iterations++
-            } while (!cursor.isFinished && iterations < MAX_SCAN_ITERATIONS && result.size < MAX_KEYS_RESULT_SIZE)
-            result
-        }
-
     override suspend fun keysPage(
         cursor: String?,
         limit: Int,

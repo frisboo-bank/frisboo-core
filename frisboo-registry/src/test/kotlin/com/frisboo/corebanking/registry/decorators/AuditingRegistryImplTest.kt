@@ -174,7 +174,7 @@ internal class AuditingRegistryImplTest :
                 registry.get("existing") shouldBe "value"
                 registry.contains("existing") shouldBe true
                 registry.size() shouldBe 1L
-                registry.keys() shouldBe setOf("existing")
+                registry.keysPage(null, Int.MAX_VALUE).items.toSet() shouldBe setOf("existing")
 
                 captured.size shouldBe 0
             }

@@ -22,6 +22,7 @@ package com.frisboo.corebanking.registry.contracts
  * and must **never** catch it as a recoverable failure. Structured concurrency depends on this.
  */
 public interface ResilienceExecutor {
+
     /**
      * Runs [block]; if it fails, runs [fallback].
      *

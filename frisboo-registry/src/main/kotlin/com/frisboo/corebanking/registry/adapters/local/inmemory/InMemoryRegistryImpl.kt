@@ -127,22 +127,6 @@ public class InMemoryRegistryImpl<K : Any, V : Any>(
             if (removed != null) EvictResult.Evicted else EvictResult.NotFound
         }
 
-    override suspend fun keys(): Set<K> =
-        mutex.withLock {
-            val now = clock.now()
-            val result = mutableSetOf<K>()
-            val iterator = store.entries.iterator()
-            while (iterator.hasNext()) {
-                val (key, entry) = iterator.next()
-                if (isExpired(entry, now)) {
-                    iterator.remove()
-                } else {
-                    result.add(key)
-                }
-            }
-            result
-        }
-
     override suspend fun keysPage(
         cursor: String?,
         limit: Int,

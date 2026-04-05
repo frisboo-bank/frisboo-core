@@ -15,7 +15,6 @@
  */
 package com.frisboo.corebanking.resilience.circuitbreaker.adapters.resilience4j
 
-import com.frisboo.corebanking.registry.contracts.Registry
 import com.frisboo.corebanking.resilience.circuitbreaker.contracts.CircuitBreakerState
 import com.frisboo.corebanking.resilience.circuitbreaker.model.CircuitBreakerConfig
 import com.frisboo.corebanking.resilience.circuitbreaker.model.CircuitBreakerPersistenceContext
@@ -48,31 +47,23 @@ internal suspend fun createResilience4jBreaker(
         }
     }
 
-    restoreState(name, r4jBreaker, stateRegistry)
-
-    return Resilience4jCircuitBreaker(r4jBreaker, config)
-}
-
-private suspend fun restoreState(
-    name: String,
-    breaker: R4jCircuitBreaker,
-    stateRegistry: Registry<String, String>,
-) {
     val lastStateName = try {
         stateRegistry.get(name)
     } catch (e: CancellationException) {
         throw e
     } catch (e: Exception) {
         logger.warn(e) { "Failed to read circuit breaker state for '$name'; starting with default state" }
-        return
+        null
     }
 
     if (lastStateName != null) {
         val state = CircuitBreakerState.fromStateNameOrNull(lastStateName)
-        if (state != null) {
-            breaker.transitionTo(state)
-        } else {
+        if (state == null) {
             logger.warn { "Unknown persisted circuit breaker state '$lastStateName' for '$name'; ignoring" }
+        } else {
+            r4jBreaker.transitionTo(state)
         }
     }
+
+    return Resilience4jCircuitBreaker(r4jBreaker, config)
 }

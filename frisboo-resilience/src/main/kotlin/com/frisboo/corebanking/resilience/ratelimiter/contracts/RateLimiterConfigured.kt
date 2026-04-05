@@ -13,15 +13,8 @@
  * or implied. See the License for the specific language governing
  * permissions and limitations under the License.
  */
-package com.frisboo.corebanking.resilience.circuitbreaker.contracts
+package com.frisboo.corebanking.resilience.ratelimiter.contracts
 
-/**
- * Thrown or passed to fallbacks when the circuit breaker denies a call.
- *
- * @param circuitBreakerName the name of the breaker that rejected the call.
- * @param cause optional underlying implementation-specific exception.
- */
-public class CallNotPermittedException(
-    public val circuitBreakerName: String,
-    cause: Throwable? = null,
-) : RuntimeException("CircuitBreaker '$circuitBreakerName' does not permit calls", cause)
+public interface RateLimiterConfigured<out C : Any> {
+    public val internalConfig: C
+}

@@ -21,6 +21,7 @@ package com.frisboo.corebanking.registry.contracts
  * Adds [isHealthy] for network health probes used by resilience and health-check layers.
  */
 public interface DistributedRegistry<K : Any, V : Any> : Registry<K, V> {
+
     /** Returns `true` if the backing store is reachable and operational. */
     public suspend fun isHealthy(): Boolean
 }

@@ -79,8 +79,6 @@ private class FailingRegistry<K : Any, V : Any> : Registry<K, V> {
 
     override suspend fun evict(key: K): EvictResult = throw RuntimeException("primary down")
 
-    override suspend fun keys(): Set<K> = throw RuntimeException("primary down")
-
     override suspend fun keysPage(
         cursor: String?,
         limit: Int,
@@ -191,7 +189,7 @@ internal class ResilientRegistryImplTest :
             }
         }
 
-        "keys delegates to primary" {
+        "keysPage delegates to primary" {
             runBlocking {
                 val primary = InMemoryRegistryImpl<String, String>(scope)
                 val fallback = InMemoryRegistryImpl<String, String>(scope)
@@ -200,7 +198,7 @@ internal class ResilientRegistryImplTest :
                 primary.put("a", "v1")
                 primary.put("b", "v2")
 
-                registry.keys() shouldBe setOf("a", "b")
+                registry.keysPage(null, Int.MAX_VALUE).items.toSet() shouldBe setOf("a", "b")
             }
         }
 

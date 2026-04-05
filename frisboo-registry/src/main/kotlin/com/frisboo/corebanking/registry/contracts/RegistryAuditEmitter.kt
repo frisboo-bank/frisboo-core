@@ -18,5 +18,10 @@ package com.frisboo.corebanking.registry.contracts
 import com.frisboo.corebanking.registry.models.RegistryAuditEvent
 
 public fun interface RegistryAuditEmitter {
+
+    /**
+     * Emits an audit event related to registry operations.
+     * Implementations may log, send to an audit service, etc.
+     */
     public suspend fun emit(event: RegistryAuditEvent)
 }

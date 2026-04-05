@@ -24,35 +24,11 @@ import com.frisboo.corebanking.resilience.circuitbreaker.model.CircuitBreakerCon
  * an internal registry of created breakers.
  */
 public interface CircuitBreakerFactory {
-    /**
-     * Returns a circuit breaker for the given [name], creating one if none exists.
-     *
-     * This operation is **idempotent by name while the instance is retained** by the
-     * factory. Repeated calls with the same [name] and [config] return the same
-     * [CircuitBreaker] instance as long as the factory has not evicted it. After
-     * eviction (e.g. TTL or capacity pressure), a new instance is created and its
-     * persisted state is restored.
-     *
-     * If called with the same [name] but a **different** [config], the existing
-     * breaker is replaced with a new one using the new configuration and a warning
-     * is logged. This prevents caller crashes while surfacing config drift for
-     * operators to fix.
-     *
-     * @param name unique identifier for the circuit breaker.
-     * @param config the configuration parameters.
-     * @return the [CircuitBreaker] for [name] (possibly cached).
-     */
+
     public suspend fun create(
         name: String,
         config: CircuitBreakerConfig,
-    ): CircuitBreaker
+    ): CircuitBreaker<*>
 
-    /**
-     * Returns a circuit breaker for the given [name], resolving configuration
-     * from the factory's [CircuitBreakerConfigSource].
-     *
-     * @throws IllegalStateException if no config source is configured or the
-     *   source returns `null` for [name].
-     */
-    public suspend fun create(name: String): CircuitBreaker
+    public suspend fun create(name: String): CircuitBreaker<*>
 }
