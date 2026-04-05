@@ -27,6 +27,7 @@ import io.github.resilience4j.ratelimiter.RateLimiter as R4jRateLimiter
 import io.github.resilience4j.ratelimiter.RateLimiterConfig as R4jRateLimiterConfig
 import io.github.resilience4j.ratelimiter.RequestNotPermitted
 import java.util.concurrent.atomic.AtomicLong
+import kotlin.coroutines.cancellation.CancellationException
 
 internal class Resilience4jRateLimiter(
     private val delegate: R4jRateLimiter,
@@ -53,6 +54,12 @@ internal class Resilience4jRateLimiter(
         } catch (_: RequestNotPermitted) {
             recordRejection()
             RateLimiterResult.Rejected(RateLimiterError.LimitExceeded(requestedPermits = 1))
+        } catch (ce: CancellationException) {
+            throw ce
+        } catch (vme: VirtualMachineError) {
+            throw vme
+        } catch (error: Error) {
+            throw error
         } catch (throwable: Throwable) {
             RateLimiterResult.Failure(throwable)
         }
@@ -70,6 +77,12 @@ internal class Resilience4jRateLimiter(
         } catch (_: RequestNotPermitted) {
             recordRejection()
             RateLimiterError.LimitExceeded(requestedPermits = permits).left()
+        } catch (ce: CancellationException) {
+            throw ce
+        } catch (vme: VirtualMachineError) {
+            throw vme
+        } catch (error: Error) {
+            throw error
         } catch (throwable: Throwable) {
             RateLimiterError.Unavailable(
                 reason = throwable.message ?: "Rate limiter backend unavailable",

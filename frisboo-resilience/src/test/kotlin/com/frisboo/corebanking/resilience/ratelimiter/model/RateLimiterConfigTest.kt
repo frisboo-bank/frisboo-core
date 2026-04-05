@@ -23,15 +23,17 @@ import io.kotest.property.Arb
 import io.kotest.property.arbitrary.int
 import io.kotest.property.arbitrary.long
 import io.kotest.property.checkAll
-import java.time.Duration
+import kotlin.time.Duration
+import kotlin.time.Duration.Companion.milliseconds
+import kotlin.time.Duration.Companion.seconds
 
 internal class RateLimiterConfigTest : StringSpec(
     {
 
         fun validBaseConfig() = RateLimiterConfig(
             limitForPeriod = 50,
-            limitRefreshPeriod = Duration.ofSeconds(1),
-            timeoutDuration = Duration.ofMillis(500),
+            limitRefreshPeriod = 1.seconds,
+            timeoutDuration = 500.milliseconds,
         )
 
         "rejects limitForPeriod <= 0" {
@@ -45,7 +47,7 @@ internal class RateLimiterConfigTest : StringSpec(
         "rejects non-positive limitRefreshPeriod" {
             checkAll(Arb.long(-1_000, 0)) { badMs ->
                 shouldThrow<IllegalArgumentException> {
-                    validBaseConfig().copy(limitRefreshPeriod = Duration.ofMillis(badMs))
+                    validBaseConfig().copy(limitRefreshPeriod = badMs.milliseconds)
                 }
             }
         }
@@ -53,7 +55,7 @@ internal class RateLimiterConfigTest : StringSpec(
         "rejects negative timeoutDuration" {
             checkAll(Arb.long(-1_000, -1)) { badMs ->
                 shouldThrow<IllegalArgumentException> {
-                    validBaseConfig().copy(timeoutDuration = Duration.ofMillis(badMs))
+                    validBaseConfig().copy(timeoutDuration = badMs.milliseconds)
                 }
             }
         }

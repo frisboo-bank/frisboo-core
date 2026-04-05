@@ -50,7 +50,7 @@ internal class RateLimiterFactoryImplTest : StringSpec(
                     serviceNameArb,
                     createRateLimiterConfigArb(),
                 ) { name: String, config: RateLimiterConfig ->
-                    val factory = RateLimiterFactoryImpl(testRegistry(), scope)
+                    val factory = RateLimiterFactoryImpl(testRegistry(), coroutineScope = scope)
 
                     val first = factory.create(name, config)
                     val second = factory.create(name, config)
@@ -68,7 +68,7 @@ internal class RateLimiterFactoryImplTest : StringSpec(
                     createRateLimiterConfigArb(),
                     createRateLimiterConfigArb(),
                 ) { name: String, configA: RateLimiterConfig, configB: RateLimiterConfig ->
-                    val factory = RateLimiterFactoryImpl(testRegistry(), scope)
+                    val factory = RateLimiterFactoryImpl(testRegistry(), coroutineScope = scope)
 
                     val first = factory.create(name, configA)
                     val second = factory.create(name, configB)
@@ -88,7 +88,7 @@ internal class RateLimiterFactoryImplTest : StringSpec(
                 ) { name1, name2, config ->
                     if (name1 == name2) return@checkAll
 
-                    val factory = RateLimiterFactoryImpl(testRegistry(), scope)
+                    val factory = RateLimiterFactoryImpl(testRegistry(), coroutineScope = scope)
 
                     val a = factory.create(name1, config)
                     val b = factory.create(name2, config)
@@ -122,7 +122,7 @@ internal class RateLimiterFactoryImplTest : StringSpec(
             runTest {
                 val scope = this
                 checkAll(serviceNameArb) { name ->
-                    val factory = RateLimiterFactoryImpl(testRegistry(), scope)
+                    val factory = RateLimiterFactoryImpl(testRegistry(), coroutineScope = scope)
                     val exception = shouldThrow<IllegalStateException> {
                         factory.create(name)
                     }
@@ -155,7 +155,7 @@ internal class RateLimiterFactoryImplTest : StringSpec(
                 checkAll(serviceNameArb, createRateLimiterConfigArb()) { name, config ->
                     val factory = RateLimiterFactoryImpl(
                         testRegistry(),
-                        scope,
+                        coroutineScope = scope,
                     )
                     val results = withContext(Dispatchers.Default) {
                         (1..50).map {

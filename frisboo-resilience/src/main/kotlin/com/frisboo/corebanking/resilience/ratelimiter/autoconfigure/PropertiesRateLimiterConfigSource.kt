@@ -13,16 +13,16 @@
  * or implied. See the License for the specific language governing
  * permissions and limitations under the License.
  */
-package com.frisboo.corebanking.core.factory.adapters
+package com.frisboo.corebanking.resilience.ratelimiter.autoconfigure
 
-import com.frisboo.corebanking.core.factory.adapters.caffeine.CaffeineFactoryCache
-import com.frisboo.corebanking.core.factory.contracts.FactoryCache
-import kotlin.time.Duration
+import com.frisboo.corebanking.resilience.circuitbreaker.autoconfigure.ResilienceProperties
+import com.frisboo.corebanking.resilience.ratelimiter.contracts.RateLimiterConfigSource
+import com.frisboo.corebanking.resilience.ratelimiter.model.RateLimiterConfig
 
-internal object AsyncCacheFactory {
-    fun <K : Any, V : Any> createCaffeine(
-        maxSize: Long,
-        expireAfterAccess: Duration,
-        recordStats: Boolean = true,
-    ): FactoryCache<K, V> = CaffeineFactoryCache(maxSize, expireAfterAccess, recordStats)
+internal class PropertiesRateLimiterConfigSource(
+    private val properties: ResilienceProperties,
+) : RateLimiterConfigSource {
+
+    override fun resolve(name: String): RateLimiterConfig =
+        properties.rateLimiter.resolveConfig(name)
 }

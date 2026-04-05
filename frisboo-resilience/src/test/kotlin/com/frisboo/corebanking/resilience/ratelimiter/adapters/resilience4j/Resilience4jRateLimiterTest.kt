@@ -33,7 +33,8 @@ import io.kotest.property.arbitrary.string
 import io.kotest.property.checkAll
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.test.runTest
-import java.time.Duration
+import kotlin.time.Duration.Companion.seconds
+import kotlin.time.toJavaDuration
 import io.github.resilience4j.ratelimiter.RateLimiterConfig as R4jRateLimiterConfig
 
 internal class Resilience4jRateLimiterTest : StringSpec(
@@ -86,8 +87,8 @@ internal class Resilience4jRateLimiterTest : StringSpec(
                 val testScope = this
                 val config = RateLimiterConfig(
                     limitForPeriod = 1,
-                    limitRefreshPeriod = Duration.ofSeconds(60),
-                    timeoutDuration = Duration.ZERO,
+                    limitRefreshPeriod = 60.seconds,
+                    timeoutDuration = kotlin.time.Duration.ZERO,
                 )
                 val rl = createLimiter("exhaust-test", config, scope = testScope)
 
@@ -105,8 +106,8 @@ internal class Resilience4jRateLimiterTest : StringSpec(
                 val testScope = this
                 val config = RateLimiterConfig(
                     limitForPeriod = 1,
-                    limitRefreshPeriod = Duration.ofSeconds(60),
-                    timeoutDuration = Duration.ZERO,
+                    limitRefreshPeriod = 60.seconds,
+                    timeoutDuration = kotlin.time.Duration.ZERO,
                 )
                 val rl = createLimiter("acquire-test", config, scope = testScope)
 
@@ -124,8 +125,8 @@ internal class Resilience4jRateLimiterTest : StringSpec(
                 val testScope = this
                 val config = RateLimiterConfig(
                     limitForPeriod = 10,
-                    limitRefreshPeriod = Duration.ofSeconds(60),
-                    timeoutDuration = Duration.ZERO,
+                    limitRefreshPeriod = 60.seconds,
+                    timeoutDuration = kotlin.time.Duration.ZERO,
                 )
                 val rl = createLimiter("metrics-test", config, scope = testScope)
 
@@ -154,8 +155,8 @@ internal class Resilience4jRateLimiterTest : StringSpec(
                     val internal = rl.internalConfig
                     internal.shouldBeInstanceOf<R4jRateLimiterConfig>()
                     internal.limitForPeriod shouldBe config.limitForPeriod
-                    internal.limitRefreshPeriod shouldBe config.limitRefreshPeriod
-                    internal.timeoutDuration shouldBe config.timeoutDuration
+                    internal.limitRefreshPeriod shouldBe config.limitRefreshPeriod.toJavaDuration()
+                    internal.timeoutDuration shouldBe config.timeoutDuration.toJavaDuration()
                 }
             }
         }

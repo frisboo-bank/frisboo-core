@@ -15,27 +15,23 @@
  */
 package com.frisboo.corebanking.resilience.ratelimiter.model
 
-import java.time.Duration
+import kotlin.time.Duration
 
-/**
- * Configuration for a rate limiter instance.
- *
- * @property limitForPeriod maximum number of permits available in one period.
- * @property limitRefreshPeriod duration of one period after which permits are refreshed.
- * @property timeoutDuration maximum time a thread will wait for a permit.
- */
 public data class RateLimiterConfig(
     val limitForPeriod: Int,
     val limitRefreshPeriod: Duration,
     val timeoutDuration: Duration,
 ) {
     init {
-        require(limitForPeriod > 0) { "limitForPeriod must be positive, got $limitForPeriod" }
-        require(!limitRefreshPeriod.isNegative && !limitRefreshPeriod.isZero) {
-            "limitRefreshPeriod must be positive"
-        }
-        require(!timeoutDuration.isNegative) {
-            "timeoutDuration must not be negative"
-        }
+        require(
+            limitForPeriod in MIN_LIMIT_FOR_PERIOD..MAX_LIMIT_FOR_PERIOD,
+        ) { "limitForPeriod must be in $MIN_LIMIT_FOR_PERIOD..$MAX_LIMIT_FOR_PERIOD, got $limitForPeriod" }
+        require(limitRefreshPeriod.isPositive()) { "limitRefreshPeriod must be positive" }
+        require(!timeoutDuration.isNegative()) { "timeoutDuration must not be negative" }
+    }
+
+    public companion object {
+        public const val MIN_LIMIT_FOR_PERIOD: Int = 1
+        public const val MAX_LIMIT_FOR_PERIOD: Int = 1_000_000
     }
 }
