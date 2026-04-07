@@ -18,7 +18,6 @@ plugins {
     id("kotlin-conventions")
     id("quality-conventions")
     alias(baseLibs.plugins.dokka)
-    alias(baseLibs.plugins.maven.publish)
     alias(baseLibs.plugins.kover)
 }
 
@@ -29,26 +28,28 @@ dokka {
 }
 
 dependencies {
-    dokka(projects.core.frisbooAuth)
-    dokka(projects.core.frisbooConfig)
-    dokka(projects.core.frisbooCore)
-    dokka(projects.core.frisbooCoordination)
-    dokka(projects.core.frisbooCrypto)
-    dokka(projects.core.frisbooData)
-    dokka(projects.core.frisbooGrpc)
-    dokka(projects.core.frisbooHttp)
-    dokka(projects.core.frisbooMessaging)
-    dokka(projects.core.frisbooObservability)
-    dokka(projects.core.frisbooPersistence)
-    dokka(projects.core.frisbooQuota)
-    dokka(projects.core.frisbooResilience)
-    dokka(projects.core.frisbooTests)
+    dokka(project(":frisboo-auth"))
+    dokka(project(":frisboo-config"))
+    dokka(project(":frisboo-coordination"))
+    dokka(project(":frisboo-core"))
+    dokka(project(":frisboo-crypto"))
+    dokka(project(":frisboo-data"))
+    dokka(project(":frisboo-grpc"))
+    dokka(project(":frisboo-http"))
+    dokka(project(":frisboo-messaging"))
+    dokka(project(":frisboo-observability"))
+    dokka(project(":frisboo-persistence"))
+    dokka(project(":frisboo-quota"))
+    dokka(project(":frisboo-resilience"))
+    dokka(project(":frisboo-registry"))
+    dokka(project(":frisboo-tests"))
 
     kover(project(":frisboo-auth"))
     kover(project(":frisboo-config"))
-    kover(project(":frisboo-core"))
     kover(project(":frisboo-coordination"))
+    kover(project(":frisboo-core"))
     kover(project(":frisboo-crypto"))
+    kover(project(":frisboo-data"))
     kover(project(":frisboo-grpc"))
     kover(project(":frisboo-http"))
     kover(project(":frisboo-messaging"))
@@ -56,25 +57,21 @@ dependencies {
     kover(project(":frisboo-persistence"))
     kover(project(":frisboo-quota"))
     kover(project(":frisboo-resilience"))
-    kover(project(":frisboo-tests"))
+    kover(project(":frisboo-registry"))
 }
 
-allprojects {
-    if (this == rootProject) {
-        return@allprojects
-    }
-
-    apply(plugin = "com.vanniktech.maven.publish")
-
-    this@allprojects.publishing {
-        repositories {
-            maven {
-                name = "FrisbooGitHubPackages"
-                url = uri("https://maven.pkg.github.com/jolafrite/frisboo-core-banking")
-                credentials {
-                    username =
-                        project.findProperty("frisboo.gpr.user") as String? ?: System.getenv("FRISBOO_GPR_USERNAME")
-                    password = project.findProperty("frisboo.gpr.key") as String? ?: System.getenv("FRISBOO_GPR_TOKEN")
+subprojects {
+    pluginManager.withPlugin("maven-publish") {
+        extensions.configure<PublishingExtension> {
+            repositories {
+                maven {
+                    name = "FrisbooGitHubPackages"
+                    url = uri("https://maven.pkg.github.com/jolafrite/frisboo-core-banking")
+                    credentials {
+                        username =
+                            project.findProperty("frisboo.gpr.user") as String? ?: System.getenv("FRISBOO_GPR_USERNAME")
+                        password = project.findProperty("frisboo.gpr.key") as String? ?: System.getenv("FRISBOO_GPR_TOKEN")
+                    }
                 }
             }
         }

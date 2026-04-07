@@ -124,7 +124,7 @@ internal class EncryptingSerializerImplTest :
 private class Utf8StringSerializer : RegistrySerializer<String> {
     override fun serialize(value: String): ByteArray = value.toByteArray(Charsets.UTF_8)
 
-    override fun deserialize(data: ByteArray): String = data.toString(Charsets.UTF_8)
+    override fun deserialize(value: ByteArray): String = value.toString(Charsets.UTF_8)
 }
 
 private class RecordingStringSerializer : RegistrySerializer<String> {
@@ -136,9 +136,9 @@ private class RecordingStringSerializer : RegistrySerializer<String> {
         return value.toByteArray(Charsets.UTF_8)
     }
 
-    override fun deserialize(data: ByteArray): String {
-        deserializeInputs.add(data)
-        return data.toString(Charsets.UTF_8)
+    override fun deserialize(value: ByteArray): String {
+        deserializeInputs.add(value)
+        return value.toString(Charsets.UTF_8)
     }
 }
 

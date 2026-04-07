@@ -21,40 +21,37 @@ plugins {
 }
 
 dependencies {
-    arrayOf(
-        baseLibs.arrow.kt.bom,
-        baseLibs.kotlin.bom,
-        baseLibs.kotlinx.coroutines.bom,
-        baseLibs.jackson.bom,
-        baseLibs.reactor.bom,
-        baseLibs.spring.boot.bom,
-    ).forEach { api(platform(it)) }
+    api(platform(baseLibs.arrow.kt.bom))
+    api(platform(baseLibs.kotlin.bom))
+    api(platform(baseLibs.kotlinx.coroutines.bom))
+    api(platform(baseLibs.jackson.bom))
+    api(platform(baseLibs.reactor.bom))
+    api(platform(baseLibs.spring.boot.bom))
 
-    arrayOf(
-        baseLibs.arrow.kt.core,
-        baseLibs.arrow.kt.coroutines,
-        baseLibs.bundles.serialization,
-        baseLibs.caffeine,
-        baseLibs.caffeine.coroutines,
-        baseLibs.jetbrains.annotations,
-        baseLibs.kotlin.logging,
-        baseLibs.kotlin.reflect,
-        baseLibs.kotlinx.coroutines.core,
-        baseLibs.kotlinx.coroutines.debug,
-        baseLibs.kotlinx.coroutines.reactor,
-        baseLibs.kotlinx.datetime,
-        baseLibs.reactor.kotlin.extensions,
-        baseLibs.spring.boot.autoconfigure,
-    ).forEach { api(it) }
+    api(baseLibs.arrow.kt.core)
+    api(baseLibs.arrow.kt.coroutines)
+    api(baseLibs.bundles.serialization)
+    api(baseLibs.caffeine)
+    api(baseLibs.caffeine.coroutines)
+    api(baseLibs.jetbrains.annotations)
+    api(baseLibs.kotlin.logging)
+    api(baseLibs.kotlin.reflect)
+    api(baseLibs.kotlinx.coroutines.core)
+    api(baseLibs.kotlinx.coroutines.debug)
+    api(baseLibs.kotlinx.coroutines.reactor)
+    api(baseLibs.kotlinx.datetime)
+    api(baseLibs.reactor.kotlin.extensions)
+    api(baseLibs.spring.boot.autoconfigure)
 
-    testApi(platform(baseLibs.junit.bom))
-    testApi(platform(baseLibs.kotest.bom))
-
-    testApi(baseLibs.kotest.property.arbs)
+    testImplementation(platform(baseLibs.junit.bom))
+    testImplementation(platform(baseLibs.kotest.bom))
+    testImplementation(baseLibs.kotest.assertions.core)
+    testImplementation(baseLibs.kotest.property.arbs)
+    testImplementation(baseLibs.kotlin.test.junit5)
 
     testRuntimeOnly(baseLibs.kotest.runner.junit5)
 }
 
-tasks.test {
+tasks.withType<Test> {
     useJUnitPlatform()
 }

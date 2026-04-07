@@ -15,6 +15,12 @@
  */
 package com.frisboo.corebanking.registry.contracts
 
+import arrow.core.Either
+import com.frisboo.corebanking.registry.errors.RegistryError
+import com.frisboo.corebanking.registry.models.RegistryContainsResult
+import com.frisboo.corebanking.registry.models.RegistryGetResult
+import com.frisboo.corebanking.registry.models.RegistrySizeResult
+
 /**
  * Read-only operations on a scoped registry.
  *
@@ -25,15 +31,15 @@ public interface RegistryReader<K : Any, V : Any> {
     /**
      * Returns the value associated with [key], or `null` if absent or expired.
      */
-    public suspend fun get(key: K): V?
+    public suspend fun get(key: K): Either<RegistryError, RegistryGetResult<V?>>
 
     /**
      * Returns `true` if the registry contains a non-expired entry for [key].
      */
-    public suspend fun contains(key: K): Boolean
+    public suspend fun contains(key: K): Either<RegistryError, RegistryContainsResult>
 
     /**
      * Returns the number of non-expired entries; O(N) SCAN on distributed implementations.
      */
-    public suspend fun size(): Long
+    public suspend fun size(): Either<RegistryError, RegistrySizeResult>
 }

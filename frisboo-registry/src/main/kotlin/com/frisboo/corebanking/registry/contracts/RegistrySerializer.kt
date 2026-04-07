@@ -15,21 +15,12 @@
  */
 package com.frisboo.corebanking.registry.contracts
 
+import com.frisboo.corebanking.persistence.core.contracts.PersistenceSerializer
+
 /**
  * Bidirectional serializer for registry keys and values.
  *
  * Implementations may apply transformations such as encryption (AES-GCM)
  * as required by the security policy for sensitive data classifications.
  */
-public interface RegistrySerializer<T> {
-
-    /**
-     * Serializes the given value to a byte array
-     */
-    public fun serialize(value: T): ByteArray
-
-    /**
-     * Deserializes the given byte array back to the original value
-     */
-    public fun deserialize(data: ByteArray): T
-}
+public typealias RegistrySerializer<T> = PersistenceSerializer<T>

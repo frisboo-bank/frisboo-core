@@ -15,14 +15,15 @@
  */
 package com.frisboo.corebanking.registry.models
 
-import com.frisboo.corebanking.registry.errors.RegistryError
+public sealed interface RegistryEvictResult {
 
-public sealed interface SetTtlResult {
-    public data object Applied : SetTtlResult
+    public val count: Long
 
-    public data object KeyNotFound : SetTtlResult
+    public data class Evicted(
+        override val count: Long,
+    ) : RegistryEvictResult
 
-    public data class Failed(
-        public val error: RegistryError,
-    ) : SetTtlResult
+    public data object NotFound : RegistryEvictResult {
+        override val count: Long = 0L
+    }
 }

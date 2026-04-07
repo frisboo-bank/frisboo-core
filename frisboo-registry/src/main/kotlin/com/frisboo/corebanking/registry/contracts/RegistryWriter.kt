@@ -15,10 +15,11 @@
  */
 package com.frisboo.corebanking.registry.contracts
 
+import arrow.core.Either
 import com.frisboo.corebanking.registry.errors.RegistryError
-import com.frisboo.corebanking.registry.models.EvictResult
-import com.frisboo.corebanking.registry.models.GetOrPutResult
-import com.frisboo.corebanking.registry.models.PutResult
+import com.frisboo.corebanking.registry.models.RegistryEvictResult
+import com.frisboo.corebanking.registry.models.RegistryGetOrPutResult
+import com.frisboo.corebanking.registry.models.RegistryPutResult
 import kotlin.time.Duration
 
 /**
@@ -31,40 +32,40 @@ public interface RegistryWriter<K : Any, V : Any> {
     /**
      * Stores [value] under [key] with an optional time-to-live.
      *
-     * @return [PutResult.Created] if the key was new, [PutResult.Updated] if overwritten,
-     *         or [PutResult.Failed] with [RegistryError.InvalidTtl] if [ttl] is not positive
+     * @return [RegistryPutResult.Created] if the key was new, [RegistryPutResult.Updated] if overwritten,
+     *         or [RegistryPutResult.Failed] with [RegistryError.InvalidTtl] if [ttl] is not positive
      *         (distributed implementations require [ttl] >= 1ms).
      */
     public suspend fun put(
         key: K,
         value: V,
         ttl: Duration? = null,
-    ): PutResult
+    ): Either<RegistryError, RegistryPutResult<V?>>
 
     /**
      * Returns the value for [key] if present; otherwise invokes [factory],
      * stores the result with an optional [ttl], and returns it.
      *
-     * The result carries an explicit outcome signal ([GetOrPutResult.Created] vs
-     * [GetOrPutResult.Found]) enabling accurate audit trails without racy pre-checks.
+     * The result carries an explicit outcome signal ([RegistryGetOrPutResult.Created] vs
+     * [RegistryGetOrPutResult.Found]) enabling accurate audit trails without racy pre-checks.
      *
      * Implementations may invoke [factory] speculatively under concurrent races;
      * callers must ensure [factory] is safe to call more than once.
      *
-     * @return [GetOrPutResult.Created] if the factory was invoked and a new entry stored,
-     *         [GetOrPutResult.Found] if an existing entry was returned, or
-     *         [GetOrPutResult.Failed] with [RegistryError.InvalidTtl] if [ttl] is invalid.
+     * @return [RegistryGetOrPutResult.Created] if the factory was invoked and a new entry stored,
+     *         [RegistryGetOrPutResult.Found] if an existing entry was returned, or
+     *         [RegistryGetOrPutResult.Failed] with [RegistryError.InvalidTtl] if [ttl] is invalid.
      */
     public suspend fun getOrPut(
         key: K,
         ttl: Duration? = null,
         factory: suspend () -> V,
-    ): GetOrPutResult<V>
+    ): Either<RegistryError, RegistryGetOrPutResult<V>>
 
     /**
      * Removes the entry for [key].
      *
-     * @return [EvictResult.Evicted] if removed, [EvictResult.NotFound] if absent.
+     * @return [RegistryEvictResult.Evicted] if removed, [RegistryEvictResult.NotFound] if absent.
      */
-    public suspend fun evict(key: K): EvictResult
+    public suspend fun evict(key: K): Either<RegistryError, RegistryEvictResult>
 }

@@ -16,7 +16,7 @@
 package com.frisboo.corebanking.persistence.exposed.extensions
 
 import arrow.core.Either
-import com.frisboo.corebanking.persistence.errors.PersistenceError
+import com.frisboo.corebanking.persistence.core.errors.PersistenceError
 import com.frisboo.corebanking.persistence.exposed.abstracts.BaseTable
 import io.kotest.assertions.arrow.core.shouldBeLeft
 import io.kotest.assertions.arrow.core.shouldBeRight

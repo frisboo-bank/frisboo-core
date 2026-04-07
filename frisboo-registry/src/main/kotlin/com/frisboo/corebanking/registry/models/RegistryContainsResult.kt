@@ -15,14 +15,9 @@
  */
 package com.frisboo.corebanking.registry.models
 
-import com.frisboo.corebanking.registry.errors.RegistryError
+public sealed interface RegistryContainsResult {
 
-public sealed interface PutResult {
-    public data object Created : PutResult
+    public data object Found : RegistryContainsResult
 
-    public data object Updated : PutResult
-
-    public data class Failed(
-        public val error: RegistryError,
-    ) : PutResult
+    public data object NotFound : RegistryContainsResult
 }

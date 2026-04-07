@@ -18,7 +18,7 @@ package com.frisboo.corebanking.persistence.exposed.extensions
 import arrow.core.Either
 import arrow.core.left
 import arrow.core.right
-import com.frisboo.corebanking.persistence.errors.PersistenceError
+import com.frisboo.corebanking.persistence.core.errors.PersistenceError
 import org.jetbrains.exposed.v1.core.Column
 import org.jetbrains.exposed.v1.core.Op
 import org.jetbrains.exposed.v1.core.Table

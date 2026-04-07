@@ -4,7 +4,8 @@ enableFeaturePreview("STABLE_CONFIGURATION_CACHE")
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 
-@Suppress("UnstableApiUsage") dependencyResolutionManagement {
+@Suppress("UnstableApiUsage")
+dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         mavenCentral()
@@ -22,7 +23,7 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
     versionCatalogs {
         create("baseLibs") {
-            from("com.frisboo.corebanking:version-catalog:0.0.1-alpha1")
+            from("com.frisboo.corebanking:version-catalog:0.0.1-alpha.1-SNAPSHOT")
         }
     }
 }

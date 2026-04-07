@@ -15,9 +15,10 @@
  */
 package com.frisboo.corebanking.registry.contracts
 
+import arrow.core.Either
 import com.frisboo.corebanking.registry.errors.RegistryError
 import com.frisboo.corebanking.registry.models.RegistryPage
-import com.frisboo.corebanking.registry.models.SetTtlResult
+import com.frisboo.corebanking.registry.models.RegistrySetTtlResult
 import kotlin.time.Duration
 
 /**
@@ -31,14 +32,14 @@ public interface RegistryAdmin<K : Any, V : Any> {
      * @param cursor opaque cursor from a previous page, or `null` for the first page.
      * @param limit maximum number of keys to return.
      */
-    public suspend fun keysPage(cursor: String?, limit: Int): RegistryPage<K>
+    public suspend fun keysPage(cursor: String?, limit: Int): Either<RegistryError, RegistryPage<K>>
 
     /**
      * Updates the time-to-live for an existing [key].
      *
-     * @return [SetTtlResult.Applied] on success, [SetTtlResult.KeyNotFound] if absent,
-     *         or [SetTtlResult.Failed] with [RegistryError.InvalidTtl] if [ttl] is not positive
+     * @return [RegistrySetTtlResult.Applied] on success, [RegistrySetTtlResult.NotFound] if absent,
+     *         or [RegistrySetTtlResult.Failed] with [RegistryError.InvalidTtl] if [ttl] is not positive
      *         (distributed implementations require [ttl] >= 1ms).
      */
-    public suspend fun setTTL(key: K, ttl: Duration): SetTtlResult
+    public suspend fun setTTL(key: K, ttl: Duration): Either<RegistryError, RegistrySetTtlResult>
 }

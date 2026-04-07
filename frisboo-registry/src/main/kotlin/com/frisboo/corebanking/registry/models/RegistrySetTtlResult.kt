@@ -16,18 +16,10 @@
 package com.frisboo.corebanking.registry.models
 
 import com.frisboo.corebanking.registry.errors.RegistryError
-import kotlin.time.Duration
-import kotlin.time.Duration.Companion.ZERO
 
-/**
- * Validates that [ttl] is positive (> 0). Returns null if valid, or [RegistryError.InvalidTtl] if not.
- */
-internal fun validateTtl(ttl: Duration): RegistryError.InvalidTtl? =
-    if (ttl <= ZERO) RegistryError.InvalidTtl(message = "TTL must be positive, got: $ttl") else null
+public sealed interface RegistrySetTtlResult {
 
-/**
- * Validates optional [ttl] for write operations. Returns null if valid (including null ttl),
- * or [RegistryError.InvalidTtl] if ttl is non-null and not positive.
- */
-internal fun validateOptionalTtl(ttl: Duration?): RegistryError.InvalidTtl? =
-    if (ttl != null) validateTtl(ttl) else null
+    public data object Applied : RegistrySetTtlResult
+
+    public data object NotFound : RegistrySetTtlResult
+}

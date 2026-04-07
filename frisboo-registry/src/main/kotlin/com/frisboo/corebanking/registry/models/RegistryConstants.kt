@@ -15,4 +15,8 @@
  */
 package com.frisboo.corebanking.registry.models
 
-internal const val MAX_PAGE_SIZE: Int = 1000
+import kotlin.time.Duration
+import kotlin.time.Duration.Companion.seconds
+
+internal val REGISTRY_DEFAULT_OPERATION_TIMEOUT: Duration = 30.seconds
+internal const val REGISTRY_DEFAULT_MAX_PAGE_SIZE: Int = 1000

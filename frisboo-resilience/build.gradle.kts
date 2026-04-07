@@ -20,50 +20,23 @@ plugins {
 }
 
 dependencies {
-    api(project(":frisboo-core"))
-    api(project(":frisboo-registry"))
+    implementation(project(":frisboo-core"))
+    implementation(project(":frisboo-registry"))
 
-    arrayOf(
-        baseLibs.arrow.kt.bom,
-        baseLibs.kotlin.bom,
-        baseLibs.kotlinx.coroutines.bom,
-        baseLibs.spring.boot.bom,
-    ).forEach { api(platform(it)) }
+    implementation(platform(baseLibs.resilience4j.bom))
 
-    arrayOf(
-        baseLibs.jackson.bom,
-        baseLibs.reactor.bom,
-        baseLibs.resilience4j.bom,
-    ).forEach { implementation(platform(it)) }
+    implementation(baseLibs.resilience4j.circuitbreaker)
+    implementation(baseLibs.resilience4j.ratelimiter)
+    implementation(baseLibs.resilience4j.kotlin)
 
-    arrayOf(
-        baseLibs.arrow.kt.core,
-        baseLibs.arrow.kt.coroutines,
-        baseLibs.kotlinx.coroutines.core,
-        baseLibs.spring.boot.autoconfigure,
-    ).forEach { api(it) }
+    testImplementation(platform(baseLibs.junit.bom))
+    testImplementation(platform(baseLibs.kotest.bom))
 
-    arrayOf(
-        baseLibs.bundles.serialization,
-        baseLibs.caffeine,
-        baseLibs.caffeine.coroutines,
-        baseLibs.jetbrains.annotations,
-        baseLibs.kotlin.logging,
-        baseLibs.kotlin.reflect,
-        baseLibs.kotlinx.coroutines.debug,
-        baseLibs.kotlinx.coroutines.reactor,
-        baseLibs.kotlinx.datetime,
-        baseLibs.reactor.kotlin.extensions,
-        baseLibs.resilience4j.circuitbreaker,
-        baseLibs.resilience4j.ratelimiter,
-        baseLibs.resilience4j.kotlin,
-    ).forEach { implementation(it) }
-
-    testApi(platform(baseLibs.junit.bom))
-    testApi(platform(baseLibs.kotest.bom))
-
-    testApi(baseLibs.kotest.property.arbs)
-    testApi(baseLibs.kotest.extensions)
+    testImplementation(project(":frisboo-tests"))
+    testImplementation(baseLibs.kotest.property.arbs)
+    testImplementation(baseLibs.kotest.extensions)
+    testImplementation(baseLibs.kotest.assertions.core)
+    testImplementation(baseLibs.kotest.assertions.arrow)
     testImplementation(baseLibs.kotlinx.coroutines.test)
 
     testRuntimeOnly(baseLibs.kotest.runner.junit5)

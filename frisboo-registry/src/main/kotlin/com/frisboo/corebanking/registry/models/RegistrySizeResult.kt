@@ -13,11 +13,11 @@
  * or implied. See the License for the specific language governing
  * permissions and limitations under the License.
  */
-package com.frisboo.corebanking.registry.adapters.local.inmemory
+package com.frisboo.corebanking.registry.models
 
-import kotlin.time.Instant
+public sealed interface RegistrySizeResult {
 
-internal data class InMemoryEntry<V>(
-    val value: V,
-    val expiresAt: Instant?,
-)
+    public data class Size(
+        val count: Long,
+    ) : RegistrySizeResult
+}

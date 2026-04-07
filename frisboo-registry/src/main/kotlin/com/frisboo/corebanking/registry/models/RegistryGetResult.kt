@@ -15,18 +15,15 @@
  */
 package com.frisboo.corebanking.registry.models
 
-import com.frisboo.corebanking.registry.errors.RegistryError
+public sealed interface RegistryGetResult<out V> {
 
-public sealed interface EvictResult {
-    public data object Evicted : EvictResult
+    public val value: V?
 
-    public data object NotFound : EvictResult
+    public data class Found<V>(
+        override val value: V,
+    ) : RegistryGetResult<V>
 
-    /**
-     * Reserved for distributed implementations where eviction may fail due to
-     * network or infrastructure errors (e.g., Redis connection timeout).
-     */
-    public data class Failed(
-        public val error: RegistryError,
-    ) : EvictResult
+    public data object NotFound : RegistryGetResult<Nothing> {
+        override val value: Nothing? = null
+    }
 }
