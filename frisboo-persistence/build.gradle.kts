@@ -23,17 +23,16 @@ dependencies {
     api(project(":frisboo-core"))
     api(project(":frisboo-data"))
 
-    arrayOf(
-        baseLibs.spring.boot.bom,
-        baseLibs.exposed.bom,
-    ).forEach { api(platform(it)) }
+    api(platform(baseLibs.spring.boot.bom))
+    api(platform(baseLibs.exposed.bom))
 
-    arrayOf(
-        baseLibs.exposed.spring.boot.starter,
-        baseLibs.exposed.kotlin.datetime,
-    ).forEach { api(it) }
+    api(baseLibs.exposed.spring.boot.starter)
+    api(baseLibs.exposed.kotlin.datetime)
+
+    implementation(baseLibs.testcontainers.redis)
 
     implementation(baseLibs.spring.boot.autoconfigure)
+    implementation(baseLibs.lettuce.core)
 
     testApi(platform(baseLibs.junit.bom))
     testApi(platform(baseLibs.kotest.bom))

@@ -15,12 +15,18 @@
  */
 package com.frisboo.corebanking.registry.decorators
 
+import arrow.core.Either
 import com.frisboo.corebanking.registry.contracts.Registry
 import com.frisboo.corebanking.registry.contracts.RegistryMetrics
-import com.frisboo.corebanking.registry.models.EvictResult
-import com.frisboo.corebanking.registry.models.GetOrPutResult
-import com.frisboo.corebanking.registry.models.PutResult
-import com.frisboo.corebanking.registry.models.SetTtlResult
+import com.frisboo.corebanking.registry.errors.RegistryError
+import com.frisboo.corebanking.registry.models.RegistryContainsResult
+import com.frisboo.corebanking.registry.models.RegistryEvictResult
+import com.frisboo.corebanking.registry.models.RegistryGetOrPutResult
+import com.frisboo.corebanking.registry.models.RegistryGetResult
+import com.frisboo.corebanking.registry.models.RegistryPage
+import com.frisboo.corebanking.registry.models.RegistryPutResult
+import com.frisboo.corebanking.registry.models.RegistrySetTtlResult
+import com.frisboo.corebanking.registry.models.RegistrySizeResult
 import java.util.concurrent.atomic.AtomicLong
 import kotlin.time.Duration
 
@@ -35,81 +41,128 @@ import kotlin.time.Duration
  */
 public class InstrumentedRegistryImpl<K : Any, V : Any>(
     private val delegate: Registry<K, V>,
-) : Registry<K, V> by delegate, RegistryMetrics {
-    private val _hitCount = AtomicLong(0)
-    private val _missCount = AtomicLong(0)
-    private val _putCount = AtomicLong(0)
-    private val _evictionCount = AtomicLong(0)
-    private val _failureCount = AtomicLong(0)
+) : Registry<K, V> {
 
-    override val hitCount: Long get() = _hitCount.get()
-    override val missCount: Long get() = _missCount.get()
-    override val putCount: Long get() = _putCount.get()
-    override val evictionCount: Long get() = _evictionCount.get()
-    override val failureCount: Long get() = _failureCount.get()
+//    private val _hitCount = AtomicLong(0)
+//    private val _missCount = AtomicLong(0)
+//    private val _putCount = AtomicLong(0)
+//    private val _evictionCount = AtomicLong(0)
+//    private val _failureCount = AtomicLong(0)
 
-    override suspend fun get(key: K): V? {
-        val result = delegate.get(key)
-        if (result != null) _hitCount.incrementAndGet() else _missCount.incrementAndGet()
-        return result
+//    override val hitCount: Long get() = _hitCount.get()
+//    override val missCount: Long get() = _missCount.get()
+//    override val putCount: Long get() = _putCount.get()
+//    override val evictionCount: Long get() = _evictionCount.get()
+//    override val failureCount: Long get() = _failureCount.get()
+
+    override suspend fun get(key: K): Either<RegistryError, RegistryGetResult<V?>> {
+        TODO("Not yet implemented")
     }
 
-    override suspend fun contains(key: K): Boolean {
-        val result = delegate.contains(key)
-        if (result) _hitCount.incrementAndGet() else _missCount.incrementAndGet()
-        return result
+    override suspend fun contains(key: K): Either<RegistryError, RegistryContainsResult> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun size(): Either<RegistryError, RegistrySizeResult> {
+        TODO("Not yet implemented")
     }
 
     override suspend fun put(
         key: K,
         value: V,
         ttl: Duration?,
-    ): PutResult {
-        val result = delegate.put(key, value, ttl)
-        when (result) {
-            is PutResult.Created, is PutResult.Updated -> _putCount.incrementAndGet()
-            is PutResult.Failed -> _failureCount.incrementAndGet()
-        }
-        return result
+    ): Either<RegistryError, RegistryPutResult<V?>> {
+        TODO("Not yet implemented")
     }
 
     override suspend fun getOrPut(
         key: K,
         ttl: Duration?,
         factory: suspend () -> V,
-    ): GetOrPutResult<V> {
-        val result = delegate.getOrPut(key, ttl, factory)
-        when (result) {
-            is GetOrPutResult.Created -> {
-                _missCount.incrementAndGet()
-                _putCount.incrementAndGet()
-            }
-            is GetOrPutResult.Found -> _hitCount.incrementAndGet()
-            is GetOrPutResult.Failed -> _failureCount.incrementAndGet()
-        }
-        return result
+    ): Either<RegistryError, RegistryGetOrPutResult<V>> {
+        TODO("Not yet implemented")
     }
 
-    override suspend fun evict(key: K): EvictResult {
-        val result = delegate.evict(key)
-        when (result) {
-            is EvictResult.Evicted -> _evictionCount.incrementAndGet()
-            is EvictResult.NotFound -> {}
-            is EvictResult.Failed -> _failureCount.incrementAndGet()
-        }
-        return result
+    override suspend fun evict(key: K): Either<RegistryError, RegistryEvictResult> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun keysPage(
+        cursor: String?,
+        limit: Int,
+    ): Either<RegistryError, RegistryPage<K>> {
+        TODO("Not yet implemented")
     }
 
     override suspend fun setTTL(
         key: K,
         ttl: Duration,
-    ): SetTtlResult {
-        val result = delegate.setTTL(key, ttl)
-        when (result) {
-            is SetTtlResult.Applied -> {}
-            is SetTtlResult.KeyNotFound -> {}
-            is SetTtlResult.Failed -> _failureCount.incrementAndGet()
-        }
-        return result
+    ): Either<RegistryError, RegistrySetTtlResult> {
+        TODO("Not yet implemented")
     }
+
+//    override suspend fun get(key: K): Eit E V? {
+//        val result = delegate.get(key)
+//        if (result != null) _hitCount.incrementAndGet() else _missCount.incrementAndGet()
+//        return result
+//    }
+
+//    override suspend fun contains(key: K): Boolean {
+//        val result = delegate.contains(key)
+//        if (result) _hitCount.incrementAndGet() else _missCount.incrementAndGet()
+//        return result
+//    }
+//
+//    override suspend fun put(
+//        key: K,
+//        value: V,
+//        ttl: Duration?,
+//    ): RegistryPutResult {
+//        val result = delegate.put(key, value, ttl)
+//        when (result) {
+//            is RegistryPutResult.Created, is RegistryPutResult.Updated -> _putCount.incrementAndGet()
+//            is RegistryPutResult.Failed -> _failureCount.incrementAndGet()
+//        }
+//        return result
+//    }
+//
+//    override suspend fun getOrPut(
+//        key: K,
+//        ttl: Duration?,
+//        factory: suspend () -> V,
+//    ): RegistryGetOrPutResult<V> {
+//        val result = delegate.getOrPut(key, ttl, factory)
+//        when (result) {
+//            is RegistryGetOrPutResult.Created -> {
+//                _missCount.incrementAndGet()
+//                _putCount.incrementAndGet()
+//            }
+//            is RegistryGetOrPutResult.Found -> _hitCount.incrementAndGet()
+//            is RegistryGetOrPutResult.Failed -> _failureCount.incrementAndGet()
+//        }
+//        return result
+//    }
+//
+//    override suspend fun evict(key: K): RegistryEvictResult {
+//        val result = delegate.evict(key)
+//        when (result) {
+//            is RegistryEvictResult.Evicted -> _evictionCount.incrementAndGet()
+//            is RegistryEvictResult.NotFound -> {}
+//            is RegistryEvictResult.Failed -> _failureCount.incrementAndGet()
+//        }
+//        return result
+//    }
+//
+//    override suspend fun setTTL(
+//        key: K,
+//        ttl: Duration,
+//    ): RegistrySetTtlResult {
+//        val result = delegate.setTTL(key, ttl)
+//        when (result) {
+//            is RegistrySetTtlResult.Applied -> {}
+//            is RegistrySetTtlResult.NotFound -> {}
+//            is RegistrySetTtlResult.Failed -> _failureCount.incrementAndGet()
+//        }
+//        return result
+//    }
 }

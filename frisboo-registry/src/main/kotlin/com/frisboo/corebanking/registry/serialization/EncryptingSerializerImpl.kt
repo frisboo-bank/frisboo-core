@@ -15,14 +15,11 @@
  */
 package com.frisboo.corebanking.registry.serialization
 
+import com.frisboo.corebanking.crypto.contracts.CryptoService
+import com.frisboo.corebanking.crypto.errors.CryptoException
 import com.frisboo.corebanking.registry.contracts.RegistrySerializer
 import com.frisboo.corebanking.registry.models.RegistryScope
-import com.frisboo.corebanking.crypto.errors.CryptoException
-import com.frisboo.corebanking.crypto.contracts.CryptoService
 
-/**
- * Encryption decorator; AAD is bound to [scope] to prevent cross-scope ciphertext reuse.
- */
 public class EncryptingSerializerImpl<T>(
     private val delegate: RegistrySerializer<T>,
     private val cryptoService: CryptoService,
@@ -36,10 +33,10 @@ public class EncryptingSerializerImpl<T>(
         return cryptoService.encrypt(plaintext, associatedData)
     }
 
-    override fun deserialize(data: ByteArray): T {
+    override fun deserialize(value: ByteArray): T {
         val plaintext =
             try {
-                cryptoService.decrypt(data, associatedData)
+                cryptoService.decrypt(value, associatedData)
             } catch (e: CryptoException) {
                 throw CryptoException.DecryptionFailed(
                     "Decryption failed for scope '${scope.prefix}': corrupted or tampered ciphertext",

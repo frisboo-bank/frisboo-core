@@ -15,15 +15,21 @@
  */
 package com.frisboo.corebanking.registry.decorators
 
+import arrow.core.Either
 import com.frisboo.corebanking.registry.contracts.Registry
 import com.frisboo.corebanking.registry.contracts.RegistryAuditEmitter
-import com.frisboo.corebanking.registry.models.EvictResult
-import com.frisboo.corebanking.registry.models.GetOrPutResult
-import com.frisboo.corebanking.registry.models.PutResult
+import com.frisboo.corebanking.registry.errors.RegistryError
+import com.frisboo.corebanking.registry.models.RegistryEvictResult
+import com.frisboo.corebanking.registry.models.RegistryGetOrPutResult
+import com.frisboo.corebanking.registry.models.RegistryPutResult
 import com.frisboo.corebanking.registry.models.RegistryAuditAction
 import com.frisboo.corebanking.registry.models.RegistryAuditEvent
+import com.frisboo.corebanking.registry.models.RegistryContainsResult
+import com.frisboo.corebanking.registry.models.RegistryGetResult
+import com.frisboo.corebanking.registry.models.RegistryPage
 import com.frisboo.corebanking.registry.models.RegistryScope
-import com.frisboo.corebanking.registry.models.SetTtlResult
+import com.frisboo.corebanking.registry.models.RegistrySetTtlResult
+import com.frisboo.corebanking.registry.models.RegistrySizeResult
 import io.github.oshai.kotlinlogging.KotlinLogging
 import javax.crypto.Mac
 import javax.crypto.spec.SecretKeySpec
@@ -35,109 +41,155 @@ public class AuditingRegistryImpl<K : Any, V : Any>(
     private val scope: RegistryScope,
     private val auditEmitter: RegistryAuditEmitter,
     auditHmacKey: ByteArray,
-) : Registry<K, V> by delegate {
-    private val hmacKey = SecretKeySpec(auditHmacKey.copyOf(), "HmacSHA256")
+) : Registry<K, V> {
 
-    private companion object {
-        private val logger = KotlinLogging.logger {}
+    private val hmacKey = SecretKeySpec(auditHmacKey.copyOf(), "HmacSHA256")
+    override suspend fun get(key: K): Either<RegistryError, RegistryGetResult<V?>> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun contains(key: K): Either<RegistryError, RegistryContainsResult> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun size(): Either<RegistryError, RegistrySizeResult> {
+        TODO("Not yet implemented")
     }
 
     override suspend fun put(
         key: K,
         value: V,
         ttl: Duration?,
-    ): PutResult {
-        val result = delegate.put(key, value, ttl)
-        emitAudit(
-            RegistryAuditEvent(
-                action = RegistryAuditAction.PUT,
-                scope = scope.prefix,
-                resourceId = sanitizeKey(key),
-                success = result is PutResult.Created || result is PutResult.Updated,
-                details =
-                    buildMap {
-                        put("result", result.simpleName())
-                        if (ttl != null) put("ttl_ms", ttl.inWholeMilliseconds.toString())
-                    },
-            ),
-        )
-        return result
+    ): Either<RegistryError, RegistryPutResult<V?>> {
+        TODO("Not yet implemented")
     }
 
     override suspend fun getOrPut(
         key: K,
         ttl: Duration?,
         factory: suspend () -> V,
-    ): GetOrPutResult<V> {
-        val result = delegate.getOrPut(key, ttl, factory)
-        if (result is GetOrPutResult.Created) {
-            emitAudit(
-                RegistryAuditEvent(
-                    action = RegistryAuditAction.GET_OR_PUT,
-                    scope = scope.prefix,
-                    resourceId = sanitizeKey(key),
-                    success = true,
-                    details =
-                        buildMap {
-                            put("result", "Created")
-                            if (ttl != null) put("ttl_ms", ttl.inWholeMilliseconds.toString())
-                        },
-                ),
-            )
-        }
-        return result
+    ): Either<RegistryError, RegistryGetOrPutResult<V>> {
+        TODO("Not yet implemented")
     }
 
-    override suspend fun evict(key: K): EvictResult {
-        val result = delegate.evict(key)
-        emitAudit(
-            RegistryAuditEvent(
-                action = RegistryAuditAction.EVICT,
-                scope = scope.prefix,
-                resourceId = sanitizeKey(key),
-                success = result is EvictResult.Evicted,
-                details = mapOf("result" to result.simpleName()),
-            ),
-        )
-        return result
+    override suspend fun evict(key: K): Either<RegistryError, RegistryEvictResult> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun keysPage(
+        cursor: String?,
+        limit: Int,
+    ): Either<RegistryError, RegistryPage<K>> {
+        TODO("Not yet implemented")
     }
 
     override suspend fun setTTL(
         key: K,
         ttl: Duration,
-    ): SetTtlResult {
-        val result = delegate.setTTL(key, ttl)
-        emitAudit(
-            RegistryAuditEvent(
-                action = RegistryAuditAction.SET_TTL,
-                scope = scope.prefix,
-                resourceId = sanitizeKey(key),
-                success = result is SetTtlResult.Applied,
-                details =
-                    mapOf(
-                        "ttl_ms" to ttl.inWholeMilliseconds.toString(),
-                        "result" to result.simpleName(),
-                    ),
-            ),
-        )
-        return result
+    ): Either<RegistryError, RegistrySetTtlResult> {
+        TODO("Not yet implemented")
     }
 
-    private suspend fun emitAudit(event: RegistryAuditEvent) {
-        runCatching { auditEmitter.emit(event) }
-            .onFailure { error ->
-                if (error is CancellationException) throw error
-                logger.error(error) { "Audit emission failed for ${event.action.value}" }
-            }
+    private companion object {
+        private val logger = KotlinLogging.logger {}
     }
 
-    private fun Any.simpleName(): String = this::class.simpleName ?: "unknown"
-
-    @OptIn(ExperimentalStdlibApi::class)
-    private fun sanitizeKey(key: K): String {
-        val raw = key.toString().toByteArray(Charsets.UTF_8)
-        val mac = Mac.getInstance("HmacSHA256")
-        mac.init(hmacKey)
-        return "hmac-sha256:${mac.doFinal(raw).toHexString()}"
-    }
+//    override suspend fun put(
+//        key: K,
+//        value: V,
+//        ttl: Duration?,
+//    ): RegistryPutResult {
+//        val result = delegate.put(key, value, ttl)
+//        emitAudit(
+//            RegistryAuditEvent(
+//                action = RegistryAuditAction.PUT,
+//                scope = scope.prefix,
+//                resourceId = sanitizeKey(key),
+//                success = result is RegistryPutResult.Created || result is RegistryPutResult.Updated,
+//                details =
+//                    buildMap {
+//                        put("result", result.simpleName())
+//                        if (ttl != null) put("ttl_ms", ttl.inWholeMilliseconds.toString())
+//                    },
+//            ),
+//        )
+//        return result
+//    }
+//
+//    override suspend fun getOrPut(
+//        key: K,
+//        ttl: Duration?,
+//        factory: suspend () -> V,
+//    ): RegistryGetOrPutResult<V> {
+//        val result = delegate.getOrPut(key, ttl, factory)
+//        if (result is RegistryGetOrPutResult.Created) {
+//            emitAudit(
+//                RegistryAuditEvent(
+//                    action = RegistryAuditAction.GET_OR_PUT,
+//                    scope = scope.prefix,
+//                    resourceId = sanitizeKey(key),
+//                    success = true,
+//                    details =
+//                        buildMap {
+//                            put("result", "Created")
+//                            if (ttl != null) put("ttl_ms", ttl.inWholeMilliseconds.toString())
+//                        },
+//                ),
+//            )
+//        }
+//        return result
+//    }
+//
+//    override suspend fun evict(key: K): RegistryEvictResult {
+//        val result = delegate.evict(key)
+//        emitAudit(
+//            RegistryAuditEvent(
+//                action = RegistryAuditAction.EVICT,
+//                scope = scope.prefix,
+//                resourceId = sanitizeKey(key),
+//                success = result is RegistryEvictResult.Evicted,
+//                details = mapOf("result" to result.simpleName()),
+//            ),
+//        )
+//        return result
+//    }
+//
+//    override suspend fun setTTL(
+//        key: K,
+//        ttl: Duration,
+//    ): RegistrySetTtlResult {
+//        val result = delegate.setTTL(key, ttl)
+//        emitAudit(
+//            RegistryAuditEvent(
+//                action = RegistryAuditAction.SET_TTL,
+//                scope = scope.prefix,
+//                resourceId = sanitizeKey(key),
+//                success = result is RegistrySetTtlResult.Applied,
+//                details =
+//                    mapOf(
+//                        "ttl_ms" to ttl.inWholeMilliseconds.toString(),
+//                        "result" to result.simpleName(),
+//                    ),
+//            ),
+//        )
+//        return result
+//    }
+//
+//    private suspend fun emitAudit(event: RegistryAuditEvent) {
+//        runCatching { auditEmitter.emit(event) }
+//            .onFailure { error ->
+//                if (error is CancellationException) throw error
+//                logger.error(error) { "Audit emission failed for ${event.action.value}" }
+//            }
+//    }
+//
+//    private fun Any.simpleName(): String = this::class.simpleName ?: "unknown"
+//
+//    @OptIn(ExperimentalStdlibApi::class)
+//    private fun sanitizeKey(key: K): String {
+//        val raw = key.toString().toByteArray(Charsets.UTF_8)
+//        val mac = Mac.getInstance("HmacSHA256")
+//        mac.init(hmacKey)
+//        return "hmac-sha256:${mac.doFinal(raw).toHexString()}"
+//    }
 }

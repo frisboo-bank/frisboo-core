@@ -20,27 +20,3 @@ public data class RegistryPage<out T>(
     public val nextCursor: String?,
 )
 
-internal fun <T> buildPage(
-    allKeys: List<T>,
-    cursor: String?,
-    limit: Int,
-    maxPageSize: Int,
-): RegistryPage<T> {
-    val safeLimit = limit.coerceIn(1, maxPageSize)
-    val startIndex =
-        if (cursor != null) {
-            val parsed = requireNotNull(cursor.toIntOrNull()) { "Invalid cursor: '$cursor'" }
-            require(parsed >= 0) { "Cursor must not be negative: '$cursor'" }
-            parsed
-        } else {
-            0
-        }
-    val page = allKeys.drop(startIndex).take(safeLimit)
-    val nextCursor =
-        if (startIndex + safeLimit < allKeys.size) {
-            (startIndex + safeLimit).toString()
-        } else {
-            null
-        }
-    return RegistryPage(items = page, nextCursor = nextCursor)
-}

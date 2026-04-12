@@ -20,8 +20,9 @@ import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 
-internal class RegistryScopeTest :
-    StringSpec({
+internal class RegistryScopeTest : StringSpec() {
+
+    init {
         "accepts single lowercase letter" {
             shouldNotThrow<IllegalArgumentException> {
                 RegistryScope(name = "a", team = "t")
@@ -118,4 +119,5 @@ internal class RegistryScopeTest :
             val scope = RegistryScope(name = "cache", team = "payments")
             scope.prefix shouldBe "payments:cache"
         }
-    })
+    }
+}

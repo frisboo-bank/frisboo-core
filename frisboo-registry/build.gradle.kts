@@ -21,24 +21,28 @@ plugins {
 
 dependencies {
     api(project(":frisboo-crypto"))
+    api(project(":frisboo-persistence"))
 
-    arrayOf(
-        baseLibs.kotlin.bom,
-        baseLibs.kotlinx.coroutines.bom,
-    ).forEach { api(platform(it)) }
-
-    arrayOf(
-        baseLibs.kotlinx.coroutines.core,
-    ).forEach { api(it) }
+    implementation(platform(baseLibs.kotlin.bom))
+    implementation(platform(baseLibs.kotlinx.coroutines.bom))
 
     implementation(baseLibs.caffeine)
+    implementation(baseLibs.kotlinx.coroutines.core)
     implementation(baseLibs.lettuce.core)
 
-    testApi(platform(baseLibs.junit.bom))
-    testApi(platform(baseLibs.kotest.bom))
+    testImplementation(platform(baseLibs.junit.bom))
+    testImplementation(platform(baseLibs.kotest.bom))
+    testImplementation(platform(baseLibs.testcontainers.bom))
 
-    testApi(baseLibs.kotest.property.arbs)
-    testApi(baseLibs.kotest.extensions)
+    testImplementation(project(":frisboo-tests"))
+
+    testImplementation(baseLibs.kotest.assertions.arrow)
+    testImplementation(baseLibs.kotest.extensions)
+    testImplementation(baseLibs.kotest.property.arbs)
+    testImplementation(baseLibs.kotest.property.datetime)
+    testImplementation(baseLibs.kotlin.test.junit5)
+    testImplementation(baseLibs.kotest.extensions.testcontainers)
+    testImplementation(baseLibs.testcontainers.redis)
 
     testRuntimeOnly(baseLibs.kotest.runner.junit5)
 }

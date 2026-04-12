@@ -29,3 +29,7 @@ dependencies {
 
     testRuntimeOnly(baseLibs.kotest.runner.junit5)
 }
+
+tasks.withType<Test> {
+    useJUnitPlatform()
+}

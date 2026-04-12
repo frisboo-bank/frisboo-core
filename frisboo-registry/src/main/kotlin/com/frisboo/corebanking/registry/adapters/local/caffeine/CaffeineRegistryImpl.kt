@@ -15,17 +15,18 @@
  */
 package com.frisboo.corebanking.registry.adapters.local.caffeine
 
+import arrow.core.Either
 import com.frisboo.corebanking.registry.contracts.LocalRegistry
-import com.frisboo.corebanking.registry.models.EvictResult
-import com.frisboo.corebanking.registry.models.GetOrPutResult
-import com.frisboo.corebanking.registry.models.MAX_PAGE_SIZE
-import com.frisboo.corebanking.registry.models.PutResult
+import com.frisboo.corebanking.registry.errors.RegistryError
+import com.frisboo.corebanking.registry.models.RegistryContainsResult
+import com.frisboo.corebanking.registry.models.RegistryEvictResult
+import com.frisboo.corebanking.registry.models.RegistryGetOrPutResult
+import com.frisboo.corebanking.registry.models.RegistryGetResult
 import com.frisboo.corebanking.registry.models.RegistryPage
+import com.frisboo.corebanking.registry.models.RegistryPutResult
 import com.frisboo.corebanking.registry.models.RegistryScope
-import com.frisboo.corebanking.registry.models.SetTtlResult
-import com.frisboo.corebanking.registry.models.buildPage
-import com.frisboo.corebanking.registry.models.validateOptionalTtl
-import com.frisboo.corebanking.registry.models.validateTtl
+import com.frisboo.corebanking.registry.models.RegistrySetTtlResult
+import com.frisboo.corebanking.registry.models.RegistrySizeResult
 import com.github.benmanes.caffeine.cache.Cache
 import com.github.benmanes.caffeine.cache.Caffeine
 import com.github.benmanes.caffeine.cache.RemovalCause
@@ -58,78 +59,128 @@ public class CaffeineRegistryImpl<K : Any, V : Any>(
                 if (cause == RemovalCause.EXPIRED) expiredCounter.incrementAndGet()
             }.build()
 
-    override suspend fun get(key: K): V? = cache.getIfPresent(key)?.value
-
-    override suspend fun getOrPut(
-        key: K,
-        ttl: Duration?,
-        factory: suspend () -> V,
-    ): GetOrPutResult<V> {
-        validateOptionalTtl(ttl)?.let { return GetOrPutResult.Failed(it) }
-        var factoryInvoked = false
-        val timedValue =
-            cache.get(key) {
-                factoryInvoked = true
-                TimedValue(kotlinx.coroutines.runBlocking { factory() }, ttlNanos(ttl))
-            }
-        return if (factoryInvoked) {
-            GetOrPutResult.Created(timedValue.value)
-        } else {
-            GetOrPutResult.Found(timedValue.value)
-        }
+    override suspend fun cleanupExpired(): Int {
+        TODO("Not yet implemented")
     }
 
-    override suspend fun contains(key: K): Boolean = cache.getIfPresent(key) != null
+    override suspend fun get(key: K): Either<RegistryError, RegistryGetResult<V?>> {
+        TODO("Not yet implemented")
+    }
 
-    override suspend fun size(): Long {
-        cache.cleanUp()
-        return cache.estimatedSize()
+    override suspend fun contains(key: K): Either<RegistryError, RegistryContainsResult> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun size(): Either<RegistryError, RegistrySizeResult> {
+        TODO("Not yet implemented")
     }
 
     override suspend fun put(
         key: K,
         value: V,
         ttl: Duration?,
-    ): PutResult {
-        validateOptionalTtl(ttl)?.let { return PutResult.Failed(it) }
-        val existed = cache.getIfPresent(key) != null
-        cache.put(key, TimedValue(value, ttlNanos(ttl)))
-        return if (existed) PutResult.Updated else PutResult.Created
+    ): Either<RegistryError, RegistryPutResult<V?>> {
+        TODO("Not yet implemented")
     }
 
-    override suspend fun evict(key: K): EvictResult {
-        val existed = cache.getIfPresent(key) != null
-        cache.invalidate(key)
-        return if (existed) EvictResult.Evicted else EvictResult.NotFound
+    override suspend fun getOrPut(
+        key: K,
+        ttl: Duration?,
+        factory: suspend () -> V,
+    ): Either<RegistryError, RegistryGetOrPutResult<V>> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun evict(key: K): Either<RegistryError, RegistryEvictResult> {
+        TODO("Not yet implemented")
     }
 
     override suspend fun keysPage(
         cursor: String?,
         limit: Int,
-    ): RegistryPage<K> {
-        cache.cleanUp()
-        val allKeys = cache.asMap().keys.sortedBy { it.toString() }
-        return buildPage(allKeys, cursor, limit, MAX_PAGE_SIZE)
+    ): Either<RegistryError, RegistryPage<K>> {
+        TODO("Not yet implemented")
     }
 
     override suspend fun setTTL(
         key: K,
         ttl: Duration,
-    ): SetTtlResult {
-        validateTtl(ttl)?.let { return SetTtlResult.Failed(it) }
-        val existing = cache.getIfPresent(key) ?: return SetTtlResult.KeyNotFound
-        cache.put(key, TimedValue(existing.value, ttl.inWholeNanoseconds))
-        return SetTtlResult.Applied
+    ): Either<RegistryError, RegistrySetTtlResult> {
+        TODO("Not yet implemented")
     }
-
-    override suspend fun cleanupExpired(): Int {
-        expiredCounter.set(0)
-        cache.cleanUp()
-        return expiredCounter.get()
-    }
-
-    private fun ttlNanos(ttl: Duration?): Long {
-        val effective = ttl ?: defaultTtl
-        return effective?.inWholeNanoseconds ?: Long.MAX_VALUE
-    }
+//
+//    override suspend fun get(key: K): V? = cache.getIfPresent(key)?.value
+//
+//    override suspend fun getOrPut(
+//        key: K,
+//        ttl: Duration?,
+//        factory: suspend () -> V,
+//    ): RegistryGetOrPutResult<V> {
+//        validateOptionalTtl(ttl)?.let { return RegistryGetOrPutResult.Failed(it) }
+//        var factoryInvoked = false
+//        val timedValue =
+//            cache.get(key) {
+//                factoryInvoked = true
+//                TimedValue(kotlinx.coroutines.runBlocking { factory() }, ttlNanos(ttl))
+//            }
+//        return if (factoryInvoked) {
+//            RegistryGetOrPutResult.Created(timedValue.value)
+//        } else {
+//            RegistryGetOrPutResult.Found(timedValue.value)
+//        }
+//    }
+//
+//    override suspend fun contains(key: K): Boolean = cache.getIfPresent(key) != null
+//
+//    override suspend fun size(): Long {
+//        cache.cleanUp()
+//        return cache.estimatedSize()
+//    }
+//
+//    override suspend fun put(
+//        key: K,
+//        value: V,
+//        ttl: Duration?,
+//    ): RegistryPutResult {
+//        validateOptionalTtl(ttl)?.let { return RegistryPutResult.Failed(it) }
+//        val existed = cache.getIfPresent(key) != null
+//        cache.put(key, TimedValue(value, ttlNanos(ttl)))
+//        return if (existed) RegistryPutResult.Updated else RegistryPutResult.Created
+//    }
+//
+//    override suspend fun evict(key: K): RegistryEvictResult {
+//        val existed = cache.getIfPresent(key) != null
+//        cache.invalidate(key)
+//        return if (existed) RegistryEvictResult.Evicted else RegistryEvictResult.NotFound
+//    }
+//
+//    override suspend fun keysPage(
+//        cursor: String?,
+//        limit: Int,
+//    ): RegistryPage<K> {
+//        cache.cleanUp()
+//        val allKeys = cache.asMap().keys.sortedBy { it.toString() }
+//        return buildPage(allKeys, cursor, limit, MAX_PAGE_SIZE)
+//    }
+//
+//    override suspend fun setTTL(
+//        key: K,
+//        ttl: Duration,
+//    ): RegistrySetTtlResult {
+//        validateTtl(ttl)?.let { return RegistrySetTtlResult.Failed(it) }
+//        val existing = cache.getIfPresent(key) ?: return RegistrySetTtlResult.NotFound
+//        cache.put(key, TimedValue(existing.value, ttl.inWholeNanoseconds))
+//        return RegistrySetTtlResult.Applied
+//    }
+//
+//    override suspend fun cleanupExpired(): Int {
+//        expiredCounter.set(0)
+//        cache.cleanUp()
+//        return expiredCounter.get()
+//    }
+//
+//    private fun ttlNanos(ttl: Duration?): Long {
+//        val effective = ttl ?: defaultTtl
+//        return effective?.inWholeNanoseconds ?: Long.MAX_VALUE
+//    }
 }

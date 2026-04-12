@@ -15,13 +15,14 @@
  */
 package com.frisboo.corebanking.registry.contracts
 
+import arrow.core.Either
+import com.frisboo.corebanking.registry.errors.RegistryError
+import com.frisboo.corebanking.registry.models.RegistryIsHealthyResult
+
 /**
- * Remote/distributed registry backend (Redis, Memcached, etc.).
- *
- * Adds [isHealthy] for network health probes used by resilience and health-check layers.
+ * Remote/distributed registry backend
  */
 public interface DistributedRegistry<K : Any, V : Any> : Registry<K, V> {
 
-    /** Returns `true` if the backing store is reachable and operational. */
-    public suspend fun isHealthy(): Boolean
+    public suspend fun isHealthy(): Either<RegistryError, RegistryIsHealthyResult>
 }

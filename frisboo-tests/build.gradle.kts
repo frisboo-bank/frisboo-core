@@ -22,45 +22,39 @@ plugins {
 
 dependencies {
     api(project(":frisboo-core"))
-    implementation(project(":frisboo-data"))
 
-    arrayOf(
-        baseLibs.exposed.bom,
-        baseLibs.junit.bom,
-        baseLibs.kotest.bom,
-        baseLibs.reactor.bom,
-        baseLibs.spring.boot.bom,
-        baseLibs.testcontainers.bom,
-    ).map {
-        api(platform(it))
-        testApi(platform(it))
-    }
+    api(platform(baseLibs.exposed.bom))
+    api(platform(baseLibs.junit.bom))
+    api(platform(baseLibs.kotest.bom))
+    api(platform(baseLibs.reactor.bom))
+    api(platform(baseLibs.spring.boot.bom))
+    api(platform(baseLibs.testcontainers.bom))
 
-    arrayOf(
-        baseLibs.exposed.kotlin.datetime,
-        baseLibs.exposed.spring.boot.starter,
-        baseLibs.flyway.core,
-        baseLibs.flyway.database.postgresql,
-        baseLibs.kotest.assertions.core,
-        baseLibs.kotest.extensions,
-        baseLibs.kotest.property,
-        baseLibs.kotest.property.arbs,
-        baseLibs.kotest.property.datetime,
-        baseLibs.kotlin.test.junit5,
-        baseLibs.kotlinx.coroutines.test,
-        baseLibs.mockk,
-        baseLibs.postgresql,
-        baseLibs.reactor.test,
-        baseLibs.spring.boot.starter.test,
-        baseLibs.spring.boot.testcontainers,
-        baseLibs.testcontainers.junit.jupiter,
-        baseLibs.testcontainers.postgresql,
-    ).map {
-        api(it)
-        testApi(it)
-    }
+    implementation(baseLibs.exposed.kotlin.datetime)
+    implementation(baseLibs.exposed.spring.boot.starter)
+    implementation(baseLibs.flyway.core)
+    implementation(baseLibs.flyway.database.postgresql)
+    implementation(baseLibs.postgresql)
 
-    testRuntimeOnly(baseLibs.postgresql)
+    api(baseLibs.testcontainers.postgresql)
+    api(baseLibs.testcontainers.toxiproxy)
+
+    testApi(baseLibs.kotest.assertions.arrow)
+    testApi(baseLibs.kotest.assertions.core)
+    testApi(baseLibs.kotest.extensions)
+    testApi(baseLibs.kotest.extensions.testcontainers)
+    testApi(baseLibs.kotest.property)
+    testApi(baseLibs.kotest.property.arbs)
+    testApi(baseLibs.kotest.property.datetime)
+    testApi(baseLibs.kotlin.test.junit5)
+    testApi(baseLibs.kotlinx.coroutines.test)
+    testApi(baseLibs.mockk)
+    testApi(baseLibs.reactor.test)
+    testApi(baseLibs.spring.boot.starter.test)
+    testApi(baseLibs.spring.boot.testcontainers)
+    testApi(baseLibs.testcontainers.junit.jupiter)
+    testApi(baseLibs.toxiproxy)
+
     testRuntimeOnly(baseLibs.kotest.runner.junit5)
 }
 

@@ -15,87 +15,66 @@
  */
 package com.frisboo.corebanking.registry.adapters.distributed.redis
 
+import arrow.core.Either
+import arrow.core.raise.either
+import arrow.core.raise.ensure
+import arrow.core.right
+import com.frisboo.corebanking.core.coroutines.executeWithTimeout
+import com.frisboo.corebanking.persistence.core.errors.PersistenceError
+import com.frisboo.corebanking.persistence.redis.constants.REDIS_DEFAULT_SCAN_BATCH_SIZE
+import com.frisboo.corebanking.persistence.redis.constants.REDIS_DEFAULT_SCAN_MAX_RESPONSE_BYTES
+import com.frisboo.corebanking.persistence.redis.utils.RedisCodec
+import com.frisboo.corebanking.persistence.redis.utils.checkHealth
+import com.frisboo.corebanking.persistence.redis.utils.evalScript
+import com.frisboo.corebanking.persistence.redis.utils.scanCount
+import com.frisboo.corebanking.persistence.redis.utils.scanPage
 import com.frisboo.corebanking.registry.contracts.DistributedRegistry
 import com.frisboo.corebanking.registry.contracts.RegistrySerializer
 import com.frisboo.corebanking.registry.errors.RegistryError
-import com.frisboo.corebanking.registry.models.EvictResult
-import com.frisboo.corebanking.registry.models.GetOrPutResult
-import com.frisboo.corebanking.registry.models.MAX_PAGE_SIZE
-import com.frisboo.corebanking.registry.models.PutResult
+import com.frisboo.corebanking.registry.models.REGISTRY_DEFAULT_MAX_PAGE_SIZE
+import com.frisboo.corebanking.registry.models.REGISTRY_DEFAULT_OPERATION_TIMEOUT
+import com.frisboo.corebanking.registry.models.RegistryContainsResult
+import com.frisboo.corebanking.registry.models.RegistryEvictResult
+import com.frisboo.corebanking.registry.models.RegistryGetOrPutResult
+import com.frisboo.corebanking.registry.models.RegistryGetResult
+import com.frisboo.corebanking.registry.models.RegistryIsHealthyResult
 import com.frisboo.corebanking.registry.models.RegistryPage
+import com.frisboo.corebanking.registry.models.RegistryPutResult
 import com.frisboo.corebanking.registry.models.RegistryScope
-import com.frisboo.corebanking.registry.models.SetTtlResult
-import com.frisboo.corebanking.registry.models.validateOptionalTtl
-import com.frisboo.corebanking.registry.models.validateTtl
-import io.lettuce.core.ScanArgs
-import io.lettuce.core.ScanCursor
-import io.lettuce.core.ScriptOutputType
+import com.frisboo.corebanking.registry.models.RegistrySetTtlResult
+import com.frisboo.corebanking.registry.models.RegistrySizeResult
+import io.lettuce.core.ExperimentalLettuceCoroutinesApi
 import io.lettuce.core.api.StatefulRedisConnection
-import kotlinx.coroutines.TimeoutCancellationException
-import kotlinx.coroutines.future.await
-import kotlinx.coroutines.withTimeout
-import kotlin.coroutines.cancellation.CancellationException
+import io.lettuce.core.api.coroutines
+import kotlinx.coroutines.CoroutineStart
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
+import java.util.concurrent.ConcurrentHashMap
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.ZERO
-import kotlin.time.Duration.Companion.seconds
 
-private val DEFAULT_OPERATION_TIMEOUT = 5.seconds
-
-/**
- * Upper bound on Redis SCAN iterations to prevent runaway loops
- * in degraded network conditions or enormous keyspaces.
- */
-private const val MAX_SCAN_ITERATIONS = 10_000
-
-/**
- * Maximum number of keys returned by [RedisRegistryImpl.keys] to prevent
- * unbounded heap allocation. Callers needing more should use [RedisRegistryImpl.keysPage].
- */
-private const val MAX_KEYS_RESULT_SIZE = 100_000
-
-/**
- * Lua: GET existing → return it; otherwise SET new value (with optional PSETEX).
- */
-private const val GET_OR_PUT_SCRIPT = """
-    local existing = redis.call('GET', KEYS[1])
-    if existing then
-        return existing
-    end
-    if #ARGV == 2 then
-        redis.call('PSETEX', KEYS[1], ARGV[2], ARGV[1])
-    else
-        redis.call('SET', KEYS[1], ARGV[1])
-    end
-    return nil
-"""
-
-/**
- * Lua: check EXISTS → SET/PSETEX → return 1 if existed, 0 if new.
- */
-private const val PUT_SCRIPT = """
-    local existed = redis.call('EXISTS', KEYS[1])
-    if #ARGV == 2 then
-        redis.call('PSETEX', KEYS[1], ARGV[2], ARGV[1])
-    else
-        redis.call('SET', KEYS[1], ARGV[1])
-    end
-    return existed
-"""
-
-/**
- * Lock-free Redis-backed registry; Lua scripts guarantee server-side atomicity,
- * [getOrPut] may invoke factory speculatively under cross-JVM races.
- */
+@OptIn(ExperimentalLettuceCoroutinesApi::class)
 public class RedisRegistryImpl<K : Any, V : Any>(
     public val scope: RegistryScope,
-    private val connection: StatefulRedisConnection<ByteArray, ByteArray>,
-    private val keySerializer: RegistrySerializer<K>,
-    private val valueSerializer: RegistrySerializer<V>,
-    private val operationTimeout: Duration = DEFAULT_OPERATION_TIMEOUT,
+    connection: StatefulRedisConnection<ByteArray, ByteArray>,
+    private val operationTimeout: Duration = REGISTRY_DEFAULT_OPERATION_TIMEOUT,
+    keySerializer: RegistrySerializer<K>,
+    valueSerializer: RegistrySerializer<V>,
 ) : DistributedRegistry<K, V> {
-    private val commands get() = connection.async()
-    private val codec = RedisKeyCodec(scope, keySerializer)
-    private val timeoutMs = operationTimeout.inWholeMilliseconds.coerceAtLeast(1)
+
+    private val commands = connection.coroutines()
+
+    private val codec = RedisCodec<K, V>(
+        prefix = scope.prefix,
+        keySerializer = keySerializer,
+        valueSerializer = valueSerializer,
+    )
+
+    /**
+     * Map to track in-flight getOrPut operations to prevent thundering herd on cache misses.
+     */
+    private val inflight = ConcurrentHashMap<K, Deferred<Either<RegistryError, RegistryGetOrPutResult<V>>>>()
 
     init {
         require(operationTimeout > ZERO) {
@@ -103,158 +82,330 @@ public class RedisRegistryImpl<K : Any, V : Any>(
         }
     }
 
-    override suspend fun isHealthy(): Boolean =
-        try {
-            withTimeout(timeoutMs) {
-                connection.async().ping().await() == "PONG"
-            }
-        } catch (_: TimeoutCancellationException) {
-            false
-        } catch (e: CancellationException) {
-            throw e
-        } catch (_: Exception) {
-            false
-        }
+    override suspend fun isHealthy(): Either<RegistryError, RegistryIsHealthyResult> =
+        commands.checkHealth(timeout = operationTimeout).fold(
+            ifLeft = { error ->
+                RegistryIsHealthyResult.Down(
+                    when (error) {
+                        is PersistenceError.ConnectionFailed -> error.message
+                        is PersistenceError.OperationTimeout ->
+                            "Operation timed out after ${error.timeoutMillis} ms"
 
-    override suspend fun get(key: K): V? =
-        withTimeout(timeoutMs) {
-            val raw =
-                commands.get(codec.encode(key)).await()
-                    ?: return@withTimeout null
-            valueSerializer.deserialize(raw)
-        }
-
-    override suspend fun getOrPut(
-        key: K,
-        ttl: Duration?,
-        factory: suspend () -> V,
-    ): GetOrPutResult<V> {
-        validateOptionalTtl(ttl)?.let { return GetOrPutResult.Failed(it) }
-        val ttlMs = ttl?.inWholeMilliseconds
-        if (ttlMs != null && ttlMs < 1L) {
-            return GetOrPutResult.Failed(
-                RegistryError.InvalidTtl("Distributed TTL must be >= 1ms, got: $ttl"),
-            )
-        }
-        val rk = codec.encode(key)
-
-        // Fast-path: check if key exists without invoking factory.
-        val cached = withTimeout(timeoutMs) { commands.get(rk).await() }
-        if (cached != null) return GetOrPutResult.Found(valueSerializer.deserialize(cached))
-
-        // Slow-path: invoke factory (outside any lock), then atomically set via Lua.
-        val value = factory()
-        val serialized = valueSerializer.serialize(value)
-
-        val luaResult =
-            withTimeout(timeoutMs) {
-                commands
-                    .eval<ByteArray>(
-                        GET_OR_PUT_SCRIPT,
-                        ScriptOutputType.VALUE,
-                        arrayOf(rk),
-                        *RedisKeyCodec.luaArgs(serialized, ttlMs),
-                    ).await()
-            }
-
-        // Lua returns existing value if another writer won the race, null if we stored ours.
-        return if (luaResult != null) {
-            GetOrPutResult.Found(valueSerializer.deserialize(luaResult))
-        } else {
-            GetOrPutResult.Created(value)
-        }
-    }
-
-    override suspend fun contains(key: K): Boolean =
-        withTimeout(timeoutMs) {
-            commands.exists(codec.encode(key)).await() > 0
-        }
-
-    override suspend fun size(): Long =
-        withTimeout(timeoutMs) {
-            var count = 0L
-            var cursor = ScanCursor.of("0")
-            var iterations = 0
-            do {
-                val result = commands.scan(cursor, codec.scopedScanArgs()).await()
-                count += result.keys.size
-                cursor = result
-                iterations++
-            } while (!cursor.isFinished && iterations < MAX_SCAN_ITERATIONS)
-            count
-        }
+                        else -> "Unexpected error: $error"
+                    },
+                ).right()
+            },
+            ifRight = { healthy ->
+                if (healthy) RegistryIsHealthyResult.Up.right()
+                else RegistryIsHealthyResult.Down("Redis PING returned unexpected response").right()
+            },
+        )
 
     override suspend fun put(
         key: K,
         value: V,
         ttl: Duration?,
-    ): PutResult {
-        validateOptionalTtl(ttl)?.let { return PutResult.Failed(it) }
-        val ttlMs = ttl?.inWholeMilliseconds
-        if (ttlMs != null && ttlMs < 1L) {
-            return PutResult.Failed(
-                RegistryError.InvalidTtl("Distributed TTL must be >= 1ms, got: $ttl"),
-            )
+    ): Either<RegistryError, RegistryPutResult<V?>> = either {
+        val serializedKey = codec.serializeKey(key).mapLeft { RegistryError.fromPersistenceError(it) }.bind()
+        val serializedValue = codec.serializeValue(value).mapLeft { RegistryError.fromPersistenceError(it) }.bind()
+
+        val result = doPutUpsert(serializedKey, serializedValue, ttl).bind()
+
+        when (result.statusByte) {
+            0.toByte() -> RegistryPutResult.Updated(previousValue = result.previousValue, newValue = value)
+            1.toByte() -> RegistryPutResult.Created(value)
+            else -> raise(RegistryError.ConnectionFailed("Unexpected result"))
         }
-        val rk = codec.encode(key)
-        val serialized = valueSerializer.serialize(value)
-
-        val existed =
-            withTimeout(timeoutMs) {
-                commands
-                    .eval<Long>(
-                        PUT_SCRIPT,
-                        ScriptOutputType.INTEGER,
-                        arrayOf(rk),
-                        *RedisKeyCodec.luaArgs(serialized, ttlMs),
-                    ).await()
-            }
-
-        return if (existed == 1L) PutResult.Updated else PutResult.Created
     }
 
-    override suspend fun evict(key: K): EvictResult {
-        val removed =
-            withTimeout(timeoutMs) {
-                commands.del(codec.encode(key)).await()
+    override suspend fun get(key: K): Either<RegistryError, RegistryGetResult<V?>> = either {
+        val serializedKey = codec.serializeKey(key).mapLeft { RegistryError.fromPersistenceError(it) }.bind()
+
+        when (val result = doGet(serializedKey).bind()) {
+            null -> RegistryGetResult.NotFound
+            else -> RegistryGetResult.Found(result)
+        }
+    }
+
+    override suspend fun contains(key: K): Either<RegistryError, RegistryContainsResult> = either {
+        val serializedKey = codec.serializeKey(key).mapLeft { RegistryError.fromPersistenceError(it) }.bind()
+
+        val exists = executeWithTimeout(
+            timeout = operationTimeout,
+            block = {
+                commands.exists(serializedKey)
+            },
+            mapError = { e -> RegistryError.ConnectionFailed("Failed to check key existence in Redis", e) },
+        ).bind() ?: raise(RegistryError.ConnectionFailed("EXISTS command returned null"))
+
+        when {
+            exists == 0L -> RegistryContainsResult.NotFound
+            exists > 0L -> RegistryContainsResult.Found
+            else -> raise(RegistryError.ConnectionFailed("Unexpected contains response: $exists"))
+        }
+    }
+
+    override suspend fun size(): Either<RegistryError, RegistrySizeResult> = either {
+        val count = commands.scanCount(
+            pattern = codec.scanPattern,
+            timeout = operationTimeout,
+            batchSize = REDIS_DEFAULT_SCAN_BATCH_SIZE,
+        ).mapLeft { RegistryError.fromPersistenceError(it) }.bind()
+
+        RegistrySizeResult.Size(count)
+    }
+
+    /**
+     * Implements getOrPut with a Redis Lua script to ensure atomicity and prevent thundering herd on cache misses.
+     * Uses an in-memory map to track in-flight operations for the same key and avoid redundant Redis calls.
+     */
+    override suspend fun getOrPut(
+        key: K,
+        ttl: Duration?,
+        factory: suspend () -> V,
+    ): Either<RegistryError, RegistryGetOrPutResult<V>> {
+        inflight[key]?.let { return it.await() }
+
+        val deferred = coroutineScope {
+            val candidate = async(start = CoroutineStart.LAZY) {
+                doGetOrPut(key, ttl, factory)
             }
-        return if (removed > 0) EvictResult.Evicted else EvictResult.NotFound
+
+            val winner = inflight.putIfAbsent(key, candidate)
+            if (winner != null) {
+                candidate.cancel()
+                return@coroutineScope winner
+            }
+
+            candidate.start()
+            candidate
+        }
+
+        return try {
+            deferred.await()
+        } finally {
+            inflight.remove(key, deferred)
+        }
+    }
+
+    private suspend fun doGetOrPut(
+        key: K,
+        ttl: Duration?,
+        factory: suspend () -> V,
+    ): Either<RegistryError, RegistryGetOrPutResult<V>> = either {
+        val serializedKey = codec.serializeKey(key).mapLeft { RegistryError.fromPersistenceError(it) }.bind()
+
+        doGet(serializedKey).bind()?.let { existingValue ->
+            return@either RegistryGetOrPutResult.Found(existingValue)
+        }
+
+        val newValue =
+            Either.catch { factory() }.mapLeft {
+                RegistryError.ComputationFailed("Factory function for key `$key` failed", it)
+            }.bind()
+
+        val serializedValue = codec.serializeValue(newValue).mapLeft { RegistryError.fromPersistenceError(it) }.bind()
+
+        val (statusByte, resultValue) = doPutAtomic(
+            serializedKey,
+            serializedValue,
+            ttl,
+        ).bind()
+
+        when (statusByte) {
+            0.toByte() -> {
+                val existingValue =
+                    resultValue ?: raise(RegistryError.ConnectionFailed("Lua returned Found status but no value"))
+                RegistryGetOrPutResult.Found(existingValue)
+            }
+
+            1.toByte() -> RegistryGetOrPutResult.Created(newValue)
+            else -> raise(RegistryError.ConnectionFailed("Unexpected Lua script result"))
+        }
+    }
+
+    override suspend fun evict(key: K): Either<RegistryError, RegistryEvictResult> = either {
+        val serializedKey = codec.serializeKey(key).mapLeft { RegistryError.fromPersistenceError(it) }.bind()
+
+        val deletedCount = executeWithTimeout(
+            timeout = operationTimeout,
+            block = { commands.del(serializedKey) },
+            mapError = { e -> RegistryError.ConnectionFailed("Failed to evict key from Redis", e) },
+        ).bind() ?: raise(RegistryError.ConnectionFailed("DEL command returned null"))
+
+        when (deletedCount) {
+            0L -> RegistryEvictResult.NotFound
+            1L -> RegistryEvictResult.Evicted(deletedCount)
+            else -> raise(RegistryError.ConnectionFailed("Unexpected deleted count: $deletedCount"))
+        }
     }
 
     override suspend fun keysPage(
         cursor: String?,
         limit: Int,
-    ): RegistryPage<K> =
-        withTimeout(timeoutMs) {
-            val safeLimit = limit.coerceIn(1, MAX_PAGE_SIZE)
-            val scanCursor = ScanCursor.of(cursor ?: "0")
-            val args = ScanArgs.Builder.matches(codec.scanPattern()).limit(safeLimit.toLong())
-            val result = commands.scan(scanCursor, args).await()
-            val keys =
-                result.keys.map { redisKeyBytes ->
-                    keySerializer.deserialize(codec.stripPrefix(redisKeyBytes))
-                }
-            RegistryPage(
-                items = keys,
-                nextCursor = if (result.isFinished) null else result.cursor,
+    ): Either<RegistryError, RegistryPage<K>> = either {
+        val safeLimit = limit.coerceIn(1, REGISTRY_DEFAULT_MAX_PAGE_SIZE)
+        ensure(limit == safeLimit) {
+            RegistryError.InvalidArgument(
+                "limit",
+                "Page size must be between 1 and $REGISTRY_DEFAULT_MAX_PAGE_SIZE, got: $limit",
             )
         }
 
-    override suspend fun setTTL(
-        key: K,
-        ttl: Duration,
-    ): SetTtlResult {
-        validateTtl(ttl)?.let { return SetTtlResult.Failed(it) }
-        val ttlMs = ttl.inWholeMilliseconds
-        if (ttlMs < 1L) {
-            return SetTtlResult.Failed(
-                RegistryError.InvalidTtl("Distributed TTL must be >= 1ms, got: $ttl"),
-            )
+        val page = commands.scanPage(
+            pattern = codec.scanPattern,
+            cursor = cursor,
+            limit = safeLimit,
+            timeout = operationTimeout,
+        ).mapLeft { RegistryError.fromPersistenceError(it) }.bind()
+
+        val responseBytes = page.keys.sumOf { it.size }
+        ensure(responseBytes <= REDIS_DEFAULT_SCAN_MAX_RESPONSE_BYTES) {
+            RegistryError.ResponseTooLarge(sizeBytes = responseBytes)
         }
-        val applied =
-            withTimeout(timeoutMs) {
-                commands.pexpire(codec.encode(key), ttlMs).await()
-            }
-        return if (applied) SetTtlResult.Applied else SetTtlResult.KeyNotFound
+
+        val keys = page.keys.map {
+            codec.deserializeKey(it).mapLeft { e -> RegistryError.fromPersistenceError(e) }.bind()
+        }
+
+        RegistryPage(
+            items = keys,
+            nextCursor = page.nextCursor,
+        )
+    }
+
+    override suspend fun setTTL(key: K, ttl: Duration): Either<RegistryError, RegistrySetTtlResult> = either {
+        val ttlMs = ttl.inWholeMilliseconds
+        ensure(ttlMs > 0) {
+            RegistryError.InvalidArgument("ttl", "TTL must be >= 1ms, got: $ttl")
+        }
+
+        val serializedKey = codec.serializeKey(key).mapLeft { e -> RegistryError.fromPersistenceError(e) }.bind()
+
+        val result = executeWithTimeout(
+            timeout = operationTimeout,
+            block = { commands.pexpire(serializedKey, ttlMs) },
+            mapError = { e -> RegistryError.ConnectionFailed("Failed to set TTL in Redis", e) },
+        ).bind() ?: raise(RegistryError.ConnectionFailed("PEXPIRE returned null"))
+
+        when (result) {
+            false -> RegistrySetTtlResult.NotFound
+            true -> RegistrySetTtlResult.Applied
+        }
+    }
+
+    private suspend fun doGet(serializedKey: ByteArray): Either<RegistryError, V?> = either {
+        val result = executeWithTimeout(
+            timeout = operationTimeout,
+            block = { commands.get(serializedKey) },
+            mapError = { e -> RegistryError.ConnectionFailed("Failed to get value from Redis", e) },
+        ).bind() ?: return@either null
+
+        codec.deserializeValue(result).mapLeft { e -> RegistryError.fromPersistenceError(e) }.bind()
+    }
+
+    private data class DoPutUpsertResult<V>(
+        val statusByte: Byte,
+        val previousValue: V?,
+    )
+
+    private suspend fun doPutUpsert(
+        serializedKey: ByteArray,
+        serializedValue: ByteArray,
+        ttl: Duration?,
+    ): Either<RegistryError, DoPutUpsertResult<V>> = either {
+        val ttlMs = ttl?.inWholeMilliseconds
+        ensure(ttlMs == null || ttlMs > 0) {
+            RegistryError.InvalidArgument("ttl", "TTL must be >= 1ms, got: $ttl")
+        }
+
+        val script = """
+            local existing = redis.call('GET', KEYS[1])
+            if #ARGV == 2 then
+                redis.call('SET', KEYS[1], ARGV[1], 'PX', ARGV[2])
+            else
+                redis.call('SET', KEYS[1], ARGV[1])
+            end
+            if existing then
+                return string.char(0) .. existing
+            else
+                return string.char(1)
+            end
+        """.trimIndent()
+
+        val scriptArgs = if (ttlMs != null) {
+            arrayOf(serializedValue, ttlMs.toString().toByteArray())
+        } else {
+            arrayOf(serializedValue)
+        }
+
+        val luaResult = commands.evalScript(
+            script = script,
+            keys = arrayOf(serializedKey),
+            args = scriptArgs,
+            timeout = operationTimeout,
+            errorContext = "Failed to execute upsert operation",
+        ).mapLeft { RegistryError.fromPersistenceError(it) }.bind()
+
+        val statusByte = luaResult[0]
+
+        var previousValue: V? = null
+        if (statusByte == 0.toByte() && luaResult.size > 1) {
+            previousValue = codec.deserializeValue(luaResult.copyOfRange(1, luaResult.size))
+                .mapLeft { RegistryError.fromPersistenceError(it) }.bind()
+        }
+
+        DoPutUpsertResult(
+            statusByte = statusByte,
+            previousValue = previousValue,
+        )
+    }
+
+    private suspend fun doPutAtomic(
+        serializedKey: ByteArray,
+        serializedValue: ByteArray,
+        ttl: Duration?,
+    ): Either<RegistryError, Pair<Byte, V?>> = either {
+        val ttlMs = ttl?.inWholeMilliseconds
+        ensure(ttlMs == null || ttlMs > 0) {
+            RegistryError.InvalidArgument("ttl", "TTL must be >= 1ms, got: $ttl")
+        }
+
+        val script = """
+            local existing = redis.call('GET', KEYS[1])
+            if existing then
+                return string.char(0) .. existing
+            end
+            if #ARGV == 2 then
+                redis.call('SET', KEYS[1], ARGV[1], 'PX', ARGV[2])
+            else
+                redis.call('SET', KEYS[1], ARGV[1])
+            end
+            return string.char(1)
+        """.trimIndent()
+
+        val scriptArgs = if (ttlMs != null) {
+            arrayOf(serializedValue, ttlMs.toString().toByteArray())
+        } else {
+            arrayOf(serializedValue)
+        }
+
+        val luaResult = commands.evalScript(
+            script = script,
+            keys = arrayOf(serializedKey),
+            args = scriptArgs,
+            timeout = operationTimeout,
+            errorContext = "Failed to execute atomic put operation",
+        ).mapLeft { RegistryError.fromPersistenceError(it) }.bind()
+
+        val statusByte = luaResult[0]
+        val existingValue = if (luaResult.size > 1) {
+            codec.deserializeValue(luaResult.copyOfRange(1, luaResult.size))
+                .mapLeft { e -> RegistryError.fromPersistenceError(e) }.bind()
+        } else {
+            null
+        }
+
+        Pair(statusByte, existingValue)
     }
 }
