@@ -20,7 +20,7 @@ When a downstream service starts failing, a circuit breaker **stops calling it**
 
 ```kotlin
 val factory: CircuitBreakerFactory = CircuitBreakerFactoryImpl(
-    stateRegistry = stateRegistry,       // persists state across restarts
+    stateStateManager = stateStateManager,       // persists state across restarts
     coroutineScope = coroutineScope,     // scope for background state persistence
 )
 
@@ -334,7 +334,7 @@ When calling `create("payment-gateway", config)` with explicit config, YAML is i
 
 ### State persistence
 
-Circuit breaker state (CLOSED, OPEN, HALF_OPEN, etc.) is persisted to the `stateRegistry` on every state transition. On restart, the factory restores the last known state so a circuit that was OPEN before a deploy stays OPEN until it naturally recovers.
+Circuit breaker state (CLOSED, OPEN, HALF_OPEN, etc.) is persisted to the `stateStateManager` on every state transition. On restart, the factory restores the last known state so a circuit that was OPEN before a deploy stays OPEN until it naturally recovers.
 
 If state persistence fails (e.g. Redis is down), the failure is logged and the breaker continues with its in-memory state. Persistence is best-effort — it never blocks or crash the breaker.
 
@@ -359,7 +359,7 @@ A rate limiter controls **how many calls** a service can receive within a time w
 
 ```kotlin
 val factory: RateLimiterFactory = RateLimiterFactoryImpl(
-    stateRegistry = stateRegistry,
+    stateStateManager = stateStateManager,
     coroutineScope = coroutineScope,
 )
 

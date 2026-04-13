@@ -15,10 +15,10 @@
  */
 package com.frisboo.corebanking.resilience.circuitbreaker.model
 
-import com.frisboo.corebanking.registry.contracts.Registry
+import com.frisboo.corebanking.statemanager.contracts.StateManager
 import kotlinx.coroutines.CoroutineScope
 
 internal data class CircuitBreakerPersistenceContext(
-    val stateRegistry: Registry<String, String>,
+    val stateStateManager: StateManager<String, String>,
     val coroutineScope: CoroutineScope,
 )

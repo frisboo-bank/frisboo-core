@@ -33,7 +33,7 @@ include("frisboo-messaging")
 include("frisboo-observability")
 include("frisboo-persistence")
 include("frisboo-quota")
-include("frisboo-registry")
+include("frisboo-statemanager")
 include("frisboo-resilience")
 
 pluginManagement {

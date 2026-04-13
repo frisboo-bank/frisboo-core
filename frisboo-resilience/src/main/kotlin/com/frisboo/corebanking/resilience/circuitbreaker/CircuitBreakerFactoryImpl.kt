@@ -18,29 +18,21 @@ package com.frisboo.corebanking.resilience.circuitbreaker
 import com.frisboo.corebanking.core.factory.AsyncFactoryBuilder
 import com.frisboo.corebanking.core.factory.models.AsyncFactoryCachingConfig
 import com.frisboo.corebanking.core.factory.models.AsyncFactoryLoggingConfig
-import com.frisboo.corebanking.registry.contracts.Registry
 import com.frisboo.corebanking.resilience.circuitbreaker.adapters.resilience4j.createResilience4jBreaker
 import com.frisboo.corebanking.resilience.circuitbreaker.contracts.CircuitBreaker
 import com.frisboo.corebanking.resilience.circuitbreaker.contracts.CircuitBreakerConfigSource
 import com.frisboo.corebanking.resilience.circuitbreaker.contracts.CircuitBreakerFactory
 import com.frisboo.corebanking.resilience.circuitbreaker.model.CircuitBreakerConfig
 import com.frisboo.corebanking.resilience.circuitbreaker.model.CircuitBreakerPersistenceContext
+import com.frisboo.corebanking.statemanager.contracts.StateManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.minutes
 
-/**
- * Create and manage circuit breakers with automatic caching and optional external configuration source.
- *
- * @param stateRegistry Registry for persisting circuit breaker state across instances.
- * @param maxBreakers Maximum number of circuit breakers to cache before evicting old ones.
- * @param expireAfterAccess Duration after which an unused circuit breaker will be evicted from the cache.
- * @param configSource Optional source for resolving circuit breaker configurations by name.
- */
 public class CircuitBreakerFactoryImpl(
-    private val stateRegistry: Registry<String, String>,
+    private val stateStateManager: StateManager<String, String>,
     private val maxBreakers: Long = 10_000,
     private val expireAfterAccess: Duration = 30.minutes,
     private val configSource: CircuitBreakerConfigSource? = null,
@@ -55,7 +47,7 @@ public class CircuitBreakerFactoryImpl(
                 createResilience4jBreaker(
                     name = name,
                     config = config,
-                    persistence = CircuitBreakerPersistenceContext(stateRegistry, persistenceScope),
+                    persistence = CircuitBreakerPersistenceContext(stateStateManager, persistenceScope),
                 )
             },
             caching = AsyncFactoryCachingConfig(

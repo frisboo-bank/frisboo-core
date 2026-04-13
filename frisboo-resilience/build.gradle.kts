@@ -21,7 +21,7 @@ plugins {
 
 dependencies {
     implementation(project(":frisboo-core"))
-    implementation(project(":frisboo-registry"))
+    implementation(project(":frisboo-statemanager"))
 
     implementation(platform(baseLibs.resilience4j.bom))
 

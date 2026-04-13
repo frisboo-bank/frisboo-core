@@ -15,7 +15,7 @@
  */
 package com.frisboo.corebanking.resilience.circuitbreaker.autoconfigure
 
-import com.frisboo.corebanking.registry.contracts.Registry
+import com.frisboo.corebanking.statemanager.contracts.StateManager
 import com.frisboo.corebanking.resilience.circuitbreaker.CircuitBreakerFactoryImpl
 import com.frisboo.corebanking.resilience.circuitbreaker.contracts.CircuitBreakerFactory
 import com.frisboo.corebanking.resilience.ratelimiter.RateLimiterFactoryImpl
@@ -46,11 +46,11 @@ public open class ResilienceAutoConfiguration {
     @ConditionalOnBean(name = ["circuitBreakerStateRegistry"])
     @ConditionalOnMissingBean(CircuitBreakerFactory::class)
     public open fun circuitBreakerFactory(
-        @Qualifier("circuitBreakerStateRegistry") stateRegistry: Registry<String, String>,
+        @Qualifier("circuitBreakerStateRegistry") stateStateManager: StateManager<String, String>,
         properties: ResilienceProperties,
     ): CircuitBreakerFactory =
         CircuitBreakerFactoryImpl(
-            stateRegistry = stateRegistry,
+            stateStateManager = stateStateManager,
             coroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Default),
             maxBreakers = properties.circuitBreaker.maxBreakers,
             configSource = PropertiesCircuitBreakerConfigSource(properties),
@@ -65,11 +65,11 @@ public open class ResilienceAutoConfiguration {
     @ConditionalOnBean(name = ["rateLimiterStateRegistry"])
     @ConditionalOnMissingBean(RateLimiterFactory::class)
     public open fun rateLimiterFactory(
-        @Qualifier("rateLimiterStateRegistry") stateRegistry: Registry<String, String>,
+        @Qualifier("rateLimiterStateRegistry") stateStateManager: StateManager<String, String>,
         properties: ResilienceProperties,
     ): RateLimiterFactory =
         RateLimiterFactoryImpl(
-            stateRegistry = stateRegistry,
+            stateStateManager = stateStateManager,
             coroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Default),
             maxLimiters = properties.rateLimiter.maxLimiters,
             configSource = PropertiesRateLimiterConfigSource(properties),
