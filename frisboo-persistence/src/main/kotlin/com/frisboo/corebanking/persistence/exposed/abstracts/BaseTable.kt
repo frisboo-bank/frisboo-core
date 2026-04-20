@@ -22,13 +22,6 @@ import java.time.OffsetDateTime
 
 /**
  * Abstract base table providing audit columns and an application-managed optimistic locking version.
- *
- * **Version**: Managed exclusively by [com.frisboo.corebanking.persistence.exposed.extensions.optimisticUpdate].
- * Initial value is `1` (set by the database `DEFAULT`). Incremented by the application on every successful update.
- * Do **not** attach a database trigger that also modifies this column.
- *
- * **Timestamps**: Managed exclusively by the database via the `fcb_handle_timestamps()` trigger.
- * Each concrete table migration must create a `BEFORE INSERT OR UPDATE` trigger calling that function.
  */
 public abstract class BaseTable(
     name: String,

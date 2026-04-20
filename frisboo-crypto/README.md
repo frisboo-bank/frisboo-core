@@ -20,14 +20,14 @@ val crypto: CryptoService = TinkCryptoService(keysetHandle)
 
 // Encrypt
 val ciphertext = crypto.encrypt(
-    plaintext = "account-number-1234".toByteArray(),
-    associatedData = "tenant:acme:scope:payments".toByteArray(),
+    plaintext = "account-number-1234".toByteArray(Charsets.UTF_8),
+    associatedData = "tenant:acme:scope:payments".toByteArray(Charsets.UTF_8),
 )
 // ciphertext => [1, 84, 22, 171, 63, ...] (opaque Tink ciphertext, ~45 bytes for this input)
 
 // Decrypt (same associated data, same key)
-val plaintext = crypto.decrypt(ciphertext, associatedData = "tenant:acme:scope:payments".toByteArray())
-// plaintext => "account-number-1234".toByteArray()
+val plaintext = crypto.decrypt(ciphertext, associatedData = "tenant:acme:scope:payments".toByteArray(Charsets.UTF_8))
+// plaintext => "account-number-1234".toByteArray(Charsets.UTF_8)
 // String(plaintext) => "account-number-1234"
 ```
 
@@ -40,14 +40,14 @@ val hybrid: HybridCryptoService = TinkHybridCryptoService(privateKeysetHandle)
 
 // Encrypt (anyone with the public key can do this)
 val ciphertext = hybrid.encrypt(
-    plaintext = "card-data-json".toByteArray(),
-    contextInfo = "merchant:shop-123:txn:abc".toByteArray(),
+    plaintext = "card-data-json".toByteArray(Charsets.UTF_8),
+    contextInfo = "merchant:shop-123:txn:abc".toByteArray(Charsets.UTF_8),
 )
 // ciphertext => [0, 4, 112, 55, 201, ...] (opaque HPKE ciphertext, larger than AEAD due to encapsulated key)
 
 // Decrypt (only the private key holder)
-val plaintext = hybrid.decrypt(ciphertext, contextInfo = "merchant:shop-123:txn:abc".toByteArray())
-// plaintext => "card-data-json".toByteArray()
+val plaintext = hybrid.decrypt(ciphertext, contextInfo = "merchant:shop-123:txn:abc".toByteArray(Charsets.UTF_8))
+// plaintext => "card-data-json".toByteArray(Charsets.UTF_8)
 // String(plaintext) => "card-data-json"
 ```
 
@@ -61,8 +61,8 @@ Ciphertext is a raw `ByteArray` — not valid UTF-8 — so Base64-encode it befo
 import java.util.Base64
 
 val ciphertext = crypto.encrypt(
-    plaintext = "account-number-1234".toByteArray(),
-    associatedData = "tenant:acme:scope:payments".toByteArray(),
+    plaintext = "account-number-1234".toByteArray(Charsets.UTF_8),
+    associatedData = "tenant:acme:scope:payments".toByteArray(Charsets.UTF_8),
 )
 
 // ByteArray → String (safe for DB text columns, JSON, HTTP headers)
@@ -71,7 +71,7 @@ val encoded: String = Base64.getEncoder().encodeToString(ciphertext)
 
 // String → ByteArray (to decrypt later)
 val decoded: ByteArray = Base64.getDecoder().decode(encoded)
-val plaintext = crypto.decrypt(decoded, associatedData = "tenant:acme:scope:payments".toByteArray())
+val plaintext = crypto.decrypt(decoded, associatedData = "tenant:acme:scope:payments".toByteArray(Charsets.UTF_8))
 // String(plaintext) => "account-number-1234"
 ```
 
@@ -151,8 +151,8 @@ class PaymentService(
 
     fun storeCardFingerprint(cardNumber: String, tenantId: String): String {
         val encrypted = crypto.encrypt(
-            plaintext = cardNumber.toByteArray(),
-            associatedData = "tenant:$tenantId".toByteArray(),
+            plaintext = cardNumber.toByteArray(Charsets.UTF_8),
+            associatedData = "tenant:$tenantId".toByteArray(Charsets.UTF_8),
         )
         // Base64-encode for storage in a text column
         return encoder.encodeToString(encrypted)
@@ -162,7 +162,7 @@ class PaymentService(
     fun readCardFingerprint(stored: String, tenantId: String): String {
         val decrypted = crypto.decrypt(
             ciphertext = decoder.decode(stored),
-            associatedData = "tenant:$tenantId".toByteArray(),
+            associatedData = "tenant:$tenantId".toByteArray(Charsets.UTF_8),
         )
         return String(decrypted)
         // => "4111-1111-1111-1234"

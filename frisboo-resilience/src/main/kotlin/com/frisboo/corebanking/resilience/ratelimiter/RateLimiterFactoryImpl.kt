@@ -18,42 +18,29 @@ package com.frisboo.corebanking.resilience.ratelimiter
 import com.frisboo.corebanking.core.factory.AsyncFactoryBuilder
 import com.frisboo.corebanking.core.factory.models.AsyncFactoryCachingConfig
 import com.frisboo.corebanking.core.factory.models.AsyncFactoryLoggingConfig
-import com.frisboo.corebanking.registry.contracts.Registry
-import com.frisboo.corebanking.resilience.circuitbreaker.adapters.resilience4j.createResilience4jBreaker
-import com.frisboo.corebanking.resilience.circuitbreaker.contracts.CircuitBreaker
-import com.frisboo.corebanking.resilience.circuitbreaker.model.CircuitBreakerConfig
-import com.frisboo.corebanking.resilience.circuitbreaker.model.CircuitBreakerPersistenceContext
+import com.frisboo.corebanking.statemanager.contracts.StateManager
 import com.frisboo.corebanking.resilience.ratelimiter.adapters.resilience4j.createResilience4jLimiter
 import com.frisboo.corebanking.resilience.ratelimiter.contracts.RateLimiter
 import com.frisboo.corebanking.resilience.ratelimiter.contracts.RateLimiterConfigSource
 import com.frisboo.corebanking.resilience.ratelimiter.contracts.RateLimiterFactory
 import com.frisboo.corebanking.resilience.ratelimiter.model.RateLimiterConfig
 import com.frisboo.corebanking.resilience.ratelimiter.model.RateLimiterPersistenceContext
-import com.github.benmanes.caffeine.cache.Caffeine
-import com.github.benmanes.caffeine.cache.RemovalListener
-import dev.hsbrysk.caffeine.CoroutineCache
-import dev.hsbrysk.caffeine.buildCoroutine
-import io.github.oshai.kotlinlogging.KotlinLogging
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
-import kotlinx.coroutines.sync.Mutex
-import kotlinx.coroutines.sync.withLock
-import java.util.concurrent.ConcurrentHashMap
 import kotlin.time.Duration
 import kotlin.time.Duration.Companion.minutes
-import kotlin.time.toJavaDuration
 
 /**
  * Create and manage rate limiters with automatic caching and optional external configuration source.
  *
- * @param stateRegistry Registry for persisting rate limiter state across instances.
+ * @param stateStateManager StateManager for persisting rate limiter state across instances.
  * @param maxLimiters Maximum number of rate limiters to cache before evicting old ones.
  * @param expireAfterAccess Duration after which an unused rate limiter will be evicted from the cache.
  * @param configSource Optional source for resolving rate limiter configurations by name.
  */
 public class RateLimiterFactoryImpl(
-    private val stateRegistry: Registry<String, String>,
+    private val stateStateManager: StateManager<String, String>,
     private val maxLimiters: Long = 10_000,
     private val expireAfterAccess: Duration = 30.minutes,
     private val configSource: RateLimiterConfigSource? = null,
@@ -68,7 +55,7 @@ public class RateLimiterFactoryImpl(
                 createResilience4jLimiter(
                     name = name,
                     config = config,
-                    persistence = RateLimiterPersistenceContext(stateRegistry, persistenceScope),
+                    persistence = RateLimiterPersistenceContext(stateStateManager, persistenceScope),
                 )
             },
             caching = AsyncFactoryCachingConfig(

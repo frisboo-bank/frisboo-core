@@ -15,9 +15,9 @@
  */
 package com.frisboo.corebanking.resilience.circuitbreaker
 
-import com.frisboo.corebanking.registry.adapters.local.inmemory.InMemoryRegistryImpl
-import com.frisboo.corebanking.registry.contracts.Registry
-import com.frisboo.corebanking.registry.models.RegistryScope
+import com.frisboo.corebanking.statemanager.adapters.local.inmemory.InMemoryRegistryImpl
+import com.frisboo.corebanking.statemanager.contracts.StateManager
+import com.frisboo.corebanking.statemanager.models.RegistryScope
 import com.frisboo.corebanking.resilience.circuitbreaker.contracts.CircuitBreakerConfigSource
 import com.frisboo.corebanking.resilience.circuitbreaker.contracts.CircuitBreakerState
 import com.frisboo.corebanking.resilience.circuitbreaker.model.CircuitBreakerConfig
@@ -38,7 +38,7 @@ import kotlinx.coroutines.withContext
 internal class CircuitBreakerFactoryImplTest : StringSpec(
     {
 
-        fun testRegistry(): Registry<String, String> = InMemoryRegistryImpl(
+        fun testRegistry(): StateManager<String, String> = InMemoryRegistryImpl(
             scope = RegistryScope(name = "cb-test", team = "resilience"),
         )
 
@@ -108,7 +108,7 @@ internal class CircuitBreakerFactoryImplTest : StringSpec(
                     }
 
                     val factory = CircuitBreakerFactoryImpl(
-                        stateRegistry = testRegistry(),
+                        stateStateManager = testRegistry(),
                         coroutineScope = scope,
                         configSource = source,
                     )
@@ -138,7 +138,7 @@ internal class CircuitBreakerFactoryImplTest : StringSpec(
                 checkAll(serviceNameArb) { name ->
                     val source = CircuitBreakerConfigSource { null }
                     val factory = CircuitBreakerFactoryImpl(
-                        stateRegistry = testRegistry(),
+                        stateStateManager = testRegistry(),
                         coroutineScope = scope,
                         configSource = source,
                     )

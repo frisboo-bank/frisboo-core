@@ -1,30 +1,8 @@
 package com.frisboo.corebanking.persistence.core.errors
 
+import kotlin.time.Duration
+
 public sealed interface PersistenceError {
-
-    /**
-     * The `where` clause did not match any rows.
-     *
-     * [optimisticUpdate][com.frisboo.corebanking.persistence.exposed.extensions.optimisticUpdate]
-     * enforces exactly-one-row semantics; if the predicate is not satisfied the update is
-     * **rolled back** and this error is returned.
-     */
-    public data class OptimisticLockFailed(
-        public val table: String,
-        public val expectedVersion: Long,
-    ) : PersistenceError
-
-    /**
-     * The `where` clause matched more than one row.
-     *
-     * [optimisticUpdate][com.frisboo.corebanking.persistence.exposed.extensions.optimisticUpdate]
-     * enforces exactly-one-row semantics; if the predicate is not unique the update is
-     * **rolled back** and this error is returned.
-     */
-    public data class NonUniqueUpdate(
-        public val table: String,
-        public val affectedRows: Int,
-    ) : PersistenceError
 
     /**
      * Errors related to connection failures to the persistence layer.
@@ -35,11 +13,19 @@ public sealed interface PersistenceError {
     ) : PersistenceError
 
     /**
+     * Errors related to failure during persistence operations.
+     */
+    public data class OperationFailed(
+        val message: String,
+        val cause: Throwable? = null,
+    ) : PersistenceError
+
+    /**
      * Errors related to timeouts during persistence operations.
      */
     public data class OperationTimeout(
         val message: String,
-        val timeoutMillis: Long,
+        val duration: Duration,
     ) : PersistenceError
 
     /**
@@ -64,5 +50,16 @@ public sealed interface PersistenceError {
     public data class DeserializationFailed(
         val message: String,
         val cause: Throwable? = null,
+    ) : PersistenceError
+
+    /**
+     * Errors related to lock acquisition failures.
+     */
+    public data class LockNotHeld(
+        val message: String,
+    ) : PersistenceError
+
+    public data class LockAlreadyHeld(
+        val message: String,
     ) : PersistenceError
 }

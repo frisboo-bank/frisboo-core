@@ -15,9 +15,9 @@
  */
 package com.frisboo.corebanking.resilience.circuitbreaker.adapters.resilience4j
 
-import com.frisboo.corebanking.registry.adapters.local.inmemory.InMemoryRegistryImpl
-import com.frisboo.corebanking.registry.contracts.Registry
-import com.frisboo.corebanking.registry.models.RegistryScope
+import com.frisboo.corebanking.statemanager.adapters.local.inmemory.InMemoryRegistryImpl
+import com.frisboo.corebanking.statemanager.contracts.StateManager
+import com.frisboo.corebanking.statemanager.models.RegistryScope
 import com.frisboo.corebanking.resilience.circuitbreaker.contracts.CircuitBreakerResult
 import com.frisboo.corebanking.resilience.circuitbreaker.contracts.CircuitBreakerState
 import com.frisboo.corebanking.resilience.circuitbreaker.model.CircuitBreakerConfig
@@ -39,7 +39,7 @@ import io.github.resilience4j.circuitbreaker.CircuitBreakerConfig as R4jConfig
 internal class Resilience4jCircuitBreakerTest : StringSpec(
     {
 
-        fun testRegistry(): Registry<String, String> = InMemoryRegistryImpl(
+        fun testRegistry(): StateManager<String, String> = InMemoryRegistryImpl(
             scope = RegistryScope(name = "r4j-test", team = "resilience"),
         )
 
@@ -48,12 +48,12 @@ internal class Resilience4jCircuitBreakerTest : StringSpec(
         suspend fun createBreaker(
             name: String,
             config: CircuitBreakerConfig,
-            registry: Registry<String, String> = testRegistry(),
+            stateManager: StateManager<String, String> = testRegistry(),
             scope: CoroutineScope,
         ): Resilience4jCircuitBreaker = createResilience4jBreaker(
             name = name,
             config = config,
-            persistence = CircuitBreakerPersistenceContext(registry, scope),
+            persistence = CircuitBreakerPersistenceContext(stateManager, scope),
         )
 
         "successful call returns Success with value" {

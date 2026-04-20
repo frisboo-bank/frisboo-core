@@ -41,7 +41,7 @@ dependencies {
     dokka(project(":frisboo-persistence"))
     dokka(project(":frisboo-quota"))
     dokka(project(":frisboo-resilience"))
-    dokka(project(":frisboo-registry"))
+    dokka(project(":frisboo-statemanager"))
     dokka(project(":frisboo-tests"))
 
     kover(project(":frisboo-auth"))
@@ -57,7 +57,7 @@ dependencies {
     kover(project(":frisboo-persistence"))
     kover(project(":frisboo-quota"))
     kover(project(":frisboo-resilience"))
-    kover(project(":frisboo-registry"))
+    kover(project(":frisboo-statemanager"))
 }
 
 subprojects {

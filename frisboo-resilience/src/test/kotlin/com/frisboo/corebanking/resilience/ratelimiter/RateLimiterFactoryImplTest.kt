@@ -15,9 +15,9 @@
  */
 package com.frisboo.corebanking.resilience.ratelimiter
 
-import com.frisboo.corebanking.registry.adapters.local.inmemory.InMemoryRegistryImpl
-import com.frisboo.corebanking.registry.contracts.Registry
-import com.frisboo.corebanking.registry.models.RegistryScope
+import com.frisboo.corebanking.statemanager.adapters.local.inmemory.InMemoryRegistryImpl
+import com.frisboo.corebanking.statemanager.contracts.StateManager
+import com.frisboo.corebanking.statemanager.models.RegistryScope
 import com.frisboo.corebanking.resilience.ratelimiter.contracts.RateLimiterConfigSource
 import com.frisboo.corebanking.resilience.ratelimiter.model.RateLimiterConfig
 import com.frisboo.corebanking.resilience.ratelimiter.testutils.createRateLimiterConfigArb
@@ -37,7 +37,7 @@ import kotlinx.coroutines.withContext
 internal class RateLimiterFactoryImplTest : StringSpec(
     {
 
-        fun testRegistry(): Registry<String, String> = InMemoryRegistryImpl(
+        fun testRegistry(): StateManager<String, String> = InMemoryRegistryImpl(
             scope = RegistryScope(name = "rl-test", team = "resilience"),
         )
 
@@ -107,7 +107,7 @@ internal class RateLimiterFactoryImplTest : StringSpec(
                     }
 
                     val factory = RateLimiterFactoryImpl(
-                        stateRegistry = testRegistry(),
+                        stateStateManager = testRegistry(),
                         coroutineScope = scope,
                         configSource = source,
                     )
@@ -137,7 +137,7 @@ internal class RateLimiterFactoryImplTest : StringSpec(
                 checkAll(serviceNameArb) { name ->
                     val source = RateLimiterConfigSource { null }
                     val factory = RateLimiterFactoryImpl(
-                        stateRegistry = testRegistry(),
+                        stateStateManager = testRegistry(),
                         coroutineScope = scope,
                         configSource = source,
                     )

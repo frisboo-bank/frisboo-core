@@ -9,7 +9,8 @@ import kotlin.time.Duration
 public suspend fun <E, T> executeWithTimeout(
     timeout: Duration,
     block: suspend () -> T,
-    mapError: (Throwable) -> E,
+    onTimeout: (Duration, TimeoutCancellationException) -> E,
+    onError: (Throwable) -> E,
 ): Either<E, T> = try {
     Either.Right(
         withTimeout(timeout) {
@@ -17,10 +18,10 @@ public suspend fun <E, T> executeWithTimeout(
         },
     )
 } catch (e: TimeoutCancellationException) {
-    Either.Left(mapError(e))
+    Either.Left(onTimeout(timeout, e))
 } catch (e: CancellationException) {
     throw e
 } catch (e: Exception) {
-    Either.Left(mapError(e))
+    Either.Left(onError(e))
 }
 

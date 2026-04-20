@@ -16,9 +16,9 @@
 package com.frisboo.corebanking.resilience.ratelimiter.adapters.resilience4j
 
 import arrow.core.Either
-import com.frisboo.corebanking.registry.adapters.local.inmemory.InMemoryRegistryImpl
-import com.frisboo.corebanking.registry.contracts.Registry
-import com.frisboo.corebanking.registry.models.RegistryScope
+import com.frisboo.corebanking.statemanager.adapters.local.inmemory.InMemoryRegistryImpl
+import com.frisboo.corebanking.statemanager.contracts.StateManager
+import com.frisboo.corebanking.statemanager.models.RegistryScope
 import com.frisboo.corebanking.resilience.ratelimiter.contracts.RateLimiterResult
 import com.frisboo.corebanking.resilience.ratelimiter.errors.RateLimiterError
 import com.frisboo.corebanking.resilience.ratelimiter.model.RateLimiterConfig
@@ -40,7 +40,7 @@ import io.github.resilience4j.ratelimiter.RateLimiterConfig as R4jRateLimiterCon
 internal class Resilience4jRateLimiterTest : StringSpec(
     {
 
-        fun testRegistry(): Registry<String, String> = InMemoryRegistryImpl(
+        fun testRegistry(): StateManager<String, String> = InMemoryRegistryImpl(
             scope = RegistryScope(name = "rl-test", team = "resilience"),
         )
 
@@ -49,12 +49,12 @@ internal class Resilience4jRateLimiterTest : StringSpec(
         suspend fun createLimiter(
             name: String,
             config: RateLimiterConfig,
-            registry: Registry<String, String> = testRegistry(),
+            stateManager: StateManager<String, String> = testRegistry(),
             scope: CoroutineScope,
         ): Resilience4jRateLimiter = createResilience4jLimiter(
             name = name,
             config = config,
-            persistence = RateLimiterPersistenceContext(registry, scope),
+            persistence = RateLimiterPersistenceContext(stateManager, scope),
         )
 
         "successful call returns Success with value" {

@@ -23,22 +23,11 @@ import org.springframework.context.annotation.Configuration
 
 /**
  * Persistence auto-configuration.
- *
- * Registers [PersistenceProperties] and provides conditional [Configuration] markers that
- * downstream services can use with `@ConditionalOnBean` to gate their own persistence beans.
- *
- * Unlike [com.frisboo.corebanking.crypto.autoconfigure.CryptoAutoConfiguration], this module
- * does not create beans itself — it supplies shared schema migrations and Exposed extensions.
- * The marker configurations exist so that services can write:
- *
- * ```kotlin
- * @ConditionalOnBean(PersistenceAutoConfiguration.Postgres::class)
- * fun myDataSource(): DataSource = ...
- * ```
  */
 @AutoConfiguration(after = [DataSourceAutoConfiguration::class])
 @EnableConfigurationProperties(PersistenceProperties::class)
-public open class PersistenceAutoConfiguration {
+public class PersistenceAutoConfiguration {
+
     @Configuration
     @ConditionalOnProperty(
         prefix = "frisboo.corebanking.persistence.postgres",

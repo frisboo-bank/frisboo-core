@@ -16,48 +16,37 @@
 package com.frisboo.corebanking.persistence.exposed.extensions
 
 import arrow.core.Either
-import arrow.core.left
-import arrow.core.right
-import com.frisboo.corebanking.persistence.core.errors.PersistenceError
+import arrow.core.raise.either
+import com.frisboo.corebanking.persistence.core.utils.toSafeSqlIdentifier
+import com.frisboo.corebanking.persistence.exposed.errors.ExposedError
 import org.jetbrains.exposed.v1.core.Column
 import org.jetbrains.exposed.v1.core.Op
 import org.jetbrains.exposed.v1.core.Table
 import org.jetbrains.exposed.v1.core.and
 import org.jetbrains.exposed.v1.core.eq
+import org.jetbrains.exposed.v1.core.intLiteral
 import org.jetbrains.exposed.v1.core.statements.UpdateStatement
-import org.jetbrains.exposed.v1.jdbc.update
+import org.jetbrains.exposed.v1.jdbc.select
 import org.jetbrains.exposed.v1.jdbc.transactions.TransactionManager
+import org.jetbrains.exposed.v1.jdbc.update
 
 public interface WithOptimisticLocking {
     public val optimisticLockingVersion: Column<Long>
 }
 
+public const val SAVEPOINT_PREFIX: String = "opt_upd_"
+public const val MAX_PG_IDENTIFIER: Int = 63
+
 /**
  * Performs an optimistic-locking–guarded UPDATE that enforces exactly-one-row semantics.
- *
- * The caller **must** supply a [where] clause that targets a single row (typically a primary-key match).
- * The version check is ANDed with [where] automatically; if the row's current version does not equal
- * [version], zero rows are updated and [PersistenceError.OptimisticLockFailed] is returned.
- *
- * If the [where] clause matches more than one row, the update is **rolled back** via a database
- * savepoint and [PersistenceError.NonUniqueUpdate] is returned — no rows are modified.
- *
- * On success the version column is incremented to `version + 1` and `1` is returned as [Either.Right].
- *
- * @param where  Row-selection predicate — **must** uniquely identify a single row.
- * @param version  Expected current version of the target row.
- * @param body  Column assignments to apply (do **not** set the version column manually).
- * @return [Either.Right] with `1` on success, or [Either.Left] with
- *         [PersistenceError.OptimisticLockFailed] when the version did not match, or
- *         [PersistenceError.NonUniqueUpdate] when multiple rows were affected (rolled back).
  */
-public suspend fun <T> T.optimisticUpdate(
-    where: () -> Op<Boolean>,
+public inline fun <T> T.optimisticUpdate(
+    crossinline where: () -> Op<Boolean>,
     version: Long,
-    body: T.(UpdateStatement) -> Unit,
-): Either<PersistenceError, Int> where T : Table, T : WithOptimisticLocking {
+    crossinline body: T.(UpdateStatement) -> Unit,
+): Either<ExposedError, Int> where T : Table, T : WithOptimisticLocking = either {
     val versionCheck = this@optimisticUpdate.optimisticLockingVersion eq version
-    val safeName = this.tableName.replace(Regex("[^a-z0-9_]"), "_").take(MAX_PG_IDENTIFIER - SAVEPOINT_PREFIX.length)
+    val safeName = tableName.toSafeSqlIdentifier(MAX_PG_IDENTIFIER - SAVEPOINT_PREFIX.length)
     val savepointName = "$SAVEPOINT_PREFIX$safeName"
     val tx = TransactionManager.current()
 
@@ -65,7 +54,7 @@ public suspend fun <T> T.optimisticUpdate(
 
     try {
         val rowsUpdated = try {
-            this.update(
+            update(
                 where = { where().and(versionCheck) },
             ) {
                 body(it)
@@ -76,24 +65,23 @@ public suspend fun <T> T.optimisticUpdate(
             throw ex
         }
 
-        return when {
-            rowsUpdated == 1 -> rowsUpdated.right()
-            rowsUpdated > 1 -> {
-                tx.exec("ROLLBACK TO SAVEPOINT $savepointName")
-                PersistenceError.NonUniqueUpdate(
-                    table = this.tableName,
-                    affectedRows = rowsUpdated,
-                ).left()
+        when (rowsUpdated) {
+            1 -> rowsUpdated
+            0 -> {
+                val exists = !select(intLiteral(1)).where(where()).limit(1).empty()
+                if (exists) {
+                    raise(ExposedError.OptimisticLockFailed(tableName, version))
+                } else {
+                    raise(ExposedError.RowNotFound(tableName))
+                }
             }
-            else -> PersistenceError.OptimisticLockFailed(
-                table = this.tableName,
-                expectedVersion = version,
-            ).left()
+
+            else -> {
+                tx.exec("ROLLBACK TO SAVEPOINT $savepointName")
+                raise(ExposedError.NonUniqueUpdate(tableName, rowsUpdated))
+            }
         }
     } finally {
         runCatching { tx.exec("RELEASE SAVEPOINT $savepointName") }
     }
 }
-
-private const val SAVEPOINT_PREFIX = "opt_upd_"
-private const val MAX_PG_IDENTIFIER = 63
