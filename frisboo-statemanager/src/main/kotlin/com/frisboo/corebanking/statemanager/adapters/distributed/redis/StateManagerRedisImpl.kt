@@ -38,6 +38,7 @@ import com.frisboo.corebanking.statemanager.models.StateManagerSizeResult
 import io.lettuce.core.ExperimentalLettuceCoroutinesApi
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.async
@@ -212,6 +213,12 @@ public class StateManagerRedisImpl<K : Any, V : Any>(
             true -> StateManagerSetTtlResult.Applied
             false -> StateManagerSetTtlResult.NotFound
         }
+    }
+
+    override fun close() {
+        backgroundScope.cancel()
+        inflight.values.forEach { it.cancel() }
+        inflight.clear()
     }
 
     // ---------- Internal helpers ----------
