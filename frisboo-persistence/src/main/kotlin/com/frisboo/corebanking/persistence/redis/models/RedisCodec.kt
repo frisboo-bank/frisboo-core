@@ -27,17 +27,18 @@ public class RedisCodec<K, V>(
         serializeWithCatch("Key") { prefixBytes + keySerializer.serialize(key) }
 
     public fun deserializeKey(prefixedKey: ByteArray): Either<PersistenceError, K> {
-        if (prefixedKey.size < prefixBytes.size) {
-            return Either.Left(PersistenceError.DeserializationFailed("Key shorter than prefix"))
-        }
-        for (i in prefixBytes.indices) {
-            if (prefixedKey[i] != prefixBytes[i]) {
+        when {
+            prefixedKey.size < prefixBytes.size ->
+                return Either.Left(PersistenceError.DeserializationFailed("Key shorter than prefix"))
+            !prefixedKey.startsWith(prefixBytes) ->
                 return Either.Left(PersistenceError.DeserializationFailed("Key prefix mismatch"))
-            }
         }
         val keyBytes = prefixedKey.copyOfRange(prefixBytes.size, prefixedKey.size)
         return deserializeWithCatch("Key") { keySerializer.deserialize(keyBytes) }
     }
+
+    private fun ByteArray.startsWith(prefix: ByteArray): Boolean =
+        this.size >= prefix.size && (0 until prefix.size).all { this[it] == prefix[it] }
 
     public fun serializeValue(value: V): Either<PersistenceError, ByteArray> =
         serializeWithCatch("Value") { valueSerializer.serialize(value) }

@@ -19,6 +19,6 @@ public interface RedisOperations<K : Any, V : Any> {
     // Atomic operations for locking
     public suspend fun set(key: K, value: V, lock: ByteArray): Either<PersistenceError, V?>
     public suspend fun set(key: K, value: V, ttlMs: Long, lock: ByteArray): Either<PersistenceError, V?>
-    public suspend fun acquireLock(key: K): Either<PersistenceError, ByteArray?>
+    public suspend fun acquireLock(key: K): Either<PersistenceError, ByteArray>
     public suspend fun releaseLock(key: K, lock: ByteArray): Either<PersistenceError, Unit>
 }

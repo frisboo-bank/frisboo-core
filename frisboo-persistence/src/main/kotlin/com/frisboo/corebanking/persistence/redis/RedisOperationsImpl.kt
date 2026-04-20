@@ -13,6 +13,7 @@ import com.frisboo.corebanking.persistence.redis.models.RedisCodec
 import com.frisboo.corebanking.persistence.redis.models.RedisScanCursor
 import com.frisboo.corebanking.persistence.redis.models.RedisScanPage
 import java.security.SecureRandom
+import kotlin.concurrent.getOrSet
 import kotlin.time.Duration
 
 public class RedisOperationsImpl<K : Any, V : Any>(
@@ -21,6 +22,8 @@ public class RedisOperationsImpl<K : Any, V : Any>(
     private val lockTtl: Duration,
     private val codec: RedisCodec<K, V>,
 ) : RedisOperations<K, V> {
+
+    private val secureRandom: SecureRandom = SecureRandom()
 
     override suspend fun ping(): Either<PersistenceError, String> =
         doExecuteOperation("PING") { it.ping() }.map { it.orEmpty() }
@@ -84,8 +87,10 @@ public class RedisOperationsImpl<K : Any, V : Any>(
         batchSize: Long?,
     ): Either<PersistenceError, Long> = either {
         var totalCount = 0L
-        val effectiveBatchSize = batchSize ?: REDIS_DEFAULT_SCAN_BATCH_SIZE
+        val effectiveBatchSize = batchSize?.coerceAtLeast(1L) ?: REDIS_DEFAULT_SCAN_BATCH_SIZE
+        require(effectiveBatchSize > 0) { "batchSize must be positive" }
         var cursor = RedisScanCursor.INITIAL
+        var iterations = 0
 
         do {
             val result = doExecuteOperation("SCAN_COUNT") {
@@ -94,6 +99,8 @@ public class RedisOperationsImpl<K : Any, V : Any>(
             ensureNotNull(result) { PersistenceError.OperationFailed("SCAN returned null") }
             val (nextCursor, keys) = result
             totalCount += keys.size
+            iterations++
+            check(iterations <= MAX_SCAN_ITERATIONS) { "SCAN exceeded max iterations ($MAX_SCAN_ITERATIONS)" }
             cursor = nextCursor
         } while (!cursor.isFinished)
         totalCount
@@ -103,6 +110,7 @@ public class RedisOperationsImpl<K : Any, V : Any>(
         cursor: RedisScanCursor?,
         limit: Int,
     ): Either<PersistenceError, RedisScanPage<K>> = either {
+        require(limit > 0) { "limit must be positive" }
         val scanCursor = cursor ?: RedisScanCursor.INITIAL
         val result = doExecuteOperation("SCAN") {
             it.scan(cursor = scanCursor, count = limit.toLong(), pattern = scanPattern())
@@ -117,12 +125,14 @@ public class RedisOperationsImpl<K : Any, V : Any>(
 
     override suspend fun acquireLock(key: K): Either<PersistenceError, ByteArray> = either {
         val lockKey = serializeLockKey(key).bind()
-        val lockValue = SecureRandom().generateSeed(16)
+        val lockValue = ByteArray(16).also { secureRandom.nextBytes(it) }
+        require(lockTtl.inWholeMilliseconds > 0) { "lockTtl must be positive" }
         val result = doExecuteOperation("ACQUIRE_LOCK") {
             it.setnx(key = lockKey, value = lockValue, ttlMs = lockTtl.inWholeMilliseconds)
         }.bind()
         when (result) {
             true -> lockValue
+            null -> raise(PersistenceError.OperationFailed("ACQUIRE_LOCK returned null"))
             else -> raise(PersistenceError.LockAlreadyHeld("Lock for key $key is already held"))
         }
     }
@@ -192,8 +202,8 @@ public class RedisOperationsImpl<K : Any, V : Any>(
                     return {-2, nil}
                 end
 
-                if ttl ~= "0" then
-                    old = redis.call("set", key, value, "PX", ttl, "GET")
+                if tonumber(ttl) > 0 then
+                    old = redis.call("set", key, value, "PX", tonumber(ttl), "GET")
                 else
                     old = redis.call("set", key, value, "GET")
                 end
@@ -215,9 +225,9 @@ public class RedisOperationsImpl<K : Any, V : Any>(
         }
     }
 
-    private suspend inline fun <T> doExecuteOperation(
+    private suspend fun <T> doExecuteOperation(
         operationName: String,
-        noinline block: suspend (command: RedisCommands) -> T?,
+        block: suspend (command: RedisCommands) -> T?,
     ): Either<PersistenceError, T?> = executeWithTimeout(
         timeout = operationTimeout,
         block = { connection.withCommands(block) },
@@ -229,6 +239,10 @@ public class RedisOperationsImpl<K : Any, V : Any>(
         },
         onError = { e -> PersistenceError.OperationFailed("$operationName failed: ${e.message}", e) },
     )
+
+    private companion object {
+        private const val MAX_SCAN_ITERATIONS: Int = 100_000
+    }
 
     private fun serializeKey(key: K): Either<PersistenceError, ByteArray> = codec.serializeKey(key)
     private fun deserializeKey(data: ByteArray): Either<PersistenceError, K> = codec.deserializeKey(data)

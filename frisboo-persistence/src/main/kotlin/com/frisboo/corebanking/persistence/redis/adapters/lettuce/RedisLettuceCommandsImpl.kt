@@ -28,9 +28,11 @@ public class RedisLettuceCommandsImpl(
 
     override suspend fun exists(key: ByteArray): Boolean = delegate.exists(key) == 1L
 
-    override suspend fun exists(vararg keys: ByteArray): Long? = delegate.exists(*keys)
+    override suspend fun exists(vararg keys: ByteArray): Long =
+        delegate.exists(*keys) ?: throw IllegalStateException("EXISTS returned null")
 
-    override suspend fun pexpire(key: ByteArray, ttlMs: Long): Boolean? = delegate.pexpire(key, ttlMs)
+    override suspend fun pexpire(key: ByteArray, ttlMs: Long): Boolean =
+        delegate.pexpire(key, ttlMs) ?: throw IllegalStateException("PEXPIRE returned null")
 
     override suspend fun scan(
         cursor: RedisScanCursor?,
@@ -53,7 +55,8 @@ public class RedisLettuceCommandsImpl(
         val raw = delegate.eval<Any>(script = script, type = ScriptOutputType.MULTI, keys = keys, values = args)
         require(raw is List<*>) { "Expected MULTI response (List), got ${raw?.javaClass}" }
 
-        val status = (raw.getOrNull(0) as? Number)?.toLong() ?: -999L
+        val status = (raw.getOrNull(0) as? Number)?.toLong()
+            ?: throw IllegalArgumentException("Expected status (Number) at index 0, got ${raw.getOrNull(0)?.javaClass}")
         val rawValue = raw.getOrNull(1)
         val value = when {
             rawValue == null -> null
