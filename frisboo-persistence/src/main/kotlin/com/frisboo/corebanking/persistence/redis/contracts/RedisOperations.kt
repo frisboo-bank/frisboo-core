@@ -7,7 +7,7 @@ import com.frisboo.corebanking.persistence.redis.models.RedisScanPage
 import kotlin.time.Duration
 
 public interface RedisOperations<K : Any, V : Any> {
-    public suspend fun ping(): Either<PersistenceError, String>
+    public suspend fun ping(): Either<PersistenceError, Boolean>
     public suspend fun set(key: K, value: V): Either<PersistenceError, V?>
     public suspend fun set(key: K, value: V, ttlMs: Long): Either<PersistenceError, V?>
     public suspend fun get(key: K): Either<PersistenceError, V?>
@@ -19,6 +19,6 @@ public interface RedisOperations<K : Any, V : Any> {
     // Atomic operations for locking
     public suspend fun set(key: K, value: V, lock: ByteArray): Either<PersistenceError, V?>
     public suspend fun set(key: K, value: V, ttlMs: Long, lock: ByteArray): Either<PersistenceError, V?>
-    public suspend fun acquireLock(key: K): Either<PersistenceError, ByteArray?>
+    public suspend fun acquireLock(key: K): Either<PersistenceError, ByteArray>
     public suspend fun releaseLock(key: K, lock: ByteArray): Either<PersistenceError, Unit>
 }

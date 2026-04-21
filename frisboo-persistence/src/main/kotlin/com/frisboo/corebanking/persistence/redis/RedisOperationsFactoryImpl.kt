@@ -16,6 +16,7 @@ public class RedisOperationsFactoryImpl(
     private val operationTimeout: Duration = REDIS_DEFAULT_OPERATION_TIMEOUT,
     private val lockTtl: Duration = REDIS_DEFAULT_LOCK_TTL,
 ) : RedisOperationsFactory {
+    private val sharedConnection by lazy { RedisLettuceConnectionImpl(connectionPool) }
 
     override suspend fun <K : Any, V : Any> create(
         prefix: String,
@@ -23,7 +24,7 @@ public class RedisOperationsFactoryImpl(
         valueSerializer: PersistenceSerializer<V>,
     ): RedisOperations<K, V> {
         return RedisOperationsImpl(
-            connection = RedisLettuceConnectionImpl(connectionPool),
+            connection = sharedConnection,
             operationTimeout = operationTimeout,
             lockTtl = lockTtl,
             codec = RedisCodec(

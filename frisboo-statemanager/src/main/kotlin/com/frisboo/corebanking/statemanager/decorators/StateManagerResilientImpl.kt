@@ -37,22 +37,34 @@ public class StateManagerResilientImpl<K : Any, V : Any>(
 ) : StateManager<K, V> {
 
     override suspend fun get(key: K): Either<StateManagerError, StateManagerGetResult<V?>> {
-        TODO("Not yet implemented")
+        return resilient(
+            primaryOption = { primary.get(key) },
+            fallbackOption = { fallback.get(key) },
+        )
     }
 
     override suspend fun contains(key: K): Either<StateManagerError, StateManagerContainsResult> {
-        TODO("Not yet implemented")
+        return resilient(
+            primaryOption = { primary.contains(key) },
+            fallbackOption = { fallback.contains(key) },
+        )
     }
 
     override suspend fun size(): Either<StateManagerError, StateManagerSizeResult> {
-        TODO("Not yet implemented")
+        return resilient(
+            primaryOption = { primary.size() },
+            fallbackOption = { fallback.size() },
+        )
     }
 
     override suspend fun put(
         key: K,
         value: V,
     ): Either<StateManagerError, StateManagerPutResult<V?>> {
-        TODO("Not yet implemented")
+        return resilient(
+            primaryOption = { primary.put(key, value) },
+            fallbackOption = { fallback.put(key, value) },
+        )
     }
 
     override suspend fun put(
@@ -60,14 +72,25 @@ public class StateManagerResilientImpl<K : Any, V : Any>(
         value: V,
         ttl: Duration,
     ): Either<StateManagerError, StateManagerPutResult<V?>> {
-        TODO("Not yet implemented")
+        return resilient(
+            primaryOption = { primary.put(key, value, ttl) },
+            fallbackOption = { fallback.put(key, value, ttl) },
+        )
     }
 
     override suspend fun getOrPut(
         key: K,
         factory: suspend () -> V,
     ): Either<StateManagerError, StateManagerGetOrPutResult<V>> {
-        TODO("Not yet implemented")
+        var factoryResult: V? = null
+        val cachedFactory: suspend () -> V = {
+            factoryResult ?: factory().also { factoryResult = it }
+        }
+
+        return resilient(
+            primaryOption = { primary.getOrPut(key, cachedFactory) },
+            fallbackOption = { fallback.getOrPut(key, cachedFactory) },
+        )
     }
 
     override suspend fun getOrPut(
@@ -75,25 +98,42 @@ public class StateManagerResilientImpl<K : Any, V : Any>(
         ttl: Duration,
         factory: suspend () -> V,
     ): Either<StateManagerError, StateManagerGetOrPutResult<V>> {
-        TODO("Not yet implemented")
+        var factoryResult: V? = null
+        val cachedFactory: suspend () -> V = {
+            factoryResult ?: factory().also { factoryResult = it }
+        }
+
+        return resilient(
+            primaryOption = { primary.getOrPut(key, ttl, cachedFactory) },
+            fallbackOption = { fallback.getOrPut(key, ttl, cachedFactory) },
+        )
     }
 
     override suspend fun evict(key: K): Either<StateManagerError, StateManagerEvictResult> {
-        TODO("Not yet implemented")
+        return resilient(
+            primaryOption = { primary.evict(key) },
+            fallbackOption = { fallback.evict(key) },
+        )
     }
 
     override suspend fun keysPage(
         cursor: String?,
         limit: Int,
     ): Either<StateManagerError, StateManagerPage<K>> {
-        TODO("Not yet implemented")
+        return resilient(
+            primaryOption = { primary.keysPage(cursor, limit) },
+            fallbackOption = { fallback.keysPage(cursor, limit) },
+        )
     }
 
     override suspend fun setTTL(
         key: K,
         ttl: Duration,
     ): Either<StateManagerError, StateManagerSetTtlResult> {
-        TODO("Not yet implemented")
+        return resilient(
+            primaryOption = { primary.setTTL(key, ttl) },
+            fallbackOption = { fallback.setTTL(key, ttl) },
+        )
     }
 
     private suspend fun <T> resilient(

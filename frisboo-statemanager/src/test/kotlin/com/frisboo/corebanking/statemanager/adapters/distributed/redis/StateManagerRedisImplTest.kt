@@ -333,5 +333,80 @@ internal class StateManagerRedisImplTest : StringSpec() {
             StateManagerTestTemplates.stressTestManyConcurrentOperationsOnDifferentKeys { createStringStateManager() }
                 .invoke()
         }
+
+        "close() cancels backgroundScope and stops in-flight getOrPut" {
+            val scope = StateManagerScope(name = "test-close-leak", team = "test")
+            val stateManager = createStringStateManager(scopeName = scope.name)
+
+            cleanupScope(scope.prefix)
+
+            val result = stateManager.getOrPut("key-1") { "value-1" }
+            result.shouldBeRight()
+
+            stateManager.close()
+
+            val shortTimeoutManager = StateManagerRedisImpl(
+                scope = scope,
+                redisOperations = RedisOperationsFactoryImpl(
+                    connectionPool = redisTestFixture.getPool(),
+                    operationTimeout = 500.milliseconds,
+                    lockTtl = REDIS_DEFAULT_LOCK_TTL,
+                ).create(
+                    prefix = scope.prefix,
+                    keySerializer = PersistenceStringSerializerImpl(),
+                    valueSerializer = PersistenceStringSerializerImpl(),
+                ),
+            )
+
+            val result2 = shortTimeoutManager.getOrPut("key-3") { "value-3" }
+            shortTimeoutManager.close()
+
+            result2.shouldBeRight()
+        }
+
+        "close() cleans up inflight deferreds" {
+            val scope = StateManagerScope(name = "test-inflight-close", team = "test")
+            val stateManager1 = createStringStateManager(scopeName = scope.name)
+            val stateManager2 = createStringStateManager(scopeName = scope.name)
+
+            cleanupScope(scope.prefix)
+
+            val slowDeferred = async(Dispatchers.IO) {
+                stateManager1.getOrPut("slow-key") {
+                    delay(5.seconds)
+                    "slow-value"
+                }
+            }
+
+            delay(100.milliseconds)
+
+            stateManager1.close()
+
+            val result = stateManager2.getOrPut("other-key") { "other-value" }
+            result.shouldBeRight()
+            stateManager2.close()
+
+            slowDeferred.cancel()
+        }
+
+        "getOrPut factory called exactly once across instances after close of one" {
+            val scope = StateManagerScope(name = "test-close-ordering", team = "test")
+            val stateManager1 = createStringStateManager(scopeName = scope.name)
+            val stateManager2 = createStringStateManager(scopeName = scope.name)
+
+            cleanupScope(scope.prefix)
+
+            stateManager1.close()
+
+            val factoryCalls = AtomicInteger(0)
+            val result = stateManager2.getOrPut("factory-test-key") {
+                factoryCalls.incrementAndGet()
+                "factory-value"
+            }
+
+            factoryCalls.get() shouldBe 1
+            result.shouldBeRight()
+            stateManager2.close()
+        }
     }
 }

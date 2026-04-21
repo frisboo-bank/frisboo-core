@@ -22,7 +22,9 @@ import com.frisboo.corebanking.statemanager.models.StateManagerIsHealthyResult
 /**
  * Remote/distributed statemanager backend
  */
-public interface DistributedStateManager<K : Any, V : Any> : StateManager<K, V> {
+public interface DistributedStateManager<K : Any, V : Any> : StateManager<K, V>, AutoCloseable {
 
     public suspend fun isHealthy(): Either<StateManagerError, StateManagerIsHealthyResult>
+
+    override fun close()
 }

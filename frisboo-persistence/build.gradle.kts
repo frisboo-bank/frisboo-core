@@ -43,6 +43,7 @@ dependencies {
     testApi(baseLibs.kotest.property.arbs)
     testApi(baseLibs.testcontainers.junit.jupiter)
     testApi(baseLibs.kotlinx.coroutines.test)
+    testApi(baseLibs.bundles.serialization)
     testRuntimeOnly(baseLibs.postgresql)
     testRuntimeOnly(baseLibs.kotest.runner.junit5)
 
