@@ -8,9 +8,8 @@ public interface RedisCommands {
     public suspend fun set(key: ByteArray, value: ByteArray): ByteArray?
     public suspend fun set(key: ByteArray, value: ByteArray, ttlMs: Long): ByteArray?
     public suspend fun del(key: ByteArray): Long?
-    public suspend fun exists(key: ByteArray): Boolean
-    public suspend fun exists(vararg keys: ByteArray): Long
-    public suspend fun pexpire(key: ByteArray, ttlMs: Long): Boolean
+    public suspend fun exists(key: ByteArray): Long?
+    public suspend fun pexpire(key: ByteArray, ttlMs: Long): Boolean?
     public suspend fun scan(
         cursor: RedisScanCursor?,
         count: Long,
@@ -24,5 +23,5 @@ public interface RedisCommands {
         valueType: Class<T>,
     ): Pair<Long, T?>
 
-    public suspend fun setnx(key: ByteArray, value: ByteArray, ttlMs: Long): Boolean
+    public suspend fun setIfAbsent(key: ByteArray, value: ByteArray, ttlMs: Long): Boolean
 }
