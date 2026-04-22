@@ -56,7 +56,7 @@ internal class Resilience4jCircuitBreakerTest : StringSpec(
             persistence = CircuitBreakerPersistenceContext(stateManager, scope),
         )
 
-        "successful call returns Success with value" {
+        "successful call returns Released with value" {
             runTest {
                 val testScope = this
                 checkAll(breakerNameArb, createCircuitBreakerConfigArb()) { name, config ->

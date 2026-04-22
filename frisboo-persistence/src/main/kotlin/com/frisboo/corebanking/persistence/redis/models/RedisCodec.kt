@@ -21,6 +21,11 @@ public class RedisCodec<K, V>(
     private val valueSerializer: PersistenceSerializer<V>,
 ) {
 
+    private companion object {
+        // Upper bound for combined key size (prefix + serialized key) to avoid unexpected huge keys.
+        private const val MAX_KEY_SIZE: Int = 10 * 1024 // 10 KiB
+    }
+
     private val prefixBytes: ByteArray = "$prefix:".toByteArray(Charsets.UTF_8)
     private val lockFullPrefixBytes: ByteArray = "$prefix:$lockPrefix:".toByteArray(Charsets.UTF_8)
 
@@ -34,7 +39,13 @@ public class RedisCodec<K, V>(
     public val scanPattern: ByteArray = "$prefix:*".toByteArray(Charsets.UTF_8)
 
     public fun serializeKey(key: K): Either<PersistenceError, ByteArray> =
-        serializeWithCatch("Key") { prefixBytes + keySerializer.serialize(key) }
+        serializeWithCatch("Key") {
+            val kb = keySerializer.serialize(key)
+            if (kb.isEmpty()) throw IllegalArgumentException("Serialized key must not be empty")
+            val combined = prefixBytes + kb
+            if (combined.size > MAX_KEY_SIZE) throw IllegalArgumentException("Serialized key too large: ${combined.size} bytes")
+            combined
+        }
 
     public fun deserializeKey(prefixedKey: ByteArray): Either<PersistenceError, K> {
         when {
@@ -54,7 +65,13 @@ public class RedisCodec<K, V>(
         deserializeWithCatch("Value") { valueSerializer.deserialize(data) }
 
     public fun serializeLockKey(key: K): Either<PersistenceError, ByteArray> =
-        serializeWithCatch("Lock key") { lockFullPrefixBytes + keySerializer.serialize(key) }
+        serializeWithCatch("Lock key") {
+            val kb = keySerializer.serialize(key)
+            if (kb.isEmpty()) throw IllegalArgumentException("Serialized lock key must not be empty")
+            val combined = lockFullPrefixBytes + kb
+            if (combined.size > MAX_KEY_SIZE) throw IllegalArgumentException("Serialized lock key too large: ${combined.size} bytes")
+            combined
+        }
 
     private inline fun serializeWithCatch(
         field: String,

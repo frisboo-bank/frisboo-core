@@ -1,7 +1,7 @@
 package com.frisboo.corebanking.persistence.redis.adapters.lettuce
 
-import com.frisboo.corebanking.persistence.redis.contracts.RedisCommands
-import com.frisboo.corebanking.persistence.redis.contracts.RedisConnection
+import com.frisboo.corebanking.persistence.redis.contracts.internal.RedisCommands
+import com.frisboo.corebanking.persistence.redis.contracts.internal.RedisConnection
 import io.lettuce.core.ExperimentalLettuceCoroutinesApi
 import io.lettuce.core.api.StatefulRedisConnection
 import io.lettuce.core.api.coroutines
@@ -9,7 +9,7 @@ import io.lettuce.core.support.AsyncPool
 import kotlinx.coroutines.future.await
 
 @OptIn(ExperimentalLettuceCoroutinesApi::class)
-public class RedisLettuceConnectionImpl(
+internal class RedisLettuceConnectionImpl(
     private val connectionPool: AsyncPool<StatefulRedisConnection<ByteArray, ByteArray>>,
 ) : RedisConnection {
 

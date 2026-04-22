@@ -57,7 +57,7 @@ internal class Resilience4jRateLimiterTest : StringSpec(
             persistence = RateLimiterPersistenceContext(stateManager, scope),
         )
 
-        "successful call returns Success with value" {
+        "successful call returns Released with value" {
             runTest {
                 val testScope = this
                 checkAll(limiterNameArb, createRateLimiterConfigArb()) { name, config ->
