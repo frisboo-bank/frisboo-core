@@ -21,4 +21,9 @@ public sealed interface CircuitBreakerError {
         public val cause: Throwable? = null,
     ) : CircuitBreakerError
 
+    public data class StateSyncFailed(
+        public val operation: String,
+        public val message: String? = null,
+        public val cause: Throwable? = null,
+    ) : CircuitBreakerError
 }

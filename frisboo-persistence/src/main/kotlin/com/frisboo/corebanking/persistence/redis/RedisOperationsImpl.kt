@@ -8,9 +8,12 @@ import com.frisboo.corebanking.persistence.core.errors.PersistenceError
 import com.frisboo.corebanking.persistence.redis.constants.REDIS_DEFAULT_LOCK_SIZE
 import com.frisboo.corebanking.persistence.redis.constants.REDIS_DEFAULT_MAX_SCAN_ITERATIONS
 import com.frisboo.corebanking.persistence.redis.constants.REDIS_DEFAULT_SCAN_BATCH_SIZE
-import com.frisboo.corebanking.persistence.redis.contracts.RedisCommands
-import com.frisboo.corebanking.persistence.redis.contracts.RedisConnection
+import com.frisboo.corebanking.persistence.redis.contracts.internal.RedisCommands
+import com.frisboo.corebanking.persistence.redis.contracts.results.RedisCompareAndSetResult
+import com.frisboo.corebanking.persistence.redis.contracts.internal.RedisConnection
 import com.frisboo.corebanking.persistence.redis.contracts.RedisOperations
+import com.frisboo.corebanking.persistence.redis.contracts.results.RedisLockAcquireResult
+import com.frisboo.corebanking.persistence.redis.contracts.results.RedisLockReleaseResult
 import com.frisboo.corebanking.persistence.redis.models.RedisCodec
 import com.frisboo.corebanking.persistence.redis.models.RedisScanCursor
 import com.frisboo.corebanking.persistence.redis.models.RedisScanPage
@@ -35,7 +38,7 @@ public class RedisOperationsImpl<K : Any, V : Any>(
      * @return True if the server responds with "PONG", false otherwise
      */
     override suspend fun ping(): Either<PersistenceError, Boolean> =
-        doExecuteOperation("PING") { it.ping() }.map { it == "PONG" }
+        doExecuteOperation("PING") { it.ping() }
 
     /**
      * Sets a value for the given key with an optional TTL. If the key already exists, it will be overwritten.
@@ -207,11 +210,11 @@ public class RedisOperationsImpl<K : Any, V : Any>(
         val lockValue = ByteArray(REDIS_DEFAULT_LOCK_SIZE).also { ThreadLocalRandom.current().nextBytes(it) }
 
         val result = doExecuteOperation("ACQUIRE_LOCK") {
-            it.setIfAbsent(key = lockKey, value = lockValue, ttlMs = lockTtl.inWholeMilliseconds)
+            it.acquireLock(key = lockKey, lock = lockValue, ttlMs = lockTtl.inWholeMilliseconds)
         }.bind()
 
         when (result) {
-            true -> lockValue
+            is RedisLockAcquireResult.Acquired -> lockValue
             else -> raise(PersistenceError.LockAlreadyHeld("Lock for key $key is already held"))
         }
     }
@@ -227,24 +230,11 @@ public class RedisOperationsImpl<K : Any, V : Any>(
     override suspend fun releaseLock(key: K, lock: ByteArray): Either<PersistenceError, Unit> = either {
         val lockKey = serializeLockKey(key).bind()
         val result = doExecuteOperation("RELEASE_LOCK") {
-            it.evalRecord(
-                """
-                    -- KEYS[1]: lockKey
-                    -- ARGV[1]: token
-                    if redis.call("get", KEYS[1]) ~= ARGV[1] then
-                        return {-1, nil}
-                    end
-                    return {redis.call("del", KEYS[1]), nil}
-                """.trimIndent(),
-                keys = arrayOf(lockKey),
-                args = arrayOf(lock),
-                valueType = ByteArray::class.java,
-            )
+            it.releaseLock(key = lockKey, lock = lock)
         }.bind()
 
-        val (status, _) = result
-        when (status) {
-            1L -> Unit
+        when (result) {
+            is RedisLockReleaseResult.Released -> Unit
             else -> raise(PersistenceError.LockNotHeld("Lock for key $key not held or token mismatch"))
         }
     }
@@ -281,59 +271,67 @@ public class RedisOperationsImpl<K : Any, V : Any>(
         lock: ByteArray,
     ): Either<PersistenceError, V?> = doSet(key, value, ttlMs, lock)
 
-    private suspend fun doSet(
+    override suspend fun compareAndSet(
         key: K,
+        expected: V?,
         value: V,
         ttlMs: Long?,
-        lock: ByteArray,
-    ): Either<PersistenceError, V?> = either {
+    ): Either<PersistenceError, RedisCompareAndSetResult> = either {
+        ensure(ttlMs == null || ttlMs > 0) { PersistenceError.OperationFailed("ttlMs must be positive") }
+
+        val k = serializeKey(key).bind()
+        val v = serializeValue(value).bind()
+        val expectedBytes = expected?.let { serializeValue(it).bind() }
+
+        val code = doExecuteOperation("EVAL compareAndSet") {
+            it.compareAndSet(key = k, expected = expectedBytes, value = v, ttlMs = ttlMs)
+        }.bind()
+        RedisCompareAndSetResult.fromCode(code)
+    }
+
+    override suspend fun increment(key: K, delta: Long): Either<PersistenceError, Long> = either {
+        val k = serializeKey(key).bind()
+
+        doExecuteOperation("INCREMENTBY") {
+            it.increment(key = k, delta = delta)
+        }.bind()
+    }
+
+    override suspend fun decrement(key: K, delta: Long): Either<PersistenceError, Long> = either {
+        val k = serializeKey(key).bind()
+
+        doExecuteOperation("DECREMENTBY") {
+            it.decrement(key = k, delta = delta)
+        }.bind()
+    }
+
+    // internal methods
+
+    private suspend fun doSet(key: K, value: V, ttlMs: Long?, lock: ByteArray): Either<PersistenceError, V?> = either {
         val k = serializeKey(key).bind()
         val v = serializeValue(value).bind()
         val lockKey = serializeLockKey(key).bind()
 
-        val result = doExecuteOperation("EVAL setWithLock") {
-            it.evalRecord(
-                """
-                local key = KEYS[1]
-                local lockKey = KEYS[2]
-                local value = ARGV[1]
-                local lock = ARGV[2]
-                local ttl = tonumber(ARGV[3])
-                local old = nil
-
-                if redis.call("get", lockKey) ~= lock then
-                    return {-1, nil}
-                end
-
-                local ttlRemaining = redis.call("pttl", lockKey)
-                if ttlRemaining <= 0 then
-                    return {-2, nil}
-                end
-
-                if ttl > 0 and ttlRemaining > ttl then
-                    redis.call("pexpire", lockKey, ttl)
-                end
-
-                if ttl > 0 then
-                    old = redis.call("set", key, value, "PX", ttl, "GET")
-                else
-                    old = redis.call("set", key, value, "GET")
-                end
-                return {0, old}
-            """.trimIndent(),
-                keys = arrayOf(k, lockKey),
-                args = arrayOf(v, lock, (ttlMs?.toString() ?: "0").toByteArray(Charsets.UTF_8)),
-                valueType = ByteArray::class.java,
-            )
+        val lockStatus = doExecuteOperation("CHECK_LOCK") {
+            it.compareAndSet(key = lockKey, expected = lock, value = lock, ttlMs = null)
         }.bind()
-        val (status, oldBytes) = result
 
-        when (status) {
-            -1L -> raise(PersistenceError.LockNotHeld("Lock for key $key not held (wrong token)"))
-            -2L -> raise(PersistenceError.LockNotHeld("Lock for key $key expired"))
-            0L -> oldBytes?.let { deserializeValue(it).bind() }
-            else -> raise(PersistenceError.OperationFailed("Unexpected status: $status"))
+        ensure(lockStatus is RedisCompareAndSetResult.Success) {
+            PersistenceError.LockNotHeld("Lock for key $key not held or has expired")
         }
+
+        val result = doExecuteOperation("SET with lock") {
+            it.compareAndSet(key = k, expected = lock, value = v, ttlMs = ttlMs)
+        }.bind()
+
+        val (status, _) = result
+        when (status) {
+            1L -> null // No previous value, but set was successful
+            0L -> doGet(key).bind() // Previous value exists and was returned
+            -1L -> raise(PersistenceError.LockNotHeld("Lock for key $key not held or has expired"))
+            else -> raise(PersistenceError.OperationFailed("Unexpected response code $status from compareAndSet"))
+        }
+
     }
 
     private suspend fun <T> doExecuteOperation(
