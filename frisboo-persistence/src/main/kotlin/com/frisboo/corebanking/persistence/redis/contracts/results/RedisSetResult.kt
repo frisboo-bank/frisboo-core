@@ -1,8 +1,11 @@
 package com.frisboo.corebanking.persistence.redis.contracts.results
 
-public sealed interface RedisSetResult {
-    public data class Success(val previous: ByteArray?) : RedisSetResult
-    public data class Failed(val message: String) : RedisSetResult
+public sealed interface RedisSetResult<out V> {
 
-    public companion object
+    public val previous: V?
+
+    public data class Success<V>(
+        override val previous: V?,
+    ) : RedisSetResult<V>
+
 }

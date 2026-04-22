@@ -1,9 +1,9 @@
 package com.frisboo.corebanking.persistence.redis.models
 
 /**
- * Page of keys from Redis SCAN with next cursor.
+ * A simple page returned by SCAN-based pagination.
  */
-public data class RedisScanPage<K>(
-    val keys: List<K>,
-    val nextCursor: RedisScanCursor,
+public data class RedisScanPage<K : Any>(
+    public val keys: List<K>,
+    public val nextCursor: RedisScanCursor,
 )

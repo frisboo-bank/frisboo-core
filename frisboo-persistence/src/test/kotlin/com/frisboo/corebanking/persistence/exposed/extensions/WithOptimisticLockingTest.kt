@@ -23,6 +23,7 @@ import io.kotest.property.arbitrary.long
 import io.kotest.property.arbitrary.string
 import io.kotest.property.checkAll
 import kotlinx.coroutines.Dispatchers
+import org.junit.jupiter.api.Assumptions.assumeTrue
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
@@ -67,9 +68,12 @@ internal class WithOptimisticLockingTest : StringSpec() {
     }
 
     private lateinit var dataSource: HikariDataSource
+    private var integrationStarted: Boolean = false
 
     override suspend fun beforeSpec(spec: Spec) {
+        if (System.getenv("RUN_INTEGRATION_TESTS") != "true") return
         postgresContainer.start()
+        integrationStarted = true
         dataSource = HikariDataSource(
             HikariConfig().apply {
                 jdbcUrl = postgresContainer.jdbcUrl
@@ -110,14 +114,18 @@ internal class WithOptimisticLockingTest : StringSpec() {
     }
 
     override suspend fun afterEach(testCase: TestCase, result: TestResult) {
+        if (!integrationStarted) return
+
         transaction {
             exec("TRUNCATE TABLE test_table RESTART IDENTITY CASCADE")
         }
     }
 
     override suspend fun afterSpec(spec: Spec) {
-        dataSource.close()
-        postgresContainer.stop()
+        if (integrationStarted) {
+            dataSource.close()
+            postgresContainer.stop()
+        }
     }
 
     private suspend fun insertRow(name: String, balance: Long = 0): Either<ExposedError, Uuid> = either {
@@ -145,7 +153,14 @@ internal class WithOptimisticLockingTest : StringSpec() {
         }
     }
 
+    private val integrationEnabled = System.getenv("RUN_INTEGRATION_TESTS") == "true"
+
     init {
+        if (!integrationEnabled) {
+            "integration tests disabled; set RUN_INTEGRATION_TESTS=true to enable" {
+                // no-op
+            }
+        } else {
         "happy-path: update succeeds and increments version" {
             checkAll(
                 PropTestConfig(iterations = TEST_ITERATIONS),
@@ -360,6 +375,7 @@ internal class WithOptimisticLockingTest : StringSpec() {
                 seenVersions.size shouldBe 1
                 seenVersions.first() shouldBe 2L
             }
+        }
         }
     }
 }

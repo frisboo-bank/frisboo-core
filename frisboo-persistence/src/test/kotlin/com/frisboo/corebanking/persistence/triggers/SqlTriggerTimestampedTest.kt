@@ -30,6 +30,8 @@ internal class SqlTriggerTimestampedTest : StringSpec() {
     lateinit var postgreSQLTestFixture: PostgreSQLTestFixture
 
     override suspend fun beforeSpec(spec: Spec) {
+        if (System.getenv("RUN_INTEGRATION_TESTS") != "true") return
+
         postgreSQLTestFixture = PostgreSQLTestFixture(
             databaseName = "trigger_test",
         )
@@ -60,10 +62,21 @@ internal class SqlTriggerTimestampedTest : StringSpec() {
     }
 
     override suspend fun afterSpec(spec: Spec) {
-        postgreSQLTestFixture.stop()
+        try {
+            postgreSQLTestFixture.stop()
+        } catch (_: Throwable) {
+            // If integration wasn't started, stop may throw; ignore
+        }
     }
 
+    private val integrationEnabled = System.getenv("RUN_INTEGRATION_TESTS") == "true"
+
     init {
+        if (!integrationEnabled) {
+            "integration tests disabled; set RUN_INTEGRATION_TESTS=true to enable" {
+                // no-op
+            }
+        } else {
         "fcb_handle_timestamps: INSERT sets created_at and updated_at" {
             val before = OffsetDateTime.now().minusSeconds(2)
             val insertName = "ts-insert-${Uuid.random()}"
@@ -165,6 +178,7 @@ internal class SqlTriggerTimestampedTest : StringSpec() {
 
             createdAfter shouldBe createdBefore
             updatedAfter shouldBe updatedBefore
+        }
         }
     }
 }

@@ -1,14 +1,12 @@
 package com.frisboo.corebanking.persistence.redis.contracts.internal
 
+import com.frisboo.corebanking.persistence.redis.contracts.results.RedisDeleteResult
 import com.frisboo.corebanking.persistence.redis.contracts.results.RedisSetIfAbsentResult
-import com.frisboo.corebanking.persistence.redis.contracts.results.RedisSetIfPresentResult
-import com.frisboo.corebanking.persistence.redis.contracts.results.RedisSetResult
 
 internal interface RedisWriteCommands {
-    suspend fun set(key: ByteArray, value: ByteArray): RedisSetResult
-    suspend fun set(key: ByteArray, value: ByteArray, ttlMs: Long): RedisSetResult
-    suspend fun setIfAbsent(key: ByteArray, value: ByteArray): RedisSetIfAbsentResult
-    suspend fun setIfAbsent(key: ByteArray, value: ByteArray, ttlMs: Long): RedisSetIfAbsentResult
-    suspend fun setIfPresent(key: ByteArray, value: ByteArray): RedisSetIfPresentResult
-    suspend fun setIfPresent(key: ByteArray, value: ByteArray, ttlMs: Long): RedisSetIfPresentResult
+    suspend fun setGet(key: ByteArray, value: ByteArray): ByteArray?
+    suspend fun setGet(key: ByteArray, value: ByteArray, ttlMs: Long): ByteArray?
+    suspend fun setIfAbsent(key: ByteArray, value: ByteArray): Boolean
+    suspend fun setIfAbsent(key: ByteArray, value: ByteArray, ttlMs: Long): Boolean
+    suspend fun del(key: ByteArray): ByteArray?
 }

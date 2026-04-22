@@ -1,9 +1,14 @@
 package com.frisboo.corebanking.persistence.redis.contracts.results
 
-public sealed interface RedisGetResult {
-    public data class Success(val value: ByteArray) : RedisGetResult
-    public data object KeyNotFound : RedisGetResult
-    public data class Failed(val message: String) : RedisGetResult
+public sealed interface RedisGetResult<out V> {
 
-    public companion object
+    public val value: V?
+
+    public data class Found<V>(
+        override val value: V,
+    ) : RedisGetResult<V>
+
+    public data object NotFound : RedisGetResult<Nothing> {
+        override val value: Nothing? = null
+    }
 }

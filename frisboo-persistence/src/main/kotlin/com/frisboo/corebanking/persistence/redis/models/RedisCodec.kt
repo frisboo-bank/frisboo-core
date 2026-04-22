@@ -51,6 +51,7 @@ public class RedisCodec<K, V>(
         when {
             prefixedKey.size < prefixBytes.size ->
                 return Either.Left(PersistenceError.DeserializationFailed("Key shorter than prefix"))
+
             !prefixedKey.startsWith(prefixBytes) ->
                 return Either.Left(PersistenceError.DeserializationFailed("Key prefix mismatch"))
         }
