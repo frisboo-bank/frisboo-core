@@ -36,7 +36,6 @@ internal class CaffeineFactoryCache<K : Any, V : Any>(
     recordStats: Boolean = true,
     coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.Default + SupervisorJob()),
 ) : FactoryCache<K, V> {
-
     init {
         require(maxSize > 0) { "maxSize must be greater than 0" }
         require(expireAfterAccess.isPositive()) { "expireAfterAccess must be positive" }
@@ -45,7 +44,8 @@ internal class CaffeineFactoryCache<K : Any, V : Any>(
     private val evictionListenerRef = AtomicReference<((suspend (K?, V?) -> Unit)?)>(null)
 
     private val cache: CoroutineCache<K, V> =
-        Caffeine.newBuilder()
+        Caffeine
+            .newBuilder()
             .maximumSize(maxSize)
             .expireAfterAccess(expireAfterAccess.toJavaDuration())
             .let { if (recordStats) it.recordStats() else it }
@@ -62,26 +62,34 @@ internal class CaffeineFactoryCache<K : Any, V : Any>(
                 },
             ).buildCoroutine()
 
-    override suspend fun get(key: K, mappingFunction: suspend (K) -> V): V = cache.get(key, mappingFunction)
+    override suspend fun get(
+        key: K,
+        mappingFunction: suspend (K) -> V,
+    ): V = cache.get(key, mappingFunction)
 
     override suspend fun getIfPresent(key: K): V? = cache.getIfPresent(key)
 
-    override suspend fun put(key: K, value: V): Unit = cache.put(key, value)
+    override suspend fun put(
+        key: K,
+        value: V,
+    ): Unit = cache.put(key, value)
 
-    override suspend fun invalidate(key: K): Unit = withContext(Dispatchers.IO) {
-        cache.synchronous().invalidate(key)
-    }
+    override suspend fun invalidate(key: K): Unit =
+        withContext(Dispatchers.IO) {
+            cache.synchronous().invalidate(key)
+        }
 
-    override suspend fun estimatedSize(): Long = withContext(Dispatchers.IO) {
-        cache.synchronous().estimatedSize()
-    }
+    override suspend fun estimatedSize(): Long =
+        withContext(Dispatchers.IO) {
+            cache.synchronous().estimatedSize()
+        }
 
-    override suspend fun stats(): FactoryCacheStats = withContext(Dispatchers.IO) {
-        FactoryCacheStats.from(cache.synchronous().stats())
-    }
+    override suspend fun stats(): FactoryCacheStats =
+        withContext(Dispatchers.IO) {
+            FactoryCacheStats.from(cache.synchronous().stats())
+        }
 
     override fun setEvictionListener(listener: (suspend (K?, V?) -> Unit)?) {
         evictionListenerRef.set(listener)
     }
 }
-

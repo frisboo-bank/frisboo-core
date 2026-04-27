@@ -18,7 +18,6 @@ package com.frisboo.corebanking.resilience.ratelimiter.errors
 import kotlin.time.Duration
 
 public sealed interface RateLimiterError {
-
     public data class LimitExceeded(
         public val requestedPermits: Int,
     ) : RateLimiterError

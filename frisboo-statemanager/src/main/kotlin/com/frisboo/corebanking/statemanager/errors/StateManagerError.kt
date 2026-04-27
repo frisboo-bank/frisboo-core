@@ -19,7 +19,6 @@ import com.frisboo.corebanking.persistence.core.errors.PersistenceError
 import kotlin.time.Duration
 
 public sealed interface StateManagerError {
-
     public data class ConnectionFailed(
         public val message: String,
         public val cause: Throwable? = null,
@@ -59,14 +58,14 @@ public sealed interface StateManagerError {
     ) : StateManagerError
 
     public companion object {
-        public fun fromPersistenceError(e: PersistenceError): StateManagerError = when (e) {
-            is PersistenceError.ConnectionFailed -> ConnectionFailed(e.message, e.cause)
-            is PersistenceError.DeserializationFailed -> DeserializationFailed(e.message, e.cause)
-            is PersistenceError.InvalidArgument -> InvalidArgument(e.name, e.message)
-            is PersistenceError.OperationFailed -> OperationFailed(e.message)
-            is PersistenceError.OperationTimeout -> OperationTimeout(e.message, e.duration)
-            is PersistenceError.SerializationFailed -> SerializationFailed(e.message, e.cause)
-            is PersistenceError.LockNotHeld -> LockNotHeld(message = e.message)
-        }
+        public fun fromPersistenceError(e: PersistenceError): StateManagerError =
+            when (e) {
+                is PersistenceError.ConnectionFailed -> ConnectionFailed(e.message, e.cause)
+                is PersistenceError.DeserializationFailed -> DeserializationFailed(e.message, e.cause)
+                is PersistenceError.InvalidArgument -> InvalidArgument(e.name, e.message)
+                is PersistenceError.OperationFailed -> OperationFailed(e.message)
+                is PersistenceError.OperationTimeout -> OperationTimeout(e.message, e.duration)
+                is PersistenceError.SerializationFailed -> SerializationFailed(e.message, e.cause)
+            }
     }
 }

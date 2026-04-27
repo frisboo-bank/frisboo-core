@@ -22,7 +22,6 @@ package com.frisboo.corebanking.statemanager.contracts
  * and must **never** catch it as a recoverable failure. Structured concurrency depends on this.
  */
 public interface StateManagerResilienceExecutor {
-
     /**
      * Runs [block]; if it fails, runs [fallback].
      *

@@ -16,7 +16,6 @@
 package com.frisboo.corebanking.statemanager.models
 
 public sealed interface StateManagerSizeResult {
-
     public val count: Long
 
     public data class Size(

@@ -26,13 +26,12 @@ import com.google.crypto.tink.hybrid.HpkeParameters
  * In production, load keysets from an encrypted store or KMS.
  */
 internal object KeysetHandleFactory {
-
-    fun generateAes256Gcm(): KeysetHandle =
-        KeysetHandle.generateNew(PredefinedAeadParameters.AES256_GCM)
+    fun generateAes256Gcm(): KeysetHandle = KeysetHandle.generateNew(PredefinedAeadParameters.AES256_GCM)
 
     fun generateHybridHpke(): KeysetHandle =
         KeysetHandle.generateNew(
-            HpkeParameters.builder()
+            HpkeParameters
+                .builder()
                 .setKemId(HpkeParameters.KemId.DHKEM_X25519_HKDF_SHA256)
                 .setKdfId(HpkeParameters.KdfId.HKDF_SHA256)
                 .setAeadId(HpkeParameters.AeadId.AES_256_GCM)

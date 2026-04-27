@@ -16,7 +16,6 @@
 package com.frisboo.corebanking.statemanager.models
 
 public sealed interface StateManagerContainsResult {
-
     public data object Found : StateManagerContainsResult
 
     public data object NotFound : StateManagerContainsResult

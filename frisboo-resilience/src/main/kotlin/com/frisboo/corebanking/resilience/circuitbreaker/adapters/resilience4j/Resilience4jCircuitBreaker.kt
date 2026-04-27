@@ -19,13 +19,13 @@ import com.frisboo.corebanking.resilience.circuitbreaker.contracts.CircuitBreake
 import com.frisboo.corebanking.resilience.circuitbreaker.contracts.CircuitBreakerMetrics
 import com.frisboo.corebanking.resilience.circuitbreaker.contracts.CircuitBreakerResult
 import com.frisboo.corebanking.resilience.circuitbreaker.errors.CircuitBreakerError
-import com.frisboo.corebanking.resilience.circuitbreaker.model.CircuitBreakerConfig
-import io.github.resilience4j.circuitbreaker.CircuitBreaker as R4jCircuitBreaker
-import io.github.resilience4j.circuitbreaker.CircuitBreakerConfig as R4jConfig
+import com.frisboo.corebanking.resilience.circuitbreaker.models.CircuitBreakerConfig
 import java.util.concurrent.TimeUnit
 import kotlin.coroutines.cancellation.CancellationException
 import kotlin.time.Duration
 import kotlin.time.toJavaDuration
+import io.github.resilience4j.circuitbreaker.CircuitBreaker as R4jCircuitBreaker
+import io.github.resilience4j.circuitbreaker.CircuitBreakerConfig as R4jConfig
 
 /**
  * Resilience4j-backed [CircuitBreaker] implementation.
@@ -39,7 +39,6 @@ internal class Resilience4jCircuitBreaker(
     private val delegate: R4jCircuitBreaker,
     override val config: CircuitBreakerConfig,
 ) : CircuitBreaker<R4jConfig> {
-
     override val metrics: CircuitBreakerMetrics = CircuitBreakerMetrics.from(delegate)
 
     override val internalConfig: R4jConfig get() = delegate.circuitBreakerConfig

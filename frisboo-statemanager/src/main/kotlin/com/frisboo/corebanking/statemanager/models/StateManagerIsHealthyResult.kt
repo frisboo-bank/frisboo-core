@@ -16,7 +16,6 @@
 package com.frisboo.corebanking.statemanager.models
 
 public sealed interface StateManagerIsHealthyResult {
-
     public data object Up : StateManagerIsHealthyResult
 
     public data class Down(

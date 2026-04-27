@@ -30,7 +30,6 @@ import com.google.crypto.tink.KeysetHandle
 public class TinkCryptoService(
     keysetHandle: KeysetHandle,
 ) : CryptoService {
-
     init {
         TinkCryptoInitializer.initialize()
     }

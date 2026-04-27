@@ -17,10 +17,10 @@ package com.frisboo.corebanking.statemanager.serialization
 
 import com.frisboo.corebanking.crypto.contracts.CryptoService
 import com.frisboo.corebanking.crypto.errors.CryptoException
+import com.frisboo.corebanking.persistence.core.models.StateManagerScope
 import com.frisboo.corebanking.persistence.core.serializers.PersistenceEncryptingSerializerImpl
 import com.frisboo.corebanking.persistence.core.serializers.PersistenceStringSerializerImpl
 import com.frisboo.corebanking.statemanager.contracts.StateManagerSerializer
-import com.frisboo.corebanking.persistence.core.models.StateManagerScope
 import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe

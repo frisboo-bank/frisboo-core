@@ -18,13 +18,13 @@ package com.frisboo.corebanking.resilience.ratelimiter
 import com.frisboo.corebanking.core.factory.AsyncFactoryBuilder
 import com.frisboo.corebanking.core.factory.models.AsyncFactoryCachingConfig
 import com.frisboo.corebanking.core.factory.models.AsyncFactoryLoggingConfig
-import com.frisboo.corebanking.statemanager.contracts.StateManager
 import com.frisboo.corebanking.resilience.ratelimiter.adapters.resilience4j.createResilience4jLimiter
 import com.frisboo.corebanking.resilience.ratelimiter.contracts.RateLimiter
 import com.frisboo.corebanking.resilience.ratelimiter.contracts.RateLimiterConfigSource
 import com.frisboo.corebanking.resilience.ratelimiter.contracts.RateLimiterFactory
 import com.frisboo.corebanking.resilience.ratelimiter.model.RateLimiterConfig
 import com.frisboo.corebanking.resilience.ratelimiter.model.RateLimiterPersistenceContext
+import com.frisboo.corebanking.statemanager.contracts.StateManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -46,11 +46,10 @@ public class RateLimiterFactoryImpl(
     private val configSource: RateLimiterConfigSource? = null,
     coroutineScope: CoroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Default), // default
 ) : RateLimiterFactory {
-
     private val persistenceScope = CoroutineScope(coroutineScope.coroutineContext + SupervisorJob())
 
     private val factory by lazy {
-        AsyncFactoryBuilder.builder< RateLimiterConfig, RateLimiter<*>>(
+        AsyncFactoryBuilder.builder<RateLimiterConfig, RateLimiter<*>>(
             constructor = { name, config ->
                 createResilience4jLimiter(
                     name = name,
@@ -58,12 +57,13 @@ public class RateLimiterFactoryImpl(
                     persistence = RateLimiterPersistenceContext(stateStateManager, persistenceScope),
                 )
             },
-            caching = AsyncFactoryCachingConfig(
-                maxSize = maxLimiters,
-                expireAfterAccess = expireAfterAccess,
-                matchesConfig = { existing, newConfig -> existing.config == newConfig },
-                recordStats = true,
-            ),
+            caching =
+                AsyncFactoryCachingConfig(
+                    maxSize = maxLimiters,
+                    expireAfterAccess = expireAfterAccess,
+                    matchesConfig = { existing, newConfig -> existing.config == newConfig },
+                    recordStats = true,
+                ),
             logging = AsyncFactoryLoggingConfig(enabled = true),
             metrics = null,
         )
@@ -75,14 +75,16 @@ public class RateLimiterFactoryImpl(
     ): RateLimiter<*> = factory.getOrCreate(name, config)
 
     override suspend fun create(name: String): RateLimiter<*> {
-        val source = checkNotNull(configSource) {
-            "No RateLimiterConfigSource configured. " +
+        val source =
+            checkNotNull(configSource) {
+                "No RateLimiterConfigSource configured. " +
                     "Either provide a config source or call create(name, config) with explicit configuration."
-        }
-        val config = checkNotNull(source.resolve(name)) {
-            "No rate limiter configuration found for '$name'. " +
+            }
+        val config =
+            checkNotNull(source.resolve(name)) {
+                "No rate limiter configuration found for '$name'. " +
                     "Define it in your configuration source or call create(name, config) with explicit configuration."
-        }
+            }
         return create(name, config)
     }
 }

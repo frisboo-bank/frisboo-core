@@ -57,13 +57,13 @@ private const val TRIGGER_TEST_TABLES_SQL =
     """
 
 internal class SqlTriggerTest : StringSpec() {
-
     lateinit var testFixture: PostgreSQLTestFixture
 
     override suspend fun beforeSpec(spec: Spec) {
-        testFixture = PostgreSQLTestFixture(
-            databaseName = "trigger_test",
-        )
+        testFixture =
+            PostgreSQLTestFixture(
+                databaseName = "trigger_test",
+            )
 
         testFixture.start()
         testFixture.migrate("classpath:db/migration/postgres")
@@ -193,4 +193,3 @@ internal class SqlTriggerTest : StringSpec() {
 //
 //            result shouldBe null
 //        }
-

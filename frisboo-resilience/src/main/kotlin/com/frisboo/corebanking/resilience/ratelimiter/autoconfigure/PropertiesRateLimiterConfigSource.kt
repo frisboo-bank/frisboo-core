@@ -15,14 +15,12 @@
  */
 package com.frisboo.corebanking.resilience.ratelimiter.autoconfigure
 
-import com.frisboo.corebanking.resilience.circuitbreaker.autoconfigure.ResilienceProperties
+import com.frisboo.corebanking.resilience.autoconfigure.ResilienceProperties
 import com.frisboo.corebanking.resilience.ratelimiter.contracts.RateLimiterConfigSource
 import com.frisboo.corebanking.resilience.ratelimiter.model.RateLimiterConfig
 
 internal class PropertiesRateLimiterConfigSource(
     private val properties: ResilienceProperties,
 ) : RateLimiterConfigSource {
-
-    override fun resolve(name: String): RateLimiterConfig =
-        properties.rateLimiter.resolveConfig(name)
+    override fun resolve(name: String): RateLimiterConfig = properties.rateLimiter.resolveConfig(name)
 }

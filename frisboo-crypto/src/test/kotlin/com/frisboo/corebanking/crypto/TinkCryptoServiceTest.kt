@@ -194,7 +194,11 @@ internal class TinkCryptoServiceTest :
             val keysetHandle = KeysetHandleFactory.generateAes256Gcm()
             val cryptoService = TinkCryptoService(keysetHandle)
 
-            checkAll(100, Arb.byteArray(Arb.int(1..4096), Arb.int().map { it.toByte() }), Arb.string(1..256)) { plaintext, aad ->
+            checkAll(
+                100,
+                Arb.byteArray(Arb.int(1..4096), Arb.int().map { it.toByte() }),
+                Arb.string(1..256),
+            ) { plaintext, aad ->
                 val aadBytes = aad.encodeToByteArray()
                 val ciphertext = cryptoService.encrypt(plaintext, aadBytes)
                 val decrypted = cryptoService.decrypt(ciphertext, aadBytes)
@@ -208,15 +212,17 @@ internal class TinkCryptoServiceTest :
             val cryptoService = TinkCryptoService(keysetHandle)
             val iterations = 100
 
-            val results = (1..iterations).map { i ->
-                async(Dispatchers.Default) {
-                    val plaintext = "concurrent-test-$i".encodeToByteArray()
-                    val aad = "aad-$i".encodeToByteArray()
-                    val ciphertext = cryptoService.encrypt(plaintext, aad)
-                    val decrypted = cryptoService.decrypt(ciphertext, aad)
-                    decrypted shouldBe plaintext
-                }
-            }.awaitAll()
+            val results =
+                (1..iterations)
+                    .map { i ->
+                        async(Dispatchers.Default) {
+                            val plaintext = "concurrent-test-$i".encodeToByteArray()
+                            val aad = "aad-$i".encodeToByteArray()
+                            val ciphertext = cryptoService.encrypt(plaintext, aad)
+                            val decrypted = cryptoService.decrypt(ciphertext, aad)
+                            decrypted shouldBe plaintext
+                        }
+                    }.awaitAll()
 
             results.size shouldBe iterations
         }

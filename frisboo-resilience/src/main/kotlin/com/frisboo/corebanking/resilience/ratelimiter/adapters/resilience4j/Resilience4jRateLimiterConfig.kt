@@ -16,8 +16,8 @@
 package com.frisboo.corebanking.resilience.ratelimiter.adapters.resilience4j
 
 import com.frisboo.corebanking.resilience.ratelimiter.model.RateLimiterConfig
-import io.github.resilience4j.ratelimiter.RateLimiterConfig as R4jRateLimiterConfig
 import kotlin.time.toJavaDuration
+import io.github.resilience4j.ratelimiter.RateLimiterConfig as R4jRateLimiterConfig
 
 internal fun RateLimiterConfig.toResilience4jConfig(): R4jRateLimiterConfig =
     R4jRateLimiterConfig

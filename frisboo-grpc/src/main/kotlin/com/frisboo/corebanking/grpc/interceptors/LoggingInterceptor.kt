@@ -52,8 +52,15 @@ public class LoggingInterceptor : ServerInterceptor {
     }
 
     private fun redactHeaders(headers: Metadata): String =
-        headers.keys()
+        headers
+            .keys()
             .joinToString { key ->
-                if (key.lowercase() in SENSITIVE_HEADERS) "$key=<REDACTED>" else "$key=${headers.get(Metadata.Key.of(key, Metadata.ASCII_STRING_MARSHALLER))}"
+                if (key.lowercase() in
+                    SENSITIVE_HEADERS
+                ) {
+                    "$key=<REDACTED>"
+                } else {
+                    "$key=${headers.get(Metadata.Key.of(key, Metadata.ASCII_STRING_MARSHALLER))}"
+                }
             }
 }

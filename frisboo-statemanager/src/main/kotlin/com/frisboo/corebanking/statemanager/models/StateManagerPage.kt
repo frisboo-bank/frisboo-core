@@ -19,4 +19,3 @@ public data class StateManagerPage<out T>(
     public val items: List<T>,
     public val nextCursor: String?,
 )
-

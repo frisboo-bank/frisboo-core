@@ -18,10 +18,15 @@ package com.frisboo.corebanking.resilience.ratelimiter.contracts
 import com.frisboo.corebanking.resilience.ratelimiter.errors.RateLimiterError.LimitExceeded
 
 public sealed class RateLimiterResult<out T> {
+    public data class Success<T>(
+        public val value: T,
+    ) : RateLimiterResult<T>()
 
-    public data class Success<T>(public val value: T) : RateLimiterResult<T>()
+    public data class Failure(
+        public val cause: Throwable,
+    ) : RateLimiterResult<Nothing>()
 
-    public data class Failure(public val cause: Throwable) : RateLimiterResult<Nothing>()
-
-    public data class Rejected(public val error: LimitExceeded) : RateLimiterResult<Nothing>()
+    public data class Rejected(
+        public val error: LimitExceeded,
+    ) : RateLimiterResult<Nothing>()
 }

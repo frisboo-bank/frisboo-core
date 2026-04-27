@@ -21,4 +21,10 @@ plugins {
 
 dependencies {
     api(project(":frisboo-core"))
+
+    api(platform(baseLibs.opentelemetry.bom))
+    api(platform(baseLibs.micrometer.bom))
+
+    api(baseLibs.opentelemetry.spring.boot.starter)
+    api(baseLibs.micrometer.registry.otlp)
 }

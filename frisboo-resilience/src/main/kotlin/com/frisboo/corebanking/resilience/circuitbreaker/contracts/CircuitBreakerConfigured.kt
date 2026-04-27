@@ -22,7 +22,6 @@ package com.frisboo.corebanking.resilience.circuitbreaker.contracts
  *   `io.github.resilience4j.circuitbreaker.CircuitBreakerConfig`).
  */
 public interface CircuitBreakerConfigured<out C : Any> {
-
     /** The adapter's native configuration as originally supplied at creation time. */
     public val internalConfig: C
 }

@@ -25,7 +25,6 @@ public sealed class CryptoException(
     message: String,
     cause: Throwable? = null,
 ) : RuntimeException(message, cause) {
-
     /** Keyset or provider misconfiguration detected during service construction. */
     public class InitializationFailed(
         message: String,

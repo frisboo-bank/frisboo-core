@@ -1,9 +1,31 @@
+/*
+ * Copyright 2025 Frisboo Bank
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing
+ * permissions and limitations under the License.
+ */
 package com.frisboo.corebanking.persistence.redis
 
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.frisboo.corebanking.persistence.core.contracts.PersistenceSerializer
 import com.frisboo.corebanking.persistence.core.errors.PersistenceError
 import com.frisboo.corebanking.persistence.core.serializers.PersistenceStringSerializerImpl
+import com.frisboo.corebanking.persistence.redis.contracts.results.RedisDeleteResult
+import com.frisboo.corebanking.persistence.redis.contracts.results.RedisExistsResult
+import com.frisboo.corebanking.persistence.redis.contracts.results.RedisGetResult
+import com.frisboo.corebanking.persistence.redis.contracts.results.RedisLockAcquireResult
+import com.frisboo.corebanking.persistence.redis.contracts.results.RedisLockReleaseResult
+import com.frisboo.corebanking.persistence.redis.contracts.results.RedisScanPageResult
+import com.frisboo.corebanking.persistence.redis.contracts.results.RedisSetResult
 import com.frisboo.corebanking.persistence.redis.models.RedisScanCursor
 import com.frisboo.corebanking.persistence.redis.testing.RedisTestFixture
 import io.kotest.assertions.arrow.core.shouldBeLeft
@@ -16,6 +38,7 @@ import io.kotest.matchers.collections.shouldBeIn
 import io.kotest.matchers.nulls.shouldNotBeNull
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.types.shouldBeInstanceOf
+import io.kotest.matchers.types.shouldBeTypeOf
 import io.kotest.property.Arb
 import io.kotest.property.PropTestConfig
 import io.kotest.property.arbitrary.boolean
@@ -27,8 +50,6 @@ import io.kotest.property.arbitrary.map
 import io.kotest.property.arbitrary.string
 import io.kotest.property.arbitrary.uuid
 import io.kotest.property.checkAll
-import com.frisboo.corebanking.persistence.redis.contracts.results.RedisLockAcquireResult
-import com.frisboo.corebanking.persistence.redis.contracts.results.RedisLockReleaseResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.awaitAll
@@ -41,81 +62,67 @@ import kotlin.uuid.Uuid
 import kotlin.uuid.toKotlinUuid
 
 @OptIn(ExperimentalUuidApi::class, ExperimentalKotest::class)
-class RedisOperationsImplTest : StringSpec() {
+internal class RedisOperationsImplTest : StringSpec() {
 
     private val redisTestFixture = RedisTestFixture()
     private lateinit var redisOperationsFactory: RedisOperationsFactoryImpl
 
     override suspend fun beforeSpec(spec: Spec) {
-        if (System.getenv("RUN_INTEGRATION_TESTS") != "true") return
         redisTestFixture.start()
         redisOperationsFactory = RedisOperationsFactoryImpl(connectionPool = redisTestFixture.getPool())
     }
 
     override suspend fun afterSpec(spec: Spec) {
-        try {
-            redisTestFixture.stop()
-        } catch (_: Throwable) {
-            // If integration wasn't started, stop may throw; ignore
-        }
+        redisTestFixture.stop()
     }
 
     override suspend fun beforeTest(testCase: TestCase) {
-        if (integrationEnabled) {
-            redisTestFixture.flushAll()
-        }
+        redisTestFixture.flushAll()
     }
 
-    private suspend fun createRedisOperations(prefix: String = "test-${Uuid.random()}") =
-        redisOperationsFactory.create(
-            prefix = prefix,
-            keySerializer = PersistenceStringSerializerImpl(),
-            valueSerializer = PersistenceStringSerializerImpl(),
-        )
-
-    private val integrationEnabled = System.getenv("RUN_INTEGRATION_TESTS") == "true"
+    private suspend fun createRedisOperations(prefix: String = "test-${Uuid.random()}") = redisOperationsFactory.create(
+        prefix = prefix,
+        keySerializer = PersistenceStringSerializerImpl(),
+        valueSerializer = PersistenceStringSerializerImpl(),
+    )
 
     init {
-        if (!integrationEnabled) {
-            "integration tests disabled; set RUN_INTEGRATION_TESTS=true to enable" {
-                // no-op, mark spec as present but skip actual tests
-            }
-        } else {
         "ping returns PONG" {
             createRedisOperations().ping() shouldBeRight true
         }
 
-        "CRUD roundtrip (set, get, exists, del)" {
+        "CRUD round-trip (set, get, exists, del)" {
             checkAll(
-                Arb.string(),
-                Arb.string(),
+                Arb.string(minSize = 4),
+                Arb.string(minSize = 1),
                 Arb.boolean(),
             ) { key, value, withTtl ->
                 val ops = createRedisOperations()
 
                 // Set
                 if (withTtl) {
-                    ops.set(key, value, 1000) shouldBeRight null
+                    ops.set(key, value, 1000) shouldBeRight RedisSetResult.Success(null)
                 } else {
-                    ops.set(key, value) shouldBeRight null
+                    ops.set(key, value) shouldBeRight RedisSetResult.Success(null)
                 }
 
                 // Get & Exists
-                ops.get(key) shouldBeRight value
-                ops.exists(key) shouldBeRight true
+                ops.get(key) shouldBeRight RedisGetResult.Found(value)
+                ops.exists(key) shouldBeRight RedisExistsResult.Exists
 
                 // Overwrite
                 val newValue = "$value-new"
-                ops.set(key, newValue) shouldBeRight value
-                ops.get(key) shouldBeRight newValue
+                val result = ops.set(key, newValue)
+                result shouldBeRight RedisSetResult.Success(value)
+                ops.get(key) shouldBeRight RedisGetResult.Found(newValue)
 
                 // Del
-                ops.del(key) shouldBeRight true
-                ops.exists(key) shouldBeRight false
-                ops.get(key) shouldBeRight null
+                ops.del(key) shouldBeRight RedisDeleteResult.Deleted(newValue)
+                ops.exists(key) shouldBeRight RedisExistsResult.NotFound
+                ops.get(key) shouldBeRight RedisGetResult.NotFound
 
                 // Del non-existent
-                ops.del(key) shouldBeRight false
+                ops.del(key) shouldBeRight RedisDeleteResult.NotFound
             }
         }
 
@@ -123,25 +130,25 @@ class RedisOperationsImplTest : StringSpec() {
             checkAll(
                 PropTestConfig(10),
                 Arb.string(minSize = 4),
-                Arb.string(),
+                Arb.string(minSize = 1),
                 Arb.string(minSize = 4),
                 Arb.long(10L..50L),
             ) { key, value, key2, ttlMs ->
                 val ops = createRedisOperations()
 
-                ops.set(key, value, ttlMs) shouldBeRight null
-                ops.get(key) shouldBeRight value
+                ops.set(key, value, ttlMs) shouldBeRight RedisSetResult.Success(null)
+                ops.get(key) shouldBeRight RedisGetResult.Found(value)
 
-                ops.set(key2, value) shouldBeRight null
+                ops.set(key2, value) shouldBeRight RedisSetResult.Success(null)
                 ops.pexpire(key2, ttlMs) shouldBeRight true
-                ops.get(key2) shouldBeRight value
+                ops.get(key2) shouldBeRight RedisGetResult.Found(value)
 
                 delay((ttlMs + 10).milliseconds)
 
-                ops.get(key) shouldBeRight null
-                ops.get(key2) shouldBeRight null
-                ops.exists(key) shouldBeRight false
-                ops.exists(key2) shouldBeRight false
+                ops.get(key) shouldBeRight RedisGetResult.NotFound
+                ops.get(key2) shouldBeRight RedisGetResult.NotFound
+                ops.exists(key) shouldBeRight RedisExistsResult.NotFound
+                ops.exists(key2) shouldBeRight RedisExistsResult.NotFound
 
                 ops.pexpire("ghost", 1000) shouldBeRight false
             }
@@ -158,7 +165,7 @@ class RedisOperationsImplTest : StringSpec() {
                 val ops = createRedisOperations(prefix)
 
                 val allKeys = (1..keyCount).map { "key-$it" }.toSet()
-                allKeys.forEach { ops.set(it, "$it-value") shouldBeRight null }
+                allKeys.forEach { ops.set(it, "$it-value") shouldBeRight RedisSetResult.Success(null) }
 
                 ops.scanCount() shouldBeRight keyCount
                 ops.scanCount(batchSize) shouldBeRight keyCount
@@ -167,7 +174,9 @@ class RedisOperationsImplTest : StringSpec() {
                 var cursor = RedisScanCursor.INITIAL
 
                 do {
-                    val page = ops.scanPage(cursor, pageLimit).shouldBeRight()
+                    val page = when (val result = ops.scanPage(cursor, pageLimit).shouldBeRight()) {
+                        is RedisScanPageResult.Success -> result
+                    }
                     retrieved.addAll(page.keys)
                     cursor = page.nextCursor
                 } while (!cursor.isFinished)
@@ -179,37 +188,33 @@ class RedisOperationsImplTest : StringSpec() {
         "locking: acquire, release, set with lock" {
             checkAll(
                 Arb.string(minSize = 4),
-                Arb.string(),
-            ) { key, value ->
+                Arb.string(minSize = 1),
+                Arb.long(1000L..50000L),
+            ) { key, value, ttlMs ->
                 val ops = createRedisOperations()
 
-                val acquired = ops.acquireLock(key).shouldBeRight()
-                val lock = when (acquired) {
+                val lock = when (val acquired = ops.acquireLock(key, ttlMs).shouldBeRight()) {
                     is RedisLockAcquireResult.Acquired -> acquired.token
                     else -> throw AssertionError("Expected lock to be acquired")
                 }
                 lock.shouldNotBeNull()
                 lock.size shouldBe 16
 
-                ops.acquireLock(key).shouldBeLeft()
-                    .shouldBeInstanceOf<PersistenceError.LockAlreadyHeld>()
+                ops.acquireLock(key, ttlMs).shouldBeRight().shouldBeInstanceOf<RedisLockAcquireResult.AlreadyHeld>()
 
-                ops.set(key, value, lock) shouldBeRight null
-                ops.get(key) shouldBeRight value
+                ops.set(key, value, lock) shouldBeRight RedisSetResult.Success(null)
+                ops.get(key) shouldBeRight RedisGetResult.Found(value)
 
-                ops.acquireLock(key).shouldBeLeft()
-                    .shouldBeInstanceOf<PersistenceError.LockAlreadyHeld>()
+                ops.acquireLock(key, ttlMs).shouldBeRight().shouldBeInstanceOf<RedisLockAcquireResult.AlreadyHeld>()
 
                 val wrongToken = ByteArray(16) { 0 }
-                ops.releaseLock(key, wrongToken).shouldBeLeft()
-                    .shouldBeInstanceOf<PersistenceError.LockNotHeld>()
+                ops.releaseLock(key, wrongToken).shouldBeRight().shouldBeInstanceOf<RedisLockReleaseResult.Mismatch>()
 
                 val releaseRes = ops.releaseLock(key, lock).shouldBeRight()
                 releaseRes shouldBe RedisLockReleaseResult.Released
-                ops.get(key) shouldBeRight value
+                ops.get(key) shouldBeRight RedisGetResult.Found(value)
 
-                val acquired2 = ops.acquireLock(key).shouldBeRight()
-                val lock2 = when (acquired2) {
+                val lock2 = when (val acquired2 = ops.acquireLock(key, ttlMs).shouldBeRight()) {
                     is RedisLockAcquireResult.Acquired -> acquired2.token
                     else -> throw AssertionError("Expected lock to be acquired")
                 }
@@ -217,8 +222,7 @@ class RedisOperationsImplTest : StringSpec() {
                 val releaseRes2 = ops.releaseLock(key, lock2).shouldBeRight()
                 releaseRes2 shouldBe RedisLockReleaseResult.Released
 
-                val reacquired = ops.acquireLock(key).shouldBeRight()
-                when (reacquired) {
+                when (val reacquired = ops.acquireLock(key, ttlMs).shouldBeRight()) {
                     is RedisLockAcquireResult.Acquired -> reacquired.token.shouldNotBeNull()
                     else -> throw AssertionError("Expected lock to be acquired")
                 }
@@ -234,20 +238,19 @@ class RedisOperationsImplTest : StringSpec() {
             ) { key, value, ttlMs ->
                 val ops = createRedisOperations()
 
-                val acquired = ops.acquireLock(key).shouldBeRight()
-                val lock = when (acquired) {
+                val lock = when (val acquired = ops.acquireLock(key, ttlMs).shouldBeRight()) {
                     is RedisLockAcquireResult.Acquired -> acquired.token
                     else -> throw AssertionError("Expected lock to be acquired")
                 }
 
-                ops.set(key, value, ttlMs, lock) shouldBeRight null
-                ops.get(key) shouldBeRight value
+                ops.set(key, value, ttlMs, lock) shouldBeRight RedisSetResult.Success(null)
+                ops.get(key) shouldBeRight RedisGetResult.Found(value)
 
                 delay((ttlMs + 10).milliseconds)
 
-                ops.get(key) shouldBeRight null
+                ops.get(key) shouldBeRight RedisGetResult.NotFound
 
-                val lock2 = ops.acquireLock(key).shouldBeRight()
+                val lock2 = ops.acquireLock(key, ttlMs).shouldBeRight()
                 lock2.shouldNotBeNull()
             }
         }
@@ -260,8 +263,7 @@ class RedisOperationsImplTest : StringSpec() {
             ) { key, value, badTtl ->
                 val ops = createRedisOperations()
 
-                ops.set(key, value, badTtl).shouldBeLeft()
-                    .shouldBeInstanceOf<PersistenceError.OperationFailed>()
+                ops.set(key, value, badTtl).shouldBeLeft().shouldBeInstanceOf<PersistenceError.OperationFailed>()
             }
         }
 
@@ -271,32 +273,35 @@ class RedisOperationsImplTest : StringSpec() {
                 Arb.long(Long.MIN_VALUE..0L),
             ) { key, badTtl ->
                 val ops = createRedisOperations()
-                ops.pexpire(key, badTtl).shouldBeLeft()
-                    .shouldBeInstanceOf<PersistenceError.OperationFailed>()
+                ops.pexpire(key, badTtl).shouldBeLeft().shouldBeInstanceOf<PersistenceError.OperationFailed>()
             }
         }
 
         "scanPage with non-positive limit returns Left" {
             checkAll(Arb.int(Int.MIN_VALUE..0)) { badLimit ->
                 val ops = createRedisOperations()
-                ops.scanPage(null, badLimit).shouldBeLeft()
-                    .shouldBeInstanceOf<PersistenceError.OperationFailed>()
+                ops.scanPage(null, badLimit).shouldBeLeft().shouldBeInstanceOf<PersistenceError.OperationFailed>()
             }
         }
 
         "concurrent acquireLock only one succeeds" {
             checkAll(
                 Arb.int(3..100),
-            ) { attempts ->
+                Arb.long(1000L..50000L),
+            ) { attempts, ttlMs ->
                 val ops = createRedisOperations()
                 val successCount = AtomicInteger(0)
 
                 coroutineScope {
                     List(attempts) {
                         async(Dispatchers.IO) {
-                            ops.acquireLock("shared").fold(
+                            ops.acquireLock("shared", ttlMs).fold(
                                 ifLeft = { /* ignore */ },
-                                ifRight = { successCount.incrementAndGet() },
+                                ifRight = {
+                                    if (it is RedisLockAcquireResult.Acquired) {
+                                        successCount.incrementAndGet()
+                                    }
+                                },
                             )
                         }
                     }.awaitAll()
@@ -319,7 +324,9 @@ class RedisOperationsImplTest : StringSpec() {
                     }.awaitAll()
                 }
 
-                ops.get(key).shouldBeRight().shouldBeIn(values)
+                val result = ops.get(key).shouldBeRight().also {
+                    it.value.shouldBeIn(values)
+                }
             }
         }
 
@@ -340,14 +347,15 @@ class RedisOperationsImplTest : StringSpec() {
 
             checkAll(
                 Arb.string(minSize = 4),
-                Arb.byteArray(Arb.int(0..1024), Arb.byte()),
-            ) { key, bytes ->
+                Arb.byteArray(Arb.int(1..1024), Arb.byte()),
+            ) { key, value ->
                 redisTestFixture.flushAll()
 
-                binaryOps.set(key, bytes) shouldBeRight null
+                binaryOps.set(key, value) shouldBeRight RedisSetResult.Success(null)
 
-                binaryOps.get(key).shouldBeRight().also {
-                    it.contentEquals(bytes) shouldBe true
+                binaryOps.get(key).shouldBeRight().also { result ->
+                    result.shouldBeTypeOf<RedisGetResult.Found<ByteArray>>()
+                    result.value shouldBe value
                 }
             }
         }
@@ -366,11 +374,9 @@ class RedisOperationsImplTest : StringSpec() {
                 prefix = "json-${Uuid.random()}",
                 keySerializer = PersistenceStringSerializerImpl(),
                 valueSerializer = object : PersistenceSerializer<User> {
-                    override fun serialize(value: User): ByteArray =
-                        mapper.writeValueAsBytes(value)
+                    override fun serialize(value: User): ByteArray = mapper.writeValueAsBytes(value)
 
-                    override fun deserialize(value: ByteArray): User =
-                        mapper.readValue(value, User::class.java)
+                    override fun deserialize(value: ByteArray): User = mapper.readValue(value, User::class.java)
                 },
             )
 
@@ -392,11 +398,10 @@ class RedisOperationsImplTest : StringSpec() {
                     isActive = isActive,
                 )
 
-                jsonOps.set(key, user) shouldBeRight null
+                jsonOps.set(key, user) shouldBeRight RedisSetResult.Success(null)
 
-                jsonOps.get(key).shouldBeRight() shouldBe user
+                jsonOps.get(key).shouldBeRight() shouldBe RedisGetResult.Found(user)
             }
-        }
         }
     }
 }

@@ -22,16 +22,19 @@ import kotlin.time.measureTimedValue
 public class LoggingFactory<C : Any, T : Any>(
     private val delegate: AsyncFactory<C, T>,
 ) : AsyncFactory<C, T> {
-
     public companion object {
         private val logger = KotlinLogging.logger {}
     }
 
-    override suspend fun getOrCreate(name: String, config: C): T {
+    override suspend fun getOrCreate(
+        name: String,
+        config: C,
+    ): T {
         logger.info { "getOrCreate($name, $config)" }
-        val (instance, duration) = measureTimedValue {
-            delegate.getOrCreate(name, config)
-        }
+        val (instance, duration) =
+            measureTimedValue {
+                delegate.getOrCreate(name, config)
+            }
         logger.info { "getOrCreate($name) completed in $duration" }
         return instance
     }

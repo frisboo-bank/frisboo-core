@@ -25,14 +25,16 @@ import kotlin.time.Duration
  * Administrative operations on a state manager.
  */
 public interface StateManagerAdmin<K : Any, V : Any> {
-
     /**
      * Returns a cursor-based page of keys.
      *
      * @param cursor opaque cursor from a previous page, or `null` for the first page.
      * @param limit maximum number of keys to return.
      */
-    public suspend fun keysPage(cursor: String?, limit: Int): Either<StateManagerError, StateManagerPage<K>>
+    public suspend fun keysPage(
+        cursor: String?,
+        limit: Int,
+    ): Either<StateManagerError, StateManagerPage<K>>
 
     /**
      * Updates the time-to-live for an existing [key].
@@ -41,5 +43,8 @@ public interface StateManagerAdmin<K : Any, V : Any> {
      *         or [StateManagerSetTtlResult.Failed] with [StateManagerError.InvalidTtl] if [ttl] is not positive
      *         (distributed implementations require [ttl] >= 1ms).
      */
-    public suspend fun setTTL(key: K, ttl: Duration): Either<StateManagerError, StateManagerSetTtlResult>
+    public suspend fun setTTL(
+        key: K,
+        ttl: Duration,
+    ): Either<StateManagerError, StateManagerSetTtlResult>
 }

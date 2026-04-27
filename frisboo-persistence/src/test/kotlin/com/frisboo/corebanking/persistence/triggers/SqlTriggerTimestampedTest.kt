@@ -1,3 +1,18 @@
+/*
+ * Copyright 2025 Frisboo Bank
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing
+ * permissions and limitations under the License.
+ */
 package com.frisboo.corebanking.persistence.triggers
 
 import com.frisboo.corebanking.persistence.exposed.abstracts.BaseTable
@@ -26,15 +41,15 @@ private object TestTimestamped : BaseTable("test_timestamped") {
 
 @OptIn(ExperimentalUuidApi::class)
 internal class SqlTriggerTimestampedTest : StringSpec() {
-
     lateinit var postgreSQLTestFixture: PostgreSQLTestFixture
 
     override suspend fun beforeSpec(spec: Spec) {
         if (System.getenv("RUN_INTEGRATION_TESTS") != "true") return
 
-        postgreSQLTestFixture = PostgreSQLTestFixture(
-            databaseName = "trigger_test",
-        )
+        postgreSQLTestFixture =
+            PostgreSQLTestFixture(
+                databaseName = "trigger_test",
+            )
 
         postgreSQLTestFixture.start()
         postgreSQLTestFixture.migrate("classpath:db/migration/postgres")
@@ -42,12 +57,12 @@ internal class SqlTriggerTimestampedTest : StringSpec() {
         suspendTransaction {
             exec(
                 """
-                    CREATE TABLE test_timestamped (
-                        table_id   UUID PRIMARY KEY DEFAULT gen_random_uuid(),
-                        name       VARCHAR(255) NOT NULL,
-                        created_at TIMESTAMPTZ NOT NULL DEFAULT statement_timestamp(),
-                        updated_at TIMESTAMPTZ NOT NULL DEFAULT statement_timestamp()
-                    );
+                CREATE TABLE test_timestamped (
+                    table_id   UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+                    name       VARCHAR(255) NOT NULL,
+                    created_at TIMESTAMPTZ NOT NULL DEFAULT statement_timestamp(),
+                    updated_at TIMESTAMPTZ NOT NULL DEFAULT statement_timestamp()
+                );
                 """.trimIndent(),
             )
             exec(
@@ -56,7 +71,7 @@ internal class SqlTriggerTimestampedTest : StringSpec() {
                 BEFORE INSERT OR UPDATE ON test_timestamped
                 FOR EACH ROW
                 EXECUTE FUNCTION public.fcb_handle_timestamps();
-            """.trimIndent(),
+                """.trimIndent(),
             )
         }
     }
@@ -77,108 +92,112 @@ internal class SqlTriggerTimestampedTest : StringSpec() {
                 // no-op
             }
         } else {
-        "fcb_handle_timestamps: INSERT sets created_at and updated_at" {
-            val before = OffsetDateTime.now().minusSeconds(2)
-            val insertName = "ts-insert-${Uuid.random()}"
+            "fcb_handle_timestamps: INSERT sets created_at and updated_at" {
+                val before = OffsetDateTime.now().minusSeconds(2)
+                val insertName = "ts-insert-${Uuid.random()}"
 
-            suspendTransaction {
-                TestTimestamped.insert { it[TestTimestamped.name] = insertName }
-            }
-
-            val (createdAt, updatedAt) =
                 suspendTransaction {
-                    TestTimestamped.select(
-                        TestTimestamped.createdAt,
-                        TestTimestamped.updatedAt,
-                    )
-                        .where { TestTimestamped.name eq insertName }
-                        .map {
-                            it[TestTimestamped.createdAt] to it[TestTimestamped.updatedAt]
-                        }.single()
+                    TestTimestamped.insert { it[TestTimestamped.name] = insertName }
                 }
 
-            createdAt shouldNotBe null
-            updatedAt shouldNotBe null
-            createdAt shouldBe updatedAt
-            createdAt shouldBeGreaterThanOrEqualTo before
-        }
+                val (createdAt, updatedAt) =
+                    suspendTransaction {
+                        TestTimestamped
+                            .select(
+                                TestTimestamped.createdAt,
+                                TestTimestamped.updatedAt,
+                            ).where { TestTimestamped.name eq insertName }
+                            .map {
+                                it[TestTimestamped.createdAt] to it[TestTimestamped.updatedAt]
+                            }.single()
+                    }
 
-        "fcb_handle_timestamps: UPDATE changes updated_at but preserves created_at" {
-            val insertName = "ts-insert-${Uuid.random()}"
-            val updateName = "ts-insert-${Uuid.random()}"
-
-            suspendTransaction {
-                TestTimestamped.insert { it[name] = insertName }
+                createdAt shouldNotBe null
+                updatedAt shouldNotBe null
+                createdAt shouldBe updatedAt
+                createdAt shouldBeGreaterThanOrEqualTo before
             }
 
-            val (createdBefore, updatedBefore) =
+            "fcb_handle_timestamps: UPDATE changes updated_at but preserves created_at" {
+                val insertName = "ts-insert-${Uuid.random()}"
+                val updateName = "ts-insert-${Uuid.random()}"
+
                 suspendTransaction {
-                    TestTimestamped.select(
-                        TestTimestamped.createdAt,
-                        TestTimestamped.updatedAt,
-                    ).where { TestTimestamped.name eq insertName }
-                        .map {
-                            it[TestTimestamped.createdAt] to it[TestTimestamped.updatedAt]
-                        }.single()
+                    TestTimestamped.insert { it[name] = insertName }
                 }
 
-            suspendTransaction {
-                TestTimestamped.update({ TestTimestamped.name eq insertName })
-                { it[name] = updateName }
+                val (createdBefore, updatedBefore) =
+                    suspendTransaction {
+                        TestTimestamped
+                            .select(
+                                TestTimestamped.createdAt,
+                                TestTimestamped.updatedAt,
+                            ).where { TestTimestamped.name eq insertName }
+                            .map {
+                                it[TestTimestamped.createdAt] to it[TestTimestamped.updatedAt]
+                            }.single()
+                    }
+
+                suspendTransaction {
+                    TestTimestamped.update({ TestTimestamped.name eq insertName })
+                        { it[name] = updateName }
+                }
+
+                val (createdAfter, updatedAfter) =
+                    suspendTransaction {
+                        TestTimestamped
+                            .select(
+                                TestTimestamped.createdAt,
+                                TestTimestamped.updatedAt,
+                            ).where { TestTimestamped.name eq updateName }
+                            .map {
+                                it[TestTimestamped.createdAt] to it[TestTimestamped.updatedAt]
+                            }.single()
+                    }
+
+                createdAfter shouldBe createdBefore
+                updatedAfter shouldBeGreaterThanOrEqualTo updatedBefore
             }
 
-            val (createdAfter, updatedAfter) =
+            "fcb_handle_timestamps: no-op UPDATE preserves both timestamps" {
+                val insertName = "ts-insert-${Uuid.random()}"
+
                 suspendTransaction {
-                    TestTimestamped.select(
-                        TestTimestamped.createdAt,
-                        TestTimestamped.updatedAt,
-                    ).where { TestTimestamped.name eq updateName }
-                        .map {
-                            it[TestTimestamped.createdAt] to it[TestTimestamped.updatedAt]
-                        }.single()
+                    TestTimestamped.insert { it[name] = insertName }
                 }
 
-            createdAfter shouldBe createdBefore
-            updatedAfter shouldBeGreaterThanOrEqualTo updatedBefore
-        }
+                val (createdBefore, updatedBefore) =
+                    suspendTransaction {
+                        TestTimestamped
+                            .select(
+                                TestTimestamped.createdAt,
+                                TestTimestamped.updatedAt,
+                            ).where { TestTimestamped.name eq insertName }
+                            .map {
+                                it[TestTimestamped.createdAt] to it[TestTimestamped.updatedAt]
+                            }.single()
+                    }
 
-        "fcb_handle_timestamps: no-op UPDATE preserves both timestamps" {
-            val insertName = "ts-insert-${Uuid.random()}"
+                suspendTransaction {
+                    TestTimestamped.update({ TestTimestamped.name eq insertName })
+                        { it[name] = insertName }
+                }
 
-            suspendTransaction {
-                TestTimestamped.insert { it[name] = insertName }
+                val (createdAfter, updatedAfter) =
+                    suspendTransaction {
+                        TestTimestamped
+                            .select(
+                                TestTimestamped.createdAt,
+                                TestTimestamped.updatedAt,
+                            ).where { TestTimestamped.name eq insertName }
+                            .map {
+                                it[TestTimestamped.createdAt] to it[TestTimestamped.updatedAt]
+                            }.single()
+                    }
+
+                createdAfter shouldBe createdBefore
+                updatedAfter shouldBe updatedBefore
             }
-
-            val (createdBefore, updatedBefore) =
-                suspendTransaction {
-                    TestTimestamped.select(
-                        TestTimestamped.createdAt,
-                        TestTimestamped.updatedAt,
-                    ).where { TestTimestamped.name eq insertName }
-                        .map {
-                            it[TestTimestamped.createdAt] to it[TestTimestamped.updatedAt]
-                        }.single()
-                }
-
-            suspendTransaction {
-                TestTimestamped.update({ TestTimestamped.name eq insertName })
-                { it[name] = insertName }
-            }
-
-            val (createdAfter, updatedAfter) =
-                suspendTransaction {
-                    TestTimestamped.select(
-                        TestTimestamped.createdAt,
-                        TestTimestamped.updatedAt,
-                    ).where { TestTimestamped.name eq insertName }
-                        .map {
-                            it[TestTimestamped.createdAt] to it[TestTimestamped.updatedAt]
-                        }.single()
-                }
-
-            createdAfter shouldBe createdBefore
-            updatedAfter shouldBe updatedBefore
-        }
         }
     }
 }

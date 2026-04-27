@@ -99,14 +99,16 @@ internal class CaffeineFactoryCacheTest :
                 val cache = createCache()
                 val computations = AtomicInteger(0)
 
-                val first = cache.get(key) {
-                    computations.incrementAndGet()
-                    value
-                }
-                val second = cache.get(key) {
-                    computations.incrementAndGet()
-                    "should-not-be-used"
-                }
+                val first =
+                    cache.get(key) {
+                        computations.incrementAndGet()
+                        value
+                    }
+                val second =
+                    cache.get(key) {
+                        computations.incrementAndGet()
+                        "should-not-be-used"
+                    }
 
                 first shouldBe value
                 second shouldBe value
@@ -185,11 +187,12 @@ internal class CaffeineFactoryCacheTest :
                 if (key1 == key2) return@checkAll
 
                 val scope = CoroutineScope(Dispatchers.Default + SupervisorJob())
-                val cache = CaffeineFactoryCache<String, String>(
-                    maxSize = 1,
-                    expireAfterAccess = 5.minutes,
-                    coroutineScope = scope,
-                )
+                val cache =
+                    CaffeineFactoryCache<String, String>(
+                        maxSize = 1,
+                        expireAfterAccess = 5.minutes,
+                        coroutineScope = scope,
+                    )
 
                 val evicted = CompletableDeferred<Pair<String?, String?>>()
                 cache.setEvictionListener { k, v ->
@@ -210,11 +213,12 @@ internal class CaffeineFactoryCacheTest :
                 if (key1 == key2) return@checkAll
 
                 val scope = CoroutineScope(Dispatchers.Default + SupervisorJob())
-                val cache = CaffeineFactoryCache<String, String>(
-                    maxSize = 1,
-                    expireAfterAccess = 5.minutes,
-                    coroutineScope = scope,
-                )
+                val cache =
+                    CaffeineFactoryCache<String, String>(
+                        maxSize = 1,
+                        expireAfterAccess = 5.minutes,
+                        coroutineScope = scope,
+                    )
 
                 val firstListenerCalls = AtomicInteger(0)
                 cache.setEvictionListener { _, _ -> firstListenerCalls.incrementAndGet() }
@@ -235,11 +239,12 @@ internal class CaffeineFactoryCacheTest :
                 if (key1 == key2) return@checkAll
 
                 val scope = CoroutineScope(Dispatchers.Default + SupervisorJob())
-                val cache = CaffeineFactoryCache<String, String>(
-                    maxSize = 1,
-                    expireAfterAccess = 5.minutes,
-                    coroutineScope = scope,
-                )
+                val cache =
+                    CaffeineFactoryCache<String, String>(
+                        maxSize = 1,
+                        expireAfterAccess = 5.minutes,
+                        coroutineScope = scope,
+                    )
 
                 val calls = AtomicInteger(0)
                 cache.setEvictionListener { _, _ -> calls.incrementAndGet() }
@@ -259,16 +264,18 @@ internal class CaffeineFactoryCacheTest :
                 val computations = AtomicInteger(0)
                 val iterations = 100
 
-                val results = withContext(Dispatchers.Default) {
-                    (1..iterations).map {
-                        async {
-                            cache.get(key) {
-                                computations.incrementAndGet()
-                                value
-                            }
-                        }
-                    }.awaitAll()
-                }
+                val results =
+                    withContext(Dispatchers.Default) {
+                        (1..iterations)
+                            .map {
+                                async {
+                                    cache.get(key) {
+                                        computations.incrementAndGet()
+                                        value
+                                    }
+                                }
+                            }.awaitAll()
+                    }
 
                 results.forEach { it shouldBe value }
                 computations.get() shouldBe 1
@@ -280,11 +287,12 @@ internal class CaffeineFactoryCacheTest :
             val iterations = 100
 
             withContext(Dispatchers.Default) {
-                (1..iterations).map { i ->
-                    async {
-                        cache.put("key-$i", "value-$i")
-                    }
-                }.awaitAll()
+                (1..iterations)
+                    .map { i ->
+                        async {
+                            cache.put("key-$i", "value-$i")
+                        }
+                    }.awaitAll()
             }
 
             cache.estimatedSize() shouldBe iterations.toLong()
@@ -295,15 +303,17 @@ internal class CaffeineFactoryCacheTest :
             val iterations = 100
 
             withContext(Dispatchers.Default) {
-                (1..iterations).map { i ->
-                    async { cache.put("key-$i", "value-$i") }
-                }.awaitAll()
+                (1..iterations)
+                    .map { i ->
+                        async { cache.put("key-$i", "value-$i") }
+                    }.awaitAll()
             }
 
             withContext(Dispatchers.Default) {
-                (1..iterations).map { i ->
-                    async { cache.invalidate("key-$i") }
-                }.awaitAll()
+                (1..iterations)
+                    .map { i ->
+                        async { cache.invalidate("key-$i") }
+                    }.awaitAll()
             }
 
             cache.estimatedSize() shouldBe 0

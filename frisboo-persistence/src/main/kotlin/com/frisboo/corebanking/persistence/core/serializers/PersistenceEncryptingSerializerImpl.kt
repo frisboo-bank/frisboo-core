@@ -25,7 +25,6 @@ public class PersistenceEncryptingSerializerImpl<T>(
     private val cryptoService: CryptoService,
     private val scope: PersistenceScope,
 ) : PersistenceSerializer<T> {
-
     private val associatedData: ByteArray = scope.prefix.toByteArray(Charsets.UTF_8)
 
     override fun serialize(value: T): ByteArray {

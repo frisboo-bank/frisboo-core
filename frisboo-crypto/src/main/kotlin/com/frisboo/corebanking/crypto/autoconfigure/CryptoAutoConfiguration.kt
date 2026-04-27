@@ -51,7 +51,6 @@ import org.springframework.context.annotation.Bean
 @ConditionalOnProperty(prefix = "frisboo.corebanking.crypto", name = ["enabled"], havingValue = "true")
 @EnableConfigurationProperties(CryptoProperties::class)
 public open class CryptoAutoConfiguration {
-
     init {
         TinkCryptoInitializer.initialize()
     }

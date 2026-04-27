@@ -35,7 +35,6 @@ import com.google.crypto.tink.RegistryConfiguration
 public class TinkHybridCryptoService(
     privateKeysetHandle: KeysetHandle,
 ) : HybridCryptoService {
-
     init {
         TinkCryptoInitializer.initialize()
     }

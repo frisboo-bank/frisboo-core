@@ -42,6 +42,7 @@ dependencies {
     api(baseLibs.kotlinx.datetime)
     api(baseLibs.reactor.kotlin.extensions)
     api(baseLibs.spring.boot.autoconfigure)
+    api(baseLibs.spring.boot.starter.webflux)
 
     testImplementation(platform(baseLibs.junit.bom))
     testImplementation(platform(baseLibs.kotest.bom))

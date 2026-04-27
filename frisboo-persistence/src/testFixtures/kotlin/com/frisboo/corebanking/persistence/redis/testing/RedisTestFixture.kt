@@ -1,3 +1,18 @@
+/*
+ * Copyright 2025 Frisboo Bank
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing
+ * permissions and limitations under the License.
+ */
 package com.frisboo.corebanking.persistence.redis.testing
 
 import com.frisboo.corebanking.persistence.core.constants.REDIS_LATEST_IMAGE
@@ -45,31 +60,39 @@ class RedisTestFixture(
     /**
      * Starts the Redis container and initializes the Redis client and connection pool.
      */
-    suspend fun start() = mutex.withLock {
-        if (started) return
+    suspend fun start() =
+        mutex.withLock {
+            if (started) return
 
-        container.start()
-        client = RedisClient.create(container.redisURI)
+            container.start()
+            client = RedisClient.create(container.redisURI)
 
-        val uri = RedisURI.create(container.redisURI)
-        pool = AsyncConnectionPoolSupport.createBoundedObjectPoolAsync(
-            { client.connectAsync(ByteArrayCodec(), uri).toCompletableFuture() },
-            BoundedPoolConfig.builder().maxTotal(poolProps.maxTotal).maxIdle(poolProps.maxIdle).build(),
-        ).await()
-        started = true
-    }
+            val uri = RedisURI.create(container.redisURI)
+            pool =
+                AsyncConnectionPoolSupport
+                    .createBoundedObjectPoolAsync(
+                        { client.connectAsync(ByteArrayCodec(), uri).toCompletableFuture() },
+                        BoundedPoolConfig
+                            .builder()
+                            .maxTotal(poolProps.maxTotal)
+                            .maxIdle(poolProps.maxIdle)
+                            .build(),
+                    ).await()
+            started = true
+        }
 
     /**
      * Stops the Redis container and closes the Redis client and connection pool.
      */
-    suspend fun stop() = mutex.withLock {
-        if (!started) return
+    suspend fun stop() =
+        mutex.withLock {
+            if (!started) return
 
-        pool.closeAsync().await()
-        client.shutdownAsync().await()
-        container.stop()
-        started = false
-    }
+            pool.closeAsync().await()
+            client.shutdownAsync().await()
+            container.stop()
+            started = false
+        }
 
     /**
      * Acquires a connection from the pool.
@@ -110,9 +133,7 @@ class RedisTestFixture(
      * and returns a result of type [T].
      * @return The result of the block execution.
      */
-    suspend fun <T> withConnection(
-        block: suspend (StatefulRedisConnection<ByteArray, ByteArray>) -> T,
-    ): T {
+    suspend fun <T> withConnection(block: suspend (StatefulRedisConnection<ByteArray, ByteArray>) -> T): T {
         check(started) { "Fixture must be started before using connection" }
 
         val connection = getConnection()
