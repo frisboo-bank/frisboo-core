@@ -22,8 +22,8 @@ import com.frisboo.corebanking.resilience.circuitbreaker.adapters.resilience4j.c
 import com.frisboo.corebanking.resilience.circuitbreaker.contracts.CircuitBreaker
 import com.frisboo.corebanking.resilience.circuitbreaker.contracts.CircuitBreakerConfigSource
 import com.frisboo.corebanking.resilience.circuitbreaker.contracts.CircuitBreakerFactory
-import com.frisboo.corebanking.resilience.circuitbreaker.model.CircuitBreakerConfig
-import com.frisboo.corebanking.resilience.circuitbreaker.model.CircuitBreakerPersistenceContext
+import com.frisboo.corebanking.resilience.circuitbreaker.models.CircuitBreakerConfig
+import com.frisboo.corebanking.resilience.circuitbreaker.models.CircuitBreakerPersistenceContext
 import com.frisboo.corebanking.statemanager.contracts.StateManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -38,7 +38,6 @@ public class CircuitBreakerFactoryImpl(
     private val configSource: CircuitBreakerConfigSource? = null,
     coroutineScope: CoroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Default), // default
 ) : CircuitBreakerFactory {
-
     private val persistenceScope = CoroutineScope(coroutineScope.coroutineContext + SupervisorJob())
 
     private val factory by lazy {
@@ -50,12 +49,13 @@ public class CircuitBreakerFactoryImpl(
                     persistence = CircuitBreakerPersistenceContext(stateStateManager, persistenceScope),
                 )
             },
-            caching = AsyncFactoryCachingConfig(
-                maxSize = maxBreakers,
-                expireAfterAccess = expireAfterAccess,
-                matchesConfig = { existing, newConfig -> existing.config == newConfig },
-                recordStats = true,
-            ),
+            caching =
+                AsyncFactoryCachingConfig(
+                    maxSize = maxBreakers,
+                    expireAfterAccess = expireAfterAccess,
+                    matchesConfig = { existing, newConfig -> existing.config == newConfig },
+                    recordStats = true,
+                ),
             logging = AsyncFactoryLoggingConfig(enabled = true),
             metrics = null,
         )
@@ -67,15 +67,16 @@ public class CircuitBreakerFactoryImpl(
     ): CircuitBreaker<*> = factory.getOrCreate(name, config)
 
     override suspend fun create(name: String): CircuitBreaker<*> {
-        val source = checkNotNull(configSource) {
-            "No CircuitBreakerConfigSource configured. " +
+        val source =
+            checkNotNull(configSource) {
+                "No CircuitBreakerConfigSource configured. " +
                     "Either provide a config source or call create(name, config) with explicit configuration."
-        }
-        val config = checkNotNull(source.resolve(name)) {
-            "No circuit breaker configuration found for '$name'. " +
+            }
+        val config =
+            checkNotNull(source.resolve(name)) {
+                "No circuit breaker configuration found for '$name'. " +
                     "Define it in your configuration source or call create(name, config) with explicit configuration."
-        }
+            }
         return create(name, config)
     }
 }
-

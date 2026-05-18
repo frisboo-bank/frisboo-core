@@ -22,7 +22,6 @@ import io.kotest.core.spec.style.StringSpec
 import io.kotest.matchers.shouldBe
 
 internal class StateManagerScopeTest : StringSpec() {
-
     init {
         "accepts single lowercase letter" {
             shouldNotThrow<IllegalArgumentException> {

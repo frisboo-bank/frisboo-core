@@ -16,8 +16,8 @@
 package com.frisboo.corebanking.resilience.circuitbreaker.adapters.resilience4j
 
 import com.frisboo.corebanking.resilience.circuitbreaker.contracts.CircuitBreakerState
-import com.frisboo.corebanking.resilience.circuitbreaker.model.CircuitBreakerConfig
-import com.frisboo.corebanking.resilience.circuitbreaker.model.CircuitBreakerPersistenceContext
+import com.frisboo.corebanking.resilience.circuitbreaker.models.CircuitBreakerConfig
+import com.frisboo.corebanking.resilience.circuitbreaker.models.CircuitBreakerPersistenceContext
 import io.github.oshai.kotlinlogging.KotlinLogging
 import kotlinx.coroutines.launch
 import kotlin.coroutines.cancellation.CancellationException
@@ -47,14 +47,15 @@ internal suspend fun createResilience4jBreaker(
         }
     }
 
-    val lastStateName = try {
-        stateRegistry.get(name)
-    } catch (e: CancellationException) {
-        throw e
-    } catch (e: Exception) {
-        logger.warn(e) { "Failed to read circuit breaker state for '$name'; starting with default state" }
-        null
-    }
+    val lastStateName =
+        try {
+            stateRegistry.get(name)
+        } catch (e: CancellationException) {
+            throw e
+        } catch (e: Exception) {
+            logger.warn(e) { "Failed to read circuit breaker state for '$name'; starting with default state" }
+            null
+        }
 
     if (lastStateName != null) {
         val state = CircuitBreakerState.fromStateNameOrNull(lastStateName)

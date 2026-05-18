@@ -18,7 +18,6 @@ package com.frisboo.corebanking.statemanager.contracts
 import com.frisboo.corebanking.statemanager.models.StateManagerAuditEvent
 
 public fun interface StateManagerAuditEmitter {
-
     /**
      * Emits an audit event related to statemanager operations.
      * Implementations may log, send to an audit service, etc.

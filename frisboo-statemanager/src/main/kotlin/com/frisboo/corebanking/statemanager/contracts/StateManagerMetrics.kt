@@ -23,7 +23,6 @@ package com.frisboo.corebanking.statemanager.contracts
  * without affecting statemanager throughput.
  */
 public interface StateManagerMetrics {
-
     /**
      * Total cache hits
      */

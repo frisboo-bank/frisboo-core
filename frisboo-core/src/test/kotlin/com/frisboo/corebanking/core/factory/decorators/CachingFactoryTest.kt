@@ -32,21 +32,31 @@ import kotlinx.coroutines.withContext
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.atomic.AtomicInteger
 
-private data class TestConfig(val version: Int)
-private data class TestInstance(val name: String, val version: Int)
+private data class TestConfig(
+    val version: Int,
+)
+
+private data class TestInstance(
+    val name: String,
+    val version: Int,
+)
 
 private class FakeFactory(
     private val creationDelay: Long = 0,
 ) : AsyncFactory<TestConfig, TestInstance> {
     val creationCount = AtomicInteger(0)
 
-    override suspend fun getOrCreate(name: String, config: TestConfig): TestInstance {
+    override suspend fun getOrCreate(
+        name: String,
+        config: TestConfig,
+    ): TestInstance {
         creationCount.incrementAndGet()
         if (creationDelay > 0) delay(creationDelay)
         return TestInstance(name = name, version = config.version)
     }
 
     override suspend fun evict(name: String): Unit = Unit
+
     override suspend fun estimatedSize(): Long = 0
 }
 
@@ -61,7 +71,10 @@ private class FakeCache : FactoryCache<String, TestInstance> {
 
     override suspend fun getIfPresent(key: String): TestInstance? = store[key]
 
-    override suspend fun put(key: String, value: TestInstance) {
+    override suspend fun put(
+        key: String,
+        value: TestInstance,
+    ) {
         store[key] = value
     }
 
@@ -92,11 +105,12 @@ internal class CachingFactoryTest :
                 delegate: FakeFactory = FakeFactory(),
                 matchesConfig: (TestInstance, TestConfig) -> Boolean = { inst, cfg -> inst.version == cfg.version },
             ): Triple<CachingFactory<TestConfig, TestInstance>, FakeFactory, FactoryCache<String, TestInstance>> {
-                val factory = CachingFactory(
-                    cache = cache,
-                    delegate = delegate,
-                    matchesConfig = matchesConfig,
-                )
+                val factory =
+                    CachingFactory(
+                        cache = cache,
+                        delegate = delegate,
+                        matchesConfig = matchesConfig,
+                    )
                 return Triple(factory, delegate, cache)
             }
 
@@ -197,13 +211,15 @@ internal class CachingFactoryTest :
                 val config = TestConfig(version = 1)
                 val iterations = 100
 
-                val results = withContext(Dispatchers.Default) {
-                    (1..iterations).map {
-                        async {
-                            factory.getOrCreate("shared", config)
-                        }
-                    }.awaitAll()
-                }
+                val results =
+                    withContext(Dispatchers.Default) {
+                        (1..iterations)
+                            .map {
+                                async {
+                                    factory.getOrCreate("shared", config)
+                                }
+                            }.awaitAll()
+                    }
 
                 results.forEach { it shouldBe TestInstance("shared", 1) }
                 delegate.creationCount.get() shouldBe 1
@@ -216,13 +232,15 @@ internal class CachingFactoryTest :
                 val config = TestConfig(version = 1)
                 val iterations = 100
 
-                val results = withContext(Dispatchers.Default) {
-                    (1..iterations).map { i ->
-                        async {
-                            factory.getOrCreate("key-$i", config)
-                        }
-                    }.awaitAll()
-                }
+                val results =
+                    withContext(Dispatchers.Default) {
+                        (1..iterations)
+                            .map { i ->
+                                async {
+                                    factory.getOrCreate("key-$i", config)
+                                }
+                            }.awaitAll()
+                    }
 
                 results.size shouldBe iterations
                 delegate.creationCount.get() shouldBe iterations
@@ -240,12 +258,14 @@ internal class CachingFactoryTest :
                 }
 
                 withContext(Dispatchers.Default) {
-                    val evictJobs = (1..iterations).map { i ->
-                        async { factory.evict("key-$i") }
-                    }
-                    val createJobs = (1..iterations).map { i ->
-                        async { factory.getOrCreate("key-$i", config) }
-                    }
+                    val evictJobs =
+                        (1..iterations).map { i ->
+                            async { factory.evict("key-$i") }
+                        }
+                    val createJobs =
+                        (1..iterations).map { i ->
+                            async { factory.getOrCreate("key-$i", config) }
+                        }
                     (evictJobs + createJobs).awaitAll()
                 }
 

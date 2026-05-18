@@ -20,7 +20,10 @@ import com.frisboo.corebanking.core.factory.contracts.AsyncFactory
 public class MetricsFactory<C : Any, T : Any>(
     private val delegate: AsyncFactory<C, T>,
 ) : AsyncFactory<C, T> {
-    override suspend fun getOrCreate(name: String, config: C): T = delegate.getOrCreate(name, config)
+    override suspend fun getOrCreate(
+        name: String,
+        config: C,
+    ): T = delegate.getOrCreate(name, config)
 
     override suspend fun evict(name: String): Unit = delegate.evict(name)
 

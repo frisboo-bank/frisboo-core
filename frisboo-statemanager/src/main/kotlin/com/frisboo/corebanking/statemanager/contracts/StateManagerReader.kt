@@ -27,7 +27,6 @@ import com.frisboo.corebanking.statemanager.models.StateManagerSizeResult
  * Implementations must be safe for concurrent use from coroutines.
  */
 public interface StateManagerReader<K : Any, V : Any> {
-
     /**
      * Returns the value associated with [key], or `null` if absent or expired.
      */

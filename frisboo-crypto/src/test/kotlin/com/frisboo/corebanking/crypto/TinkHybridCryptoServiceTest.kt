@@ -149,7 +149,11 @@ internal class TinkHybridCryptoServiceTest :
             val privateHandle = KeysetHandleFactory.generateHybridHpke()
             val service = TinkHybridCryptoService(privateHandle)
 
-            checkAll(50, Arb.byteArray(Arb.int(1..4096), Arb.int().map { it.toByte() }), Arb.string(1..256)) { plaintext, ctx ->
+            checkAll(
+                50,
+                Arb.byteArray(Arb.int(1..4096), Arb.int().map { it.toByte() }),
+                Arb.string(1..256),
+            ) { plaintext, ctx ->
                 val ctxBytes = ctx.encodeToByteArray()
                 val ciphertext = service.encrypt(plaintext, ctxBytes)
                 val decrypted = service.decrypt(ciphertext, ctxBytes)
@@ -163,15 +167,17 @@ internal class TinkHybridCryptoServiceTest :
             val service = TinkHybridCryptoService(privateHandle)
             val iterations = 50
 
-            val results = (1..iterations).map { i ->
-                async(Dispatchers.Default) {
-                    val plaintext = "concurrent-hybrid-$i".encodeToByteArray()
-                    val ctx = "ctx-$i".encodeToByteArray()
-                    val ciphertext = service.encrypt(plaintext, ctx)
-                    val decrypted = service.decrypt(ciphertext, ctx)
-                    decrypted shouldBe plaintext
-                }
-            }.awaitAll()
+            val results =
+                (1..iterations)
+                    .map { i ->
+                        async(Dispatchers.Default) {
+                            val plaintext = "concurrent-hybrid-$i".encodeToByteArray()
+                            val ctx = "ctx-$i".encodeToByteArray()
+                            val ciphertext = service.encrypt(plaintext, ctx)
+                            val decrypted = service.decrypt(ciphertext, ctx)
+                            decrypted shouldBe plaintext
+                        }
+                    }.awaitAll()
 
             results.size shouldBe iterations
         }

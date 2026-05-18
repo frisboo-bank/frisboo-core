@@ -60,20 +60,3 @@ dependencies {
     kover(project(":frisboo-statemanager"))
 }
 
-subprojects {
-    pluginManager.withPlugin("maven-publish") {
-        extensions.configure<PublishingExtension> {
-            repositories {
-                maven {
-                    name = "FrisbooGitHubPackages"
-                    url = uri("https://maven.pkg.github.com/jolafrite/frisboo-core-banking")
-                    credentials {
-                        username =
-                            project.findProperty("frisboo.gpr.user") as String? ?: System.getenv("FRISBOO_GPR_USERNAME")
-                        password = project.findProperty("frisboo.gpr.key") as String? ?: System.getenv("FRISBOO_GPR_TOKEN")
-                    }
-                }
-            }
-        }
-    }
-}

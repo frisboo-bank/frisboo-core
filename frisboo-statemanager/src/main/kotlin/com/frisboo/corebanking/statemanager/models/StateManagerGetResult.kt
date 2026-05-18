@@ -16,7 +16,6 @@
 package com.frisboo.corebanking.statemanager.models
 
 public sealed interface StateManagerGetResult<out V> {
-
     public val value: V?
 
     public data class Found<V>(

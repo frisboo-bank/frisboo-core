@@ -16,7 +16,6 @@
 package com.frisboo.corebanking.statemanager.models
 
 public sealed interface StateManagerSetTtlResult {
-
     public data object Applied : StateManagerSetTtlResult
 
     public data object NotFound : StateManagerSetTtlResult

@@ -15,7 +15,7 @@
  */
 package com.frisboo.corebanking.resilience.circuitbreaker.contracts
 
-import com.frisboo.corebanking.resilience.circuitbreaker.model.CircuitBreakerConfig
+import com.frisboo.corebanking.resilience.circuitbreaker.models.CircuitBreakerConfig
 
 /**
  * Factory for creating and managing [CircuitBreaker] instances.
@@ -24,7 +24,6 @@ import com.frisboo.corebanking.resilience.circuitbreaker.model.CircuitBreakerCon
  * an internal registry of created breakers.
  */
 public interface CircuitBreakerFactory {
-
     public suspend fun create(
         name: String,
         config: CircuitBreakerConfig,

@@ -23,17 +23,16 @@ import com.frisboo.corebanking.resilience.ratelimiter.contracts.RateLimiterMetri
 import com.frisboo.corebanking.resilience.ratelimiter.contracts.RateLimiterResult
 import com.frisboo.corebanking.resilience.ratelimiter.errors.RateLimiterError
 import com.frisboo.corebanking.resilience.ratelimiter.model.RateLimiterConfig
-import io.github.resilience4j.ratelimiter.RateLimiter as R4jRateLimiter
-import io.github.resilience4j.ratelimiter.RateLimiterConfig as R4jRateLimiterConfig
 import io.github.resilience4j.ratelimiter.RequestNotPermitted
 import java.util.concurrent.atomic.AtomicLong
 import kotlin.coroutines.cancellation.CancellationException
+import io.github.resilience4j.ratelimiter.RateLimiter as R4jRateLimiter
+import io.github.resilience4j.ratelimiter.RateLimiterConfig as R4jRateLimiterConfig
 
 internal class Resilience4jRateLimiter(
     private val delegate: R4jRateLimiter,
     override val config: RateLimiterConfig,
 ) : RateLimiter<R4jRateLimiterConfig> {
-
     private val successfulCallsCounter = AtomicLong(0)
     private val rejectedCallsCounter = AtomicLong(0)
 
@@ -65,8 +64,8 @@ internal class Resilience4jRateLimiter(
         }
     }
 
-    override suspend fun acquire(permits: Int): Either<RateLimiterError, Unit> {
-        return try {
+    override suspend fun acquire(permits: Int): Either<RateLimiterError, Unit> =
+        try {
             if (delegate.acquirePermission(permits)) {
                 recordSuccess()
                 Unit.right()
@@ -84,17 +83,17 @@ internal class Resilience4jRateLimiter(
         } catch (error: Error) {
             throw error
         } catch (throwable: Throwable) {
-            RateLimiterError.Unavailable(
-                reason = throwable.message ?: "Rate limiter backend unavailable",
-            ).left()
+            RateLimiterError
+                .Unavailable(
+                    reason = throwable.message ?: "Rate limiter backend unavailable",
+                ).left()
         }
-    }
 
-    override fun recordSuccess(): Unit {
+    override fun recordSuccess() {
         successfulCallsCounter.incrementAndGet()
     }
 
-    override fun recordRejection(): Unit {
+    override fun recordRejection() {
         rejectedCallsCounter.incrementAndGet()
     }
 }

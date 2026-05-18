@@ -26,8 +26,9 @@ import com.frisboo.corebanking.resilience.circuitbreaker.errors.CircuitBreakerEr
  * - [Rejected]: the circuit is open — the call was not attempted.
  */
 public sealed class CircuitBreakerResult<out T> {
-
-    public data class Success<T>(public val value: T) : CircuitBreakerResult<T>()
+    public data class Success<T>(
+        public val value: T,
+    ) : CircuitBreakerResult<T>()
 
     public data class Failure(
         public val cause: Throwable,

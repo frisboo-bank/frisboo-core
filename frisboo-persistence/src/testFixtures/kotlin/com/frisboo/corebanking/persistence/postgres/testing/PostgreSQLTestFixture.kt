@@ -1,3 +1,18 @@
+/*
+ * Copyright 2025 Frisboo Bank
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing
+ * permissions and limitations under the License.
+ */
 package com.frisboo.corebanking.persistence.postgres.testing
 
 import com.frisboo.corebanking.persistence.core.constants.POSTGRESQL_LATEST_IMAGE
@@ -22,13 +37,13 @@ class PostgreSQLTestFixture(
     private val password: String = "postgres",
     private val poolProps: PostgreSQLPoolProps = PostgreSQLPoolProps(),
 ) {
-
-    private val container: PostgreSQLContainer<*> = PostgreSQLContainer(postgreSQLImage).apply {
-        withDatabaseName(databaseName)
-        withUsername(username)
-        withPassword(password)
-        withReuse(true)
-    }
+    private val container: PostgreSQLContainer<*> =
+        PostgreSQLContainer(postgreSQLImage).apply {
+            withDatabaseName(databaseName)
+            withUsername(username)
+            withPassword(password)
+            withReuse(true)
+        }
 
     /**
      * Mutex to ensure thread-safe operations when starting and stopping the container.
@@ -58,33 +73,36 @@ class PostgreSQLTestFixture(
     /**
      * Starts the PostgreSQL container and initializes the HikariDataSource with the container's connection details.
      */
-    suspend fun start() = mutex.withLock {
-        if (started) return@withLock
+    suspend fun start() =
+        mutex.withLock {
+            if (started) return@withLock
 
-        container.start()
-        dataSource = HikariDataSource(
-            HikariConfig().apply {
-                jdbcUrl = container.jdbcUrl
-                username = container.username
-                password = container.password
-                maximumPoolSize = poolProps.maximumPoolSize
-                minimumIdle = poolProps.minimumIdle
-            },
-        )
-        Database.connect(dataSource)
-        started = true
-    }
+            container.start()
+            dataSource =
+                HikariDataSource(
+                    HikariConfig().apply {
+                        jdbcUrl = container.jdbcUrl
+                        username = container.username
+                        password = container.password
+                        maximumPoolSize = poolProps.maximumPoolSize
+                        minimumIdle = poolProps.minimumIdle
+                    },
+                )
+            Database.connect(dataSource)
+            started = true
+        }
 
     /**
      * Stops the PostgreSQL container and closes the HikariDataSource.
      */
-    suspend fun stop() = mutex.withLock {
-        if (!started) return@withLock
+    suspend fun stop() =
+        mutex.withLock {
+            if (!started) return@withLock
 
-        dataSource.close()
-        container.stop()
-        started = false
-    }
+            dataSource.close()
+            container.stop()
+            started = false
+        }
 
     /**
      * Runs Flyway migrations against the PostgreSQL database using the provided migration script locations.
@@ -95,7 +113,8 @@ class PostgreSQLTestFixture(
         check(started) { "Fixture must be started before migration" }
         require(locations.isNotEmpty()) { "Migration locations must not be empty" }
 
-        Flyway.configure()
+        Flyway
+            .configure()
             .dataSource(dataSource)
             .locations(*locations)
             .load()

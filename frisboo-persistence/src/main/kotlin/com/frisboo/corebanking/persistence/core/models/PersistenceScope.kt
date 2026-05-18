@@ -24,7 +24,6 @@ public data class PersistenceScope(
     public val name: String,
     public val team: String,
 ) {
-
     public val prefix: String get() = "$team:$name"
 
     init {

@@ -21,7 +21,6 @@ public interface RateLimiter<out C : Any> :
     RateLimiterAcquirer,
     RateLimiterRecorder,
     RateLimiterConfigured<C> {
-
     public val metrics: RateLimiterMetrics
 
     public val config: RateLimiterConfig

@@ -22,12 +22,14 @@ package com.frisboo.corebanking.core.factory.contracts
  * @param T the type of instance created
  */
 public interface AsyncFactory<C : Any, T : Any> {
-
     /**
      * Returns an existing instance for [name] with the given [config], or creates a new one.
      * Implementations must be idempotent for the same (name, config).
      */
-    public suspend fun getOrCreate(name: String, config: C): T
+    public suspend fun getOrCreate(
+        name: String,
+        config: C,
+    ): T
 
     /** Evicts the instance for [name] from the factory's cache (if any). */
     public suspend fun evict(name: String)

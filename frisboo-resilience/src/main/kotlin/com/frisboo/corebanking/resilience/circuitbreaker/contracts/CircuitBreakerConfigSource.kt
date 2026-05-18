@@ -15,7 +15,7 @@
  */
 package com.frisboo.corebanking.resilience.circuitbreaker.contracts
 
-import com.frisboo.corebanking.resilience.circuitbreaker.model.CircuitBreakerConfig
+import com.frisboo.corebanking.resilience.circuitbreaker.models.CircuitBreakerConfig
 
 /**
  * Resolves [CircuitBreakerConfig] by circuit breaker name.

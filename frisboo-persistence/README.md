@@ -2,19 +2,19 @@
 
 Shared persistence primitives for Frisboo services — base tables, optimistic locking, SQL triggers, and Flyway migrations for PostgreSQL.
 
-## What's included?
+## What's Included?
 
-| Component | Purpose |
-|-----------|---------|
-| `BaseTable` | Abstract Exposed table with `version`, `created_at`, `updated_at` columns |
+| Component                                    | Purpose                                                                                                           |
+| -------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| `BaseTable`                                  | Abstract Exposed table with `version`, `created_at`, `updated_at` columns                                         |
 | `WithOptimisticLocking` / `optimisticUpdate` | Application-managed optimistic locking returning `Either<PersistenceError, Int>` with exactly-one-row enforcement |
-| `PersistenceError` | Sealed error hierarchy for persistence failures |
-| SQL triggers | `fcb_handle_timestamps()`, `fcb_update_expired_at()`, `fcb_update_verification_status()`, `fcb_validate_of_age()` |
-| Auto-configuration | `PersistenceProperties` with conditional `Postgres` / `MongoDb` markers |
+| `PersistenceError`                           | Sealed error hierarchy for persistence failures                                                                   |
+| SQL triggers                                 | `fcb_handle_timestamps()`, `fcb_update_expired_at()`, `fcb_update_verification_status()`, `fcb_validate_of_age()` |
+| Auto-configuration                           | `PersistenceProperties` with conditional `Postgres` / `MongoDb` markers                                           |
 
-## Getting started
+## Getting Started
 
-### 1. Define a table
+### 1. Define a Table
 
 Extend `BaseTable` and implement `WithOptimisticLocking` to get audit columns and version-checked updates:
 
@@ -30,6 +30,7 @@ object AccountsTable : BaseTable("accounts"), WithOptimisticLocking {
 ```
 
 This gives you:
+
 - `version` — starts at `1`, incremented by `optimisticUpdate` on each successful write
 - `created_at` / `updated_at` — managed by the `fcb_handle_timestamps()` database trigger (never set these from application code)
 
@@ -127,6 +128,7 @@ transaction {
 ```
 
 Invalid values raise a database exception:
+
 - `ttl_in_second = 0` → `"ttl_in_second must be positive, got 0"`
 - `ttl_in_second = 3000000` → `"ttl_in_second exceeds maximum of 2592000 seconds, got 3000000"`
 
@@ -146,11 +148,11 @@ CREATE TRIGGER my_table_verification_status
 
 The trigger derives `verification_status` from `verified_at` — the application value is always overwritten:
 
-| Condition | Status |
-|-----------|--------|
-| `verified_at IS NOT NULL` | `VERIFIED` |
-| UPDATE where `OLD.verified_at IS NOT NULL` and `NEW.verified_at IS NULL` | `REVOKED` |
-| Otherwise | `PENDING` |
+| Condition                                                                | Status     |
+| ------------------------------------------------------------------------ | ---------- |
+| `verified_at IS NOT NULL`                                                | `VERIFIED` |
+| UPDATE where `OLD.verified_at IS NOT NULL` and `NEW.verified_at IS NULL` | `REVOKED`  |
+| Otherwise                                                                | `PENDING`  |
 
 ```kotlin
 // Mark as verified
@@ -176,12 +178,12 @@ transaction {
 
 ```yaml
 frisboo:
-  corebanking:
-    persistence:
-      postgres:
-        enabled: true    # activates the Postgres marker configuration
-      mongodb:
-        enabled: true    # activates the MongoDB marker configuration
+    corebanking:
+        persistence:
+            postgres:
+                enabled: true # activates the Postgres marker configuration
+            mongodb:
+                enabled: true # activates the MongoDB marker configuration
 ```
 
 ### Conditional bean wiring
@@ -203,17 +205,17 @@ If `frisboo.corebanking.persistence.postgres.enabled` is `false` (the default), 
 
 ## Available SQL functions
 
-| Function | Trigger event | Purpose |
-|----------|--------------|---------|
-| `fcb_handle_timestamps()` | `BEFORE INSERT OR UPDATE` | Sets `created_at`/`updated_at` on insert; updates `updated_at` on meaningful changes; preserves both on no-op updates |
-| `fcb_update_expired_at()` | `BEFORE INSERT` | Computes `expired_at` from `ttl_in_second`; validates positive and ≤ 30 days |
-| `fcb_update_verification_status()` | `BEFORE INSERT OR UPDATE` | Derives `verification_status` from `verified_at` (PENDING / VERIFIED / REVOKED) |
-| `fcb_validate_of_age(dob DATE)` | Pure function (`STABLE STRICT`) | Returns `true` if `dob` is ≥ 18 years before today; `NULL` on `NULL` input |
+| Function                           | Trigger event                   | Purpose                                                                                                               |
+| ---------------------------------- | ------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `fcb_handle_timestamps()`          | `BEFORE INSERT OR UPDATE`       | Sets `created_at`/`updated_at` on insert; updates `updated_at` on meaningful changes; preserves both on no-op updates |
+| `fcb_update_expired_at()`          | `BEFORE INSERT`                 | Computes `expired_at` from `ttl_in_second`; validates positive and ≤ 30 days                                          |
+| `fcb_update_verification_status()` | `BEFORE INSERT OR UPDATE`       | Derives `verification_status` from `verified_at` (PENDING / VERIFIED / REVOKED)                                       |
+| `fcb_validate_of_age(dob DATE)`    | Pure function (`STABLE STRICT`) | Returns `true` if `dob` is ≥ 18 years before today; `NULL` on `NULL` input                                            |
 
 ## Extensions provided
 
-| Extension | Purpose |
-|-----------|---------|
-| `citext` | Case-insensitive text type for email, username columns |
-| `pgcrypto` | Cryptographic functions (`gen_random_uuid()`, etc.) |
-| `pg_trgm` | Trigram-based similarity search and indexing |
+| Extension  | Purpose                                                |
+| ---------- | ------------------------------------------------------ |
+| `citext`   | Case-insensitive text type for email, username columns |
+| `pgcrypto` | Cryptographic functions (`gen_random_uuid()`, etc.)    |
+| `pg_trgm`  | Trigram-based similarity search and indexing           |

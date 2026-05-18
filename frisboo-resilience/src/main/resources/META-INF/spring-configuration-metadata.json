@@ -50,7 +50,7 @@
         },
         {
             "name": "frisboo.corebanking.resilience.circuit-breaker.sliding-window-type",
-            "type": "com.frisboo.corebanking.resilience.circuitbreaker.model.SlidingWindowType",
+            "type": "com.frisboo.corebanking.resilience.circuitbreaker.models.SlidingWindowType",
             "description": "Default sliding window type (COUNT_BASED or TIME_BASED) for all instances. Overridable per instance.",
             "defaultValue": "COUNT_BASED"
         },
@@ -80,7 +80,7 @@
         },
         {
             "name": "frisboo.corebanking.resilience.circuit-breaker.instances",
-            "type": "java.util.Map<java.lang.String,com.frisboo.corebanking.resilience.circuitbreaker.autoconfigure.ResilienceProperties.CircuitBreakerInstanceProperties>",
+            "type": "java.util.Map<java.lang.String,com.frisboo.corebanking.resilience.autoconfigure.ResilienceProperties.CircuitBreakerInstanceProperties>",
             "description": "Per-instance circuit breaker configuration. Keys are circuit breaker names. Instance values override global defaults."
         }
     ]

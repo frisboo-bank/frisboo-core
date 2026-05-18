@@ -1,251 +1,323 @@
+/*
+ * Copyright 2025 Frisboo Bank
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing
+ * permissions and limitations under the License.
+ */
 package com.frisboo.corebanking.persistence.redis.adapters.lettuce
 
-import com.frisboo.corebanking.persistence.redis.adapters.lettuce.results.fromLettuceResult
 import com.frisboo.corebanking.persistence.redis.contracts.internal.RedisCommands
-import com.frisboo.corebanking.persistence.redis.contracts.results.RedisSetResult
-import com.frisboo.corebanking.persistence.redis.contracts.results.RedisCompareAndSetResult
-import com.frisboo.corebanking.persistence.redis.contracts.results.RedisDecrementResult
-import com.frisboo.corebanking.persistence.redis.contracts.results.RedisGetResult
-import com.frisboo.corebanking.persistence.redis.contracts.results.RedisIncrementResult
-import com.frisboo.corebanking.persistence.redis.contracts.results.RedisLockAcquireResult
-import com.frisboo.corebanking.persistence.redis.contracts.results.RedisLockReleaseResult
-import com.frisboo.corebanking.persistence.redis.contracts.results.RedisPingResult
-import com.frisboo.corebanking.persistence.redis.contracts.results.RedisScanResult
-import com.frisboo.corebanking.persistence.redis.contracts.results.RedisSetIfAbsentResult
-import com.frisboo.corebanking.persistence.redis.contracts.results.RedisSetIfPresentResult
+import com.frisboo.corebanking.persistence.redis.contracts.internal.results.RedisCommandsAcquireLockResult
+import com.frisboo.corebanking.persistence.redis.contracts.internal.results.RedisCommandsCompareAndSetResult
+import com.frisboo.corebanking.persistence.redis.contracts.internal.results.RedisCommandsReleaseLockResult
+import com.frisboo.corebanking.persistence.redis.contracts.internal.results.RedisCommandsSetWithLockResult
 import com.frisboo.corebanking.persistence.redis.models.RedisScanCursor
 import io.lettuce.core.ExperimentalLettuceCoroutinesApi
-import io.lettuce.core.KeyScanCursor
 import io.lettuce.core.ScanArgs
 import io.lettuce.core.ScanCursor
 import io.lettuce.core.ScriptOutputType
 import io.lettuce.core.SetArgs
 import io.lettuce.core.api.coroutines.RedisCoroutinesCommands
-import java.security.MessageDigest
 
 @OptIn(ExperimentalLettuceCoroutinesApi::class)
 internal class RedisLettuceCommandsImpl(
     private val delegate: RedisCoroutinesCommands<ByteArray, ByteArray>,
 ) : RedisCommands {
-
     private companion object {
         val ACQUIRE_LOCK_SCRIPT = """
-            local key = KEYS[1]
-            local value = ARGV[1]
-            local ttl = tonumber(ARGV[2])
-            local result = redis.call("SET", key, value, "NX", "PX", ttl)
-            if result == false then
-                return 0 -- Lock already exists
+            local current = redis.call("GET", KEYS[1])
+            if current ~= false then
+                return string.char(1)
             end
-            return 1 -- Lock acquired successfully
-        """.trimIndent().toByteArray(Charsets.UTF_8)
+            redis.call("SET", KEYS[1], ARGV[1], "PX", tonumber(ARGV[2]))
+            return string.char(0)
+            """.trimIndent().toByteArray(Charsets.UTF_8)
 
         val RELEASE_LOCK_SCRIPT = """
             local currentValue = redis.call("GET", KEYS[1])
             if currentValue == false then
-                return 0 -- Key does not exist, treat as mismatch
+                return string.char(1)
             end
             if currentValue ~= ARGV[1] then
-                return 0 -- Lock value does not match, cannot release
+                return string.char(2)
             end
             redis.call("DEL", KEYS[1])
-            return 1 -- Lock released successfully
-        """.trimIndent().toByteArray(Charsets.UTF_8)
+            return string.char(0)
+            """.trimIndent().toByteArray(Charsets.UTF_8)
 
-        private val COMPARE_AND_SET_SCRIPT = """
+        val COMPARE_AND_SET_SCRIPT = """
             local key = KEYS[1]
             local expected = ARGV[1]
-            local newValue = ARGV[2]
-            local ttl = ARGV[3]
+            local isNullExpected = ARGV[2]
+            local newValue = ARGV[3]
+            local ttl = tonumber(ARGV[4])
 
             local function do_set()
-              if ttl ~= "__NULL__" and tonumber(ttl) and tonumber(ttl) > 0 then
-                redis.call("SET", key, newValue, "PX", tonumber(ttl))
-              else
-                redis.call("SET", key, newValue)
-              end
+                if ttl and ttl > 0 then
+                    redis.call("SET", key, newValue, "PX", ttl)
+                else
+                    redis.call("SET", key, newValue)
+                end
             end
 
             local current = redis.call("GET", key)
 
             if current == false then
-                if expected == "__NULL__" then
-                    do_set()
-                    return 1 -- Success: Key did not exist and was set
-                else
-                    return -1 -- Key not found, but expected was not null
+                if isNullExpected ~= "1" then
+                    return string.char(1)
                 end
+                do_set()
+                return string.char(0)
+            end
+
+            if isNullExpected == "1" then
+                return string.char(2)
             end
 
             if current ~= expected then
-                return -2 -- Mismatch: Current value does not match expected
+                return string.char(2)
             end
 
             do_set()
-            return 1 -- Success: Value matched expected and was updated
-        """.trimIndent().toByteArray(Charsets.UTF_8)
+            return string.char(0) .. current
+            """.trimIndent().toByteArray(Charsets.UTF_8)
+
+        val SET_WITH_LOCK_SCRIPT = """
+            local lockKey = KEYS[1]
+            local dataKey = KEYS[2]
+            local expectedLock = ARGV[1]
+            local newValue = ARGV[2]
+            local ttl = tonumber(ARGV[3])
+
+            local current = redis.call("GET", lockKey)
+            if current == false then
+                return string.char(1)
+            end
+            if current ~= expectedLock then
+                return string.char(2)
+            end
+
+            local oldValue = redis.call("GET", dataKey)
+            if ttl and ttl > 0 then
+                redis.call("SET", dataKey, newValue, "PX", ttl)
+            else
+                redis.call("SET", dataKey, newValue)
+            end
+
+            if oldValue == false then
+                return string.char(0)
+            else
+                return string.char(0) .. oldValue
+            end
+            """.trimIndent().toByteArray(Charsets.UTF_8)
     }
 
-    // Simple in-memory cache of script SHA per script content (keyed by script SHA1 hex)
-    private val scriptShaCache: MutableMap<String, String> = mutableMapOf()
+    override suspend fun ping(): Boolean = delegate.ping() == "PONG"
 
-    private fun sha1Hex(data: ByteArray): String = MessageDigest.getInstance("SHA-1")
-        .digest(data)
-        .joinToString(separator = "") { "%02x".format(it) }
-
-    private suspend fun <T> executeScriptWithCache(
-        script: ByteArray,
-        type: ScriptOutputType,
-        keys: Array<ByteArray>,
-        values: Array<ByteArray>,
-    ): T {
-        val scriptKey = sha1Hex(script)
-
-        // Try cached sha -> evalsha
-        val cachedSha = scriptShaCache[scriptKey]
-        if (cachedSha != null) {
-            try {
-                @Suppress("UNCHECKED_CAST")
-                return delegate.evalsha(cachedSha, type, keys = keys, values = values) as T
-            } catch (e: Exception) {
-                // fallthrough to load/eval on NOSCRIPT or other script-related errors
-                if (e.message?.contains("NOSCRIPT", ignoreCase = true) == false) throw e
-            }
-        }
-
-        // Try loading the script into Redis script cache and run via evalsha
-        try {
-            val sha = delegate.scriptLoad(script)
-            scriptShaCache[scriptKey] = sha
-            @Suppress("UNCHECKED_CAST")
-            return delegate.evalsha(sha, type, keys = keys, values = values) as T
-        } catch (e: Exception) {
-            // Fallback to direct EVAL if scriptLoad/evalsha not supported or fails (cluster/no-cache)
-            @Suppress("UNCHECKED_CAST")
-            return delegate.eval(script, type, keys = keys, values = values) as T
-        }
+    override suspend fun get(key: ByteArray): ByteArray? {
+        require(key.isNotEmpty()) { "Key must not be empty" }
+        return delegate.get(key)
     }
 
-    override suspend fun ping(): RedisPingResult {
-        val result = delegate.ping()
-        return RedisPingResult.fromLettuceResult(result)
-    }
-
-    override suspend fun get(key: ByteArray): RedisGetResult {
-        val result = delegate.get(key)
-        return RedisGetResult.fromLettuceResult(result)
-    }
-
-    override suspend fun set(key: ByteArray, value: ByteArray): RedisSetResult {
-        val result = delegate.setGet(key, value)
-        return RedisSetResult.fromLettuceResult(result)
-    }
-
-    override suspend fun set(key: ByteArray, value: ByteArray, ttlMs: Long): RedisSetResult {
-        val result = delegate.setGet(key, value, SetArgs.Builder.px(ttlMs))
-        return RedisSetResult.fromLettuceResult(result)
-    }
-
-    override suspend fun setIfAbsent(key: ByteArray, value: ByteArray): RedisSetIfAbsentResult {
-        val result = delegate.set(key, value, SetArgs.Builder.nx())
-        return RedisSetIfAbsentResult.fromLettuceResult(result)
-    }
-
-    override suspend fun setIfAbsent(key: ByteArray, value: ByteArray, ttlMs: Long): RedisSetIfAbsentResult {
-        val result = delegate.set(key, value, SetArgs.Builder.nx().px(ttlMs))
-        return RedisSetIfAbsentResult.fromLettuceResult(result)
-    }
-
-    override suspend fun setIfPresent(key: ByteArray, value: ByteArray): RedisSetIfPresentResult {
-        val result = delegate.getset(key, value)
-        return RedisSetIfPresentResult.fromLettuceResult(result)
-    }
-
-    override suspend fun setIfPresent(key: ByteArray, value: ByteArray, ttlMs: Long): RedisSetIfPresentResult {
-        val prev = delegate.get(key) ?: return RedisSetIfPresentResult.KeyNotFound
-        val result = delegate.set(key, value, SetArgs.Builder.xx().px(ttlMs))
-        return RedisSetIfPresentResult.fromLettuceResult(result)
-    }
-
-    override suspend fun compareAndSet(
+    override suspend fun setGet(
         key: ByteArray,
-        expected: ByteArray,
-        value: ByteArray,
-    ): RedisCompareAndSetResult {
-        val result = executeScriptWithCache<Long>(
-            script = COMPARE_AND_SET_SCRIPT,
-            type = ScriptOutputType.INTEGER,
-            keys = arrayOf(key),
-            values = arrayOf(expected, value, "__NULL__".toByteArray()),
-        )
-        return RedisCompareAndSetResult.fromLettuceResult(result)
-    }
-
-    override suspend fun compareAndSet(
-        key: ByteArray,
-        expected: ByteArray,
         value: ByteArray,
         ttlMs: Long,
-    ): RedisCompareAndSetResult {
-        val ttlArg = ttlMs.toString().toByteArray()
-        val result = executeScriptWithCache<Long>(
-            script = COMPARE_AND_SET_SCRIPT,
-            type = ScriptOutputType.INTEGER,
-            keys = arrayOf(key),
-            values = arrayOf(expected, value, ttlArg),
-        )
-        return RedisCompareAndSetResult.fromLettuceResult(result)
+    ): ByteArray? {
+        require(key.isNotEmpty()) { "Key must not be empty" }
+        require(value.isNotEmpty()) { "Value must not be empty" }
+        require(ttlMs >= 0) { "TTL must be non-negative" }
+
+        return when (ttlMs) {
+            0L -> delegate.setGet(key, value)
+            else -> delegate.setGet(key, value, SetArgs.Builder.px(ttlMs))
+        }
     }
 
-    override suspend fun del(key: ByteArray): Long? = delegate.del(key)
+    override suspend fun setIfAbsent(
+        key: ByteArray,
+        value: ByteArray,
+        ttlMs: Long,
+    ): Boolean {
+        require(key.isNotEmpty()) { "Key must not be empty" }
+        require(value.isNotEmpty()) { "Value must not be empty" }
+        require(ttlMs >= 0) { "TTL must be non-negative" }
 
-    override suspend fun exists(key: ByteArray): Long? =
-        delegate.exists(key)
+        val args = SetArgs.Builder.nx()
+        if (ttlMs > 0L) {
+            args.px(ttlMs)
+        }
+        return delegate.set(key, value, args) == "OK"
+    }
 
-    override suspend fun pexpire(key: ByteArray, ttlMs: Long): Boolean? =
-        delegate.pexpire(key, ttlMs)
+    override suspend fun compareAndSet(
+        key: ByteArray,
+        expected: ByteArray?,
+        value: ByteArray,
+        ttlMs: Long,
+    ): RedisCommandsCompareAndSetResult {
+        require(key.isNotEmpty()) { "Key must not be empty" }
+        require(value.isNotEmpty()) { "Value must not be empty" }
+        require(ttlMs >= 0) { "TTL must be non-negative" }
+
+        val ttlArg = ttlMs.toString().toByteArray(Charsets.UTF_8)
+        val isNullExpected = (if (expected == null) "1" else "0").toByteArray(Charsets.UTF_8)
+
+        val raw = delegate.eval<ByteArray>(
+            script = COMPARE_AND_SET_SCRIPT,
+            type = ScriptOutputType.VALUE,
+            keys = arrayOf(key),
+            values = arrayOf(expected ?: ByteArray(0), isNullExpected, value, ttlArg),
+        )
+
+        return when (val status = raw?.get(0)?.toInt()) {
+            0 -> {
+                val previousValue = if (raw.size > 1) raw.copyOfRange(1, raw.size) else null
+                RedisCommandsCompareAndSetResult.Success(previousValue)
+            }
+
+            1 -> RedisCommandsCompareAndSetResult.KeyNotFound
+            2 -> RedisCommandsCompareAndSetResult.Mismatch
+            else -> throw IllegalStateException("Unknown status $status")
+        }
+    }
+
+    override suspend fun del(key: ByteArray): ByteArray? {
+        require(key.isNotEmpty()) { "Key must not be empty" }
+
+        return delegate.getdel(key)
+    }
+
+    override suspend fun exists(key: ByteArray): Boolean {
+        require(key.isNotEmpty()) { "Key must not be empty" }
+
+        return delegate.exists(key)?.let { it == 1L } == true
+    }
+
+    override suspend fun pexpire(
+        key: ByteArray,
+        ttlMs: Long,
+    ): Boolean {
+        require(key.isNotEmpty()) { "Key must not be empty" }
+        require(ttlMs > 0) { "TTL must be greater than 0" }
+
+        return delegate.pexpire(key, ttlMs) == true
+    }
 
     override suspend fun scan(
         cursor: RedisScanCursor?,
         count: Long,
         pattern: ByteArray,
-    ): Pair<RedisScanCursor, List<ByteArray>> {
-        val mappedCursor = cursor?.let { ScanCursor.of(it.value) } ?: ScanCursor.INITIAL
+    ): Pair<RedisScanCursor, List<ByteArray?>?>? {
+        require(count > 0) { "Count must be greater than 0" }
+        require(pattern.isNotEmpty()) { "Pattern must not be empty" }
+
+        val mappedCursor = cursor?.toRedisLettuceScanCursor() ?: ScanCursor.INITIAL
         val scanArgs = ScanArgs.Builder.limit(count).match(pattern)
-        val result: KeyScanCursor<ByteArray>? = delegate.scan(mappedCursor, scanArgs)
-        return RedisScanResult.fromLettuceResult(result)
+        val result = delegate.scan(mappedCursor, scanArgs) ?: return null
+
+        return RedisScanCursor.of(result.cursor) to result.keys
     }
 
-    override suspend fun acquireLock(key: ByteArray, lock: ByteArray, ttlMs: Long): RedisLockAcquireResult {
-        val result = executeScriptWithCache<Long>(
+    override suspend fun acquireLock(key: ByteArray, lock: ByteArray, ttlMs: Long): RedisCommandsAcquireLockResult {
+        require(key.isNotEmpty()) { "Key must not be empty" }
+        require(lock.isNotEmpty()) { "Lock value must not be empty" }
+        require(ttlMs > 0) { "TTL must be greater than 0" }
+
+        val raw = delegate.eval<ByteArray>(
             script = ACQUIRE_LOCK_SCRIPT,
-            type = ScriptOutputType.INTEGER,
+            type = ScriptOutputType.VALUE,
             keys = arrayOf(key),
-            values = arrayOf(lock, ttlMs.toString().toByteArray()),
+            values = arrayOf(lock, ttlMs.toString().toByteArray(Charsets.UTF_8)),
         )
-        return RedisLockAcquireResult.fromLettuceResult(result)
+        return when (val status = raw?.get(0)) {
+            0.toByte() -> RedisCommandsAcquireLockResult.Acquired(lock)
+            1.toByte() -> RedisCommandsAcquireLockResult.AlreadyHeld
+            else -> throw IllegalStateException("Unknown status $status")
+        }
     }
 
     override suspend fun releaseLock(
         key: ByteArray,
         lock: ByteArray,
-    ): RedisLockReleaseResult {
-        val result = executeScriptWithCache<Long>(
+    ): RedisCommandsReleaseLockResult {
+        require(key.isNotEmpty()) { "Key must not be empty" }
+        require(lock.isNotEmpty()) { "Lock value must not be empty" }
+
+        val raw = delegate.eval<ByteArray>(
             script = RELEASE_LOCK_SCRIPT,
-            type = ScriptOutputType.INTEGER,
+            type = ScriptOutputType.VALUE,
             keys = arrayOf(key),
             values = arrayOf(lock),
         )
-        return RedisLockReleaseResult.fromLettuceResult(result)
+
+        return when (val status = raw?.get(0)?.toInt()) {
+            0 -> RedisCommandsReleaseLockResult.Released
+            1 -> RedisCommandsReleaseLockResult.NotHeld
+            2 -> RedisCommandsReleaseLockResult.Mismatch
+            else -> throw IllegalStateException("Unknown status $status")
+        }
     }
 
-    override suspend fun increment(key: ByteArray, delta: Long): RedisIncrementResult {
-        val result = delegate.incrby(key, delta)
-        return RedisIncrementResult.fromLettuceResult(result)
+    override suspend fun setWithLock(
+        lockKey: ByteArray,
+        dataKey: ByteArray,
+        lock: ByteArray,
+        value: ByteArray,
+        ttlMs: Long,
+    ): RedisCommandsSetWithLockResult {
+        require(lockKey.isNotEmpty()) { "Lock key must not be empty" }
+        require(dataKey.isNotEmpty()) { "Data key must not be empty" }
+        require(lock.isNotEmpty()) { "Lock value must not be empty" }
+        require(ttlMs >= 0) { "TTL must be non-negative" }
+
+        val ttlArg = ttlMs.toString().toByteArray(Charsets.UTF_8)
+
+        val raw = delegate.eval<ByteArray>(
+            script = SET_WITH_LOCK_SCRIPT,
+            type = ScriptOutputType.VALUE,
+            keys = arrayOf(lockKey, dataKey),
+            values = arrayOf(lock, value, ttlArg),
+        )
+
+        return when (val status = raw?.get(0)?.toInt()) {
+            0 -> {
+                val previousValue = if (raw.size > 1) raw.copyOfRange(1, raw.size) else null
+                RedisCommandsSetWithLockResult.Success(previousValue)
+            }
+
+            1 -> RedisCommandsSetWithLockResult.LockMissing
+            2 -> RedisCommandsSetWithLockResult.LockMismatch
+            else -> throw IllegalStateException("Unknown status $status")
+        }
     }
 
-    override suspend fun decrement(key: ByteArray, delta: Long): RedisDecrementResult {
-        val result = delegate.decrby(key, delta)
-        return RedisDecrementResult.fromLettuceResult(result)
+    override suspend fun increment(
+        key: ByteArray,
+        delta: Long,
+    ): Long? {
+        require(key.isNotEmpty()) { "Key must not be empty" }
+        require(delta >= 0) { "Delta must be non-negative" }
+
+        return delegate.incrby(key, delta)
+    }
+
+    override suspend fun decrement(
+        key: ByteArray,
+        delta: Long,
+    ): Long? {
+        require(key.isNotEmpty()) { "Key must not be empty" }
+        require(delta >= 0) { "Delta must be non-negative" }
+
+        return delegate.decrby(key, delta)
     }
 }

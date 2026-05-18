@@ -15,13 +15,12 @@
  */
 package com.frisboo.corebanking.resilience.circuitbreaker.contracts
 
-import com.frisboo.corebanking.resilience.circuitbreaker.model.CircuitBreakerConfig
+import com.frisboo.corebanking.resilience.circuitbreaker.models.CircuitBreakerConfig
 
 public interface CircuitBreaker<out C : Any> :
     CircuitBreakerDecision,
     CircuitBreakerRecorder,
     CircuitBreakerConfigured<C> {
-
     /** Read-only metrics and state. */
     public val metrics: CircuitBreakerMetrics
 

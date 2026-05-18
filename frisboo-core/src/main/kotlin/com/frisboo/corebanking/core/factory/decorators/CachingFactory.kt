@@ -27,7 +27,6 @@ public class CachingFactory<C : Any, T : Any>(
     private val delegate: AsyncFactory<C, T>,
     private val matchesConfig: (T, C) -> Boolean,
 ) : AsyncFactory<C, T> {
-
     public companion object {
         private val logger = KotlinLogging.logger {}
     }
@@ -40,7 +39,10 @@ public class CachingFactory<C : Any, T : Any>(
         }
     }
 
-    override suspend fun getOrCreate(name: String, config: C): T {
+    override suspend fun getOrCreate(
+        name: String,
+        config: C,
+    ): T {
         val existing = cache.getIfPresent(name)
         if (existing != null && matchesConfig(existing, config)) {
             return existing
@@ -57,7 +59,7 @@ public class CachingFactory<C : Any, T : Any>(
             if (current != null) {
                 logger.warn {
                     "Instance '$name' already exists with a different configuration — " +
-                            "replacing with the new config. This indicates a config drift that should be fixed."
+                        "replacing with the new config. This indicates a config drift that should be fixed."
                 }
             }
 
@@ -77,4 +79,3 @@ public class CachingFactory<C : Any, T : Any>(
 
     override suspend fun estimatedSize(): Long = cache.estimatedSize()
 }
-

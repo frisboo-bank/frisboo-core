@@ -16,7 +16,6 @@
 package com.frisboo.corebanking.statemanager.models
 
 public sealed interface StateManagerEvictResult {
-
     public val count: Long
 
     public data class Evicted(

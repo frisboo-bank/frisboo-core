@@ -15,30 +15,30 @@
  */
 package com.frisboo.corebanking.resilience.circuitbreaker.adapters.resilience4j
 
-import com.frisboo.corebanking.resilience.circuitbreaker.model.CircuitBreakerConfig
-import com.frisboo.corebanking.resilience.circuitbreaker.model.SlidingWindowType
-import io.github.resilience4j.circuitbreaker.CircuitBreakerConfig as R4jConfig
+import com.frisboo.corebanking.resilience.circuitbreaker.models.CircuitBreakerConfig
+import com.frisboo.corebanking.resilience.circuitbreaker.models.SlidingWindowType
 import kotlin.time.toJavaDuration
+import io.github.resilience4j.circuitbreaker.CircuitBreakerConfig as R4jConfig
 import io.github.resilience4j.circuitbreaker.CircuitBreakerConfig.SlidingWindowType as R4jSlidingWindowType
 
 internal fun CircuitBreakerConfig.toResilience4jConfig(): R4jConfig {
-    val builder = R4jConfig
-        .custom()
-        .failureRateThreshold(failureRateThreshold)
-        .slowCallDurationThreshold(slowCallDurationThreshold.toJavaDuration())
-        .slowCallRateThreshold(slowCallRateThreshold)
-        .waitDurationInOpenState(waitDurationInOpenState.toJavaDuration())
-        .permittedNumberOfCallsInHalfOpenState(permittedNumberOfCallsInHalfOpenState)
-        .minimumNumberOfCalls(minimumNumberOfCalls)
-        .slidingWindowSize(slidingWindowSize)
-        .slidingWindowType(
-            when (slidingWindowType) {
-                SlidingWindowType.COUNT_BASED -> R4jSlidingWindowType.COUNT_BASED
-                SlidingWindowType.TIME_BASED -> R4jSlidingWindowType.TIME_BASED
-            },
-        )
-        .maxWaitDurationInHalfOpenState(maxWaitDurationInHalfOpenState.toJavaDuration())
-        .writableStackTraceEnabled(writableStackTraceEnabled)
+    val builder =
+        R4jConfig
+            .custom()
+            .failureRateThreshold(failureRateThreshold)
+            .slowCallDurationThreshold(slowCallDurationThreshold.toJavaDuration())
+            .slowCallRateThreshold(slowCallRateThreshold)
+            .waitDurationInOpenState(waitDurationInOpenState.toJavaDuration())
+            .permittedNumberOfCallsInHalfOpenState(permittedNumberOfCallsInHalfOpenState)
+            .minimumNumberOfCalls(minimumNumberOfCalls)
+            .slidingWindowSize(slidingWindowSize)
+            .slidingWindowType(
+                when (slidingWindowType) {
+                    SlidingWindowType.COUNT_BASED -> R4jSlidingWindowType.COUNT_BASED
+                    SlidingWindowType.TIME_BASED -> R4jSlidingWindowType.TIME_BASED
+                },
+            ).maxWaitDurationInHalfOpenState(maxWaitDurationInHalfOpenState.toJavaDuration())
+            .writableStackTraceEnabled(writableStackTraceEnabled)
 
     if (recordExceptions.isNotEmpty()) {
         builder.recordExceptions(*recordExceptions.toTypedArray())

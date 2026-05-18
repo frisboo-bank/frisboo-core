@@ -32,64 +32,73 @@ import kotlin.time.Duration
 public class StateManagerAuditingImpl<K : Any, V : Any>(
     private val delegate: StateManager<K, V>,
 ) : StateManager<K, V> {
+    override suspend fun get(key: K): Either<StateManagerError, StateManagerGetResult<V?>> =
+        either {
+            return delegate.get(key)
+        }
 
-    override suspend fun get(key: K): Either<StateManagerError, StateManagerGetResult<V?>> = either {
-        return delegate.get(key)
-    }
+    override suspend fun contains(key: K): Either<StateManagerError, StateManagerContainsResult> =
+        either {
+            return delegate.contains(key)
+        }
 
-    override suspend fun contains(key: K): Either<StateManagerError, StateManagerContainsResult> = either {
-        return delegate.contains(key)
-    }
-
-    override suspend fun size(): Either<StateManagerError, StateManagerSizeResult> = either {
-        return delegate.size()
-    }
+    override suspend fun size(): Either<StateManagerError, StateManagerSizeResult> =
+        either {
+            return delegate.size()
+        }
 
     override suspend fun put(
         key: K,
         value: V,
-    ): Either<StateManagerError, StateManagerPutResult<V?>> = either {
-        return delegate.put(key, value)
-    }
+    ): Either<StateManagerError, StateManagerPutResult<V?>> =
+        either {
+            return delegate.put(key, value)
+        }
 
     override suspend fun put(
         key: K,
         value: V,
         ttl: Duration,
-    ): Either<StateManagerError, StateManagerPutResult<V?>> = either {
-        return delegate.put(key, value, ttl)
-    }
+    ): Either<StateManagerError, StateManagerPutResult<V?>> =
+        either {
+            return delegate.put(key, value, ttl)
+        }
 
     override suspend fun getOrPut(
         key: K,
         factory: suspend () -> V,
-    ): Either<StateManagerError, StateManagerGetOrPutResult<V>> = either {
-        return delegate.getOrPut(key, factory)
-    }
+    ): Either<StateManagerError, StateManagerGetOrPutResult<V>> =
+        either {
+            return delegate.getOrPut(key, factory)
+        }
 
     override suspend fun getOrPut(
         key: K,
         ttl: Duration,
         factory: suspend () -> V,
-    ): Either<StateManagerError, StateManagerGetOrPutResult<V>> = either {
-        return delegate.getOrPut(key, ttl, factory)
-    }
+    ): Either<StateManagerError, StateManagerGetOrPutResult<V>> =
+        either {
+            return delegate.getOrPut(key, ttl, factory)
+        }
 
-    override suspend fun evict(key: K): Either<StateManagerError, StateManagerEvictResult> = either {
-        return delegate.evict(key)
-    }
+    override suspend fun evict(key: K): Either<StateManagerError, StateManagerEvictResult> =
+        either {
+            return delegate.evict(key)
+        }
 
     override suspend fun keysPage(
         cursor: String?,
         limit: Int,
-    ): Either<StateManagerError, StateManagerPage<K>> = either {
-        return delegate.keysPage(cursor, limit)
-    }
+    ): Either<StateManagerError, StateManagerPage<K>> =
+        either {
+            return delegate.keysPage(cursor, limit)
+        }
 
     override suspend fun setTTL(
         key: K,
         ttl: Duration,
-    ): Either<StateManagerError, StateManagerSetTtlResult> = either {
-        return delegate.setTTL(key, ttl)
-    }
+    ): Either<StateManagerError, StateManagerSetTtlResult> =
+        either {
+            return delegate.setTTL(key, ttl)
+        }
 }

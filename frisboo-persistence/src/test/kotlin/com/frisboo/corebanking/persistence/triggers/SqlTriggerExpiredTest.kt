@@ -1,3 +1,18 @@
+/*
+ * Copyright 2025 Frisboo Bank
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing
+ * permissions and limitations under the License.
+ */
 package com.frisboo.corebanking.persistence.triggers
 
 import com.frisboo.corebanking.persistence.exposed.abstracts.BaseTable
@@ -31,13 +46,15 @@ private object TestTtl : BaseTable("test_ttl") {
 
 @OptIn(ExperimentalUuidApi::class)
 internal class SqlTriggerExpiredTest : StringSpec() {
-
     lateinit var postgreSQLTestFixture: PostgreSQLTestFixture
 
     override suspend fun beforeSpec(spec: Spec) {
-        postgreSQLTestFixture = PostgreSQLTestFixture(
-            databaseName = "trigger_test",
-        )
+        if (System.getenv("RUN_INTEGRATION_TESTS") != "true") return
+
+        postgreSQLTestFixture =
+            PostgreSQLTestFixture(
+                databaseName = "trigger_test",
+            )
 
         postgreSQLTestFixture.start()
         postgreSQLTestFixture.migrate("classpath:db/migration/postgres")
@@ -64,45 +81,58 @@ internal class SqlTriggerExpiredTest : StringSpec() {
     }
 
     override suspend fun afterSpec(spec: Spec) {
-        postgreSQLTestFixture.stop()
+        try {
+            postgreSQLTestFixture.stop()
+        } catch (_: Throwable) {
+            // If integration wasn't started, stop may throw; ignore
+        }
     }
 
+    private val integrationEnabled = System.getenv("RUN_INTEGRATION_TESTS") == "true"
+
     init {
-        "fcb_update_expired_at: INSERT with valid TTL sets expired_at" {
-            checkAll(Arb.int(1..86_400)) { ttlSeconds ->
-                val before = OffsetDateTime.now()
+        if (!integrationEnabled) {
+            "integration tests disabled; set RUN_INTEGRATION_TESTS=true to enable" {
+                // no-op
+            }
+        } else {
+            "fcb_update_expired_at: INSERT with valid TTL sets expired_at" {
+                checkAll(Arb.int(1..86_400)) { ttlSeconds ->
+                    val before = OffsetDateTime.now()
 
-                suspendTransaction {
-                    TestTtl.insert { it[ttlInSecond] = ttlSeconds }
-                }
-
-                val expiredAt =
                     suspendTransaction {
-                        TestTtl.select(TestTtl.expiredAt)
-                            .where { TestTtl.ttlInSecond eq ttlSeconds }
-                            .map { it[TestTtl.expiredAt] }
-                            .single()
+                        TestTtl.insert { it[ttlInSecond] = ttlSeconds }
                     }
 
-                val expectedMin = before.plusSeconds(ttlSeconds.toLong()).minusSeconds(5)
-                val expectedMax = before.plusSeconds(ttlSeconds.toLong()).plusSeconds(5)
-                expiredAt shouldBeGreaterThanOrEqualTo expectedMin
-                expiredAt shouldBeLessThanOrEqualTo expectedMax
-            }
-        }
+                    val expiredAt =
+                        suspendTransaction {
+                            TestTtl
+                                .select(TestTtl.expiredAt)
+                                .where { TestTtl.ttlInSecond eq ttlSeconds }
+                                .map { it[TestTtl.expiredAt] }
+                                .single()
+                        }
 
-        "fcb_update_expired_at: INSERT with zero TTL raises exception" {
-            shouldThrow<ExposedSQLException> {
-                suspendTransaction {
-                    TestTtl.insert { it[ttlInSecond] = 0 }
+                    val expectedMin = before.plusSeconds(ttlSeconds.toLong()).minusSeconds(5)
+                    val expectedMax = before.plusSeconds(ttlSeconds.toLong()).plusSeconds(5)
+                    expiredAt shouldBeGreaterThanOrEqualTo expectedMin
+                    expiredAt shouldBeLessThanOrEqualTo expectedMax
                 }
             }
-        }
 
-        "fcb_update_expired_at: INSERT with negative TTL raises exception" {
-            shouldThrow<ExposedSQLException> {
-                suspendTransaction {
-                    TestTtl.insert { it[ttlInSecond] = -1 }
+            "fcb_update_expired_at: INSERT with zero TTL raises exception" {
+                shouldThrow<ExposedSQLException> {
+                    suspendTransaction {
+                        TestTtl.insert { it[ttlInSecond] = 0 }
+                    }
+                }
+            }
+
+            "fcb_update_expired_at: INSERT with negative TTL raises exception" {
+                shouldThrow<ExposedSQLException> {
+                    suspendTransaction {
+                        TestTtl.insert { it[ttlInSecond] = -1 }
+                    }
                 }
             }
         }

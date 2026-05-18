@@ -44,44 +44,49 @@ public inline fun <T> T.optimisticUpdate(
     crossinline where: () -> Op<Boolean>,
     version: Long,
     crossinline body: T.(UpdateStatement) -> Unit,
-): Either<ExposedError, Int> where T : Table, T : WithOptimisticLocking = either {
-    val versionCheck = this@optimisticUpdate.optimisticLockingVersion eq version
-    val safeName = tableName.toSafeSqlIdentifier(MAX_PG_IDENTIFIER - SAVEPOINT_PREFIX.length)
-    val savepointName = "$SAVEPOINT_PREFIX$safeName"
-    val tx = TransactionManager.current()
+): Either<ExposedError, Int> where T : Table, T : WithOptimisticLocking =
+    either {
+        val versionCheck = this@optimisticUpdate.optimisticLockingVersion eq version
+        val safeName = tableName.toSafeSqlIdentifier(MAX_PG_IDENTIFIER - SAVEPOINT_PREFIX.length)
+        val savepointName = "$SAVEPOINT_PREFIX$safeName"
+        val tx = TransactionManager.current()
 
-    tx.exec("SAVEPOINT $savepointName")
+        tx.exec("SAVEPOINT $savepointName")
 
-    try {
-        val rowsUpdated = try {
-            update(
-                where = { where().and(versionCheck) },
-            ) {
-                body(it)
-                it[this@optimisticUpdate.optimisticLockingVersion] = version + 1
-            }
-        } catch (ex: Throwable) {
-            tx.exec("ROLLBACK TO SAVEPOINT $savepointName")
-            throw ex
-        }
+        try {
+            val rowsUpdated =
+                try {
+                    update(
+                        where = { where().and(versionCheck) },
+                    ) {
+                        body(it)
+                        it[this@optimisticUpdate.optimisticLockingVersion] = version + 1
+                    }
+                } catch (ex: Throwable) {
+                    tx.exec("ROLLBACK TO SAVEPOINT $savepointName")
+                    throw ex
+                }
 
-        when (rowsUpdated) {
-            1 -> rowsUpdated
-            0 -> {
-                val exists = !select(intLiteral(1)).where(where()).limit(1).empty()
-                if (exists) {
-                    raise(ExposedError.OptimisticLockFailed(tableName, version))
-                } else {
-                    raise(ExposedError.RowNotFound(tableName))
+            when (rowsUpdated) {
+                1 -> {
+                    rowsUpdated
+                }
+
+                0 -> {
+                    val exists = !select(intLiteral(1)).where(where()).limit(1).empty()
+                    if (exists) {
+                        raise(ExposedError.OptimisticLockFailed(tableName, version))
+                    } else {
+                        raise(ExposedError.RowNotFound(tableName))
+                    }
+                }
+
+                else -> {
+                    tx.exec("ROLLBACK TO SAVEPOINT $savepointName")
+                    raise(ExposedError.NonUniqueUpdate(tableName, rowsUpdated))
                 }
             }
-
-            else -> {
-                tx.exec("ROLLBACK TO SAVEPOINT $savepointName")
-                raise(ExposedError.NonUniqueUpdate(tableName, rowsUpdated))
-            }
+        } finally {
+            runCatching { tx.exec("RELEASE SAVEPOINT $savepointName") }
         }
-    } finally {
-        runCatching { tx.exec("RELEASE SAVEPOINT $savepointName") }
     }
-}

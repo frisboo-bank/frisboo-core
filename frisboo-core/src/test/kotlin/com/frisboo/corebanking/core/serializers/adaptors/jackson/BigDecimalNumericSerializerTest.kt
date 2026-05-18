@@ -42,7 +42,11 @@ class BigDecimalNumericSerializerTest :
                 Arb.bigDecimal().forAll { bigDecimal ->
                     val wallet = Wallet(balance = bigDecimal)
                     val serialized = serializer.serializeToString(wallet)
-                    val deserialized: Wallet = serializer.deserialize(serialized.toByteArray(Charsets.UTF_8), Wallet::class.java)
+                    val deserialized: Wallet =
+                        serializer.deserialize(
+                            serialized.toByteArray(Charsets.UTF_8),
+                            Wallet::class.java,
+                        )
                     deserialized.balance == bigDecimal
                 }
             }
@@ -67,7 +71,11 @@ class BigDecimalNumericSerializerTest :
                 testValues.forEach { (bigDecimal, expectedString) ->
                     val wallet = Wallet(balance = bigDecimal)
                     val serialized = serializer.serializeToString(wallet)
-                    val deserialized: Wallet = serializer.deserialize(serialized.toByteArray(Charsets.UTF_8), Wallet::class.java)
+                    val deserialized: Wallet =
+                        serializer.deserialize(
+                            serialized.toByteArray(Charsets.UTF_8),
+                            Wallet::class.java,
+                        )
 
                     deserialized.balance shouldBeEqual bigDecimal
                     serialized shouldContain "{\"balance\":$expectedString}"

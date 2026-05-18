@@ -21,7 +21,6 @@ package com.frisboo.corebanking.statemanager.contracts
  * Adds [cleanupExpired] for eager eviction — local stores manage expiry themselves.
  */
 public interface LocalStateManager<K : Any, V : Any> : StateManager<K, V> {
-
     /** Removes expired entries. Returns the count removed. */
     public suspend fun cleanupExpired(): Int
 }

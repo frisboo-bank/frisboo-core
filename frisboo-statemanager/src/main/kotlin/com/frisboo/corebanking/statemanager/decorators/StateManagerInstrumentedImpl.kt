@@ -31,20 +31,10 @@ import com.frisboo.corebanking.statemanager.models.StateManagerSizeResult
 import java.util.concurrent.atomic.AtomicLong
 import kotlin.time.Duration
 
-/**
- * Metrics decorator: tracks hit/miss/put/eviction/failure counters for a [StateManager].
- *
- * Counters are lock-free ([AtomicLong]) and safe for concurrent coroutine use.
- * Read-only counters via [StateManagerMetrics] — suitable for Micrometer gauge binding
- * or periodic scraping without affecting statemanager throughput.
- *
- * Delegates all [StateManager] operations unchanged; only the counting behaviour is added.
- */
 public class StateManagerInstrumentedImpl<K : Any, V : Any>(
     private val delegate: StateManager<K, V>,
 ) : StateManager<K, V> {
-
-//    private val _hitCount = AtomicLong(0)
+    //    private val _hitCount = AtomicLong(0)
 //    private val _missCount = AtomicLong(0)
 //    private val _putCount = AtomicLong(0)
 //    private val _evictionCount = AtomicLong(0)
@@ -56,66 +46,75 @@ public class StateManagerInstrumentedImpl<K : Any, V : Any>(
 //    override val evictionCount: Long get() = _evictionCount.get()
 //    override val failureCount: Long get() = _failureCount.get()
 
+    override suspend fun get(key: K): Either<StateManagerError, StateManagerGetResult<V?>> =
+        either {
+            return delegate.get(key)
+        }
 
-    override suspend fun get(key: K): Either<StateManagerError, StateManagerGetResult<V?>> = either {
-        return delegate.get(key)
-    }
+    override suspend fun contains(key: K): Either<StateManagerError, StateManagerContainsResult> =
+        either {
+            return delegate.contains(key)
+        }
 
-    override suspend fun contains(key: K): Either<StateManagerError, StateManagerContainsResult> = either {
-        return delegate.contains(key)
-    }
-
-    override suspend fun size(): Either<StateManagerError, StateManagerSizeResult> = either {
-        return delegate.size()
-    }
+    override suspend fun size(): Either<StateManagerError, StateManagerSizeResult> =
+        either {
+            return delegate.size()
+        }
 
     override suspend fun put(
         key: K,
         value: V,
-    ): Either<StateManagerError, StateManagerPutResult<V?>> = either {
-        return delegate.put(key, value)
-    }
+    ): Either<StateManagerError, StateManagerPutResult<V?>> =
+        either {
+            return delegate.put(key, value)
+        }
 
     override suspend fun put(
         key: K,
         value: V,
         ttl: Duration,
-    ): Either<StateManagerError, StateManagerPutResult<V?>> = either {
-        return delegate.put(key, value, ttl)
-    }
+    ): Either<StateManagerError, StateManagerPutResult<V?>> =
+        either {
+            return delegate.put(key, value, ttl)
+        }
 
     override suspend fun getOrPut(
         key: K,
         factory: suspend () -> V,
-    ): Either<StateManagerError, StateManagerGetOrPutResult<V>> = either {
-        return delegate.getOrPut(key, factory)
-    }
+    ): Either<StateManagerError, StateManagerGetOrPutResult<V>> =
+        either {
+            return delegate.getOrPut(key, factory)
+        }
 
     override suspend fun getOrPut(
         key: K,
         ttl: Duration,
         factory: suspend () -> V,
-    ): Either<StateManagerError, StateManagerGetOrPutResult<V>> = either {
-        return delegate.getOrPut(key, ttl, factory)
-    }
+    ): Either<StateManagerError, StateManagerGetOrPutResult<V>> =
+        either {
+            return delegate.getOrPut(key, ttl, factory)
+        }
 
-    override suspend fun evict(key: K): Either<StateManagerError, StateManagerEvictResult> = either {
-        return delegate.evict(key)
-    }
+    override suspend fun evict(key: K): Either<StateManagerError, StateManagerEvictResult> =
+        either {
+            return delegate.evict(key)
+        }
 
     override suspend fun keysPage(
         cursor: String?,
         limit: Int,
-    ): Either<StateManagerError, StateManagerPage<K>> = either {
-        return delegate.keysPage(cursor, limit)
-    }
+    ): Either<StateManagerError, StateManagerPage<K>> =
+        either {
+            return delegate.keysPage(cursor, limit)
+        }
 
     override suspend fun setTTL(
         key: K,
         ttl: Duration,
-    ): Either<StateManagerError, StateManagerSetTtlResult> = either {
-        return delegate.setTTL(key, ttl)
-    }
+    ): Either<StateManagerError, StateManagerSetTtlResult> =
+        either {
+            return delegate.setTTL(key, ttl)
+        }
 
 //    override suspend fun get(key: K): Eit E V? {
 //        val result = delegate.get(key)

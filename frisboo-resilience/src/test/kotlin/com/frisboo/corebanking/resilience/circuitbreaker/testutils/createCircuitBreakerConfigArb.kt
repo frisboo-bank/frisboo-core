@@ -15,13 +15,13 @@
  */
 package com.frisboo.corebanking.resilience.circuitbreaker.testutils
 
-import com.frisboo.corebanking.resilience.circuitbreaker.model.CircuitBreakerConfig
-import com.frisboo.corebanking.resilience.circuitbreaker.model.CircuitBreakerConfig.Companion.MAX_FAILURE_RATE
-import com.frisboo.corebanking.resilience.circuitbreaker.model.CircuitBreakerConfig.Companion.MAX_SLOW_CALL_RATE
-import com.frisboo.corebanking.resilience.circuitbreaker.model.CircuitBreakerConfig.Companion.MIN_FAILURE_RATE
-import com.frisboo.corebanking.resilience.circuitbreaker.model.CircuitBreakerConfig.Companion.MIN_MINIMUM_CALLS
-import com.frisboo.corebanking.resilience.circuitbreaker.model.CircuitBreakerConfig.Companion.MIN_SLIDING_WINDOW_SIZE
-import com.frisboo.corebanking.resilience.circuitbreaker.model.CircuitBreakerConfig.Companion.MIN_SLOW_CALL_RATE
+import com.frisboo.corebanking.resilience.circuitbreaker.models.CircuitBreakerConfig
+import com.frisboo.corebanking.resilience.circuitbreaker.models.CircuitBreakerConfig.Companion.MAX_FAILURE_RATE
+import com.frisboo.corebanking.resilience.circuitbreaker.models.CircuitBreakerConfig.Companion.MAX_SLOW_CALL_RATE
+import com.frisboo.corebanking.resilience.circuitbreaker.models.CircuitBreakerConfig.Companion.MIN_FAILURE_RATE
+import com.frisboo.corebanking.resilience.circuitbreaker.models.CircuitBreakerConfig.Companion.MIN_MINIMUM_CALLS
+import com.frisboo.corebanking.resilience.circuitbreaker.models.CircuitBreakerConfig.Companion.MIN_SLIDING_WINDOW_SIZE
+import com.frisboo.corebanking.resilience.circuitbreaker.models.CircuitBreakerConfig.Companion.MIN_SLOW_CALL_RATE
 import io.kotest.property.Arb
 import io.kotest.property.arbitrary.bind
 import io.kotest.property.arbitrary.duration

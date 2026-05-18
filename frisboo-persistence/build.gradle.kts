@@ -16,6 +16,7 @@
 plugins {
     id("kotlin-conventions")
     id("java-test-fixtures")
+    alias(baseLibs.plugins.kover)
     alias(baseLibs.plugins.dokka)
     alias(baseLibs.plugins.maven.publish)
 }
@@ -24,10 +25,16 @@ dependencies {
     api(project(":frisboo-core"))
     api(project(":frisboo-crypto"))
     api(project(":frisboo-data"))
+    api(project(":frisboo-observability"))
 
+    api(platform(baseLibs.arrow.kt.bom))
+    api(platform(baseLibs.kotlin.bom))
+    api(platform(baseLibs.kotlinx.coroutines.bom))
     api(platform(baseLibs.spring.boot.bom))
     api(platform(baseLibs.exposed.bom))
 
+    api(baseLibs.arrow.kt.core)
+    api(baseLibs.arrow.kt.coroutines)
     api(baseLibs.lettuce.core)
     api(baseLibs.exposed.spring.boot.starter)
     api(baseLibs.exposed.kotlin.datetime)
@@ -50,7 +57,6 @@ dependencies {
     // Test fixtures dependencies
     testImplementation(testFixtures(project(":frisboo-persistence")))
     testFixturesImplementation(platform(baseLibs.testcontainers.bom))
-    testFixturesApi(baseLibs.lettuce.core)
     testFixturesApi(baseLibs.kotlinx.coroutines.core)
     testFixturesApi(baseLibs.testcontainers.postgresql)
     testFixturesApi(baseLibs.testcontainers.redis)

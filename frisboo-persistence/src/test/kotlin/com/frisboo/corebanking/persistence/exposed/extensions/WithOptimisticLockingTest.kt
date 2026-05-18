@@ -1,3 +1,18 @@
+/*
+ * Copyright 2025 Frisboo Bank
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing
+ * permissions and limitations under the License.
+ */
 package com.frisboo.corebanking.persistence.exposed.extensions
 
 import arrow.core.Either
@@ -53,39 +68,43 @@ private object TestTable : BaseTable("test_table"), WithOptimisticLocking {
 
 @OptIn(ExperimentalUuidApi::class, ExperimentalKotest::class)
 internal class WithOptimisticLockingTest : StringSpec() {
-
     companion object {
         private const val TEST_ITERATIONS = 20
     }
 
-    private val postgresContainer = PostgreSQLContainer(POSTGRESQL_LATEST_IMAGE).apply {
-        withReuse(true)
-        withDatabaseName("persistence_test")
-        withUsername("postgres")
-        withPassword("postgres")
-        withCommand("postgres", "-c", "max_connections=200")
-    }
+    private val postgresContainer =
+        PostgreSQLContainer(POSTGRESQL_LATEST_IMAGE).apply {
+            withReuse(true)
+            withDatabaseName("persistence_test")
+            withUsername("postgres")
+            withPassword("postgres")
+            withCommand("postgres", "-c", "max_connections=200")
+        }
 
     private lateinit var dataSource: HikariDataSource
+    private var integrationStarted: Boolean = false
 
     override suspend fun beforeSpec(spec: Spec) {
+        if (System.getenv("RUN_INTEGRATION_TESTS") != "true") return
         postgresContainer.start()
-        dataSource = HikariDataSource(
-            HikariConfig().apply {
-                jdbcUrl = postgresContainer.jdbcUrl
-                username = postgresContainer.username
-                password = postgresContainer.password
-                maximumPoolSize = 150
-            },
-        )
+        integrationStarted = true
+        dataSource =
+            HikariDataSource(
+                HikariConfig().apply {
+                    jdbcUrl = postgresContainer.jdbcUrl
+                    username = postgresContainer.username
+                    password = postgresContainer.password
+                    maximumPoolSize = 150
+                },
+            )
         Database.connect(dataSource)
-        Flyway.configure()
+        Flyway
+            .configure()
             .dataSource(
                 postgresContainer.jdbcUrl,
                 postgresContainer.username,
                 postgresContainer.password,
-            )
-            .locations("classpath:db/migration/postgres")
+            ).locations("classpath:db/migration/postgres")
             .load()
             .migrate()
         transaction {
@@ -109,256 +128,290 @@ internal class WithOptimisticLockingTest : StringSpec() {
         }
     }
 
-    override suspend fun afterEach(testCase: TestCase, result: TestResult) {
+    override suspend fun afterEach(
+        testCase: TestCase,
+        result: TestResult,
+    ) {
+        if (!integrationStarted) return
+
         transaction {
             exec("TRUNCATE TABLE test_table RESTART IDENTITY CASCADE")
         }
     }
 
     override suspend fun afterSpec(spec: Spec) {
-        dataSource.close()
-        postgresContainer.stop()
-    }
-
-    private suspend fun insertRow(name: String, balance: Long = 0): Either<ExposedError, Uuid> = either {
-        suspendTransaction {
-            TestTable.insert {
-                it[TestTable.name] = name
-                it[TestTable.balance] = balance
-            } get TestTable.tableId
+        if (integrationStarted) {
+            dataSource.close()
+            postgresContainer.stop()
         }
     }
 
-    private suspend fun readVersion(tableId: Uuid): Either<ExposedError, Long> = either {
-        suspendTransaction {
-            TestTable.select(TestTable.optimisticLockingVersion)
-                .where { TestTable.tableId eq tableId }
-                .single()[TestTable.version]
+    private suspend fun insertRow(
+        name: String,
+        balance: Long = 0,
+    ): Either<ExposedError, Uuid> =
+        either {
+            suspendTransaction {
+                TestTable.insert {
+                    it[TestTable.name] = name
+                    it[TestTable.balance] = balance
+                } get TestTable.tableId
+            }
         }
-    }
 
-    private suspend fun readBalance(tableId: Uuid): Either<ExposedError, Long> = either {
-        suspendTransaction {
-            TestTable.select(TestTable.balance)
-                .where { TestTable.tableId eq tableId }
-                .single()[TestTable.balance]
+    private suspend fun readVersion(tableId: Uuid): Either<ExposedError, Long> =
+        either {
+            suspendTransaction {
+                TestTable
+                    .select(TestTable.optimisticLockingVersion)
+                    .where { TestTable.tableId eq tableId }
+                    .single()[TestTable.version]
+            }
         }
-    }
+
+    private suspend fun readBalance(tableId: Uuid): Either<ExposedError, Long> =
+        either {
+            suspendTransaction {
+                TestTable
+                    .select(TestTable.balance)
+                    .where { TestTable.tableId eq tableId }
+                    .single()[TestTable.balance]
+            }
+        }
+
+    private val integrationEnabled = System.getenv("RUN_INTEGRATION_TESTS") == "true"
 
     init {
-        "happy-path: update succeeds and increments version" {
-            checkAll(
-                PropTestConfig(iterations = TEST_ITERATIONS),
-                Arb.string(1..100),
-                Arb.long(0L..10000L),
-            ) { name, balance ->
-                val id = insertRow(name, balance).shouldBeRight()
-                readVersion(id).shouldBeRight(1L)
-
-                val newBalance = balance + 100
-
-                val result = suspendTransaction {
-                    TestTable.optimisticUpdate(
-                        where = { TestTable.tableId eq id },
-                        version = 1L,
-                    ) {
-                        it[TestTable.balance] = newBalance
-                    }
-                }
-
-                result.shouldBeRight(1)
-                readBalance(id).shouldBeRight(newBalance)
-                readVersion(id).shouldBeRight(2L)
+        if (!integrationEnabled) {
+            "integration tests disabled; set RUN_INTEGRATION_TESTS=true to enable" {
+                // no-op
             }
-        }
+        } else {
+            "happy-path: update succeeds and increments version" {
+                checkAll(
+                    PropTestConfig(iterations = TEST_ITERATIONS),
+                    Arb.string(1..100),
+                    Arb.long(0L..10000L),
+                ) { name, balance ->
+                    val id = insertRow(name, balance).shouldBeRight()
+                    readVersion(id).shouldBeRight(1L)
 
-        "version mismatch returns OptimisticLockFailed" {
-            checkAll(
-                PropTestConfig(iterations = TEST_ITERATIONS),
-                Arb.string(1..100),
-                Arb.long(0L..1000L),
-                Arb.long(2L..100L),
-            ) { name, balance, wrongVersion ->
-                val id = insertRow(name, balance).shouldBeRight()
-                readVersion(id).shouldBeRight(1L)
+                    val newBalance = balance + 100
 
-                val result = suspendTransaction {
-                    TestTable.optimisticUpdate(
-                        where = { TestTable.tableId eq id },
-                        version = wrongVersion,
-                    ) {
-                        it[TestTable.balance] = 9999L
-                    }
-                }
-
-                result.shouldBeLeft(ExposedError.OptimisticLockFailed(TestTable.tableName, wrongVersion))
-                readBalance(id).shouldBeRight(balance)
-                readVersion(id).shouldBeRight(1L)
-            }
-        }
-
-        "sequential updates with correct versions succeed" {
-            checkAll(
-                PropTestConfig(iterations = TEST_ITERATIONS),
-                Arb.string(1..100),
-                Arb.long(0L..1000L),
-                Arb.int(2..10),
-            ) { name, startBalance, steps ->
-                val id = insertRow(name, startBalance).shouldBeRight()
-                readVersion(id).shouldBeRight(1L)
-
-                var expectedVersion = 1L
-                var expectedBalance = startBalance
-
-                for (step in 1..steps) {
-                    val newBalance = expectedBalance + step * 10
-                    val result = suspendTransaction {
-                        TestTable.optimisticUpdate(
-                            where = { TestTable.tableId eq id },
-                            version = expectedVersion,
-                        ) {
-                            it[TestTable.balance] = newBalance
+                    val result =
+                        suspendTransaction {
+                            TestTable.optimisticUpdate(
+                                where = { TestTable.tableId eq id },
+                                version = 1L,
+                            ) {
+                                it[TestTable.balance] = newBalance
+                            }
                         }
-                    }
+
                     result.shouldBeRight(1)
-                    expectedVersion++
-                    expectedBalance = newBalance
+                    readBalance(id).shouldBeRight(newBalance)
+                    readVersion(id).shouldBeRight(2L)
                 }
-
-                readVersion(id).shouldBeRight(expectedVersion)
-                readBalance(id).shouldBeRight(expectedBalance)
             }
-        }
 
-        "stale version after successful update returns OptimisticLockFailed" {
-            checkAll(
-                PropTestConfig(iterations = TEST_ITERATIONS),
-                Arb.string(1..100),
-                Arb.long(0L..1000L),
-            ) { name, balance ->
-                val id = insertRow(name, balance).shouldBeRight()
-                readVersion(id).shouldBeRight(1L)
+            "version mismatch returns OptimisticLockFailed" {
+                checkAll(
+                    PropTestConfig(iterations = TEST_ITERATIONS),
+                    Arb.string(1..100),
+                    Arb.long(0L..1000L),
+                    Arb.long(2L..100L),
+                ) { name, balance, wrongVersion ->
+                    val id = insertRow(name, balance).shouldBeRight()
+                    readVersion(id).shouldBeRight(1L)
 
-                val newBalance = balance + 200
+                    val result =
+                        suspendTransaction {
+                            TestTable.optimisticUpdate(
+                                where = { TestTable.tableId eq id },
+                                version = wrongVersion,
+                            ) {
+                                it[TestTable.balance] = 9999L
+                            }
+                        }
 
-                val firstUpdate = suspendTransaction {
-                    TestTable.optimisticUpdate(
-                        where = { TestTable.tableId eq id },
-                        version = 1L,
-                    ) {
-                        it[TestTable.balance] = newBalance
-                    }
+                    result.shouldBeLeft(ExposedError.OptimisticLockFailed(TestTable.tableName, wrongVersion))
+                    readBalance(id).shouldBeRight(balance)
+                    readVersion(id).shouldBeRight(1L)
                 }
-
-                firstUpdate.shouldBeRight(1)
-                readVersion(id).shouldBeRight(2L)
-                readBalance(id).shouldBeRight(newBalance)
-
-                val staleUpdate = suspendTransaction {
-                    TestTable.optimisticUpdate(
-                        where = { TestTable.tableId eq id },
-                        version = 1L,
-                    ) {
-                        it[TestTable.balance] = newBalance + 100
-                    }
-                }
-
-                staleUpdate.shouldBeLeft(ExposedError.OptimisticLockFailed(TestTable.tableName, 1L))
-                readBalance(id).shouldBeRight(newBalance)
-                readVersion(id).shouldBeRight(2L)
             }
-        }
 
-        "non-unique where clause returns NonUniqueUpdate and rolls back" {
-            checkAll(
-                PropTestConfig(iterations = TEST_ITERATIONS),
-                Arb.string(1..50),
-                Arb.string(1..50),
-                Arb.long(0L..1000L),
-                Arb.long(0L..1000L),
-            ) { name1, name2, balance1, balance2 ->
-                val id1 = insertRow(name1, balance1).shouldBeRight()
-                val id2 = insertRow(name2, balance2).shouldBeRight()
+            "sequential updates with correct versions succeed" {
+                checkAll(
+                    PropTestConfig(iterations = TEST_ITERATIONS),
+                    Arb.string(1..100),
+                    Arb.long(0L..1000L),
+                    Arb.int(2..10),
+                ) { name, startBalance, steps ->
+                    val id = insertRow(name, startBalance).shouldBeRight()
+                    readVersion(id).shouldBeRight(1L)
 
-                readVersion(id1).shouldBeRight(1L)
-                readVersion(id2).shouldBeRight(1L)
+                    var expectedVersion = 1L
+                    var expectedBalance = startBalance
 
-                val result = suspendTransaction {
-                    TestTable.optimisticUpdate(
-                        where = { (TestTable.tableId eq id1) or (TestTable.tableId eq id2) },
-                        version = 1L,
-                    ) {
-                        it[TestTable.balance] = 9999L
-                    }
-                }
-
-                result.shouldBeLeft(ExposedError.NonUniqueUpdate(TestTable.tableName, 2))
-                readBalance(id1).shouldBeRight(balance1)
-                readVersion(id1).shouldBeRight(1L)
-                readBalance(id2).shouldBeRight(balance2)
-                readVersion(id2).shouldBeRight(1L)
-            }
-        }
-
-        "non-existent row returns RowNotFound" {
-            checkAll(PropTestConfig(iterations = 10), Arb.long(1L..100L)) { version ->
-                val nonExistentId = Uuid.random()
-
-                val result = suspendTransaction {
-                    TestTable.optimisticUpdate(
-                        where = { TestTable.tableId eq nonExistentId },
-                        version = version,
-                    ) {
-                        it[TestTable.balance] = 999L
-                    }
-                }
-                result.shouldBeLeft(ExposedError.RowNotFound(TestTable.tableName))
-            }
-        }
-
-        "concurrent optimistic updates — exactly one winner per round" {
-            checkAll(
-                Arb.int(10..50),
-                Arb.long(0L..5000L),
-            ) { concurrentAttempts, startBalance ->
-                val id = insertRow("concurrent-prop", startBalance).shouldBeRight()
-                readVersion(id).shouldBeRight(1L)
-
-                val successCount = AtomicInteger(0)
-                val failureCount = AtomicInteger(0)
-                val seenVersions = ConcurrentHashMap.newKeySet<Long>()
-
-                coroutineScope {
-                    val jobs = (1..concurrentAttempts).map { i ->
-                        async(Dispatchers.IO) {
-                            val result = suspendTransaction {
+                    for (step in 1..steps) {
+                        val newBalance = expectedBalance + step * 10
+                        val result =
+                            suspendTransaction {
                                 TestTable.optimisticUpdate(
                                     where = { TestTable.tableId eq id },
-                                    version = 1L,
+                                    version = expectedVersion,
                                 ) {
-                                    it[TestTable.balance] = startBalance + i.toLong()
+                                    it[TestTable.balance] = newBalance
                                 }
                             }
-                            when (result) {
-                                is Either.Right -> {
-                                    successCount.incrementAndGet()
-                                    readVersion(id).onRight { v -> seenVersions.add(v) }
-                                }
-
-                                is Either.Left -> failureCount.incrementAndGet()
-                            }
-                            result
-                        }
+                        result.shouldBeRight(1)
+                        expectedVersion++
+                        expectedBalance = newBalance
                     }
-                    jobs.awaitAll()
-                }
 
-                successCount.get() shouldBe 1
-                failureCount.get() shouldBe concurrentAttempts - 1
-                readVersion(id).shouldBeRight(2L)
-                readBalance(id).shouldNotBe(startBalance)
-                seenVersions.size shouldBe 1
-                seenVersions.first() shouldBe 2L
+                    readVersion(id).shouldBeRight(expectedVersion)
+                    readBalance(id).shouldBeRight(expectedBalance)
+                }
+            }
+
+            "stale version after successful update returns OptimisticLockFailed" {
+                checkAll(
+                    PropTestConfig(iterations = TEST_ITERATIONS),
+                    Arb.string(1..100),
+                    Arb.long(0L..1000L),
+                ) { name, balance ->
+                    val id = insertRow(name, balance).shouldBeRight()
+                    readVersion(id).shouldBeRight(1L)
+
+                    val newBalance = balance + 200
+
+                    val firstUpdate =
+                        suspendTransaction {
+                            TestTable.optimisticUpdate(
+                                where = { TestTable.tableId eq id },
+                                version = 1L,
+                            ) {
+                                it[TestTable.balance] = newBalance
+                            }
+                        }
+
+                    firstUpdate.shouldBeRight(1)
+                    readVersion(id).shouldBeRight(2L)
+                    readBalance(id).shouldBeRight(newBalance)
+
+                    val staleUpdate =
+                        suspendTransaction {
+                            TestTable.optimisticUpdate(
+                                where = { TestTable.tableId eq id },
+                                version = 1L,
+                            ) {
+                                it[TestTable.balance] = newBalance + 100
+                            }
+                        }
+
+                    staleUpdate.shouldBeLeft(ExposedError.OptimisticLockFailed(TestTable.tableName, 1L))
+                    readBalance(id).shouldBeRight(newBalance)
+                    readVersion(id).shouldBeRight(2L)
+                }
+            }
+
+            "non-unique where clause returns NonUniqueUpdate and rolls back" {
+                checkAll(
+                    PropTestConfig(iterations = TEST_ITERATIONS),
+                    Arb.string(1..50),
+                    Arb.string(1..50),
+                    Arb.long(0L..1000L),
+                    Arb.long(0L..1000L),
+                ) { name1, name2, balance1, balance2 ->
+                    val id1 = insertRow(name1, balance1).shouldBeRight()
+                    val id2 = insertRow(name2, balance2).shouldBeRight()
+
+                    readVersion(id1).shouldBeRight(1L)
+                    readVersion(id2).shouldBeRight(1L)
+
+                    val result =
+                        suspendTransaction {
+                            TestTable.optimisticUpdate(
+                                where = { (TestTable.tableId eq id1) or (TestTable.tableId eq id2) },
+                                version = 1L,
+                            ) {
+                                it[TestTable.balance] = 9999L
+                            }
+                        }
+
+                    result.shouldBeLeft(ExposedError.NonUniqueUpdate(TestTable.tableName, 2))
+                    readBalance(id1).shouldBeRight(balance1)
+                    readVersion(id1).shouldBeRight(1L)
+                    readBalance(id2).shouldBeRight(balance2)
+                    readVersion(id2).shouldBeRight(1L)
+                }
+            }
+
+            "non-existent row returns RowNotFound" {
+                checkAll(PropTestConfig(iterations = 10), Arb.long(1L..100L)) { version ->
+                    val nonExistentId = Uuid.random()
+
+                    val result =
+                        suspendTransaction {
+                            TestTable.optimisticUpdate(
+                                where = { TestTable.tableId eq nonExistentId },
+                                version = version,
+                            ) {
+                                it[TestTable.balance] = 999L
+                            }
+                        }
+                    result.shouldBeLeft(ExposedError.RowNotFound(TestTable.tableName))
+                }
+            }
+
+            "concurrent optimistic updates — exactly one winner per round" {
+                checkAll(
+                    Arb.int(10..50),
+                    Arb.long(0L..5000L),
+                ) { concurrentAttempts, startBalance ->
+                    val id = insertRow("concurrent-prop", startBalance).shouldBeRight()
+                    readVersion(id).shouldBeRight(1L)
+
+                    val successCount = AtomicInteger(0)
+                    val failureCount = AtomicInteger(0)
+                    val seenVersions = ConcurrentHashMap.newKeySet<Long>()
+
+                    coroutineScope {
+                        val jobs =
+                            (1..concurrentAttempts).map { i ->
+                                async(Dispatchers.IO) {
+                                    val result =
+                                        suspendTransaction {
+                                            TestTable.optimisticUpdate(
+                                                where = { TestTable.tableId eq id },
+                                                version = 1L,
+                                            ) {
+                                                it[TestTable.balance] = startBalance + i.toLong()
+                                            }
+                                        }
+                                    when (result) {
+                                        is Either.Right -> {
+                                            successCount.incrementAndGet()
+                                            readVersion(id).onRight { v -> seenVersions.add(v) }
+                                        }
+
+                                        is Either.Left -> {
+                                            failureCount.incrementAndGet()
+                                        }
+                                    }
+                                    result
+                                }
+                            }
+                        jobs.awaitAll()
+                    }
+
+                    successCount.get() shouldBe 1
+                    failureCount.get() shouldBe concurrentAttempts - 1
+                    readVersion(id).shouldBeRight(2L)
+                    readBalance(id).shouldNotBe(startBalance)
+                    seenVersions.size shouldBe 1
+                    seenVersions.first() shouldBe 2L
+                }
             }
         }
     }

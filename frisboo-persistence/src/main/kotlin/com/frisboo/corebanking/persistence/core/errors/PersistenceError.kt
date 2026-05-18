@@ -1,65 +1,55 @@
+/*
+ * Copyright 2025 Frisboo Bank
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing
+ * permissions and limitations under the License.
+ */
 package com.frisboo.corebanking.persistence.core.errors
 
 import kotlin.time.Duration
 
 public sealed interface PersistenceError {
+    public val message: String
+    public val cause: Throwable?
 
-    /**
-     * Errors related to connection failures to the persistence layer.
-     */
     public data class ConnectionFailed(
-        val message: String,
-        val cause: Throwable? = null,
+        override val message: String,
+        override val cause: Throwable? = null,
     ) : PersistenceError
 
-    /**
-     * Errors related to failure during persistence operations.
-     */
     public data class OperationFailed(
-        val message: String,
-        val cause: Throwable? = null,
+        override val message: String,
+        override val cause: Throwable? = null,
     ) : PersistenceError
 
-    /**
-     * Errors related to timeouts during persistence operations.
-     */
     public data class OperationTimeout(
-        val message: String,
+        override val message: String,
         val duration: Duration,
+        override val cause: Throwable? = null,
     ) : PersistenceError
 
-    /**
-     * Errors related to invalid arguments provided to persistence operations.
-     */
     public data class InvalidArgument(
         val name: String,
-        val message: String,
+        override val message: String,
+        override val cause: Throwable? = null,
     ) : PersistenceError
 
-    /**
-     * Errors related to serialization of persistence values.
-     */
     public data class SerializationFailed(
-        val message: String,
-        val cause: Throwable? = null,
+        override val message: String,
+        override val cause: Throwable? = null,
     ) : PersistenceError
 
-    /**
-     * Errors related to deserialization of persistence values.
-     */
     public data class DeserializationFailed(
-        val message: String,
-        val cause: Throwable? = null,
-    ) : PersistenceError
-
-    /**
-     * Errors related to lock acquisition failures.
-     */
-    public data class LockNotHeld(
-        val message: String,
-    ) : PersistenceError
-
-    public data class LockAlreadyHeld(
-        val message: String,
+        override val message: String,
+        override val cause: Throwable? = null,
     ) : PersistenceError
 }

@@ -1,9 +1,28 @@
+/*
+ * Copyright 2025 Frisboo Bank
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing
+ * permissions and limitations under the License.
+ */
 package com.frisboo.corebanking.persistence.redis.contracts.results
 
-public sealed interface RedisGetResult {
-    public data class Success(val value: ByteArray) : RedisGetResult
-    public data object KeyNotFound : RedisGetResult
-    public data class Failed(val message: String) : RedisGetResult
+public sealed interface RedisGetResult<out V> {
+    public val value: V?
 
-    public companion object
+    public data class Found<V>(
+        override val value: V,
+    ) : RedisGetResult<V>
+
+    public data object NotFound : RedisGetResult<Nothing> {
+        override val value: Nothing? = null
+    }
 }

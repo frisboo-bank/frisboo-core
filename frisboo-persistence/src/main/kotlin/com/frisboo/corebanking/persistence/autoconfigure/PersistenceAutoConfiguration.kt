@@ -27,7 +27,6 @@ import org.springframework.context.annotation.Configuration
 @AutoConfiguration(after = [DataSourceAutoConfiguration::class])
 @EnableConfigurationProperties(PersistenceProperties::class)
 public class PersistenceAutoConfiguration {
-
     @Configuration
     @ConditionalOnProperty(
         prefix = "frisboo.corebanking.persistence.postgres",

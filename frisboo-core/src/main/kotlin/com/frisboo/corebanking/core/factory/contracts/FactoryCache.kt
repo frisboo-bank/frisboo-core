@@ -18,15 +18,20 @@ package com.frisboo.corebanking.core.factory.contracts
 import com.frisboo.corebanking.core.factory.models.FactoryCacheStats
 
 public interface FactoryCache<K : Any, V : Any> {
-
     /** Returns the value for [key], computing it via [mappingFunction] if absent. */
-    public suspend fun get(key: K, mappingFunction: suspend (K) -> V): V
+    public suspend fun get(
+        key: K,
+        mappingFunction: suspend (K) -> V,
+    ): V
 
     /** Returns the value if present, otherwise null. */
     public suspend fun getIfPresent(key: K): V?
 
     /** Associates [value] with [key]. */
-    public suspend fun put(key: K, value: V)
+    public suspend fun put(
+        key: K,
+        value: V,
+    )
 
     /** Removes the entry for [key]. */
     public suspend fun invalidate(key: K)

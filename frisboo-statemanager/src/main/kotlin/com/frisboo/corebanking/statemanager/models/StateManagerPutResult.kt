@@ -16,7 +16,6 @@
 package com.frisboo.corebanking.statemanager.models
 
 public sealed interface StateManagerPutResult<out V> {
-
     public val previousValue: V?
     public val newValue: V?
 

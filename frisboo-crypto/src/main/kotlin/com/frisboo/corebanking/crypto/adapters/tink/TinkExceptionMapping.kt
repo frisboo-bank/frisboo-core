@@ -20,14 +20,21 @@ import com.google.crypto.tink.KeysetHandle
 import com.google.crypto.tink.RegistryConfiguration
 import java.security.GeneralSecurityException
 
-internal inline fun <T> wrapInit(message: String, block: () -> T): T =
+internal inline fun <T> wrapInit(
+    message: String,
+    block: () -> T,
+): T =
     try {
         block()
     } catch (e: GeneralSecurityException) {
         throw CryptoException.InitializationFailed(message, e)
     }
 
-internal inline fun <T> wrapCryptoOp(wrap: (String, Throwable) -> CryptoException, message: String, block: () -> T): T =
+internal inline fun <T> wrapCryptoOp(
+    wrap: (String, Throwable) -> CryptoException,
+    message: String,
+    block: () -> T,
+): T =
     try {
         block()
     } catch (e: GeneralSecurityException) {

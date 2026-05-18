@@ -35,48 +35,42 @@ public class StateManagerResilientImpl<K : Any, V : Any>(
     private val fallback: StateManager<K, V>,
     private val resilientExecutor: StateManagerResilienceExecutor,
 ) : StateManager<K, V> {
-
-    override suspend fun get(key: K): Either<StateManagerError, StateManagerGetResult<V?>> {
-        return resilient(
+    override suspend fun get(key: K): Either<StateManagerError, StateManagerGetResult<V?>> =
+        resilient(
             primaryOption = { primary.get(key) },
             fallbackOption = { fallback.get(key) },
         )
-    }
 
-    override suspend fun contains(key: K): Either<StateManagerError, StateManagerContainsResult> {
-        return resilient(
+    override suspend fun contains(key: K): Either<StateManagerError, StateManagerContainsResult> =
+        resilient(
             primaryOption = { primary.contains(key) },
             fallbackOption = { fallback.contains(key) },
         )
-    }
 
-    override suspend fun size(): Either<StateManagerError, StateManagerSizeResult> {
-        return resilient(
+    override suspend fun size(): Either<StateManagerError, StateManagerSizeResult> =
+        resilient(
             primaryOption = { primary.size() },
             fallbackOption = { fallback.size() },
         )
-    }
 
     override suspend fun put(
         key: K,
         value: V,
-    ): Either<StateManagerError, StateManagerPutResult<V?>> {
-        return resilient(
+    ): Either<StateManagerError, StateManagerPutResult<V?>> =
+        resilient(
             primaryOption = { primary.put(key, value) },
             fallbackOption = { fallback.put(key, value) },
         )
-    }
 
     override suspend fun put(
         key: K,
         value: V,
         ttl: Duration,
-    ): Either<StateManagerError, StateManagerPutResult<V?>> {
-        return resilient(
+    ): Either<StateManagerError, StateManagerPutResult<V?>> =
+        resilient(
             primaryOption = { primary.put(key, value, ttl) },
             fallbackOption = { fallback.put(key, value, ttl) },
         )
-    }
 
     override suspend fun getOrPut(
         key: K,
@@ -109,32 +103,29 @@ public class StateManagerResilientImpl<K : Any, V : Any>(
         )
     }
 
-    override suspend fun evict(key: K): Either<StateManagerError, StateManagerEvictResult> {
-        return resilient(
+    override suspend fun evict(key: K): Either<StateManagerError, StateManagerEvictResult> =
+        resilient(
             primaryOption = { primary.evict(key) },
             fallbackOption = { fallback.evict(key) },
         )
-    }
 
     override suspend fun keysPage(
         cursor: String?,
         limit: Int,
-    ): Either<StateManagerError, StateManagerPage<K>> {
-        return resilient(
+    ): Either<StateManagerError, StateManagerPage<K>> =
+        resilient(
             primaryOption = { primary.keysPage(cursor, limit) },
             fallbackOption = { fallback.keysPage(cursor, limit) },
         )
-    }
 
     override suspend fun setTTL(
         key: K,
         ttl: Duration,
-    ): Either<StateManagerError, StateManagerSetTtlResult> {
-        return resilient(
+    ): Either<StateManagerError, StateManagerSetTtlResult> =
+        resilient(
             primaryOption = { primary.setTTL(key, ttl) },
             fallbackOption = { fallback.setTTL(key, ttl) },
         )
-    }
 
     private suspend fun <T> resilient(
         primaryOption: suspend () -> T,

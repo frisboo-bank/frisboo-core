@@ -16,8 +16,8 @@
 package com.frisboo.corebanking.resilience.ratelimiter.adapters.resilience4j
 
 import com.frisboo.corebanking.resilience.ratelimiter.contracts.RateLimiterMetrics
-import io.github.resilience4j.ratelimiter.RateLimiter as R4jRateLimiter
 import java.util.concurrent.atomic.AtomicLong
+import io.github.resilience4j.ratelimiter.RateLimiter as R4jRateLimiter
 
 internal fun RateLimiterMetrics.Companion.from(
     limiter: R4jRateLimiter,

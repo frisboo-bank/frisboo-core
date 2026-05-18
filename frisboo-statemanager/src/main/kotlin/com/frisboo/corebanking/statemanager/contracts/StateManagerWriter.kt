@@ -28,7 +28,6 @@ import kotlin.time.Duration
  * Implementations must be safe for concurrent use from coroutines.
  */
 public interface StateManagerWriter<K : Any, V : Any> {
-
     public suspend fun put(
         key: K,
         value: V,

@@ -1,14 +1,32 @@
+/*
+ * Copyright 2025 Frisboo Bank
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing
+ * permissions and limitations under the License.
+ */
 package com.frisboo.corebanking.persistence.redis.contracts.internal
 
-import com.frisboo.corebanking.persistence.redis.contracts.results.RedisSetIfAbsentResult
-import com.frisboo.corebanking.persistence.redis.contracts.results.RedisSetIfPresentResult
-import com.frisboo.corebanking.persistence.redis.contracts.results.RedisSetResult
-
 internal interface RedisWriteCommands {
-    suspend fun set(key: ByteArray, value: ByteArray): RedisSetResult
-    suspend fun set(key: ByteArray, value: ByteArray, ttlMs: Long): RedisSetResult
-    suspend fun setIfAbsent(key: ByteArray, value: ByteArray): RedisSetIfAbsentResult
-    suspend fun setIfAbsent(key: ByteArray, value: ByteArray, ttlMs: Long): RedisSetIfAbsentResult
-    suspend fun setIfPresent(key: ByteArray, value: ByteArray): RedisSetIfPresentResult
-    suspend fun setIfPresent(key: ByteArray, value: ByteArray, ttlMs: Long): RedisSetIfPresentResult
+    suspend fun setGet(
+        key: ByteArray,
+        value: ByteArray,
+        ttlMs: Long,
+    ): ByteArray?
+
+    suspend fun setIfAbsent(
+        key: ByteArray,
+        value: ByteArray,
+        ttlMs: Long,
+    ): Boolean
+
+    suspend fun del(key: ByteArray): ByteArray?
 }
