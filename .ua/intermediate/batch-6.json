@@ -1,0 +1,639 @@
+{
+  "nodes": [
+    {
+      "id": "file:frisboo-grpc/src/main/kotlin/com/frisboo/corebanking/grpc/domain/dtos/ProtoTimestamp.kt",
+      "type": "file",
+      "name": "ProtoTimestamp.kt",
+      "filePath": "frisboo-grpc/src/main/kotlin/com/frisboo/corebanking/grpc/domain/dtos/ProtoTimestamp.kt",
+      "summary": "Converts protobuf Timestamp to kotlin.time.Instant",
+      "tags": ["grpc", "domain", "dto", "converter"]
+    },
+    {
+      "id": "function:frisboo-grpc/src/main/kotlin/com/frisboo/corebanking/grpc/domain/dtos/ProtoTimestamp.kt:toInstant",
+      "type": "function",
+      "name": "toInstant",
+      "filePath": "frisboo-grpc/src/main/kotlin/com/frisboo/corebanking/grpc/domain/dtos/ProtoTimestamp.kt",
+      "summary": "Extension converting protobuf Timestamp to kotlin.time.Instant",
+      "tags": ["grpc", "domain", "dto", "converter"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:frisboo-grpc/src/main/kotlin/com/frisboo/corebanking/grpc/interceptors/GlobalInterceptorConfiguration.kt",
+      "type": "file",
+      "name": "GlobalInterceptorConfiguration.kt",
+      "filePath": "frisboo-grpc/src/main/kotlin/com/frisboo/corebanking/grpc/interceptors/GlobalInterceptorConfiguration.kt",
+      "summary": "Spring configuration registering LoggingInterceptor as a global gRPC server interceptor",
+      "tags": ["grpc", "interceptor", "config", "spring"]
+    },
+    {
+      "id": "class:frisboo-grpc/src/main/kotlin/com/frisboo/corebanking/grpc/interceptors/GlobalInterceptorConfiguration.kt:GlobalInterceptorConfiguration",
+      "type": "class",
+      "name": "GlobalInterceptorConfiguration",
+      "filePath": "frisboo-grpc/src/main/kotlin/com/frisboo/corebanking/grpc/interceptors/GlobalInterceptorConfiguration.kt",
+      "summary": "@Configuration bean exposing LoggingInterceptor as a @GlobalServerInterceptor",
+      "tags": ["grpc", "interceptor", "config", "spring"]
+    },
+    {
+      "id": "file:frisboo-grpc/src/main/kotlin/com/frisboo/corebanking/grpc/interceptors/LoggingInterceptor.kt",
+      "type": "file",
+      "name": "LoggingInterceptor.kt",
+      "filePath": "frisboo-grpc/src/main/kotlin/com/frisboo/corebanking/grpc/interceptors/LoggingInterceptor.kt",
+      "summary": "gRPC ServerInterceptor logging service/method/headers with sensitive-header redaction",
+      "tags": ["grpc", "interceptor", "observability", "logging"]
+    },
+    {
+      "id": "class:frisboo-grpc/src/main/kotlin/com/frisboo/corebanking/grpc/interceptors/LoggingInterceptor.kt:LoggingInterceptor",
+      "type": "class",
+      "name": "LoggingInterceptor",
+      "filePath": "frisboo-grpc/src/main/kotlin/com/frisboo/corebanking/grpc/interceptors/LoggingInterceptor.kt",
+      "summary": "ServerInterceptor that logs incoming gRPC calls and redacts authorization/cookie/api-key headers",
+      "tags": ["grpc", "interceptor", "observability", "logging"]
+    },
+    {
+      "id": "file:frisboo-grpc/src/test/kotlin/com/frisboo/corebanking/grpc/domain/dtos/ProtoTimestampTest.kt",
+      "type": "file",
+      "name": "ProtoTimestampTest.kt",
+      "filePath": "frisboo-grpc/src/test/kotlin/com/frisboo/corebanking/grpc/domain/dtos/ProtoTimestampTest.kt",
+      "summary": "Kotest property test round-tripping Instant to ProtoTimestamp and back",
+      "tags": ["grpc", "test", "dto"]
+    },
+    {
+      "id": "class:frisboo-grpc/src/test/kotlin/com/frisboo/corebanking/grpc/domain/dtos/ProtoTimestampTest.kt:ProtoTimestampTest",
+      "type": "class",
+      "name": "ProtoTimestampTest",
+      "filePath": "frisboo-grpc/src/test/kotlin/com/frisboo/corebanking/grpc/domain/dtos/ProtoTimestampTest.kt",
+      "summary": "StringSpec verifying Instant<->ProtoTimestamp round-trip via property-based checkAll",
+      "tags": ["grpc", "test", "dto"]
+    },
+    {
+      "id": "file:frisboo-grpc/src/test/resources/logback-test.xml",
+      "type": "file",
+      "name": "logback-test.xml",
+      "filePath": "frisboo-grpc/src/test/resources/logback-test.xml",
+      "summary": "Test logback config with CONSOLE/ASYNC appenders and FrisbooCoreBanking logger",
+      "tags": ["config", "logging", "test"]
+    },
+    {
+      "id": "file:frisboo-http/api/frisboo-http.api",
+      "type": "file",
+      "name": "frisboo-http.api",
+      "filePath": "frisboo-http/api/frisboo-http.api",
+      "summary": "Public API surface marker file for the frisboo-http module",
+      "tags": ["api", "api-exports", "public-api"]
+    },
+    {
+      "id": "file:frisboo-http/build.gradle.kts",
+      "type": "file",
+      "name": "build.gradle.kts",
+      "filePath": "frisboo-http/build.gradle.kts",
+      "summary": "frisboo-http module build config applying kotlin-conventions/dokka/maven-publish and depending on frisboo-core",
+      "tags": ["gradle", "config"]
+    },
+    {
+      "id": "file:frisboo-http/src/main/kotlin/com/frisboo/corebanking/http/domain/models/HTTPErrorResponse.kt",
+      "type": "file",
+      "name": "HTTPErrorResponse.kt",
+      "filePath": "frisboo-http/src/main/kotlin/com/frisboo/corebanking/http/domain/models/HTTPErrorResponse.kt",
+      "summary": "Problem Details-style HTTP error response data class with title/status/type/detail/instance/correlationId/code/extensions",
+      "tags": ["http", "domain", "model", "error"]
+    },
+    {
+      "id": "class:frisboo-http/src/main/kotlin/com/frisboo/corebanking/http/domain/models/HTTPErrorResponse.kt:HTTPErrorResponse",
+      "type": "class",
+      "name": "HTTPErrorResponse",
+      "filePath": "frisboo-http/src/main/kotlin/com/frisboo/corebanking/http/domain/models/HTTPErrorResponse.kt",
+      "summary": "Data class for RFC 7807-style HTTP error responses with init validation on title and status",
+      "tags": ["http", "domain", "model", "error", "valueobject"]
+    },
+    {
+      "id": "file:frisboo-messaging/build.gradle.kts",
+      "type": "file",
+      "name": "build.gradle.kts",
+      "filePath": "frisboo-messaging/build.gradle.kts",
+      "summary": "frisboo-messaging module build config applying kotlin-conventions/dokka/maven-publish and depending on frisboo-core",
+      "tags": ["gradle", "config"]
+    },
+    {
+      "id": "file:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/dlq/contracts/DlqDeduplication.kt",
+      "type": "file",
+      "name": "DlqDeduplication.kt",
+      "filePath": "frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/dlq/contracts/DlqDeduplication.kt",
+      "summary": "Aggregate DLQ deduplication contract combining reader and writer",
+      "tags": ["messaging", "dlq", "contract", "deduplication"]
+    },
+    {
+      "id": "class:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/dlq/contracts/DlqDeduplication.kt:DlqDeduplication",
+      "type": "class",
+      "name": "DlqDeduplication",
+      "filePath": "frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/dlq/contracts/DlqDeduplication.kt",
+      "summary": "Aggregate interface composing DlqDedupReader and DlqDedupWriter",
+      "tags": ["messaging", "dlq", "contract", "deduplication"]
+    },
+    {
+      "id": "file:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/dlq/contracts/DlqDedupReader.kt",
+      "type": "file",
+      "name": "DlqDedupReader.kt",
+      "filePath": "frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/dlq/contracts/DlqDedupReader.kt",
+      "summary": "Read-only DLQ deduplication contract: isDuplicate and retryCount",
+      "tags": ["messaging", "dlq", "contract", "deduplication"]
+    },
+    {
+      "id": "class:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/dlq/contracts/DlqDedupReader.kt:DlqDedupReader",
+      "type": "class",
+      "name": "DlqDedupReader",
+      "filePath": "frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/dlq/contracts/DlqDedupReader.kt",
+      "summary": "Read contract exposing isDuplicate(messageId) and retryCount(messageId)",
+      "tags": ["messaging", "dlq", "contract", "deduplication"]
+    },
+    {
+      "id": "file:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/dlq/contracts/DlqDedupWriter.kt",
+      "type": "file",
+      "name": "DlqDedupWriter.kt",
+      "filePath": "frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/dlq/contracts/DlqDedupWriter.kt",
+      "summary": "Write-only DLQ deduplication contract with DlqError sealed interface and record/incrementRetry/markResolved",
+      "tags": ["messaging", "dlq", "contract", "deduplication", "error"]
+    },
+    {
+      "id": "class:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/dlq/contracts/DlqDedupWriter.kt:DlqError",
+      "type": "class",
+      "name": "DlqError",
+      "filePath": "frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/dlq/contracts/DlqDedupWriter.kt",
+      "summary": "Sealed interface of DLQ dedup errors: StoreUnavailable and MessageNotFound",
+      "tags": ["messaging", "dlq", "error", "sealed"]
+    },
+    {
+      "id": "class:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/dlq/contracts/DlqDedupWriter.kt:DlqDedupWriter",
+      "type": "class",
+      "name": "DlqDedupWriter",
+      "filePath": "frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/dlq/contracts/DlqDedupWriter.kt",
+      "summary": "Write contract: record, incrementRetry, markResolved returning Either<DlqError, *>",
+      "tags": ["messaging", "dlq", "contract", "deduplication"]
+    },
+    {
+      "id": "file:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/IdempotentOutbox.kt",
+      "type": "file",
+      "name": "IdempotentOutbox.kt",
+      "filePath": "frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/IdempotentOutbox.kt",
+      "summary": "Aggregate idempotent outbox contract combining reader and writer",
+      "tags": ["messaging", "outbox", "contract", "idempotency"]
+    },
+    {
+      "id": "class:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/IdempotentOutbox.kt:IdempotentOutbox",
+      "type": "class",
+      "name": "IdempotentOutbox",
+      "filePath": "frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/IdempotentOutbox.kt",
+      "summary": "Aggregate interface composing IdempotentOutboxReader and IdempotentOutboxWriter",
+      "tags": ["messaging", "outbox", "contract", "idempotency"]
+    },
+    {
+      "id": "file:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/IdempotentOutboxReader.kt",
+      "type": "file",
+      "name": "IdempotentOutboxReader.kt",
+      "filePath": "frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/IdempotentOutboxReader.kt",
+      "summary": "Read-only idempotent outbox contract: isAlreadySent and getByIdempotencyKey",
+      "tags": ["messaging", "outbox", "contract", "idempotency"]
+    },
+    {
+      "id": "class:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/IdempotentOutboxReader.kt:IdempotentOutboxReader",
+      "type": "class",
+      "name": "IdempotentOutboxReader",
+      "filePath": "frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/IdempotentOutboxReader.kt",
+      "summary": "Read contract exposing isAlreadySent and getByIdempotencyKey over OutboxMessage",
+      "tags": ["messaging", "outbox", "contract", "idempotency"]
+    },
+    {
+      "id": "file:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/IdempotentOutboxWriter.kt",
+      "type": "file",
+      "name": "IdempotentOutboxWriter.kt",
+      "filePath": "frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/IdempotentOutboxWriter.kt",
+      "summary": "Write-only idempotent outbox contract: saveIdempotent returning Either<OutboxError, Boolean>",
+      "tags": ["messaging", "outbox", "contract", "idempotency", "error"]
+    },
+    {
+      "id": "class:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/IdempotentOutboxWriter.kt:IdempotentOutboxWriter",
+      "type": "class",
+      "name": "IdempotentOutboxWriter",
+      "filePath": "frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/IdempotentOutboxWriter.kt",
+      "summary": "Write contract: saveIdempotent(idempotencyKey, message) returning Either<OutboxError, Boolean>",
+      "tags": ["messaging", "outbox", "contract", "idempotency"]
+    },
+    {
+      "id": "file:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/OutboxAtomic.kt",
+      "type": "file",
+      "name": "OutboxAtomic.kt",
+      "filePath": "frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/OutboxAtomic.kt",
+      "summary": "Atomic outbox contract: saveAndDispatch persisting message and dispatching via callback",
+      "tags": ["messaging", "outbox", "contract", "atomic"]
+    },
+    {
+      "id": "class:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/OutboxAtomic.kt:OutboxAtomic",
+      "type": "class",
+      "name": "OutboxAtomic",
+      "filePath": "frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/OutboxAtomic.kt",
+      "summary": "Contract for atomic save+dispatch of OutboxMessage through a dispatch lambda",
+      "tags": ["messaging", "outbox", "contract", "atomic"]
+    },
+    {
+      "id": "file:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/OutboxReader.kt",
+      "type": "file",
+      "name": "OutboxReader.kt",
+      "filePath": "frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/OutboxReader.kt",
+      "summary": "Read-only outbox contract: findPending, findById, countByStatus",
+      "tags": ["messaging", "outbox", "contract"]
+    },
+    {
+      "id": "class:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/OutboxReader.kt:OutboxReader",
+      "type": "class",
+      "name": "OutboxReader",
+      "filePath": "frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/OutboxReader.kt",
+      "summary": "Read contract: findPending(limit), findById(messageId), countByStatus(status)",
+      "tags": ["messaging", "outbox", "contract"]
+    },
+    {
+      "id": "file:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/OutboxStore.kt",
+      "type": "file",
+      "name": "OutboxStore.kt",
+      "filePath": "frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/OutboxStore.kt",
+      "summary": "Aggregate outbox contract combining reader, writer and atomic operations plus OutboxError sealed interface",
+      "tags": ["messaging", "outbox", "contract", "error"]
+    },
+    {
+      "id": "class:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/OutboxStore.kt:OutboxStore",
+      "type": "class",
+      "name": "OutboxStore",
+      "filePath": "frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/OutboxStore.kt",
+      "summary": "Aggregate interface composing OutboxReader, OutboxWriter and OutboxAtomic",
+      "tags": ["messaging", "outbox", "contract"]
+    },
+    {
+      "id": "class:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/OutboxStore.kt:OutboxError",
+      "type": "class",
+      "name": "OutboxError",
+      "filePath": "frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/OutboxStore.kt",
+      "summary": "Sealed interface of outbox errors: StoreUnavailable and MessageNotFound",
+      "tags": ["messaging", "outbox", "error", "sealed"]
+    },
+    {
+      "id": "file:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/OutboxWriter.kt",
+      "type": "file",
+      "name": "OutboxWriter.kt",
+      "filePath": "frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/OutboxWriter.kt",
+      "summary": "Write-only outbox contract: save, markDispatched, markFailed, moveToDlq",
+      "tags": ["messaging", "outbox", "contract"]
+    },
+    {
+      "id": "class:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/OutboxWriter.kt:OutboxWriter",
+      "type": "class",
+      "name": "OutboxWriter",
+      "filePath": "frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/OutboxWriter.kt",
+      "summary": "Write contract: save, markDispatched, markFailed, moveToDlq returning Either<OutboxError, *>",
+      "tags": ["messaging", "outbox", "contract"]
+    },
+    {
+      "id": "file:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/model/OutboxMessage.kt",
+      "type": "file",
+      "name": "OutboxMessage.kt",
+      "filePath": "frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/model/OutboxMessage.kt",
+      "summary": "OutboxMessage data class and OutboxMessageStatus enum (PENDING/DISPATCHED/FAILED)",
+      "tags": ["messaging", "outbox", "model", "enum"]
+    },
+    {
+      "id": "class:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/model/OutboxMessage.kt:OutboxMessageStatus",
+      "type": "class",
+      "name": "OutboxMessageStatus",
+      "filePath": "frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/model/OutboxMessage.kt",
+      "summary": "Enum of outbox dispatch lifecycle states: PENDING, DISPATCHED, FAILED",
+      "tags": ["messaging", "outbox", "enum", "model"]
+    },
+    {
+      "id": "class:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/model/OutboxMessage.kt:OutboxMessage",
+      "type": "class",
+      "name": "OutboxMessage",
+      "filePath": "frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/model/OutboxMessage.kt",
+      "summary": "Data class for an outbox message with id/aggregateId/type/payload/status/createdAt, equality by id",
+      "tags": ["messaging", "outbox", "model", "valueobject"]
+    },
+    {
+      "id": "file:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/model/OutboxStatus.kt",
+      "type": "file",
+      "name": "OutboxStatus.kt",
+      "filePath": "frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/model/OutboxStatus.kt",
+      "summary": "OutboxStatus enum: PENDING, DISPATCHED, FAILED, DLQ",
+      "tags": ["messaging", "outbox", "model", "enum"]
+    },
+    {
+      "id": "class:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/model/OutboxStatus.kt:OutboxStatus",
+      "type": "class",
+      "name": "OutboxStatus",
+      "filePath": "frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/model/OutboxStatus.kt",
+      "summary": "Enum of outbox message statuses including DLQ",
+      "tags": ["messaging", "outbox", "enum", "model"]
+    },
+    {
+      "id": "file:frisboo-messaging/src/main/resources/META-INF/spring-configuration-metadata.json",
+      "type": "file",
+      "name": "spring-configuration-metadata.json",
+      "filePath": "frisboo-messaging/src/main/resources/META-INF/spring-configuration-metadata.json",
+      "summary": "Spring Boot metadata for Kafka publisher enabled/bootstrap-servers/topics properties",
+      "tags": ["config", "spring", "metadata"]
+    },
+    {
+      "id": "file:frisboo-messaging/src/main/resources/META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports",
+      "type": "file",
+      "name": "org.springframework.boot.autoconfigure.AutoConfiguration.imports",
+      "filePath": "frisboo-messaging/src/main/resources/META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports",
+      "summary": "Spring Boot service-loader marker registering PersistenceAutoConfiguration",
+      "tags": ["spring", "autoconfiguration", "spi", "boot"]
+    },
+    {
+      "id": "file:frisboo-observability/build.gradle.kts",
+      "type": "file",
+      "name": "build.gradle.kts",
+      "filePath": "frisboo-observability/build.gradle.kts",
+      "summary": "frisboo-observability module build config depending on frisboo-core plus OpenTelemetry/Micrometer BOMs and starters",
+      "tags": ["gradle", "config"]
+    },
+    {
+      "id": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/adapters/kafka/ObservabilityAuditKafkaAdapter.kt",
+      "type": "file",
+      "name": "ObservabilityAuditKafkaAdapter.kt",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/adapters/kafka/ObservabilityAuditKafkaAdapter.kt",
+      "summary": "Internal Kafka adapter implementing ObservabilityAuditAdapter with TODO stub",
+      "tags": ["observability", "audit", "kafka", "adapter"]
+    },
+    {
+      "id": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/adapters/kafka/ObservabilityAuditKafkaAdapter.kt:ObservabilityAuditKafkaAdapter",
+      "type": "class",
+      "name": "ObservabilityAuditKafkaAdapter",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/adapters/kafka/ObservabilityAuditKafkaAdapter.kt",
+      "summary": "Internal ObservabilityAuditAdapter implementation recording audit entries via Kafka (TODO stub)",
+      "tags": ["observability", "audit", "kafka", "adapter"]
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:frisboo-grpc/src/main/kotlin/com/frisboo/corebanking/grpc/domain/dtos/ProtoTimestamp.kt",
+      "target": "function:frisboo-grpc/src/main/kotlin/com/frisboo/corebanking/grpc/domain/dtos/ProtoTimestamp.kt:toInstant",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-grpc/src/main/kotlin/com/frisboo/corebanking/grpc/interceptors/GlobalInterceptorConfiguration.kt",
+      "target": "class:frisboo-grpc/src/main/kotlin/com/frisboo/corebanking/grpc/interceptors/GlobalInterceptorConfiguration.kt:GlobalInterceptorConfiguration",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-grpc/src/main/kotlin/com/frisboo/corebanking/grpc/interceptors/GlobalInterceptorConfiguration.kt",
+      "target": "file:frisboo-grpc/src/main/kotlin/com/frisboo/corebanking/grpc/interceptors/LoggingInterceptor.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-grpc/src/main/kotlin/com/frisboo/corebanking/grpc/interceptors/LoggingInterceptor.kt",
+      "target": "class:frisboo-grpc/src/main/kotlin/com/frisboo/corebanking/grpc/interceptors/LoggingInterceptor.kt:LoggingInterceptor",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-grpc/src/test/kotlin/com/frisboo/corebanking/grpc/domain/dtos/ProtoTimestampTest.kt",
+      "target": "class:frisboo-grpc/src/test/kotlin/com/frisboo/corebanking/grpc/domain/dtos/ProtoTimestampTest.kt:ProtoTimestampTest",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-grpc/src/test/kotlin/com/frisboo/corebanking/grpc/domain/dtos/ProtoTimestampTest.kt",
+      "target": "file:frisboo-grpc/src/main/kotlin/com/frisboo/corebanking/grpc/domain/dtos/ProtoTimestamp.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-grpc/src/test/kotlin/com/frisboo/corebanking/grpc/domain/dtos/ProtoTimestampTest.kt",
+      "target": "file:frisboo-grpc/src/main/kotlin/com/frisboo/corebanking/grpc/domain/dtos/ProtoTimestamp.kt",
+      "type": "tested_by",
+      "weight": 0.5
+    },
+    {
+      "source": "file:frisboo-http/build.gradle.kts",
+      "target": "file:frisboo-http",
+      "type": "configures",
+      "weight": 0.6
+    },
+    {
+      "source": "file:frisboo-http/src/main/kotlin/com/frisboo/corebanking/http/domain/models/HTTPErrorResponse.kt",
+      "target": "class:frisboo-http/src/main/kotlin/com/frisboo/corebanking/http/domain/models/HTTPErrorResponse.kt:HTTPErrorResponse",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-messaging/build.gradle.kts",
+      "target": "file:frisboo-messaging",
+      "type": "configures",
+      "weight": 0.6
+    },
+    {
+      "source": "file:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/dlq/contracts/DlqDeduplication.kt",
+      "target": "class:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/dlq/contracts/DlqDeduplication.kt:DlqDeduplication",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/dlq/contracts/DlqDeduplication.kt",
+      "target": "file:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/dlq/contracts/DlqDedupReader.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/dlq/contracts/DlqDeduplication.kt",
+      "target": "file:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/dlq/contracts/DlqDedupWriter.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/dlq/contracts/DlqDedupReader.kt",
+      "target": "class:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/dlq/contracts/DlqDedupReader.kt:DlqDedupReader",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/dlq/contracts/DlqDedupWriter.kt",
+      "target": "class:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/dlq/contracts/DlqDedupWriter.kt:DlqError",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/dlq/contracts/DlqDedupWriter.kt",
+      "target": "class:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/dlq/contracts/DlqDedupWriter.kt:DlqDedupWriter",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/IdempotentOutbox.kt",
+      "target": "class:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/IdempotentOutbox.kt:IdempotentOutbox",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/IdempotentOutbox.kt",
+      "target": "file:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/IdempotentOutboxReader.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/IdempotentOutbox.kt",
+      "target": "file:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/IdempotentOutboxWriter.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/IdempotentOutboxReader.kt",
+      "target": "class:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/IdempotentOutboxReader.kt:IdempotentOutboxReader",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/IdempotentOutboxReader.kt",
+      "target": "file:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/model/OutboxMessage.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/IdempotentOutboxWriter.kt",
+      "target": "class:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/IdempotentOutboxWriter.kt:IdempotentOutboxWriter",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/IdempotentOutboxWriter.kt",
+      "target": "file:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/model/OutboxMessage.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/OutboxAtomic.kt",
+      "target": "class:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/OutboxAtomic.kt:OutboxAtomic",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/OutboxAtomic.kt",
+      "target": "file:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/model/OutboxMessage.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/OutboxReader.kt",
+      "target": "class:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/OutboxReader.kt:OutboxReader",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/OutboxReader.kt",
+      "target": "file:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/model/OutboxMessage.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/OutboxReader.kt",
+      "target": "file:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/model/OutboxStatus.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/OutboxStore.kt",
+      "target": "class:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/OutboxStore.kt:OutboxStore",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/OutboxStore.kt",
+      "target": "class:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/OutboxStore.kt:OutboxError",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/OutboxStore.kt",
+      "target": "file:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/OutboxReader.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/OutboxStore.kt",
+      "target": "file:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/OutboxWriter.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/OutboxStore.kt",
+      "target": "file:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/OutboxAtomic.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/OutboxWriter.kt",
+      "target": "class:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/OutboxWriter.kt:OutboxWriter",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/OutboxWriter.kt",
+      "target": "file:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/model/OutboxMessage.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/model/OutboxMessage.kt",
+      "target": "class:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/model/OutboxMessage.kt:OutboxMessageStatus",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/model/OutboxMessage.kt",
+      "target": "class:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/model/OutboxMessage.kt:OutboxMessage",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/model/OutboxStatus.kt",
+      "target": "class:frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/model/OutboxStatus.kt:OutboxStatus",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-messaging/src/main/resources/META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports",
+      "target": "file:frisboo-messaging/src/main/resources/META-INF/spring-configuration-metadata.json",
+      "type": "related",
+      "weight": 0.5
+    },
+    {
+      "source": "file:frisboo-observability/build.gradle.kts",
+      "target": "file:frisboo-observability",
+      "type": "configures",
+      "weight": 0.6
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/adapters/kafka/ObservabilityAuditKafkaAdapter.kt",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/adapters/kafka/ObservabilityAuditKafkaAdapter.kt:ObservabilityAuditKafkaAdapter",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/adapters/kafka/ObservabilityAuditKafkaAdapter.kt",
+      "target": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/contracts/ObservabilityAuditAdapter.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/adapters/kafka/ObservabilityAuditKafkaAdapter.kt",
+      "target": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditEntry.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/adapters/kafka/ObservabilityAuditKafkaAdapter.kt:ObservabilityAuditKafkaAdapter",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/contracts/ObservabilityAuditAdapter.kt:ObservabilityAuditAdapter",
+      "type": "implements",
+      "weight": 0.9
+    }
+  ]
+}

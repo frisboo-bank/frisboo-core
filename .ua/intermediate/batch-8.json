@@ -1,0 +1,898 @@
+{
+  "nodes": [
+    {
+      "id": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/otel/models/OtelSpanStatus.kt",
+      "type": "file",
+      "name": "OtelSpanStatus.kt",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/otel/models/OtelSpanStatus.kt",
+      "summary": "Enum mapping internal span status to OpenTelemetry StatusCode",
+      "tags": ["observability", "otel", "model"]
+    },
+    {
+      "id": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/otel/models/OtelSpanStatus.kt:OtelSpanStatus",
+      "type": "class",
+      "name": "OtelSpanStatus",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/otel/models/OtelSpanStatus.kt",
+      "summary": "Enum OK/ERROR with conversion to OpenTelemetry StatusCode",
+      "tags": ["observability", "otel", "enum"]
+    },
+    {
+      "id": "function:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/otel/models/OtelSpanStatus.kt:toOtelStatusCode",
+      "type": "function",
+      "name": "toOtelStatusCode",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/otel/models/OtelSpanStatus.kt",
+      "summary": "Maps OtelSpanStatus to io.opentelemetry.api.trace.StatusCode",
+      "tags": ["observability", "otel"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/otel/OtelSpanEmitterImpl.kt",
+      "type": "file",
+      "name": "OtelSpanEmitterImpl.kt",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/otel/OtelSpanEmitterImpl.kt",
+      "summary": "Implementation of OtelSpanEmitter using OpenTelemetry tracer",
+      "tags": ["observability", "otel", "impl"]
+    },
+    {
+      "id": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/otel/OtelSpanEmitterImpl.kt:OtelSpanEmitterImpl",
+      "type": "class",
+      "name": "OtelSpanEmitterImpl",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/otel/OtelSpanEmitterImpl.kt",
+      "summary": "Creates and manages OpenTelemetry spans around a block with attributes",
+      "tags": ["observability", "otel", "impl"]
+    },
+    {
+      "id": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/otel/OtelSpanImpl.kt",
+      "type": "file",
+      "name": "OtelSpanImpl.kt",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/otel/OtelSpanImpl.kt",
+      "summary": "Internal adapter wrapping OpenTelemetry Span to OtelSpan contract",
+      "tags": ["observability", "otel", "impl"]
+    },
+    {
+      "id": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/otel/OtelSpanImpl.kt:OtelSpanImpl",
+      "type": "class",
+      "name": "OtelSpanImpl",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/otel/OtelSpanImpl.kt",
+      "summary": "Internal wrapper delegating setAttribute/recordException/recordError/setStatus to OpenTelemetry Span",
+      "tags": ["observability", "otel", "impl"]
+    },
+    {
+      "id": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/adapters/noop/ObservabilityTracerNoOpAdapter.kt",
+      "type": "file",
+      "name": "ObservabilityTracerNoOpAdapter.kt",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/adapters/noop/ObservabilityTracerNoOpAdapter.kt",
+      "summary": "No-op implementation of ObservabilityTracerAdapter",
+      "tags": ["observability", "tracer", "noop", "adapter"]
+    },
+    {
+      "id": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/adapters/noop/ObservabilityTracerNoOpAdapter.kt:ObservabilityTracerNoOpAdapter",
+      "type": "class",
+      "name": "ObservabilityTracerNoOpAdapter",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/adapters/noop/ObservabilityTracerNoOpAdapter.kt",
+      "summary": "No-op adapter that forwards withOperation directly to the block with a no-op operation",
+      "tags": ["observability", "tracer", "noop", "adapter"]
+    },
+    {
+      "id": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/adapters/noop/ObservabilityTracerNoopOperation.kt",
+      "type": "file",
+      "name": "ObservabilityTracerNoopOperation.kt",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/adapters/noop/ObservabilityTracerNoopOperation.kt",
+      "summary": "No-op singleton implementing ObservabilityTracerOperation",
+      "tags": ["observability", "tracer", "noop"]
+    },
+    {
+      "id": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/adapters/noop/ObservabilityTracerNoopOperation.kt:ObservabilityTracerNoopOperation",
+      "type": "class",
+      "name": "ObservabilityTracerNoopOperation",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/adapters/noop/ObservabilityTracerNoopOperation.kt",
+      "summary": "Singleton no-op operation with empty implementations of setAttribute/recordException/recordError",
+      "tags": ["observability", "tracer", "noop"]
+    },
+    {
+      "id": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/adapters/otel/ObservabilityTracerOtelAdapter.kt",
+      "type": "file",
+      "name": "ObservabilityTracerOtelAdapter.kt",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/adapters/otel/ObservabilityTracerOtelAdapter.kt",
+      "summary": "OTEL adapter bridging ObservabilityTracerAdapter to OtelSpanEmitter",
+      "tags": ["observability", "tracer", "otel", "adapter"]
+    },
+    {
+      "id": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/adapters/otel/ObservabilityTracerOtelAdapter.kt:ObservabilityTracerOtelAdapter",
+      "type": "class",
+      "name": "ObservabilityTracerOtelAdapter",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/adapters/otel/ObservabilityTracerOtelAdapter.kt",
+      "summary": "Adapter that wraps OtelSpanEmitter.withSpan to provide ObservabilityTracerAdapter.withOperation",
+      "tags": ["observability", "tracer", "otel", "adapter"]
+    },
+    {
+      "id": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/adapters/otel/OtelToTracerOperationMapping.kt",
+      "type": "file",
+      "name": "OtelToTracerOperationMapping.kt",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/adapters/otel/OtelToTracerOperationMapping.kt",
+      "summary": "Extension function mapping OtelSpan to ObservabilityTracerOperation",
+      "tags": ["observability", "tracer", "otel", "mapping"]
+    },
+    {
+      "id": "function:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/adapters/otel/OtelToTracerOperationMapping.kt:toTracerOperation",
+      "type": "function",
+      "name": "toTracerOperation",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/adapters/otel/OtelToTracerOperationMapping.kt",
+      "summary": "Extension on OtelSpan returning an anonymous ObservabilityTracerOperation delegating to the span",
+      "tags": ["observability", "tracer", "otel"],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/contracts/ObservabilityTracer.kt",
+      "type": "file",
+      "name": "ObservabilityTracer.kt",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/contracts/ObservabilityTracer.kt",
+      "summary": "Public interface for the observability tracer contract",
+      "tags": ["observability", "tracer", "contract"]
+    },
+    {
+      "id": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/contracts/ObservabilityTracer.kt:ObservabilityTracer",
+      "type": "class",
+      "name": "ObservabilityTracer",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/contracts/ObservabilityTracer.kt",
+      "summary": "Public tracer interface extending ObservabilityTracerShared",
+      "tags": ["observability", "tracer", "contract"]
+    },
+    {
+      "id": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/contracts/ObservabilityTracerAdapter.kt",
+      "type": "file",
+      "name": "ObservabilityTracerAdapter.kt",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/contracts/ObservabilityTracerAdapter.kt",
+      "summary": "Public interface for tracer adapter implementations",
+      "tags": ["observability", "tracer", "contract"]
+    },
+    {
+      "id": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/contracts/ObservabilityTracerAdapter.kt:ObservabilityTracerAdapter",
+      "type": "class",
+      "name": "ObservabilityTracerAdapter",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/contracts/ObservabilityTracerAdapter.kt",
+      "summary": "Adapter interface extending ObservabilityTracerShared, implemented by OTEL and NOOP adapters",
+      "tags": ["observability", "tracer", "contract"]
+    },
+    {
+      "id": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/contracts/ObservabilityTracerOperation.kt",
+      "type": "file",
+      "name": "ObservabilityTracerOperation.kt",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/contracts/ObservabilityTracerOperation.kt",
+      "summary": "Interface for operations within a tracer span",
+      "tags": ["observability", "tracer", "contract"]
+    },
+    {
+      "id": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/contracts/ObservabilityTracerOperation.kt:ObservabilityTracerOperation",
+      "type": "class",
+      "name": "ObservabilityTracerOperation",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/contracts/ObservabilityTracerOperation.kt",
+      "summary": "Operation interface with setAttribute/recordException/recordError",
+      "tags": ["observability", "tracer", "contract"]
+    },
+    {
+      "id": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/contracts/ObservabilityTracerShared.kt",
+      "type": "file",
+      "name": "ObservabilityTracerShared.kt",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/contracts/ObservabilityTracerShared.kt",
+      "summary": "Shared interface defining withOperation for tracer and adapter contracts",
+      "tags": ["observability", "tracer", "contract"]
+    },
+    {
+      "id": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/contracts/ObservabilityTracerShared.kt:ObservabilityTracerShared",
+      "type": "class",
+      "name": "ObservabilityTracerShared",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/contracts/ObservabilityTracerShared.kt",
+      "summary": "Shared contract defining generic withOperation(name, attributes, block)",
+      "tags": ["observability", "tracer", "contract"]
+    },
+    {
+      "id": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/models/ObservabilityTracerProperties.kt",
+      "type": "file",
+      "name": "ObservabilityTracerProperties.kt",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/models/ObservabilityTracerProperties.kt",
+      "summary": "Configuration properties for the observability tracer",
+      "tags": ["observability", "tracer", "config", "model"]
+    },
+    {
+      "id": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/models/ObservabilityTracerProperties.kt:ObservabilityTracerProperties",
+      "type": "class",
+      "name": "ObservabilityTracerProperties",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/models/ObservabilityTracerProperties.kt",
+      "summary": "Data class holding tracer type with NOOP default",
+      "tags": ["observability", "tracer", "config", "model"]
+    },
+    {
+      "id": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/models/ObservabilityTracerType.kt",
+      "type": "file",
+      "name": "ObservabilityTracerType.kt",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/models/ObservabilityTracerType.kt",
+      "summary": "Enum of available observability tracer types",
+      "tags": ["observability", "tracer", "model"]
+    },
+    {
+      "id": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/models/ObservabilityTracerType.kt:ObservabilityTracerType",
+      "type": "class",
+      "name": "ObservabilityTracerType",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/models/ObservabilityTracerType.kt",
+      "summary": "Enum NOOP/OTEL selecting the tracer implementation",
+      "tags": ["observability", "tracer", "enum"]
+    },
+    {
+      "id": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/ObservabilityTracerImpl.kt",
+      "type": "file",
+      "name": "ObservabilityTracerImpl.kt",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/ObservabilityTracerImpl.kt",
+      "summary": "Default implementation of ObservabilityTracer delegating to an adapter",
+      "tags": ["observability", "tracer", "impl"]
+    },
+    {
+      "id": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/ObservabilityTracerImpl.kt:ObservabilityTracerImpl",
+      "type": "class",
+      "name": "ObservabilityTracerImpl",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/ObservabilityTracerImpl.kt",
+      "summary": "Tracer implementation forwarding withOperation to its ObservabilityTracerAdapter delegate",
+      "tags": ["observability", "tracer", "impl"]
+    },
+    {
+      "id": "file:frisboo-persistence/build.gradle.kts",
+      "type": "file",
+      "name": "build.gradle.kts",
+      "filePath": "frisboo-persistence/build.gradle.kts",
+      "summary": "Gradle build configuration for the frisboo-persistence module",
+      "tags": ["gradle", "build", "config"]
+    },
+    {
+      "id": "file:frisboo-persistence/README.md",
+      "type": "file",
+      "name": "README.md",
+      "filePath": "frisboo-persistence/README.md",
+      "summary": "Documentation for the shared persistence module: tables, optimistic locking, triggers, auto-configuration",
+      "tags": ["docs", "persistence"]
+    },
+    {
+      "id": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/autoconfigure/PersistenceAutoConfiguration.kt",
+      "type": "file",
+      "name": "PersistenceAutoConfiguration.kt",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/autoconfigure/PersistenceAutoConfiguration.kt",
+      "summary": "Spring Boot auto-configuration with conditional Postgres and MongoDb markers",
+      "tags": ["spring", "autoconfiguration", "spi", "boot", "persistence"]
+    },
+    {
+      "id": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/autoconfigure/PersistenceAutoConfiguration.kt:PersistenceAutoConfiguration",
+      "type": "class",
+      "name": "PersistenceAutoConfiguration",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/autoconfigure/PersistenceAutoConfiguration.kt",
+      "summary": "Spring @AutoConfiguration enabling PersistenceProperties and conditional Postgres/MongoDb beans",
+      "tags": ["spring", "autoconfiguration", "persistence"]
+    },
+    {
+      "id": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/autoconfigure/PersistenceAutoConfiguration.kt:Postgres",
+      "type": "class",
+      "name": "Postgres",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/autoconfigure/PersistenceAutoConfiguration.kt",
+      "summary": "Conditional configuration activated when frisboo.corebanking.persistence.postgres.enabled=true",
+      "tags": ["spring", "autoconfiguration", "persistence", "postgres"]
+    },
+    {
+      "id": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/autoconfigure/PersistenceAutoConfiguration.kt:MongoDb",
+      "type": "class",
+      "name": "MongoDb",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/autoconfigure/PersistenceAutoConfiguration.kt",
+      "summary": "Conditional configuration activated when frisboo.corebanking.persistence.mongodb.enabled=true",
+      "tags": ["spring", "autoconfiguration", "persistence", "mongodb"]
+    },
+    {
+      "id": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/autoconfigure/PersistenceProperties.kt",
+      "type": "file",
+      "name": "PersistenceProperties.kt",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/autoconfigure/PersistenceProperties.kt",
+      "summary": "Spring configuration properties for persistence backend enablement flags",
+      "tags": ["spring", "config", "persistence"]
+    },
+    {
+      "id": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/autoconfigure/PersistenceProperties.kt:PersistenceProperties",
+      "type": "class",
+      "name": "PersistenceProperties",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/autoconfigure/PersistenceProperties.kt",
+      "summary": "ConfigurationProperties data class with nested PostgresProperties and MongoDbProperties",
+      "tags": ["spring", "config", "persistence"]
+    },
+    {
+      "id": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/autoconfigure/PersistenceProperties.kt:PostgresProperties",
+      "type": "class",
+      "name": "PostgresProperties",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/autoconfigure/PersistenceProperties.kt",
+      "summary": "Nested config for postgres enablement flag",
+      "tags": ["spring", "config", "persistence", "postgres"]
+    },
+    {
+      "id": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/autoconfigure/PersistenceProperties.kt:MongoDbProperties",
+      "type": "class",
+      "name": "MongoDbProperties",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/autoconfigure/PersistenceProperties.kt",
+      "summary": "Nested config for mongodb enablement flag",
+      "tags": ["spring", "config", "persistence", "mongodb"]
+    },
+    {
+      "id": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/constants/PersistenceConstants.kt",
+      "type": "file",
+      "name": "PersistenceConstants.kt",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/constants/PersistenceConstants.kt",
+      "summary": "Constants for default container images used in tests",
+      "tags": ["persistence", "constants"]
+    },
+    {
+      "id": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/contracts/PersistenceSerializer.kt",
+      "type": "file",
+      "name": "PersistenceSerializer.kt",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/contracts/PersistenceSerializer.kt",
+      "summary": "Contract for serializing/deserializing values to/from ByteArray",
+      "tags": ["persistence", "contract", "serializer"]
+    },
+    {
+      "id": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/contracts/PersistenceSerializer.kt:PersistenceSerializer",
+      "type": "class",
+      "name": "PersistenceSerializer",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/contracts/PersistenceSerializer.kt",
+      "summary": "Generic serializer interface with serialize and deserialize",
+      "tags": ["persistence", "contract", "serializer"]
+    },
+    {
+      "id": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/errors/PersistenceError.kt",
+      "type": "file",
+      "name": "PersistenceError.kt",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/errors/PersistenceError.kt",
+      "summary": "Sealed interface of all persistence failure types",
+      "tags": ["persistence", "error"]
+    },
+    {
+      "id": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/errors/PersistenceError.kt:PersistenceError",
+      "type": "class",
+      "name": "PersistenceError",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/errors/PersistenceError.kt",
+      "summary": "Sealed interface with message and cause; subtypes ConnectionFailed, OperationFailed, OperationTimeout, InvalidArgument, SerializationFailed, DeserializationFailed",
+      "tags": ["persistence", "error", "sealed"]
+    },
+    {
+      "id": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/models/KeyValuePutResult.kt",
+      "type": "file",
+      "name": "KeyValuePutResult.kt",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/models/KeyValuePutResult.kt",
+      "summary": "Sealed outcome of a key-value put operation",
+      "tags": ["persistence", "model"]
+    },
+    {
+      "id": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/models/KeyValuePutResult.kt:KeyValuePutResult",
+      "type": "class",
+      "name": "KeyValuePutResult",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/models/KeyValuePutResult.kt",
+      "summary": "Sealed interface with Created and Updated data objects",
+      "tags": ["persistence", "model", "sealed"]
+    },
+    {
+      "id": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/models/PersistenceScope.kt",
+      "type": "file",
+      "name": "PersistenceScope.kt",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/models/PersistenceScope.kt",
+      "summary": "Validated scope identifier for key-value namespacing",
+      "tags": ["persistence", "model"]
+    },
+    {
+      "id": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/models/PersistenceScope.kt:PersistenceScope",
+      "type": "class",
+      "name": "PersistenceScope",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/models/PersistenceScope.kt",
+      "summary": "Data class with name/team validated for length and forbidden characters; exposes prefix",
+      "tags": ["persistence", "model", "valueobject"]
+    },
+    {
+      "id": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/serializers/PersistenceEncryptingSerializerImpl.kt",
+      "type": "file",
+      "name": "PersistenceEncryptingSerializerImpl.kt",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/serializers/PersistenceEncryptingSerializerImpl.kt",
+      "summary": "Serializer decorator that encrypts payloads via CryptoService with scope-associated data",
+      "tags": ["persistence", "serializer", "impl", "crypto"]
+    },
+    {
+      "id": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/serializers/PersistenceEncryptingSerializerImpl.kt:PersistenceEncryptingSerializerImpl",
+      "type": "class",
+      "name": "PersistenceEncryptingSerializerImpl",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/serializers/PersistenceEncryptingSerializerImpl.kt",
+      "summary": "Decorator wrapping a PersistenceSerializer with encrypt/decrypt using scope prefix as associated data",
+      "tags": ["persistence", "serializer", "impl", "crypto"]
+    },
+    {
+      "id": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/serializers/PersistenceStringSerializerImpl.kt",
+      "type": "file",
+      "name": "PersistenceStringSerializerImpl.kt",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/serializers/PersistenceStringSerializerImpl.kt",
+      "summary": "String serializer converting to/from UTF-8 ByteArray",
+      "tags": ["persistence", "serializer", "impl"]
+    },
+    {
+      "id": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/serializers/PersistenceStringSerializerImpl.kt:PersistenceStringSerializerImpl",
+      "type": "class",
+      "name": "PersistenceStringSerializerImpl",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/serializers/PersistenceStringSerializerImpl.kt",
+      "summary": "Simple UTF-8 serializer for String values",
+      "tags": ["persistence", "serializer", "impl"]
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/otel/models/OtelSpanStatus.kt",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/otel/models/OtelSpanStatus.kt:OtelSpanStatus",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/otel/models/OtelSpanStatus.kt:OtelSpanStatus",
+      "target": "function:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/otel/models/OtelSpanStatus.kt:toOtelStatusCode",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/otel/OtelSpanEmitterImpl.kt",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/otel/OtelSpanEmitterImpl.kt:OtelSpanEmitterImpl",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/otel/OtelSpanImpl.kt",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/otel/OtelSpanImpl.kt:OtelSpanImpl",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/adapters/noop/ObservabilityTracerNoOpAdapter.kt",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/adapters/noop/ObservabilityTracerNoOpAdapter.kt:ObservabilityTracerNoOpAdapter",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/adapters/noop/ObservabilityTracerNoopOperation.kt",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/adapters/noop/ObservabilityTracerNoopOperation.kt:ObservabilityTracerNoopOperation",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/adapters/otel/ObservabilityTracerOtelAdapter.kt",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/adapters/otel/ObservabilityTracerOtelAdapter.kt:ObservabilityTracerOtelAdapter",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/adapters/otel/OtelToTracerOperationMapping.kt",
+      "target": "function:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/adapters/otel/OtelToTracerOperationMapping.kt:toTracerOperation",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/contracts/ObservabilityTracer.kt",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/contracts/ObservabilityTracer.kt:ObservabilityTracer",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/contracts/ObservabilityTracerAdapter.kt",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/contracts/ObservabilityTracerAdapter.kt:ObservabilityTracerAdapter",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/contracts/ObservabilityTracerOperation.kt",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/contracts/ObservabilityTracerOperation.kt:ObservabilityTracerOperation",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/contracts/ObservabilityTracerShared.kt",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/contracts/ObservabilityTracerShared.kt:ObservabilityTracerShared",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/models/ObservabilityTracerProperties.kt",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/models/ObservabilityTracerProperties.kt:ObservabilityTracerProperties",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/models/ObservabilityTracerType.kt",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/models/ObservabilityTracerType.kt:ObservabilityTracerType",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/ObservabilityTracerImpl.kt",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/ObservabilityTracerImpl.kt:ObservabilityTracerImpl",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/autoconfigure/PersistenceAutoConfiguration.kt",
+      "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/autoconfigure/PersistenceAutoConfiguration.kt:PersistenceAutoConfiguration",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/autoconfigure/PersistenceAutoConfiguration.kt:PersistenceAutoConfiguration",
+      "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/autoconfigure/PersistenceAutoConfiguration.kt:Postgres",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/autoconfigure/PersistenceAutoConfiguration.kt:PersistenceAutoConfiguration",
+      "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/autoconfigure/PersistenceAutoConfiguration.kt:MongoDb",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/autoconfigure/PersistenceProperties.kt",
+      "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/autoconfigure/PersistenceProperties.kt:PersistenceProperties",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/autoconfigure/PersistenceProperties.kt:PersistenceProperties",
+      "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/autoconfigure/PersistenceProperties.kt:PostgresProperties",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/autoconfigure/PersistenceProperties.kt:PersistenceProperties",
+      "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/autoconfigure/PersistenceProperties.kt:MongoDbProperties",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/contracts/PersistenceSerializer.kt",
+      "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/contracts/PersistenceSerializer.kt:PersistenceSerializer",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/errors/PersistenceError.kt",
+      "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/errors/PersistenceError.kt:PersistenceError",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/models/KeyValuePutResult.kt",
+      "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/models/KeyValuePutResult.kt:KeyValuePutResult",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/models/PersistenceScope.kt",
+      "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/models/PersistenceScope.kt:PersistenceScope",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/serializers/PersistenceEncryptingSerializerImpl.kt",
+      "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/serializers/PersistenceEncryptingSerializerImpl.kt:PersistenceEncryptingSerializerImpl",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/serializers/PersistenceStringSerializerImpl.kt",
+      "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/serializers/PersistenceStringSerializerImpl.kt:PersistenceStringSerializerImpl",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/otel/OtelSpanEmitterImpl.kt",
+      "target": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/otel/contracts/OtelSpanEmitter.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/otel/OtelSpanEmitterImpl.kt",
+      "target": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/otel/contracts/OtelSpan.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/otel/OtelSpanImpl.kt",
+      "target": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/otel/contracts/OtelSpan.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/otel/OtelSpanImpl.kt",
+      "target": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/otel/models/OtelSpanStatus.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/adapters/noop/ObservabilityTracerNoOpAdapter.kt",
+      "target": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/contracts/ObservabilityTracerAdapter.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/adapters/noop/ObservabilityTracerNoOpAdapter.kt",
+      "target": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/contracts/ObservabilityTracerOperation.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/adapters/noop/ObservabilityTracerNoopOperation.kt",
+      "target": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/contracts/ObservabilityTracerOperation.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/adapters/otel/ObservabilityTracerOtelAdapter.kt",
+      "target": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/otel/contracts/OtelSpanEmitter.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/adapters/otel/ObservabilityTracerOtelAdapter.kt",
+      "target": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/contracts/ObservabilityTracerAdapter.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/adapters/otel/ObservabilityTracerOtelAdapter.kt",
+      "target": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/contracts/ObservabilityTracerOperation.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/adapters/otel/OtelToTracerOperationMapping.kt",
+      "target": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/otel/contracts/OtelSpan.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/adapters/otel/OtelToTracerOperationMapping.kt",
+      "target": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/contracts/ObservabilityTracerOperation.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/ObservabilityTracerImpl.kt",
+      "target": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/contracts/ObservabilityTracer.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/ObservabilityTracerImpl.kt",
+      "target": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/contracts/ObservabilityTracerAdapter.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/ObservabilityTracerImpl.kt",
+      "target": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/contracts/ObservabilityTracerOperation.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/serializers/PersistenceEncryptingSerializerImpl.kt",
+      "target": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/contracts/CryptoService.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/serializers/PersistenceEncryptingSerializerImpl.kt",
+      "target": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/errors/CryptoException.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/serializers/PersistenceEncryptingSerializerImpl.kt",
+      "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/contracts/PersistenceSerializer.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/serializers/PersistenceEncryptingSerializerImpl.kt",
+      "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/models/PersistenceScope.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/serializers/PersistenceStringSerializerImpl.kt",
+      "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/contracts/PersistenceSerializer.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/otel/OtelSpanEmitterImpl.kt:OtelSpanEmitterImpl",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/otel/OtelSpanImpl.kt:OtelSpanImpl",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/adapters/otel/ObservabilityTracerOtelAdapter.kt:ObservabilityTracerOtelAdapter",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/otel/OtelSpanEmitterImpl.kt:OtelSpanEmitterImpl",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/adapters/noop/ObservabilityTracerNoOpAdapter.kt:ObservabilityTracerNoOpAdapter",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/adapters/noop/ObservabilityTracerNoopOperation.kt:ObservabilityTracerNoopOperation",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/adapters/otel/OtelToTracerOperationMapping.kt:toTracerOperation",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/otel/OtelSpanImpl.kt:OtelSpanImpl",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/ObservabilityTracerImpl.kt:ObservabilityTracerImpl",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/adapters/noop/ObservabilityTracerNoOpAdapter.kt:ObservabilityTracerNoOpAdapter",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/ObservabilityTracerImpl.kt:ObservabilityTracerImpl",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/adapters/otel/ObservabilityTracerOtelAdapter.kt:ObservabilityTracerOtelAdapter",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/otel/OtelSpanImpl.kt:OtelSpanImpl",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/otel/models/OtelSpanStatus.kt:OtelSpanStatus",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/ObservabilityTracerImpl.kt:ObservabilityTracerImpl",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/contracts/ObservabilityTracer.kt:ObservabilityTracer",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/contracts/ObservabilityTracer.kt:ObservabilityTracer",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/contracts/ObservabilityTracerShared.kt:ObservabilityTracerShared",
+      "type": "inherits",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/contracts/ObservabilityTracerAdapter.kt:ObservabilityTracerAdapter",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/contracts/ObservabilityTracerShared.kt:ObservabilityTracerShared",
+      "type": "inherits",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/adapters/noop/ObservabilityTracerNoOpAdapter.kt:ObservabilityTracerNoOpAdapter",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/contracts/ObservabilityTracerAdapter.kt:ObservabilityTracerAdapter",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/adapters/otel/ObservabilityTracerOtelAdapter.kt:ObservabilityTracerOtelAdapter",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/contracts/ObservabilityTracerAdapter.kt:ObservabilityTracerAdapter",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/adapters/noop/ObservabilityTracerNoopOperation.kt:ObservabilityTracerNoopOperation",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/contracts/ObservabilityTracerOperation.kt:ObservabilityTracerOperation",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/otel/OtelSpanImpl.kt:OtelSpanImpl",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/otel/contracts/OtelSpan.kt:OtelSpan",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/otel/OtelSpanEmitterImpl.kt:OtelSpanEmitterImpl",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/otel/contracts/OtelSpanEmitter.kt:OtelSpanEmitter",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/adapters/otel/OtelToTracerOperationMapping.kt:toTracerOperation",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/contracts/ObservabilityTracerOperation.kt:ObservabilityTracerOperation",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/serializers/PersistenceEncryptingSerializerImpl.kt:PersistenceEncryptingSerializerImpl",
+      "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/contracts/PersistenceSerializer.kt:PersistenceSerializer",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/serializers/PersistenceStringSerializerImpl.kt:PersistenceStringSerializerImpl",
+      "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/contracts/PersistenceSerializer.kt:PersistenceSerializer",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "file:frisboo-persistence/build.gradle.kts",
+      "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/autoconfigure/PersistenceAutoConfiguration.kt",
+      "type": "configures",
+      "weight": 0.6
+    },
+    {
+      "source": "file:frisboo-persistence/build.gradle.kts",
+      "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/errors/PersistenceError.kt",
+      "type": "configures",
+      "weight": 0.6
+    },
+    {
+      "source": "file:frisboo-persistence/build.gradle.kts",
+      "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/serializers/PersistenceEncryptingSerializerImpl.kt",
+      "type": "configures",
+      "weight": 0.6
+    },
+    {
+      "source": "file:frisboo-persistence/README.md",
+      "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/errors/PersistenceError.kt:PersistenceError",
+      "type": "documents",
+      "weight": 0.5
+    },
+    {
+      "source": "file:frisboo-persistence/README.md",
+      "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/autoconfigure/PersistenceAutoConfiguration.kt",
+      "type": "documents",
+      "weight": 0.5
+    },
+    {
+      "source": "file:frisboo-persistence/README.md",
+      "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/autoconfigure/PersistenceProperties.kt",
+      "type": "documents",
+      "weight": 0.5
+    },
+    {
+      "source": "file:frisboo-persistence/README.md",
+      "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/models/PersistenceScope.kt:PersistenceScope",
+      "type": "documents",
+      "weight": 0.5
+    },
+    {
+      "source": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/serializers/PersistenceEncryptingSerializerImpl.kt:PersistenceEncryptingSerializerImpl",
+      "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/serializers/PersistenceStringSerializerImpl.kt:PersistenceStringSerializerImpl",
+      "type": "similar_to",
+      "weight": 0.5
+    },
+    {
+      "source": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/autoconfigure/PersistenceAutoConfiguration.kt:Postgres",
+      "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/autoconfigure/PersistenceProperties.kt:PostgresProperties",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/autoconfigure/PersistenceAutoConfiguration.kt:MongoDb",
+      "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/autoconfigure/PersistenceProperties.kt:MongoDbProperties",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/autoconfigure/PersistenceAutoConfiguration.kt:PersistenceAutoConfiguration",
+      "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/autoconfigure/PersistenceProperties.kt:PersistenceProperties",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/serializers/PersistenceEncryptingSerializerImpl.kt:PersistenceEncryptingSerializerImpl",
+      "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/models/PersistenceScope.kt:PersistenceScope",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/serializers/PersistenceEncryptingSerializerImpl.kt:PersistenceEncryptingSerializerImpl",
+      "target": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/contracts/CryptoService.kt",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/serializers/PersistenceEncryptingSerializerImpl.kt:PersistenceEncryptingSerializerImpl",
+      "target": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/errors/CryptoException.kt",
+      "type": "depends_on",
+      "weight": 0.6
+    }
+  ]
+}

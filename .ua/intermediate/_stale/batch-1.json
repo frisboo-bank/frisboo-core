@@ -1,0 +1,140 @@
+{
+  "nodes": [
+    {
+      "id": "file:.github/workflows/ci.yaml",
+      "type": "file",
+      "name": "ci.yaml",
+      "filePath": ".github/workflows/ci.yaml",
+      "summary": "GitHub Actions CI pipeline for frisboo-core — builds and tests on push and pull_request to main",
+      "tags": ["ci", "workflow", "infra", "config", "github-actions"]
+    },
+    {
+      "id": "trigger:.github/workflows/ci.yaml:push",
+      "type": "trigger",
+      "name": "push",
+      "filePath": ".github/workflows/ci.yaml",
+      "summary": "Trigger fired on pushes to the main branch",
+      "tags": ["ci", "trigger", "event", "push"]
+    },
+    {
+      "id": "trigger:.github/workflows/ci.yaml:pull_request",
+      "type": "trigger",
+      "name": "pull_request",
+      "filePath": ".github/workflows/ci.yaml",
+      "summary": "Trigger fired on pull requests targeting the main branch",
+      "tags": ["ci", "trigger", "event", "pull-request"]
+    },
+    {
+      "id": "job:.github/workflows/ci.yaml:build",
+      "type": "job",
+      "name": "build",
+      "filePath": ".github/workflows/ci.yaml",
+      "summary": "Build job that runs on ubuntu-latest, checks out source, sets up JDK 21, and runs ./gradlew build test",
+      "tags": ["ci", "job", "build", "gradle", "kotlin"]
+    },
+    {
+      "id": "step:.github/workflows/ci.yaml:checkout",
+      "type": "step",
+      "name": "checkout",
+      "filePath": ".github/workflows/ci.yaml",
+      "summary": "Checks out the repository source code via actions/checkout@v4",
+      "tags": ["ci", "step", "checkout", "source"]
+    },
+    {
+      "id": "step:.github/workflows/ci.yaml:setup-java",
+      "type": "step",
+      "name": "setup-java",
+      "filePath": ".github/workflows/ci.yaml",
+      "summary": "Sets up JDK 21 with Temurin distribution via actions/setup-java@v4",
+      "tags": ["ci", "step", "java", "setup", "jdk"]
+    },
+    {
+      "id": "step:.github/workflows/ci.yaml:gradle-build-test",
+      "type": "step",
+      "name": "gradle-build-test",
+      "filePath": ".github/workflows/ci.yaml",
+      "summary": "Runs ./gradlew build test to compile and test the frisboo-core Kotlin project",
+      "tags": ["ci", "step", "gradle", "build", "test", "kotlin"]
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:.github/workflows/ci.yaml",
+      "target": "trigger:.github/workflows/ci.yaml:push",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:.github/workflows/ci.yaml",
+      "target": "trigger:.github/workflows/ci.yaml:pull_request",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:.github/workflows/ci.yaml",
+      "target": "job:.github/workflows/ci.yaml:build",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "job:.github/workflows/ci.yaml:build",
+      "target": "step:.github/workflows/ci.yaml:checkout",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "job:.github/workflows/ci.yaml:build",
+      "target": "step:.github/workflows/ci.yaml:setup-java",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "job:.github/workflows/ci.yaml:build",
+      "target": "step:.github/workflows/ci.yaml:gradle-build-test",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "trigger:.github/workflows/ci.yaml:push",
+      "target": "job:.github/workflows/ci.yaml:build",
+      "type": "triggers",
+      "weight": 0.6
+    },
+    {
+      "source": "trigger:.github/workflows/ci.yaml:pull_request",
+      "target": "job:.github/workflows/ci.yaml:build",
+      "type": "triggers",
+      "weight": 0.6
+    },
+    {
+      "source": "step:.github/workflows/ci.yaml:checkout",
+      "target": "step:.github/workflows/ci.yaml:setup-java",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "step:.github/workflows/ci.yaml:setup-java",
+      "target": "step:.github/workflows/ci.yaml:gradle-build-test",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "step:.github/workflows/ci.yaml:checkout",
+      "target": "file:.github/workflows/ci.yaml",
+      "type": "configures",
+      "weight": 0.6
+    },
+    {
+      "source": "step:.github/workflows/ci.yaml:setup-java",
+      "target": "file:.github/workflows/ci.yaml",
+      "type": "configures",
+      "weight": 0.6
+    },
+    {
+      "source": "step:.github/workflows/ci.yaml:gradle-build-test",
+      "target": "file:.github/workflows/ci.yaml",
+      "type": "deploys",
+      "weight": 0.7
+    }
+  ]
+}

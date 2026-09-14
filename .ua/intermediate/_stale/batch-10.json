@@ -1,0 +1,172 @@
+{
+  "nodes": [
+    {
+      "id": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/internal/RedisWriteCommands.kt",
+      "type": "file",
+      "name": "RedisWriteCommands.kt",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/internal/RedisWriteCommands.kt",
+      "summary": "Internal Redis write command contract defining setGet, setIfAbsent, and del operations over raw ByteArray keys and values with TTL support.",
+      "tags": ["persistence", "redis", "commands", "contract", "internal", "write"]
+    },
+    {
+      "id": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/internal/RedisWriteCommands.kt:RedisWriteCommands",
+      "type": "class",
+      "name": "RedisWriteCommands",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/internal/RedisWriteCommands.kt",
+      "summary": "Internal interface declaring Redis write operations: setGet (set with TTL, return previous), setIfAbsent (NX), and del (delete).",
+      "tags": ["persistence", "redis", "commands", "contract", "internal", "write", "interface"]
+    },
+    {
+      "id": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/internal/results/RedisCommandsAcquireLockResult.kt",
+      "type": "file",
+      "name": "RedisCommandsAcquireLockResult.kt",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/internal/results/RedisCommandsAcquireLockResult.kt",
+      "summary": "Sealed result type for Redis lock-acquire commands: Acquired (with token) or AlreadyHeld.",
+      "tags": ["persistence", "redis", "commands", "result", "model", "valueobject", "internal"]
+    },
+    {
+      "id": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/internal/results/RedisCommandsAcquireLockResult.kt:RedisCommandsAcquireLockResult",
+      "type": "class",
+      "name": "RedisCommandsAcquireLockResult",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/internal/results/RedisCommandsAcquireLockResult.kt",
+      "summary": "Internal sealed interface representing the outcome of a Redis lock-acquire command, with Acquired (carrying a token) and AlreadyHeld variants.",
+      "tags": ["persistence", "redis", "commands", "result", "model", "valueobject", "internal", "interface"]
+    },
+    {
+      "id": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/internal/results/RedisCommandsAcquireLockResult.kt:Acquired",
+      "type": "class",
+      "name": "Acquired",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/internal/results/RedisCommandsAcquireLockResult.kt",
+      "summary": "Data class variant of RedisCommandsAcquireLockResult indicating the lock was acquired, carrying the acquired token with content-based equals/hashCode.",
+      "tags": ["persistence", "redis", "commands", "result", "model", "valueobject", "internal", "dataclass"]
+    },
+    {
+      "id": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/internal/results/RedisCommandsAcquireLockResult.kt:AlreadyHeld",
+      "type": "class",
+      "name": "AlreadyHeld",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/internal/results/RedisCommandsAcquireLockResult.kt",
+      "summary": "Data-object singleton variant of RedisCommandsAcquireLockResult indicating the lock was already held by another client.",
+      "tags": ["persistence", "redis", "commands", "result", "model", "valueobject", "internal", "dataobject"]
+    },
+    {
+      "id": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/internal/results/RedisCommandsCompareAndSetResult.kt",
+      "type": "file",
+      "name": "RedisCommandsCompareAndSetResult.kt",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/internal/results/RedisCommandsCompareAndSetResult.kt",
+      "summary": "Sealed result type for Redis compare-and-set commands: Success (with previous value), KeyNotFound, or Mismatch.",
+      "tags": ["persistence", "redis", "commands", "result", "model", "valueobject", "internal"]
+    },
+    {
+      "id": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/internal/results/RedisCommandsCompareAndSetResult.kt:RedisCommandsCompareAndSetResult",
+      "type": "class",
+      "name": "RedisCommandsCompareAndSetResult",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/internal/results/RedisCommandsCompareAndSetResult.kt",
+      "summary": "Internal sealed interface representing the outcome of a Redis compare-and-set command, with Success (previous value), KeyNotFound, and Mismatch variants.",
+      "tags": ["persistence", "redis", "commands", "result", "model", "valueobject", "internal", "interface"]
+    },
+    {
+      "id": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/internal/results/RedisCommandsCompareAndSetResult.kt:Success",
+      "type": "class",
+      "name": "Success",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/internal/results/RedisCommandsCompareAndSetResult.kt",
+      "summary": "Data class variant of RedisCommandsCompareAndSetResult indicating the CAS succeeded, carrying the previous value with content-based equals/hashCode.",
+      "tags": ["persistence", "redis", "commands", "result", "model", "valueobject", "internal", "dataclass"]
+    },
+    {
+      "id": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/internal/results/RedisCommandsCompareAndSetResult.kt:KeyNotFound",
+      "type": "class",
+      "name": "KeyNotFound",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/internal/results/RedisCommandsCompareAndSetResult.kt",
+      "summary": "Data-object singleton variant of RedisCommandsCompareAndSetResult indicating the compared key did not exist.",
+      "tags": ["persistence", "redis", "commands", "result", "model", "valueobject", "internal", "dataobject"]
+    },
+    {
+      "id": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/internal/results/RedisCommandsCompareAndSetResult.kt:Mismatch",
+      "type": "class",
+      "name": "Mismatch",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/internal/results/RedisCommandsCompareAndSetResult.kt",
+      "summary": "Data-object singleton variant of RedisCommandsCompareAndSetResult indicating the compared value did not match the expected value.",
+      "tags": ["persistence", "redis", "commands", "result", "model", "valueobject", "internal", "dataobject"]
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/internal/RedisWriteCommands.kt",
+      "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/internal/RedisWriteCommands.kt:RedisWriteCommands",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/internal/results/RedisCommandsAcquireLockResult.kt",
+      "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/internal/results/RedisCommandsAcquireLockResult.kt:RedisCommandsAcquireLockResult",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/internal/results/RedisCommandsAcquireLockResult.kt",
+      "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/internal/results/RedisCommandsAcquireLockResult.kt:Acquired",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/internal/results/RedisCommandsAcquireLockResult.kt",
+      "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/internal/results/RedisCommandsAcquireLockResult.kt:AlreadyHeld",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/internal/results/RedisCommandsCompareAndSetResult.kt",
+      "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/internal/results/RedisCommandsCompareAndSetResult.kt:RedisCommandsCompareAndSetResult",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/internal/results/RedisCommandsCompareAndSetResult.kt",
+      "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/internal/results/RedisCommandsCompareAndSetResult.kt:Success",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/internal/results/RedisCommandsCompareAndSetResult.kt",
+      "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/internal/results/RedisCommandsCompareAndSetResult.kt:KeyNotFound",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/internal/results/RedisCommandsCompareAndSetResult.kt",
+      "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/internal/results/RedisCommandsCompareAndSetResult.kt:Mismatch",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/internal/results/RedisCommandsAcquireLockResult.kt:Acquired",
+      "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/internal/results/RedisCommandsAcquireLockResult.kt:RedisCommandsAcquireLockResult",
+      "type": "inherits",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/internal/results/RedisCommandsAcquireLockResult.kt:AlreadyHeld",
+      "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/internal/results/RedisCommandsAcquireLockResult.kt:RedisCommandsAcquireLockResult",
+      "type": "inherits",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/internal/results/RedisCommandsCompareAndSetResult.kt:Success",
+      "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/internal/results/RedisCommandsCompareAndSetResult.kt:RedisCommandsCompareAndSetResult",
+      "type": "inherits",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/internal/results/RedisCommandsCompareAndSetResult.kt:KeyNotFound",
+      "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/internal/results/RedisCommandsCompareAndSetResult.kt:RedisCommandsCompareAndSetResult",
+      "type": "inherits",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/internal/results/RedisCommandsCompareAndSetResult.kt:Mismatch",
+      "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/internal/results/RedisCommandsCompareAndSetResult.kt:RedisCommandsCompareAndSetResult",
+      "type": "inherits",
+      "weight": 0.9
+    }
+  ]
+}

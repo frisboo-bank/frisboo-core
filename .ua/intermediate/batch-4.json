@@ -1,0 +1,1401 @@
+{
+  "nodes": [
+    {
+      "id": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/validation/contracts/ValidationRule.kt",
+      "type": "file",
+      "name": "ValidationRule.kt",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/validation/contracts/ValidationRule.kt",
+      "summary": "Defines the ValidationRule functional interface for single validation rules.",
+      "tags": ["validation", "contract", "domain"]
+    },
+    {
+      "id": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/validation/contracts/Validator.kt",
+      "type": "file",
+      "name": "Validator.kt",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/validation/contracts/Validator.kt",
+      "summary": "Defines the Validator interface composing multiple validation rules into an Either result.",
+      "tags": ["validation", "contract", "domain"]
+    },
+    {
+      "id": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/validation/model/ValidationResult.kt",
+      "type": "file",
+      "name": "ValidationResult.kt",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/validation/model/ValidationResult.kt",
+      "summary": "Defines the ValidationResult sealed interface and Violation data class.",
+      "tags": ["validation", "model", "valueobject"]
+    },
+    {
+      "id": "file:frisboo-core/src/test/kotlin/com/frisboo/corebanking/core/factory/adapters/caffeine/CaffeineFactoryCacheTest.kt",
+      "type": "file",
+      "name": "CaffeineFactoryCacheTest.kt",
+      "filePath": "frisboo-core/src/test/kotlin/com/frisboo/corebanking/core/factory/adapters/caffeine/CaffeineFactoryCacheTest.kt",
+      "summary": "Kotest test suite for the Caffeine-backed FactoryCache implementation.",
+      "tags": ["test", "cache", "factory"]
+    },
+    {
+      "id": "file:frisboo-core/src/test/kotlin/com/frisboo/corebanking/core/factory/decorators/CachingFactoryTest.kt",
+      "type": "file",
+      "name": "CachingFactoryTest.kt",
+      "filePath": "frisboo-core/src/test/kotlin/com/frisboo/corebanking/core/factory/decorators/CachingFactoryTest.kt",
+      "summary": "Kotest test suite for the CachingFactory decorator.",
+      "tags": ["test", "factory", "cache"]
+    },
+    {
+      "id": "file:frisboo-core/src/test/kotlin/com/frisboo/corebanking/core/serializers/adaptors/jackson/BigDecimalNumericSerializerTest.kt",
+      "type": "file",
+      "name": "BigDecimalNumericSerializerTest.kt",
+      "filePath": "frisboo-core/src/test/kotlin/com/frisboo/corebanking/core/serializers/adaptors/jackson/BigDecimalNumericSerializerTest.kt",
+      "summary": "Kotest test suite for BigDecimal numeric Jackson serialization.",
+      "tags": ["test", "serializer"]
+    },
+    {
+      "id": "file:frisboo-core/src/test/kotlin/com/frisboo/corebanking/core/serializers/adaptors/jackson/JacksonJsonSerializerImplTest.kt",
+      "type": "file",
+      "name": "JacksonJsonSerializerImplTest.kt",
+      "filePath": "frisboo-core/src/test/kotlin/com/frisboo/corebanking/core/serializers/adaptors/jackson/JacksonJsonSerializerImplTest.kt",
+      "summary": "Kotest test suite for JacksonJsonSerializerImpl round-trip serialization.",
+      "tags": ["test", "serializer"]
+    },
+    {
+      "id": "file:frisboo-crypto/build.gradle.kts",
+      "type": "file",
+      "name": "build.gradle.kts",
+      "filePath": "frisboo-crypto/build.gradle.kts",
+      "summary": "Gradle build script configuring the frisboo-crypto module.",
+      "tags": ["gradle", "config", "build"]
+    },
+    {
+      "id": "file:frisboo-crypto/README.md",
+      "type": "file",
+      "name": "README.md",
+      "filePath": "frisboo-crypto/README.md",
+      "summary": "User documentation for the frisboo-crypto module covering AEAD and hybrid encryption.",
+      "tags": ["docs", "crypto"]
+    },
+    {
+      "id": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkCryptoInitializer.kt",
+      "type": "file",
+      "name": "TinkCryptoInitializer.kt",
+      "filePath": "frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkCryptoInitializer.kt",
+      "summary": "Tink primitive registration entry point using lazy exactly-once initialization.",
+      "tags": ["crypto", "adapter", "initializer"]
+    },
+    {
+      "id": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkCryptoService.kt",
+      "type": "file",
+      "name": "TinkCryptoService.kt",
+      "filePath": "frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkCryptoService.kt",
+      "summary": "Tink AEAD adapter implementing the CryptoService contract.",
+      "tags": ["crypto", "adapter", "service"]
+    },
+    {
+      "id": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkExceptionMapping.kt",
+      "type": "file",
+      "name": "TinkExceptionMapping.kt",
+      "filePath": "frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkExceptionMapping.kt",
+      "summary": "Shared helpers mapping Tink GeneralSecurityExceptions to CryptoException subtypes.",
+      "tags": ["crypto", "exception", "helper"]
+    },
+    {
+      "id": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkHybridCryptoService.kt",
+      "type": "file",
+      "name": "TinkHybridCryptoService.kt",
+      "filePath": "frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkHybridCryptoService.kt",
+      "summary": "Tink HPKE adapter implementing the HybridCryptoService contract.",
+      "tags": ["crypto", "adapter", "service"]
+    },
+    {
+      "id": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/autoconfigure/CryptoAutoConfiguration.kt",
+      "type": "file",
+      "name": "CryptoAutoConfiguration.kt",
+      "filePath": "frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/autoconfigure/CryptoAutoConfiguration.kt",
+      "summary": "Spring Boot auto-configuration conditionally creating crypto service beans.",
+      "tags": ["crypto", "autoconfigure", "config"]
+    },
+    {
+      "id": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/autoconfigure/CryptoProperties.kt",
+      "type": "file",
+      "name": "CryptoProperties.kt",
+      "filePath": "frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/autoconfigure/CryptoProperties.kt",
+      "summary": "Spring configuration properties for the crypto module.",
+      "tags": ["crypto", "config", "autoconfigure"]
+    },
+    {
+      "id": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/contracts/CryptoService.kt",
+      "type": "file",
+      "name": "CryptoService.kt",
+      "filePath": "frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/contracts/CryptoService.kt",
+      "summary": "Contract interface for authenticated encryption with associated data.",
+      "tags": ["crypto", "contract"]
+    },
+    {
+      "id": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/contracts/HybridCryptoService.kt",
+      "type": "file",
+      "name": "HybridCryptoService.kt",
+      "filePath": "frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/contracts/HybridCryptoService.kt",
+      "summary": "Contract interface for hybrid public-key encryption.",
+      "tags": ["crypto", "contract"]
+    },
+    {
+      "id": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/errors/CryptoException.kt",
+      "type": "file",
+      "name": "CryptoException.kt",
+      "filePath": "frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/errors/CryptoException.kt",
+      "summary": "Sealed exception hierarchy for crypto operation failures.",
+      "tags": ["crypto", "error"]
+    },
+    {
+      "id": "file:frisboo-crypto/src/main/resources/META-INF/spring-configuration-metadata.json",
+      "type": "file",
+      "name": "spring-configuration-metadata.json",
+      "filePath": "frisboo-crypto/src/main/resources/META-INF/spring-configuration-metadata.json",
+      "summary": "Spring Boot configuration metadata describing crypto properties.",
+      "tags": ["spring", "config", "metadata"]
+    },
+    {
+      "id": "file:frisboo-crypto/src/main/resources/META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports",
+      "type": "file",
+      "name": "org.springframework.boot.autoconfigure.AutoConfiguration.imports",
+      "filePath": "frisboo-crypto/src/main/resources/META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports",
+      "summary": "Spring Boot auto-configuration SPI registration for CryptoAutoConfiguration.",
+      "tags": ["spring", "autoconfiguration", "spi", "boot"]
+    },
+    {
+      "id": "file:frisboo-crypto/src/test/kotlin/com/frisboo/corebanking/crypto/KeysetHandleFactory.kt",
+      "type": "file",
+      "name": "KeysetHandleFactory.kt",
+      "filePath": "frisboo-crypto/src/test/kotlin/com/frisboo/corebanking/crypto/KeysetHandleFactory.kt",
+      "summary": "Test-only factory generating ephemeral in-memory Tink keysets.",
+      "tags": ["test", "crypto", "factory"]
+    },
+    {
+      "id": "file:frisboo-crypto/src/test/kotlin/com/frisboo/corebanking/crypto/TinkCryptoServiceTest.kt",
+      "type": "file",
+      "name": "TinkCryptoServiceTest.kt",
+      "filePath": "frisboo-crypto/src/test/kotlin/com/frisboo/corebanking/crypto/TinkCryptoServiceTest.kt",
+      "summary": "Kotest test suite for TinkCryptoService AEAD operations.",
+      "tags": ["test", "crypto"]
+    },
+    {
+      "id": "file:frisboo-crypto/src/test/kotlin/com/frisboo/corebanking/crypto/TinkHybridCryptoServiceTest.kt",
+      "type": "file",
+      "name": "TinkHybridCryptoServiceTest.kt",
+      "filePath": "frisboo-crypto/src/test/kotlin/com/frisboo/corebanking/crypto/TinkHybridCryptoServiceTest.kt",
+      "summary": "Kotest test suite for TinkHybridCryptoService HPKE operations.",
+      "tags": ["test", "crypto"]
+    },
+    {
+      "id": "file:frisboo-data/build.gradle.kts",
+      "type": "file",
+      "name": "build.gradle.kts",
+      "filePath": "frisboo-data/build.gradle.kts",
+      "summary": "Gradle build script configuring the frisboo-data module.",
+      "tags": ["gradle", "config", "build"]
+    },
+    {
+      "id": "file:frisboo-data/src/main/kotlin/com/frisboo/corebanking/data/deduplication/contracts/BatchDeduplication.kt",
+      "type": "file",
+      "name": "BatchDeduplication.kt",
+      "filePath": "frisboo-data/src/main/kotlin/com/frisboo/corebanking/data/deduplication/contracts/BatchDeduplication.kt",
+      "summary": "Aggregate contract interface for batch deduplication combining reader and writer.",
+      "tags": ["deduplication", "contract", "data"]
+    },
+    {
+      "id": "module:frisboo-crypto",
+      "type": "module",
+      "name": "frisboo-crypto",
+      "filePath": "frisboo-crypto",
+      "summary": "Crypto module providing Tink-based AEAD and hybrid encryption with Spring auto-configuration.",
+      "tags": ["crypto", "module"]
+    },
+    {
+      "id": "module:frisboo-data",
+      "type": "module",
+      "name": "frisboo-data",
+      "filePath": "frisboo-data",
+      "summary": "Data module providing deduplication contracts and data-access primitives.",
+      "tags": ["data", "module"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/validation/contracts/ValidationRule.kt:ValidationRule",
+      "type": "class",
+      "name": "ValidationRule",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/validation/contracts/ValidationRule.kt",
+      "summary": "Functional interface defining a single validation rule that returns a ValidationResult.",
+      "tags": ["validation", "contract"]
+    },
+    {
+      "id": "function:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/validation/contracts/ValidationRule.kt:validate",
+      "type": "function",
+      "name": "validate",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/validation/contracts/ValidationRule.kt",
+      "summary": "Validates a value of type T and returns a ValidationResult.",
+      "tags": ["validation"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/validation/contracts/Validator.kt:Validator",
+      "type": "class",
+      "name": "Validator",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/validation/contracts/Validator.kt",
+      "summary": "Interface composing multiple ValidationRules into an Either<AppError, ValidationResult.Valid>.",
+      "tags": ["validation", "contract"]
+    },
+    {
+      "id": "function:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/validation/contracts/Validator.kt:validate",
+      "type": "function",
+      "name": "validate",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/validation/contracts/Validator.kt",
+      "summary": "Validates a value by composing rules, returning Right on success or Left with AppError on failure.",
+      "tags": ["validation"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/validation/model/ValidationResult.kt:ValidationResult",
+      "type": "class",
+      "name": "ValidationResult",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/validation/model/ValidationResult.kt",
+      "summary": "Sealed interface representing a valid or invalid validation outcome with collected violations.",
+      "tags": ["validation", "model", "valueobject"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/validation/model/ValidationResult.kt:Valid",
+      "type": "class",
+      "name": "Valid",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/validation/model/ValidationResult.kt",
+      "summary": "Singleton data object indicating a successful validation.",
+      "tags": ["validation", "model"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/validation/model/ValidationResult.kt:Invalid",
+      "type": "class",
+      "name": "Invalid",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/validation/model/ValidationResult.kt",
+      "summary": "Data class holding a non-empty list of validation violations.",
+      "tags": ["validation", "model"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/validation/model/ValidationResult.kt:Violation",
+      "type": "class",
+      "name": "Violation",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/validation/model/ValidationResult.kt",
+      "summary": "Data class describing a single field violation with a field name and message.",
+      "tags": ["validation", "model", "valueobject"]
+    },
+    {
+      "id": "class:frisboo-core/src/test/kotlin/com/frisboo/corebanking/core/factory/adapters/caffeine/CaffeineFactoryCacheTest.kt:CaffeineFactoryCacheTest",
+      "type": "class",
+      "name": "CaffeineFactoryCacheTest",
+      "filePath": "frisboo-core/src/test/kotlin/com/frisboo/corebanking/core/factory/adapters/caffeine/CaffeineFactoryCacheTest.kt",
+      "summary": "Kotest StringSpec testing Caffeine-backed FactoryCache eviction, concurrency, and stats.",
+      "tags": ["test"]
+    },
+    {
+      "id": "class:frisboo-core/src/test/kotlin/com/frisboo/corebanking/core/factory/decorators/CachingFactoryTest.kt:CachingFactoryTest",
+      "type": "class",
+      "name": "CachingFactoryTest",
+      "filePath": "frisboo-core/src/test/kotlin/com/frisboo/corebanking/core/factory/decorators/CachingFactoryTest.kt",
+      "summary": "Kotest StringSpec testing CachingFactory decorator concurrency, config drift, and eviction.",
+      "tags": ["test"]
+    },
+    {
+      "id": "class:frisboo-core/src/test/kotlin/com/frisboo/corebanking/core/factory/decorators/CachingFactoryTest.kt:TestConfig",
+      "type": "class",
+      "name": "TestConfig",
+      "filePath": "frisboo-core/src/test/kotlin/com/frisboo/corebanking/core/factory/decorators/CachingFactoryTest.kt",
+      "summary": "Private data class holding a version used as factory config in tests.",
+      "tags": ["test", "model"]
+    },
+    {
+      "id": "class:frisboo-core/src/test/kotlin/com/frisboo/corebanking/core/factory/decorators/CachingFactoryTest.kt:TestInstance",
+      "type": "class",
+      "name": "TestInstance",
+      "filePath": "frisboo-core/src/test/kotlin/com/frisboo/corebanking/core/factory/decorators/CachingFactoryTest.kt",
+      "summary": "Private data class representing a cached factory instance in tests.",
+      "tags": ["test", "model"]
+    },
+    {
+      "id": "class:frisboo-core/src/test/kotlin/com/frisboo/corebanking/core/factory/decorators/CachingFactoryTest.kt:FakeFactory",
+      "type": "class",
+      "name": "FakeFactory",
+      "filePath": "frisboo-core/src/test/kotlin/com/frisboo/corebanking/core/factory/decorators/CachingFactoryTest.kt",
+      "summary": "Private test double implementing AsyncFactory with a creation counter.",
+      "tags": ["test", "factory"]
+    },
+    {
+      "id": "class:frisboo-core/src/test/kotlin/com/frisboo/corebanking/core/factory/decorators/CachingFactoryTest.kt:FakeCache",
+      "type": "class",
+      "name": "FakeCache",
+      "filePath": "frisboo-core/src/test/kotlin/com/frisboo/corebanking/core/factory/decorators/CachingFactoryTest.kt",
+      "summary": "Private test double implementing FactoryCache backed by a ConcurrentHashMap.",
+      "tags": ["test", "cache"]
+    },
+    {
+      "id": "class:frisboo-core/src/test/kotlin/com/frisboo/corebanking/core/serializers/adaptors/jackson/BigDecimalNumericSerializerTest.kt:Wallet",
+      "type": "class",
+      "name": "Wallet",
+      "filePath": "frisboo-core/src/test/kotlin/com/frisboo/corebanking/core/serializers/adaptors/jackson/BigDecimalNumericSerializerTest.kt",
+      "summary": "Private data class with a BigDecimal balance used in serialization tests.",
+      "tags": ["test", "model"]
+    },
+    {
+      "id": "class:frisboo-core/src/test/kotlin/com/frisboo/corebanking/core/serializers/adaptors/jackson/BigDecimalNumericSerializerTest.kt:BigDecimalNumericSerializerTest",
+      "type": "class",
+      "name": "BigDecimalNumericSerializerTest",
+      "filePath": "frisboo-core/src/test/kotlin/com/frisboo/corebanking/core/serializers/adaptors/jackson/BigDecimalNumericSerializerTest.kt",
+      "summary": "Kotest StringSpec verifying BigDecimal numeric serialization round-trips through Jackson.",
+      "tags": ["test"]
+    },
+    {
+      "id": "class:frisboo-core/src/test/kotlin/com/frisboo/corebanking/core/serializers/adaptors/jackson/JacksonJsonSerializerImplTest.kt:Transaction",
+      "type": "class",
+      "name": "Transaction",
+      "filePath": "frisboo-core/src/test/kotlin/com/frisboo/corebanking/core/serializers/adaptors/jackson/JacksonJsonSerializerImplTest.kt",
+      "summary": "Private data class representing a transaction with amount, card number, and creation time.",
+      "tags": ["test", "model"]
+    },
+    {
+      "id": "class:frisboo-core/src/test/kotlin/com/frisboo/corebanking/core/serializers/adaptors/jackson/JacksonJsonSerializerImplTest.kt:Person",
+      "type": "class",
+      "name": "Person",
+      "filePath": "frisboo-core/src/test/kotlin/com/frisboo/corebanking/core/serializers/adaptors/jackson/JacksonJsonSerializerImplTest.kt",
+      "summary": "Private data class representing a person with varied field types for serialization tests.",
+      "tags": ["test", "model"]
+    },
+    {
+      "id": "class:frisboo-core/src/test/kotlin/com/frisboo/corebanking/core/serializers/adaptors/jackson/JacksonJsonSerializerImplTest.kt:JacksonJsonSerializerImplTest",
+      "type": "class",
+      "name": "JacksonJsonSerializerImplTest",
+      "filePath": "frisboo-core/src/test/kotlin/com/frisboo/corebanking/core/serializers/adaptors/jackson/JacksonJsonSerializerImplTest.kt",
+      "summary": "Kotest StringSpec verifying JacksonJsonSerializerImpl serialize/deserialize round-trips.",
+      "tags": ["test"]
+    },
+    {
+      "id": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkCryptoInitializer.kt:TinkCryptoInitializer",
+      "type": "class",
+      "name": "TinkCryptoInitializer",
+      "filePath": "frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkCryptoInitializer.kt",
+      "summary": "Singleton lazily registering Tink primitives via HybridConfig.register exactly once.",
+      "tags": ["crypto", "initializer"]
+    },
+    {
+      "id": "function:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkCryptoInitializer.kt:initialize",
+      "type": "function",
+      "name": "initialize",
+      "filePath": "frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkCryptoInitializer.kt",
+      "summary": "Triggers lazy Tink primitive registration; safe to call concurrently and idempotently.",
+      "tags": ["crypto"]
+    },
+    {
+      "id": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkCryptoService.kt:TinkCryptoService",
+      "type": "class",
+      "name": "TinkCryptoService",
+      "filePath": "frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkCryptoService.kt",
+      "summary": "Tink AEAD implementation of CryptoService backed by a KeysetHandle.",
+      "tags": ["crypto", "adapter", "service"]
+    },
+    {
+      "id": "function:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkCryptoService.kt:encrypt",
+      "type": "function",
+      "name": "encrypt",
+      "filePath": "frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkCryptoService.kt",
+      "summary": "Encrypts plaintext with associated data using AEAD, throwing CryptoException on failure.",
+      "tags": ["crypto"]
+    },
+    {
+      "id": "function:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkCryptoService.kt:decrypt",
+      "type": "function",
+      "name": "decrypt",
+      "filePath": "frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkCryptoService.kt",
+      "summary": "Decrypts ciphertext with matching associated data using AEAD.",
+      "tags": ["crypto"]
+    },
+    {
+      "id": "function:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkExceptionMapping.kt:wrapInit",
+      "type": "function",
+      "name": "wrapInit",
+      "filePath": "frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkExceptionMapping.kt",
+      "summary": "Wraps a Tink initialization block, mapping GeneralSecurityException to CryptoException.InitializationFailed.",
+      "tags": ["crypto", "exception"]
+    },
+    {
+      "id": "function:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkExceptionMapping.kt:wrapCryptoOp",
+      "type": "function",
+      "name": "wrapCryptoOp",
+      "filePath": "frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkExceptionMapping.kt",
+      "summary": "Wraps a crypto operation, mapping GeneralSecurityException to a caller-supplied CryptoException subtype.",
+      "tags": ["crypto", "exception"]
+    },
+    {
+      "id": "function:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkExceptionMapping.kt:tinkPrimitive",
+      "type": "function",
+      "name": "tinkPrimitive",
+      "filePath": "frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkExceptionMapping.kt",
+      "summary": "Extension obtaining a Tink primitive of type T from a KeysetHandle.",
+      "tags": ["crypto", "exception"]
+    },
+    {
+      "id": "function:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkExceptionMapping.kt:requireNonEmptyPlaintext",
+      "type": "function",
+      "name": "requireNonEmptyPlaintext",
+      "filePath": "frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkExceptionMapping.kt",
+      "summary": "Throws IllegalArgumentException if plaintext is empty.",
+      "tags": ["crypto", "validation"]
+    },
+    {
+      "id": "function:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkExceptionMapping.kt:requireNonEmptyCiphertext",
+      "type": "function",
+      "name": "requireNonEmptyCiphertext",
+      "filePath": "frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkExceptionMapping.kt",
+      "summary": "Throws IllegalArgumentException if ciphertext is empty.",
+      "tags": ["crypto", "validation"]
+    },
+    {
+      "id": "function:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkExceptionMapping.kt:requireNonEmptyAssociatedData",
+      "type": "function",
+      "name": "requireNonEmptyAssociatedData",
+      "filePath": "frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkExceptionMapping.kt",
+      "summary": "Throws IllegalArgumentException if associated data is empty.",
+      "tags": ["crypto", "validation"]
+    },
+    {
+      "id": "function:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkExceptionMapping.kt:requireNonEmptyContextInfo",
+      "type": "function",
+      "name": "requireNonEmptyContextInfo",
+      "filePath": "frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkExceptionMapping.kt",
+      "summary": "Throws IllegalArgumentException if context info is empty.",
+      "tags": ["crypto", "validation"]
+    },
+    {
+      "id": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkHybridCryptoService.kt:TinkHybridCryptoService",
+      "type": "class",
+      "name": "TinkHybridCryptoService",
+      "filePath": "frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkHybridCryptoService.kt",
+      "summary": "Tink HPKE implementation of HybridCryptoService using a private KeysetHandle.",
+      "tags": ["crypto", "adapter", "service"]
+    },
+    {
+      "id": "function:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkHybridCryptoService.kt:encrypt",
+      "type": "function",
+      "name": "encrypt",
+      "filePath": "frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkHybridCryptoService.kt",
+      "summary": "Encrypts plaintext with context info using the derived public key.",
+      "tags": ["crypto"]
+    },
+    {
+      "id": "function:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkHybridCryptoService.kt:decrypt",
+      "type": "function",
+      "name": "decrypt",
+      "filePath": "frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkHybridCryptoService.kt",
+      "summary": "Decrypts ciphertext with context info using the private key.",
+      "tags": ["crypto"]
+    },
+    {
+      "id": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/autoconfigure/CryptoAutoConfiguration.kt:CryptoAutoConfiguration",
+      "type": "class",
+      "name": "CryptoAutoConfiguration",
+      "filePath": "frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/autoconfigure/CryptoAutoConfiguration.kt",
+      "summary": "Spring Boot auto-configuration that creates CryptoService and HybridCryptoService beans conditionally.",
+      "tags": ["crypto", "autoconfigure", "config"]
+    },
+    {
+      "id": "function:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/autoconfigure/CryptoAutoConfiguration.kt:cryptoService",
+      "type": "function",
+      "name": "cryptoService",
+      "filePath": "frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/autoconfigure/CryptoAutoConfiguration.kt",
+      "summary": "Bean factory creating a TinkCryptoService when AEAD is enabled and a keyset bean is present.",
+      "tags": ["crypto", "autoconfigure"]
+    },
+    {
+      "id": "function:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/autoconfigure/CryptoAutoConfiguration.kt:hybridCryptoService",
+      "type": "function",
+      "name": "hybridCryptoService",
+      "filePath": "frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/autoconfigure/CryptoAutoConfiguration.kt",
+      "summary": "Bean factory creating a TinkHybridCryptoService when hybrid is enabled and a keyset bean is present.",
+      "tags": ["crypto", "autoconfigure"]
+    },
+    {
+      "id": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/autoconfigure/CryptoProperties.kt:CryptoProperties",
+      "type": "class",
+      "name": "CryptoProperties",
+      "filePath": "frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/autoconfigure/CryptoProperties.kt",
+      "summary": "ConfigurationProperties exposing enabled flags for crypto, AEAD, and hybrid sub-configs.",
+      "tags": ["crypto", "config", "autoconfigure"]
+    },
+    {
+      "id": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/autoconfigure/CryptoProperties.kt:AeadProperties",
+      "type": "class",
+      "name": "AeadProperties",
+      "filePath": "frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/autoconfigure/CryptoProperties.kt",
+      "summary": "Nested config for AEAD symmetric encryption enablement.",
+      "tags": ["crypto", "config"]
+    },
+    {
+      "id": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/autoconfigure/CryptoProperties.kt:HybridProperties",
+      "type": "class",
+      "name": "HybridProperties",
+      "filePath": "frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/autoconfigure/CryptoProperties.kt",
+      "summary": "Nested config for hybrid asymmetric encryption enablement.",
+      "tags": ["crypto", "config"]
+    },
+    {
+      "id": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/contracts/CryptoService.kt:CryptoService",
+      "type": "class",
+      "name": "CryptoService",
+      "filePath": "frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/contracts/CryptoService.kt",
+      "summary": "Interface for authenticated encryption with associated data (AEAD).",
+      "tags": ["crypto", "contract"]
+    },
+    {
+      "id": "function:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/contracts/CryptoService.kt:encrypt",
+      "type": "function",
+      "name": "encrypt",
+      "filePath": "frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/contracts/CryptoService.kt",
+      "summary": "Encrypts plaintext bytes with associated data binding.",
+      "tags": ["crypto"]
+    },
+    {
+      "id": "function:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/contracts/CryptoService.kt:decrypt",
+      "type": "function",
+      "name": "decrypt",
+      "filePath": "frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/contracts/CryptoService.kt",
+      "summary": "Decrypts ciphertext bytes with matching associated data.",
+      "tags": ["crypto"]
+    },
+    {
+      "id": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/contracts/HybridCryptoService.kt:HybridCryptoService",
+      "type": "class",
+      "name": "HybridCryptoService",
+      "filePath": "frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/contracts/HybridCryptoService.kt",
+      "summary": "Interface for hybrid (asymmetric) encryption using public/private keysets.",
+      "tags": ["crypto", "contract"]
+    },
+    {
+      "id": "function:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/contracts/HybridCryptoService.kt:encrypt",
+      "type": "function",
+      "name": "encrypt",
+      "filePath": "frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/contracts/HybridCryptoService.kt",
+      "summary": "Encrypts plaintext with the public key and context info.",
+      "tags": ["crypto"]
+    },
+    {
+      "id": "function:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/contracts/HybridCryptoService.kt:decrypt",
+      "type": "function",
+      "name": "decrypt",
+      "filePath": "frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/contracts/HybridCryptoService.kt",
+      "summary": "Decrypts ciphertext with the private key and context info.",
+      "tags": ["crypto"]
+    },
+    {
+      "id": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/errors/CryptoException.kt:CryptoException",
+      "type": "class",
+      "name": "CryptoException",
+      "filePath": "frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/errors/CryptoException.kt",
+      "summary": "Sealed exception hierarchy wrapping all crypto provider failures.",
+      "tags": ["crypto", "error"]
+    },
+    {
+      "id": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/errors/CryptoException.kt:InitializationFailed",
+      "type": "class",
+      "name": "InitializationFailed",
+      "filePath": "frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/errors/CryptoException.kt",
+      "summary": "Thrown when keyset or provider misconfiguration is detected at construction.",
+      "tags": ["crypto", "error"]
+    },
+    {
+      "id": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/errors/CryptoException.kt:EncryptionFailed",
+      "type": "class",
+      "name": "EncryptionFailed",
+      "filePath": "frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/errors/CryptoException.kt",
+      "summary": "Thrown when AEAD encryption fails.",
+      "tags": ["crypto", "error"]
+    },
+    {
+      "id": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/errors/CryptoException.kt:DecryptionFailed",
+      "type": "class",
+      "name": "DecryptionFailed",
+      "filePath": "frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/errors/CryptoException.kt",
+      "summary": "Thrown when AEAD decryption fails (tampered ciphertext, wrong key, mismatched AAD).",
+      "tags": ["crypto", "error"]
+    },
+    {
+      "id": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/errors/CryptoException.kt:HybridEncryptionFailed",
+      "type": "class",
+      "name": "HybridEncryptionFailed",
+      "filePath": "frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/errors/CryptoException.kt",
+      "summary": "Thrown when hybrid encryption fails.",
+      "tags": ["crypto", "error"]
+    },
+    {
+      "id": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/errors/CryptoException.kt:HybridDecryptionFailed",
+      "type": "class",
+      "name": "HybridDecryptionFailed",
+      "filePath": "frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/errors/CryptoException.kt",
+      "summary": "Thrown when hybrid decryption fails (wrong private key, tampered ciphertext, mismatched context).",
+      "tags": ["crypto", "error"]
+    },
+    {
+      "id": "class:frisboo-crypto/src/test/kotlin/com/frisboo/corebanking/crypto/KeysetHandleFactory.kt:KeysetHandleFactory",
+      "type": "class",
+      "name": "KeysetHandleFactory",
+      "filePath": "frisboo-crypto/src/test/kotlin/com/frisboo/corebanking/crypto/KeysetHandleFactory.kt",
+      "summary": "Test-only factory generating ephemeral in-memory Tink KeysetHandle instances.",
+      "tags": ["test", "crypto", "factory"]
+    },
+    {
+      "id": "function:frisboo-crypto/src/test/kotlin/com/frisboo/corebanking/crypto/KeysetHandleFactory.kt:generateAes256Gcm",
+      "type": "function",
+      "name": "generateAes256Gcm",
+      "filePath": "frisboo-crypto/src/test/kotlin/com/frisboo/corebanking/crypto/KeysetHandleFactory.kt",
+      "summary": "Generates an ephemeral AES-256-GCM KeysetHandle.",
+      "tags": ["crypto", "test"]
+    },
+    {
+      "id": "function:frisboo-crypto/src/test/kotlin/com/frisboo/corebanking/crypto/KeysetHandleFactory.kt:generateHybridHpke",
+      "type": "function",
+      "name": "generateHybridHpke",
+      "filePath": "frisboo-crypto/src/test/kotlin/com/frisboo/corebanking/crypto/KeysetHandleFactory.kt",
+      "summary": "Generates an ephemeral HPKE (X25519-HKDF-SHA256-AES-256-GCM) KeysetHandle.",
+      "tags": ["crypto", "test"]
+    },
+    {
+      "id": "class:frisboo-crypto/src/test/kotlin/com/frisboo/corebanking/crypto/TinkCryptoServiceTest.kt:TinkCryptoServiceTest",
+      "type": "class",
+      "name": "TinkCryptoServiceTest",
+      "filePath": "frisboo-crypto/src/test/kotlin/com/frisboo/corebanking/crypto/TinkCryptoServiceTest.kt",
+      "summary": "Kotest StringSpec testing TinkCryptoService round-trips, rejection, and concurrency.",
+      "tags": ["test", "crypto"]
+    },
+    {
+      "id": "class:frisboo-crypto/src/test/kotlin/com/frisboo/corebanking/crypto/TinkHybridCryptoServiceTest.kt:TinkHybridCryptoServiceTest",
+      "type": "class",
+      "name": "TinkHybridCryptoServiceTest",
+      "filePath": "frisboo-crypto/src/test/kotlin/com/frisboo/corebanking/crypto/TinkHybridCryptoServiceTest.kt",
+      "summary": "Kotest StringSpec testing TinkHybridCryptoService round-trips, rejection, and concurrency.",
+      "tags": ["test", "crypto"]
+    },
+    {
+      "id": "class:frisboo-data/src/main/kotlin/com/frisboo/corebanking/data/deduplication/contracts/BatchDeduplication.kt:BatchDeduplication",
+      "type": "class",
+      "name": "BatchDeduplication",
+      "filePath": "frisboo-data/src/main/kotlin/com/frisboo/corebanking/data/deduplication/contracts/BatchDeduplication.kt",
+      "summary": "Aggregate contract combining BatchDedupReader and BatchDedupWriter for batch deduplication.",
+      "tags": ["deduplication", "contract", "data"]
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/validation/contracts/Validator.kt",
+      "target": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/validation/model/ValidationResult.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/validation/contracts/ValidationRule.kt",
+      "target": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/validation/model/ValidationResult.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkCryptoInitializer.kt",
+      "target": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/errors/CryptoException.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkCryptoService.kt",
+      "target": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/contracts/CryptoService.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkCryptoService.kt",
+      "target": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/errors/CryptoException.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkExceptionMapping.kt",
+      "target": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/errors/CryptoException.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkHybridCryptoService.kt",
+      "target": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/contracts/HybridCryptoService.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkHybridCryptoService.kt",
+      "target": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/errors/CryptoException.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/autoconfigure/CryptoAutoConfiguration.kt",
+      "target": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkCryptoInitializer.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/autoconfigure/CryptoAutoConfiguration.kt",
+      "target": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkCryptoService.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/autoconfigure/CryptoAutoConfiguration.kt",
+      "target": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkHybridCryptoService.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/autoconfigure/CryptoAutoConfiguration.kt",
+      "target": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/contracts/CryptoService.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/autoconfigure/CryptoAutoConfiguration.kt",
+      "target": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/contracts/HybridCryptoService.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-crypto/src/test/kotlin/com/frisboo/corebanking/crypto/TinkCryptoServiceTest.kt",
+      "target": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkCryptoInitializer.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-crypto/src/test/kotlin/com/frisboo/corebanking/crypto/TinkCryptoServiceTest.kt",
+      "target": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkCryptoService.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-crypto/src/test/kotlin/com/frisboo/corebanking/crypto/TinkCryptoServiceTest.kt",
+      "target": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/errors/CryptoException.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-crypto/src/test/kotlin/com/frisboo/corebanking/crypto/TinkCryptoServiceTest.kt",
+      "target": "file:frisboo-crypto/src/test/kotlin/com/frisboo/corebanking/crypto/KeysetHandleFactory.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-crypto/src/test/kotlin/com/frisboo/corebanking/crypto/TinkHybridCryptoServiceTest.kt",
+      "target": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkCryptoInitializer.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-crypto/src/test/kotlin/com/frisboo/corebanking/crypto/TinkHybridCryptoServiceTest.kt",
+      "target": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkCryptoService.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-crypto/src/test/kotlin/com/frisboo/corebanking/crypto/TinkHybridCryptoServiceTest.kt",
+      "target": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkHybridCryptoService.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-crypto/src/test/kotlin/com/frisboo/corebanking/crypto/TinkHybridCryptoServiceTest.kt",
+      "target": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/errors/CryptoException.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-crypto/src/test/kotlin/com/frisboo/corebanking/crypto/TinkHybridCryptoServiceTest.kt",
+      "target": "file:frisboo-crypto/src/test/kotlin/com/frisboo/corebanking/crypto/KeysetHandleFactory.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/validation/contracts/ValidationRule.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/validation/contracts/ValidationRule.kt:ValidationRule",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/validation/contracts/ValidationRule.kt",
+      "target": "function:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/validation/contracts/ValidationRule.kt:validate",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/validation/contracts/Validator.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/validation/contracts/Validator.kt:Validator",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/validation/contracts/Validator.kt",
+      "target": "function:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/validation/contracts/Validator.kt:validate",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/validation/model/ValidationResult.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/validation/model/ValidationResult.kt:ValidationResult",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/validation/model/ValidationResult.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/validation/model/ValidationResult.kt:Valid",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/validation/model/ValidationResult.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/validation/model/ValidationResult.kt:Invalid",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/validation/model/ValidationResult.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/validation/model/ValidationResult.kt:Violation",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/test/kotlin/com/frisboo/corebanking/core/factory/adapters/caffeine/CaffeineFactoryCacheTest.kt",
+      "target": "class:frisboo-core/src/test/kotlin/com/frisboo/corebanking/core/factory/adapters/caffeine/CaffeineFactoryCacheTest.kt:CaffeineFactoryCacheTest",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/test/kotlin/com/frisboo/corebanking/core/factory/decorators/CachingFactoryTest.kt",
+      "target": "class:frisboo-core/src/test/kotlin/com/frisboo/corebanking/core/factory/decorators/CachingFactoryTest.kt:CachingFactoryTest",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/test/kotlin/com/frisboo/corebanking/core/factory/decorators/CachingFactoryTest.kt",
+      "target": "class:frisboo-core/src/test/kotlin/com/frisboo/corebanking/core/factory/decorators/CachingFactoryTest.kt:TestConfig",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/test/kotlin/com/frisboo/corebanking/core/factory/decorators/CachingFactoryTest.kt",
+      "target": "class:frisboo-core/src/test/kotlin/com/frisboo/corebanking/core/factory/decorators/CachingFactoryTest.kt:TestInstance",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/test/kotlin/com/frisboo/corebanking/core/factory/decorators/CachingFactoryTest.kt",
+      "target": "class:frisboo-core/src/test/kotlin/com/frisboo/corebanking/core/factory/decorators/CachingFactoryTest.kt:FakeFactory",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/test/kotlin/com/frisboo/corebanking/core/factory/decorators/CachingFactoryTest.kt",
+      "target": "class:frisboo-core/src/test/kotlin/com/frisboo/corebanking/core/factory/decorators/CachingFactoryTest.kt:FakeCache",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/test/kotlin/com/frisboo/corebanking/core/serializers/adaptors/jackson/BigDecimalNumericSerializerTest.kt",
+      "target": "class:frisboo-core/src/test/kotlin/com/frisboo/corebanking/core/serializers/adaptors/jackson/BigDecimalNumericSerializerTest.kt:BigDecimalNumericSerializerTest",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/test/kotlin/com/frisboo/corebanking/core/serializers/adaptors/jackson/BigDecimalNumericSerializerTest.kt",
+      "target": "class:frisboo-core/src/test/kotlin/com/frisboo/corebanking/core/serializers/adaptors/jackson/BigDecimalNumericSerializerTest.kt:Wallet",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/test/kotlin/com/frisboo/corebanking/core/serializers/adaptors/jackson/JacksonJsonSerializerImplTest.kt",
+      "target": "class:frisboo-core/src/test/kotlin/com/frisboo/corebanking/core/serializers/adaptors/jackson/JacksonJsonSerializerImplTest.kt:JacksonJsonSerializerImplTest",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/test/kotlin/com/frisboo/corebanking/core/serializers/adaptors/jackson/JacksonJsonSerializerImplTest.kt",
+      "target": "class:frisboo-core/src/test/kotlin/com/frisboo/corebanking/core/serializers/adaptors/jackson/JacksonJsonSerializerImplTest.kt:Transaction",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/test/kotlin/com/frisboo/corebanking/core/serializers/adaptors/jackson/JacksonJsonSerializerImplTest.kt",
+      "target": "class:frisboo-core/src/test/kotlin/com/frisboo/corebanking/core/serializers/adaptors/jackson/JacksonJsonSerializerImplTest.kt:Person",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkCryptoInitializer.kt",
+      "target": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkCryptoInitializer.kt:TinkCryptoInitializer",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkCryptoInitializer.kt",
+      "target": "function:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkCryptoInitializer.kt:initialize",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkCryptoService.kt",
+      "target": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkCryptoService.kt:TinkCryptoService",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkCryptoService.kt",
+      "target": "function:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkCryptoService.kt:encrypt",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkCryptoService.kt",
+      "target": "function:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkCryptoService.kt:decrypt",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkExceptionMapping.kt",
+      "target": "function:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkExceptionMapping.kt:wrapInit",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkExceptionMapping.kt",
+      "target": "function:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkExceptionMapping.kt:wrapCryptoOp",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkExceptionMapping.kt",
+      "target": "function:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkExceptionMapping.kt:tinkPrimitive",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkExceptionMapping.kt",
+      "target": "function:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkExceptionMapping.kt:requireNonEmptyPlaintext",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkExceptionMapping.kt",
+      "target": "function:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkExceptionMapping.kt:requireNonEmptyCiphertext",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkExceptionMapping.kt",
+      "target": "function:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkExceptionMapping.kt:requireNonEmptyAssociatedData",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkExceptionMapping.kt",
+      "target": "function:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkExceptionMapping.kt:requireNonEmptyContextInfo",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkHybridCryptoService.kt",
+      "target": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkHybridCryptoService.kt:TinkHybridCryptoService",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkHybridCryptoService.kt",
+      "target": "function:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkHybridCryptoService.kt:encrypt",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkHybridCryptoService.kt",
+      "target": "function:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkHybridCryptoService.kt:decrypt",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/autoconfigure/CryptoAutoConfiguration.kt",
+      "target": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/autoconfigure/CryptoAutoConfiguration.kt:CryptoAutoConfiguration",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/autoconfigure/CryptoAutoConfiguration.kt",
+      "target": "function:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/autoconfigure/CryptoAutoConfiguration.kt:cryptoService",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/autoconfigure/CryptoAutoConfiguration.kt",
+      "target": "function:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/autoconfigure/CryptoAutoConfiguration.kt:hybridCryptoService",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/autoconfigure/CryptoProperties.kt",
+      "target": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/autoconfigure/CryptoProperties.kt:CryptoProperties",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/autoconfigure/CryptoProperties.kt",
+      "target": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/autoconfigure/CryptoProperties.kt:AeadProperties",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/autoconfigure/CryptoProperties.kt",
+      "target": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/autoconfigure/CryptoProperties.kt:HybridProperties",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/contracts/CryptoService.kt",
+      "target": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/contracts/CryptoService.kt:CryptoService",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/contracts/CryptoService.kt",
+      "target": "function:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/contracts/CryptoService.kt:encrypt",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/contracts/CryptoService.kt",
+      "target": "function:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/contracts/CryptoService.kt:decrypt",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/contracts/HybridCryptoService.kt",
+      "target": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/contracts/HybridCryptoService.kt:HybridCryptoService",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/contracts/HybridCryptoService.kt",
+      "target": "function:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/contracts/HybridCryptoService.kt:encrypt",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/contracts/HybridCryptoService.kt",
+      "target": "function:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/contracts/HybridCryptoService.kt:decrypt",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/errors/CryptoException.kt",
+      "target": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/errors/CryptoException.kt:CryptoException",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/errors/CryptoException.kt",
+      "target": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/errors/CryptoException.kt:InitializationFailed",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/errors/CryptoException.kt",
+      "target": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/errors/CryptoException.kt:EncryptionFailed",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/errors/CryptoException.kt",
+      "target": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/errors/CryptoException.kt:DecryptionFailed",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/errors/CryptoException.kt",
+      "target": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/errors/CryptoException.kt:HybridEncryptionFailed",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/errors/CryptoException.kt",
+      "target": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/errors/CryptoException.kt:HybridDecryptionFailed",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-crypto/src/test/kotlin/com/frisboo/corebanking/crypto/KeysetHandleFactory.kt",
+      "target": "class:frisboo-crypto/src/test/kotlin/com/frisboo/corebanking/crypto/KeysetHandleFactory.kt:KeysetHandleFactory",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-crypto/src/test/kotlin/com/frisboo/corebanking/crypto/KeysetHandleFactory.kt",
+      "target": "function:frisboo-crypto/src/test/kotlin/com/frisboo/corebanking/crypto/KeysetHandleFactory.kt:generateAes256Gcm",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-crypto/src/test/kotlin/com/frisboo/corebanking/crypto/KeysetHandleFactory.kt",
+      "target": "function:frisboo-crypto/src/test/kotlin/com/frisboo/corebanking/crypto/KeysetHandleFactory.kt:generateHybridHpke",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-crypto/src/test/kotlin/com/frisboo/corebanking/crypto/TinkCryptoServiceTest.kt",
+      "target": "class:frisboo-crypto/src/test/kotlin/com/frisboo/corebanking/crypto/TinkCryptoServiceTest.kt:TinkCryptoServiceTest",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-crypto/src/test/kotlin/com/frisboo/corebanking/crypto/TinkHybridCryptoServiceTest.kt",
+      "target": "class:frisboo-crypto/src/test/kotlin/com/frisboo/corebanking/crypto/TinkHybridCryptoServiceTest.kt:TinkHybridCryptoServiceTest",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-data/src/main/kotlin/com/frisboo/corebanking/data/deduplication/contracts/BatchDeduplication.kt",
+      "target": "class:frisboo-data/src/main/kotlin/com/frisboo/corebanking/data/deduplication/contracts/BatchDeduplication.kt:BatchDeduplication",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkCryptoService.kt:TinkCryptoService",
+      "target": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/contracts/CryptoService.kt:CryptoService",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkHybridCryptoService.kt:TinkHybridCryptoService",
+      "target": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/contracts/HybridCryptoService.kt:HybridCryptoService",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/errors/CryptoException.kt:InitializationFailed",
+      "target": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/errors/CryptoException.kt:CryptoException",
+      "type": "inherits",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/errors/CryptoException.kt:EncryptionFailed",
+      "target": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/errors/CryptoException.kt:CryptoException",
+      "type": "inherits",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/errors/CryptoException.kt:DecryptionFailed",
+      "target": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/errors/CryptoException.kt:CryptoException",
+      "type": "inherits",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/errors/CryptoException.kt:HybridEncryptionFailed",
+      "target": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/errors/CryptoException.kt:CryptoException",
+      "type": "inherits",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/errors/CryptoException.kt:HybridDecryptionFailed",
+      "target": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/errors/CryptoException.kt:CryptoException",
+      "type": "inherits",
+      "weight": 0.9
+    },
+    
+    {
+      "source": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkCryptoService.kt:TinkCryptoService",
+      "target": "class:frisboo-crypto/src/test/kotlin/com/frisboo/corebanking/crypto/TinkCryptoServiceTest.kt:TinkCryptoServiceTest",
+      "type": "tested_by",
+      "weight": 0.5
+    },
+    {
+      "source": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkHybridCryptoService.kt:TinkHybridCryptoService",
+      "target": "class:frisboo-crypto/src/test/kotlin/com/frisboo/corebanking/crypto/TinkHybridCryptoServiceTest.kt:TinkHybridCryptoServiceTest",
+      "type": "tested_by",
+      "weight": 0.5
+    },
+    {
+      "source": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkCryptoInitializer.kt:TinkCryptoInitializer",
+      "target": "class:frisboo-crypto/src/test/kotlin/com/frisboo/corebanking/crypto/TinkCryptoServiceTest.kt:TinkCryptoServiceTest",
+      "type": "tested_by",
+      "weight": 0.5
+    },
+    {
+      "source": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkCryptoInitializer.kt:TinkCryptoInitializer",
+      "target": "class:frisboo-crypto/src/test/kotlin/com/frisboo/corebanking/crypto/TinkHybridCryptoServiceTest.kt:TinkHybridCryptoServiceTest",
+      "type": "tested_by",
+      "weight": 0.5
+    },
+    {
+      "source": "function:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkCryptoService.kt:encrypt",
+      "target": "function:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkExceptionMapping.kt:requireNonEmptyPlaintext",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkCryptoService.kt:encrypt",
+      "target": "function:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkExceptionMapping.kt:requireNonEmptyAssociatedData",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkCryptoService.kt:encrypt",
+      "target": "function:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkExceptionMapping.kt:wrapCryptoOp",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkCryptoService.kt:decrypt",
+      "target": "function:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkExceptionMapping.kt:requireNonEmptyCiphertext",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkCryptoService.kt:decrypt",
+      "target": "function:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkExceptionMapping.kt:requireNonEmptyAssociatedData",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkCryptoService.kt:decrypt",
+      "target": "function:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkExceptionMapping.kt:wrapCryptoOp",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkHybridCryptoService.kt:encrypt",
+      "target": "function:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkExceptionMapping.kt:requireNonEmptyPlaintext",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkHybridCryptoService.kt:encrypt",
+      "target": "function:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkExceptionMapping.kt:requireNonEmptyContextInfo",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkHybridCryptoService.kt:encrypt",
+      "target": "function:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkExceptionMapping.kt:wrapCryptoOp",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkHybridCryptoService.kt:decrypt",
+      "target": "function:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkExceptionMapping.kt:requireNonEmptyCiphertext",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkHybridCryptoService.kt:decrypt",
+      "target": "function:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkExceptionMapping.kt:requireNonEmptyContextInfo",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkHybridCryptoService.kt:decrypt",
+      "target": "function:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkExceptionMapping.kt:wrapCryptoOp",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkCryptoService.kt:TinkCryptoService",
+      "target": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkCryptoInitializer.kt:TinkCryptoInitializer",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkHybridCryptoService.kt:TinkHybridCryptoService",
+      "target": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkCryptoInitializer.kt:TinkCryptoInitializer",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/autoconfigure/CryptoAutoConfiguration.kt:CryptoAutoConfiguration",
+      "target": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkCryptoInitializer.kt:TinkCryptoInitializer",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkCryptoService.kt:TinkCryptoService",
+      "target": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkExceptionMapping.kt",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkHybridCryptoService.kt:TinkHybridCryptoService",
+      "target": "file:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkExceptionMapping.kt",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/autoconfigure/CryptoAutoConfiguration.kt:CryptoAutoConfiguration",
+      "target": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/autoconfigure/CryptoProperties.kt:CryptoProperties",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "file:frisboo-crypto/build.gradle.kts",
+      "target": "module:frisboo-crypto",
+      "type": "configures",
+      "weight": 0.6
+    },
+    {
+      "source": "file:frisboo-data/build.gradle.kts",
+      "target": "module:frisboo-data",
+      "type": "configures",
+      "weight": 0.6
+    },
+    {
+      "source": "file:frisboo-crypto/README.md",
+      "target": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/contracts/CryptoService.kt:CryptoService",
+      "type": "documents",
+      "weight": 0.5
+    },
+    {
+      "source": "file:frisboo-crypto/README.md",
+      "target": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/contracts/HybridCryptoService.kt:HybridCryptoService",
+      "type": "documents",
+      "weight": 0.5
+    },
+    {
+      "source": "file:frisboo-crypto/README.md",
+      "target": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkCryptoService.kt:TinkCryptoService",
+      "type": "documents",
+      "weight": 0.5
+    },
+    {
+      "source": "file:frisboo-crypto/README.md",
+      "target": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkHybridCryptoService.kt:TinkHybridCryptoService",
+      "type": "documents",
+      "weight": 0.5
+    },
+    {
+      "source": "file:frisboo-crypto/README.md",
+      "target": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/errors/CryptoException.kt:CryptoException",
+      "type": "documents",
+      "weight": 0.5
+    },
+    {
+      "source": "file:frisboo-crypto/README.md",
+      "target": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/autoconfigure/CryptoAutoConfiguration.kt:CryptoAutoConfiguration",
+      "type": "documents",
+      "weight": 0.5
+    },
+    {
+      "source": "file:frisboo-crypto/src/main/resources/META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports",
+      "target": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/autoconfigure/CryptoAutoConfiguration.kt:CryptoAutoConfiguration",
+      "type": "deploys",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-crypto/src/main/resources/META-INF/spring-configuration-metadata.json",
+      "target": "class:frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/autoconfigure/CryptoProperties.kt:CryptoProperties",
+      "type": "defines_schema",
+      "weight": 0.8
+    }
+  ]
+}

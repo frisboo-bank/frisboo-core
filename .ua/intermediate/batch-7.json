@@ -1,0 +1,1343 @@
+{
+  "nodes": [
+    {
+      "id": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/adapters/noop/ObservabilityAuditNoOpAdapter.kt",
+      "type": "file",
+      "name": "ObservabilityAuditNoOpAdapter.kt",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/adapters/noop/ObservabilityAuditNoOpAdapter.kt",
+      "summary": "No-op audit adapter that discards all audit entries.",
+      "tags": ["observability", "audit", "adapter", "noop"]
+    },
+    {
+      "id": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/adapters/otel/ObservabilityAuditOtelAdapter.kt",
+      "type": "file",
+      "name": "ObservabilityAuditOtelAdapter.kt",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/adapters/otel/ObservabilityAuditOtelAdapter.kt",
+      "summary": "OTEL audit adapter that emits audit records as OpenTelemetry spans.",
+      "tags": ["observability", "audit", "adapter", "otel"]
+    },
+    {
+      "id": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/adapters/otel/ObservabilityAuditOutcomeMapper.kt",
+      "type": "file",
+      "name": "ObservabilityAuditOutcomeMapper.kt",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/adapters/otel/ObservabilityAuditOutcomeMapper.kt",
+      "summary": "Extension function mapping audit outcomes to OTEL span statuses.",
+      "tags": ["observability", "audit", "otel", "mapper"]
+    },
+    {
+      "id": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/contracts/ObservabilityAudit.kt",
+      "type": "file",
+      "name": "ObservabilityAudit.kt",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/contracts/ObservabilityAudit.kt",
+      "summary": "Fun interface defining the audit recording contract.",
+      "tags": ["observability", "audit", "contract"]
+    },
+    {
+      "id": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/contracts/ObservabilityAuditAdapter.kt",
+      "type": "file",
+      "name": "ObservabilityAuditAdapter.kt",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/contracts/ObservabilityAuditAdapter.kt",
+      "summary": "Interface for audit adapter implementations.",
+      "tags": ["observability", "audit", "contract", "adapter"]
+    },
+    {
+      "id": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/contracts/ObservabilityAuditBaggageFilter.kt",
+      "type": "file",
+      "name": "ObservabilityAuditBaggageFilter.kt",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/contracts/ObservabilityAuditBaggageFilter.kt",
+      "summary": "Fun interface for filtering audit baggage entries.",
+      "tags": ["observability", "audit", "contract", "filter"]
+    },
+    {
+      "id": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/contracts/ObservabilityAuditShared.kt",
+      "type": "file",
+      "name": "ObservabilityAuditShared.kt",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/contracts/ObservabilityAuditShared.kt",
+      "summary": "Shared interface for audit recording with entry parameter.",
+      "tags": ["observability", "audit", "contract"]
+    },
+    {
+      "id": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditBaggage.kt",
+      "type": "file",
+      "name": "ObservabilityAuditBaggage.kt",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditBaggage.kt",
+      "summary": "Inline value class wrapping audit baggage as an immutable string map.",
+      "tags": ["observability", "audit", "model", "valueobject"]
+    },
+    {
+      "id": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditEntry.kt",
+      "type": "file",
+      "name": "ObservabilityAuditEntry.kt",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditEntry.kt",
+      "summary": "Data classes for audit entry properties and the audit entry itself.",
+      "tags": ["observability", "audit", "model"]
+    },
+    {
+      "id": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditOutcome.kt",
+      "type": "file",
+      "name": "ObservabilityAuditOutcome.kt",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditOutcome.kt",
+      "summary": "Enum of possible audit outcomes: DENIED, FAILURE, SUCCESS, TIMEOUT.",
+      "tags": ["observability", "audit", "model", "enum"]
+    },
+    {
+      "id": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditProperties.kt",
+      "type": "file",
+      "name": "ObservabilityAuditProperties.kt",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditProperties.kt",
+      "summary": "Configuration properties for audit backend type selection.",
+      "tags": ["observability", "audit", "config", "model"]
+    },
+    {
+      "id": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditType.kt",
+      "type": "file",
+      "name": "ObservabilityAuditType.kt",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditType.kt",
+      "summary": "Enum of audit backend types: KAFKA, NOOP, OTEL.",
+      "tags": ["observability", "audit", "model", "enum"]
+    },
+    {
+      "id": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/ObservabilityAuditImpl.kt",
+      "type": "file",
+      "name": "ObservabilityAuditImpl.kt",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/ObservabilityAuditImpl.kt",
+      "summary": "Default audit implementation that filters baggage and delegates recording.",
+      "tags": ["observability", "audit", "impl"]
+    },
+    {
+      "id": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityAutoConfiguration.kt",
+      "type": "file",
+      "name": "ObservabilityAutoConfiguration.kt",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityAutoConfiguration.kt",
+      "summary": "Spring auto-configuration that wires audit, metrics, and tracer beans conditionally.",
+      "tags": ["observability", "autoconfigure", "config"]
+    },
+    {
+      "id": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityProperties.kt",
+      "type": "file",
+      "name": "ObservabilityProperties.kt",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityProperties.kt",
+      "summary": "Top-level configuration properties for the observability module.",
+      "tags": ["observability", "autoconfigure", "config"]
+    },
+    {
+      "id": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/adapters/noop/ObservabilityMetricsNoOpAdapter.kt",
+      "type": "file",
+      "name": "ObservabilityMetricsNoOpAdapter.kt",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/adapters/noop/ObservabilityMetricsNoOpAdapter.kt",
+      "summary": "No-op metrics adapter that discards counter, gauge, and duration records.",
+      "tags": ["observability", "metrics", "adapter", "noop"]
+    },
+    {
+      "id": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/adapters/otel/ObservabilityMetricsOtelAdapter.kt",
+      "type": "file",
+      "name": "ObservabilityMetricsOtelAdapter.kt",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/adapters/otel/ObservabilityMetricsOtelAdapter.kt",
+      "summary": "OTEL metrics adapter that delegates to Micrometer MeterRegistry.",
+      "tags": ["observability", "metrics", "adapter", "otel"]
+    },
+    {
+      "id": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/contracts/ObservabilityMetrics.kt",
+      "type": "file",
+      "name": "ObservabilityMetrics.kt",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/contracts/ObservabilityMetrics.kt",
+      "summary": "Interface defining the metrics recording contract.",
+      "tags": ["observability", "metrics", "contract"]
+    },
+    {
+      "id": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/contracts/ObservabilityMetricsAdapter.kt",
+      "type": "file",
+      "name": "ObservabilityMetricsAdapter.kt",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/contracts/ObservabilityMetricsAdapter.kt",
+      "summary": "Interface for metrics adapter implementations.",
+      "tags": ["observability", "metrics", "contract", "adapter"]
+    },
+    {
+      "id": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/contracts/ObservabilityMetricsShared.kt",
+      "type": "file",
+      "name": "ObservabilityMetricsShared.kt",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/contracts/ObservabilityMetricsShared.kt",
+      "summary": "Shared interface for counter, gauge, and duration recording.",
+      "tags": ["observability", "metrics", "contract"]
+    },
+    {
+      "id": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/models/ObservabilityMetricsProperties.kt",
+      "type": "file",
+      "name": "ObservabilityMetricsProperties.kt",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/models/ObservabilityMetricsProperties.kt",
+      "summary": "Configuration properties for metrics backend type selection.",
+      "tags": ["observability", "metrics", "config", "model"]
+    },
+    {
+      "id": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/models/ObservabilityMetricsType.kt",
+      "type": "file",
+      "name": "ObservabilityMetricsType.kt",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/models/ObservabilityMetricsType.kt",
+      "summary": "Enum of metrics backend types: NOOP, OTEL.",
+      "tags": ["observability", "metrics", "model", "enum"]
+    },
+    {
+      "id": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/ObservabilityMetricsImpl.kt",
+      "type": "file",
+      "name": "ObservabilityMetricsImpl.kt",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/ObservabilityMetricsImpl.kt",
+      "summary": "Default metrics implementation that delegates to an adapter.",
+      "tags": ["observability", "metrics", "impl"]
+    },
+    {
+      "id": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/otel/contracts/OtelSpan.kt",
+      "type": "file",
+      "name": "OtelSpan.kt",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/otel/contracts/OtelSpan.kt",
+      "summary": "Interface for OTEL span operations: setAttribute, recordException, recordError, setStatus.",
+      "tags": ["observability", "otel", "contract"]
+    },
+    {
+      "id": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/otel/contracts/OtelSpanEmitter.kt",
+      "type": "file",
+      "name": "OtelSpanEmitter.kt",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/otel/contracts/OtelSpanEmitter.kt",
+      "summary": "Interface for emitting OTEL spans with attributes and a block.",
+      "tags": ["observability", "otel", "contract"]
+    },
+    {
+      "id": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/adapters/noop/ObservabilityAuditNoOpAdapter.kt:ObservabilityAuditNoOpAdapter",
+      "type": "class",
+      "name": "ObservabilityAuditNoOpAdapter",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/adapters/noop/ObservabilityAuditNoOpAdapter.kt",
+      "summary": "No-op audit adapter implementing ObservabilityAuditAdapter with empty record method.",
+      "tags": ["observability", "audit", "adapter", "noop"]
+    },
+    {
+      "id": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/adapters/otel/ObservabilityAuditOtelAdapter.kt:ObservabilityAuditOtelAdapter",
+      "type": "class",
+      "name": "ObservabilityAuditOtelAdapter",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/adapters/otel/ObservabilityAuditOtelAdapter.kt",
+      "summary": "OTEL audit adapter that emits audit entries as OpenTelemetry spans with attributes.",
+      "tags": ["observability", "audit", "adapter", "otel"]
+    },
+    {
+      "id": "function:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/adapters/otel/ObservabilityAuditOtelAdapter.kt:record",
+      "type": "function",
+      "name": "record",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/adapters/otel/ObservabilityAuditOtelAdapter.kt",
+      "summary": "Records an audit entry by emitting an OTEL span with entry attributes and baggage.",
+      "tags": ["observability", "audit", "otel"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/adapters/otel/ObservabilityAuditOutcomeMapper.kt:toOtelSpanStatus",
+      "type": "function",
+      "name": "toOtelSpanStatus",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/adapters/otel/ObservabilityAuditOutcomeMapper.kt",
+      "summary": "Extension function mapping audit outcomes to OTEL span statuses (SUCCESS/DENIED->OK, FAILURE/TIMEOUT->ERROR).",
+      "tags": ["observability", "audit", "otel", "mapper"]
+    },
+    {
+      "id": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/contracts/ObservabilityAudit.kt:ObservabilityAudit",
+      "type": "class",
+      "name": "ObservabilityAudit",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/contracts/ObservabilityAudit.kt",
+      "summary": "Fun interface for recording audit entries, extending ObservabilityAuditShared.",
+      "tags": ["observability", "audit", "contract"]
+    },
+    {
+      "id": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/contracts/ObservabilityAuditAdapter.kt:ObservabilityAuditAdapter",
+      "type": "class",
+      "name": "ObservabilityAuditAdapter",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/contracts/ObservabilityAuditAdapter.kt",
+      "summary": "Interface for audit adapter implementations, extending ObservabilityAuditShared.",
+      "tags": ["observability", "audit", "contract", "adapter"]
+    },
+    {
+      "id": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/contracts/ObservabilityAuditBaggageFilter.kt:ObservabilityAuditBaggageFilter",
+      "type": "class",
+      "name": "ObservabilityAuditBaggageFilter",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/contracts/ObservabilityAuditBaggageFilter.kt",
+      "summary": "Fun interface for filtering audit baggage before recording.",
+      "tags": ["observability", "audit", "contract", "filter"]
+    },
+    {
+      "id": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/contracts/ObservabilityAuditShared.kt:ObservabilityAuditShared",
+      "type": "class",
+      "name": "ObservabilityAuditShared",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/contracts/ObservabilityAuditShared.kt",
+      "summary": "Shared interface defining the record method for audit entries.",
+      "tags": ["observability", "audit", "contract"]
+    },
+    {
+      "id": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditBaggage.kt:ObservabilityAuditBaggage",
+      "type": "class",
+      "name": "ObservabilityAuditBaggage",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditBaggage.kt",
+      "summary": "Inline value class wrapping an immutable string-to-string baggage map.",
+      "tags": ["observability", "audit", "model", "valueobject"]
+    },
+    {
+      "id": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditEntry.kt:ObservabilityAuditEntryProps",
+      "type": "class",
+      "name": "ObservabilityAuditEntryProps",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditEntry.kt",
+      "summary": "Data class holding optional properties for creating an audit entry.",
+      "tags": ["observability", "audit", "model"]
+    },
+    {
+      "id": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditEntry.kt:ObservabilityAuditEntry",
+      "type": "class",
+      "name": "ObservabilityAuditEntry",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditEntry.kt",
+      "summary": "Data class representing a single audit entry with all metadata fields.",
+      "tags": ["observability", "audit", "model"]
+    },
+    {
+      "id": "function:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditEntry.kt:create",
+      "type": "function",
+      "name": "create",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditEntry.kt",
+      "summary": "Companion factory that creates an audit entry from props with a random UUID.",
+      "tags": ["observability", "audit", "model", "factory"]
+    },
+    {
+      "id": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditOutcome.kt:ObservabilityAuditOutcome",
+      "type": "class",
+      "name": "ObservabilityAuditOutcome",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditOutcome.kt",
+      "summary": "Enum of audit outcomes: DENIED, FAILURE, SUCCESS, TIMEOUT.",
+      "tags": ["observability", "audit", "model", "enum"]
+    },
+    {
+      "id": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditProperties.kt:ObservabilityAuditProperties",
+      "type": "class",
+      "name": "ObservabilityAuditProperties",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditProperties.kt",
+      "summary": "Data class holding audit backend type configuration.",
+      "tags": ["observability", "audit", "config", "model"]
+    },
+    {
+      "id": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditType.kt:ObservabilityAuditType",
+      "type": "class",
+      "name": "ObservabilityAuditType",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditType.kt",
+      "summary": "Enum of audit backend types: KAFKA, NOOP, OTEL.",
+      "tags": ["observability", "audit", "model", "enum"]
+    },
+    {
+      "id": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/ObservabilityAuditImpl.kt:ObservabilityAuditImpl",
+      "type": "class",
+      "name": "ObservabilityAuditImpl",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/ObservabilityAuditImpl.kt",
+      "summary": "Default audit implementation that filters baggage then delegates to the adapter.",
+      "tags": ["observability", "audit", "impl"]
+    },
+    {
+      "id": "function:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/ObservabilityAuditImpl.kt:record",
+      "type": "function",
+      "name": "record",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/ObservabilityAuditImpl.kt",
+      "summary": "Filters baggage and delegates the entry to the underlying adapter.",
+      "tags": ["observability", "audit", "impl"]
+    },
+    {
+      "id": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityAutoConfiguration.kt:ObservabilityAutoConfiguration",
+      "type": "class",
+      "name": "ObservabilityAutoConfiguration",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityAutoConfiguration.kt",
+      "summary": "Spring auto-configuration class that conditionally wires audit, metrics, and tracer beans.",
+      "tags": ["observability", "autoconfigure", "config"]
+    },
+    {
+      "id": "function:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityAutoConfiguration.kt:otelSpanEmitter",
+      "type": "function",
+      "name": "otelSpanEmitter",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityAutoConfiguration.kt",
+      "summary": "Bean factory creating an OtelSpanEmitter from an OpenTelemetry instance.",
+      "tags": ["observability", "autoconfigure", "otel"]
+    },
+    {
+      "id": "function:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityAutoConfiguration.kt:tracer",
+      "type": "function",
+      "name": "tracer",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityAutoConfiguration.kt",
+      "summary": "Bean factory creating a tracer based on configuration type (NOOP or OTEL).",
+      "tags": ["observability", "autoconfigure", "tracer"]
+    },
+    {
+      "id": "function:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityAutoConfiguration.kt:auditBaggageFilter",
+      "type": "function",
+      "name": "auditBaggageFilter",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityAutoConfiguration.kt",
+      "summary": "Bean factory creating a no-op baggage filter that passes entries through unchanged.",
+      "tags": ["observability", "autoconfigure", "audit"]
+    },
+    {
+      "id": "function:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityAutoConfiguration.kt:audit",
+      "type": "function",
+      "name": "audit",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityAutoConfiguration.kt",
+      "summary": "Bean factory creating an audit implementation based on configuration type (KAFKA, NOOP, OTEL).",
+      "tags": ["observability", "autoconfigure", "audit"]
+    },
+    {
+      "id": "function:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityAutoConfiguration.kt:metrics",
+      "type": "function",
+      "name": "metrics",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityAutoConfiguration.kt",
+      "summary": "Bean factory creating a metrics implementation based on configuration type (NOOP or OTEL).",
+      "tags": ["observability", "autoconfigure", "metrics"]
+    },
+    {
+      "id": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityProperties.kt:ObservabilityProperties",
+      "type": "class",
+      "name": "ObservabilityProperties",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityProperties.kt",
+      "summary": "Data class holding top-level observability configuration (enabled, audit, tracer, metrics).",
+      "tags": ["observability", "autoconfigure", "config"]
+    },
+    {
+      "id": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/adapters/noop/ObservabilityMetricsNoOpAdapter.kt:ObservabilityMetricsNoOpAdapter",
+      "type": "class",
+      "name": "ObservabilityMetricsNoOpAdapter",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/adapters/noop/ObservabilityMetricsNoOpAdapter.kt",
+      "summary": "No-op metrics adapter implementing all metrics operations as empty methods.",
+      "tags": ["observability", "metrics", "adapter", "noop"]
+    },
+    {
+      "id": "function:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/adapters/noop/ObservabilityMetricsNoOpAdapter.kt:incrementCounter",
+      "type": "function",
+      "name": "incrementCounter",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/adapters/noop/ObservabilityMetricsNoOpAdapter.kt",
+      "summary": "No-op counter increment that does nothing.",
+      "tags": ["observability", "metrics", "noop"]
+    },
+    {
+      "id": "function:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/adapters/noop/ObservabilityMetricsNoOpAdapter.kt:recordGauge",
+      "type": "function",
+      "name": "recordGauge",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/adapters/noop/ObservabilityMetricsNoOpAdapter.kt",
+      "summary": "No-op gauge recording that does nothing.",
+      "tags": ["observability", "metrics", "noop"]
+    },
+    {
+      "id": "function:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/adapters/noop/ObservabilityMetricsNoOpAdapter.kt:recordDuration",
+      "type": "function",
+      "name": "recordDuration",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/adapters/noop/ObservabilityMetricsNoOpAdapter.kt",
+      "summary": "No-op duration recording that does nothing.",
+      "tags": ["observability", "metrics", "noop"]
+    },
+    {
+      "id": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/adapters/otel/ObservabilityMetricsOtelAdapter.kt:ObservabilityMetricsOtelAdapter",
+      "type": "class",
+      "name": "ObservabilityMetricsOtelAdapter",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/adapters/otel/ObservabilityMetricsOtelAdapter.kt",
+      "summary": "OTEL metrics adapter that delegates counter, gauge, and duration to Micrometer MeterRegistry.",
+      "tags": ["observability", "metrics", "adapter", "otel"]
+    },
+    {
+      "id": "function:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/adapters/otel/ObservabilityMetricsOtelAdapter.kt:incrementCounter",
+      "type": "function",
+      "name": "incrementCounter",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/adapters/otel/ObservabilityMetricsOtelAdapter.kt",
+      "summary": "Increments a Micrometer counter with the given name and tags.",
+      "tags": ["observability", "metrics", "otel"]
+    },
+    {
+      "id": "function:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/adapters/otel/ObservabilityMetricsOtelAdapter.kt:recordGauge",
+      "type": "function",
+      "name": "recordGauge",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/adapters/otel/ObservabilityMetricsOtelAdapter.kt",
+      "summary": "Records a Micrometer gauge with the given name, value, and tags.",
+      "tags": ["observability", "metrics", "otel"]
+    },
+    {
+      "id": "function:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/adapters/otel/ObservabilityMetricsOtelAdapter.kt:recordDuration",
+      "type": "function",
+      "name": "recordDuration",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/adapters/otel/ObservabilityMetricsOtelAdapter.kt",
+      "summary": "Records a duration against a Micrometer timer with the given name and tags.",
+      "tags": ["observability", "metrics", "otel"]
+    },
+    {
+      "id": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/contracts/ObservabilityMetrics.kt:ObservabilityMetrics",
+      "type": "class",
+      "name": "ObservabilityMetrics",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/contracts/ObservabilityMetrics.kt",
+      "summary": "Interface for metrics recording, extending ObservabilityMetricsShared.",
+      "tags": ["observability", "metrics", "contract"]
+    },
+    {
+      "id": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/contracts/ObservabilityMetricsAdapter.kt:ObservabilityMetricsAdapter",
+      "type": "class",
+      "name": "ObservabilityMetricsAdapter",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/contracts/ObservabilityMetricsAdapter.kt",
+      "summary": "Interface for metrics adapter implementations, extending ObservabilityMetricsShared.",
+      "tags": ["observability", "metrics", "contract", "adapter"]
+    },
+    {
+      "id": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/contracts/ObservabilityMetricsShared.kt:ObservabilityMetricsShared",
+      "type": "class",
+      "name": "ObservabilityMetricsShared",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/contracts/ObservabilityMetricsShared.kt",
+      "summary": "Shared interface defining incrementCounter, recordGauge, and recordDuration methods.",
+      "tags": ["observability", "metrics", "contract"]
+    },
+    {
+      "id": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/models/ObservabilityMetricsProperties.kt:ObservabilityMetricsProperties",
+      "type": "class",
+      "name": "ObservabilityMetricsProperties",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/models/ObservabilityMetricsProperties.kt",
+      "summary": "Data class holding metrics backend type configuration.",
+      "tags": ["observability", "metrics", "config", "model"]
+    },
+    {
+      "id": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/models/ObservabilityMetricsType.kt:ObservabilityMetricsType",
+      "type": "class",
+      "name": "ObservabilityMetricsType",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/models/ObservabilityMetricsType.kt",
+      "summary": "Enum of metrics backend types: NOOP, OTEL.",
+      "tags": ["observability", "metrics", "model", "enum"]
+    },
+    {
+      "id": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/ObservabilityMetricsImpl.kt:ObservabilityMetricsImpl",
+      "type": "class",
+      "name": "ObservabilityMetricsImpl",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/ObservabilityMetricsImpl.kt",
+      "summary": "Default metrics implementation that delegates all operations to an adapter.",
+      "tags": ["observability", "metrics", "impl"]
+    },
+    {
+      "id": "function:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/ObservabilityMetricsImpl.kt:incrementCounter",
+      "type": "function",
+      "name": "incrementCounter",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/ObservabilityMetricsImpl.kt",
+      "summary": "Delegates counter increment to the underlying adapter.",
+      "tags": ["observability", "metrics", "impl"]
+    },
+    {
+      "id": "function:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/ObservabilityMetricsImpl.kt:recordGauge",
+      "type": "function",
+      "name": "recordGauge",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/ObservabilityMetricsImpl.kt",
+      "summary": "Delegates gauge recording to the underlying adapter.",
+      "tags": ["observability", "metrics", "impl"]
+    },
+    {
+      "id": "function:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/ObservabilityMetricsImpl.kt:recordDuration",
+      "type": "function",
+      "name": "recordDuration",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/ObservabilityMetricsImpl.kt",
+      "summary": "Delegates duration recording to the underlying adapter.",
+      "tags": ["observability", "metrics", "impl"]
+    },
+    {
+      "id": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/otel/contracts/OtelSpan.kt:OtelSpan",
+      "type": "class",
+      "name": "OtelSpan",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/otel/contracts/OtelSpan.kt",
+      "summary": "Interface for OTEL span operations: setAttribute, recordException, recordError, setStatus.",
+      "tags": ["observability", "otel", "contract"]
+    },
+    {
+      "id": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/otel/contracts/OtelSpanEmitter.kt:OtelSpanEmitter",
+      "type": "class",
+      "name": "OtelSpanEmitter",
+      "filePath": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/otel/contracts/OtelSpanEmitter.kt",
+      "summary": "Interface for emitting OTEL spans with attributes and a receiver block.",
+      "tags": ["observability", "otel", "contract"]
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/adapters/noop/ObservabilityAuditNoOpAdapter.kt",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/adapters/noop/ObservabilityAuditNoOpAdapter.kt:ObservabilityAuditNoOpAdapter",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/adapters/noop/ObservabilityAuditNoOpAdapter.kt",
+      "target": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/contracts/ObservabilityAuditAdapter.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/adapters/noop/ObservabilityAuditNoOpAdapter.kt",
+      "target": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditEntry.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/adapters/noop/ObservabilityAuditNoOpAdapter.kt:ObservabilityAuditNoOpAdapter",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/contracts/ObservabilityAuditAdapter.kt:ObservabilityAuditAdapter",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/adapters/otel/ObservabilityAuditOtelAdapter.kt",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/adapters/otel/ObservabilityAuditOtelAdapter.kt:ObservabilityAuditOtelAdapter",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/adapters/otel/ObservabilityAuditOtelAdapter.kt",
+      "target": "function:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/adapters/otel/ObservabilityAuditOtelAdapter.kt:record",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/adapters/otel/ObservabilityAuditOtelAdapter.kt",
+      "target": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/contracts/ObservabilityAuditAdapter.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/adapters/otel/ObservabilityAuditOtelAdapter.kt",
+      "target": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditEntry.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/adapters/otel/ObservabilityAuditOtelAdapter.kt",
+      "target": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/otel/contracts/OtelSpanEmitter.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/adapters/otel/ObservabilityAuditOtelAdapter.kt:ObservabilityAuditOtelAdapter",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/contracts/ObservabilityAuditAdapter.kt:ObservabilityAuditAdapter",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "function:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/adapters/otel/ObservabilityAuditOtelAdapter.kt:record",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/otel/contracts/OtelSpanEmitter.kt:OtelSpanEmitter",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/adapters/otel/ObservabilityAuditOtelAdapter.kt:record",
+      "target": "function:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/adapters/otel/ObservabilityAuditOutcomeMapper.kt:toOtelSpanStatus",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/adapters/otel/ObservabilityAuditOtelAdapter.kt:record",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/otel/contracts/OtelSpan.kt:OtelSpan",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/adapters/otel/ObservabilityAuditOutcomeMapper.kt",
+      "target": "function:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/adapters/otel/ObservabilityAuditOutcomeMapper.kt:toOtelSpanStatus",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/adapters/otel/ObservabilityAuditOutcomeMapper.kt",
+      "target": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditOutcome.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/contracts/ObservabilityAudit.kt",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/contracts/ObservabilityAudit.kt:ObservabilityAudit",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/contracts/ObservabilityAudit.kt:ObservabilityAudit",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/contracts/ObservabilityAuditShared.kt:ObservabilityAuditShared",
+      "type": "inherits",
+      "weight": 0.9
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/contracts/ObservabilityAuditAdapter.kt",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/contracts/ObservabilityAuditAdapter.kt:ObservabilityAuditAdapter",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/contracts/ObservabilityAuditAdapter.kt:ObservabilityAuditAdapter",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/contracts/ObservabilityAuditShared.kt:ObservabilityAuditShared",
+      "type": "inherits",
+      "weight": 0.9
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/contracts/ObservabilityAuditBaggageFilter.kt",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/contracts/ObservabilityAuditBaggageFilter.kt:ObservabilityAuditBaggageFilter",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/contracts/ObservabilityAuditBaggageFilter.kt",
+      "target": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditBaggage.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/contracts/ObservabilityAuditShared.kt",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/contracts/ObservabilityAuditShared.kt:ObservabilityAuditShared",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/contracts/ObservabilityAuditShared.kt",
+      "target": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditEntry.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditBaggage.kt",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditBaggage.kt:ObservabilityAuditBaggage",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditEntry.kt",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditEntry.kt:ObservabilityAuditEntryProps",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditEntry.kt",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditEntry.kt:ObservabilityAuditEntry",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditEntry.kt",
+      "target": "function:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditEntry.kt:create",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditEntry.kt:ObservabilityAuditEntry",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditEntry.kt:ObservabilityAuditEntryProps",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditOutcome.kt",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditOutcome.kt:ObservabilityAuditOutcome",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditProperties.kt",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditProperties.kt:ObservabilityAuditProperties",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditProperties.kt:ObservabilityAuditProperties",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditType.kt:ObservabilityAuditType",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditType.kt",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditType.kt:ObservabilityAuditType",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/ObservabilityAuditImpl.kt",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/ObservabilityAuditImpl.kt:ObservabilityAuditImpl",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/ObservabilityAuditImpl.kt",
+      "target": "function:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/ObservabilityAuditImpl.kt:record",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/ObservabilityAuditImpl.kt",
+      "target": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/contracts/ObservabilityAudit.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/ObservabilityAuditImpl.kt",
+      "target": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/contracts/ObservabilityAuditAdapter.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/ObservabilityAuditImpl.kt",
+      "target": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/contracts/ObservabilityAuditBaggageFilter.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/ObservabilityAuditImpl.kt",
+      "target": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditEntry.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/ObservabilityAuditImpl.kt:ObservabilityAuditImpl",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/contracts/ObservabilityAudit.kt:ObservabilityAudit",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "function:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/ObservabilityAuditImpl.kt:record",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/contracts/ObservabilityAuditBaggageFilter.kt:ObservabilityAuditBaggageFilter",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/ObservabilityAuditImpl.kt:record",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/contracts/ObservabilityAuditAdapter.kt:ObservabilityAuditAdapter",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityAutoConfiguration.kt",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityAutoConfiguration.kt:ObservabilityAutoConfiguration",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityAutoConfiguration.kt",
+      "target": "function:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityAutoConfiguration.kt:otelSpanEmitter",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityAutoConfiguration.kt",
+      "target": "function:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityAutoConfiguration.kt:tracer",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityAutoConfiguration.kt",
+      "target": "function:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityAutoConfiguration.kt:auditBaggageFilter",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityAutoConfiguration.kt",
+      "target": "function:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityAutoConfiguration.kt:audit",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityAutoConfiguration.kt",
+      "target": "function:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityAutoConfiguration.kt:metrics",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityAutoConfiguration.kt",
+      "target": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/ObservabilityAuditImpl.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityAutoConfiguration.kt",
+      "target": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/adapters/noop/ObservabilityAuditNoOpAdapter.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityAutoConfiguration.kt",
+      "target": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/adapters/otel/ObservabilityAuditOtelAdapter.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityAutoConfiguration.kt",
+      "target": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/contracts/ObservabilityAudit.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityAutoConfiguration.kt",
+      "target": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/contracts/ObservabilityAuditBaggageFilter.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityAutoConfiguration.kt",
+      "target": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditType.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityAutoConfiguration.kt",
+      "target": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/ObservabilityMetricsImpl.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityAutoConfiguration.kt",
+      "target": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/adapters/noop/ObservabilityMetricsNoOpAdapter.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityAutoConfiguration.kt",
+      "target": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/adapters/otel/ObservabilityMetricsOtelAdapter.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityAutoConfiguration.kt",
+      "target": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/contracts/ObservabilityMetrics.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityAutoConfiguration.kt",
+      "target": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/models/ObservabilityMetricsType.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityAutoConfiguration.kt",
+      "target": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/otel/contracts/OtelSpanEmitter.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "function:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityAutoConfiguration.kt:otelSpanEmitter",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/otel/contracts/OtelSpanEmitter.kt:OtelSpanEmitter",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "function:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityAutoConfiguration.kt:audit",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/adapters/noop/ObservabilityAuditNoOpAdapter.kt:ObservabilityAuditNoOpAdapter",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "function:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityAutoConfiguration.kt:audit",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/adapters/otel/ObservabilityAuditOtelAdapter.kt:ObservabilityAuditOtelAdapter",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "function:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityAutoConfiguration.kt:audit",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/ObservabilityAuditImpl.kt:ObservabilityAuditImpl",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "function:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityAutoConfiguration.kt:metrics",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/adapters/noop/ObservabilityMetricsNoOpAdapter.kt:ObservabilityMetricsNoOpAdapter",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "function:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityAutoConfiguration.kt:metrics",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/adapters/otel/ObservabilityMetricsOtelAdapter.kt:ObservabilityMetricsOtelAdapter",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "function:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityAutoConfiguration.kt:metrics",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/ObservabilityMetricsImpl.kt:ObservabilityMetricsImpl",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityProperties.kt",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityProperties.kt:ObservabilityProperties",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityProperties.kt",
+      "target": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditProperties.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityProperties.kt",
+      "target": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/models/ObservabilityMetricsProperties.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityProperties.kt:ObservabilityProperties",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditProperties.kt:ObservabilityAuditProperties",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityProperties.kt:ObservabilityProperties",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/models/ObservabilityMetricsProperties.kt:ObservabilityMetricsProperties",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/adapters/noop/ObservabilityMetricsNoOpAdapter.kt",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/adapters/noop/ObservabilityMetricsNoOpAdapter.kt:ObservabilityMetricsNoOpAdapter",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/adapters/noop/ObservabilityMetricsNoOpAdapter.kt",
+      "target": "function:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/adapters/noop/ObservabilityMetricsNoOpAdapter.kt:incrementCounter",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/adapters/noop/ObservabilityMetricsNoOpAdapter.kt",
+      "target": "function:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/adapters/noop/ObservabilityMetricsNoOpAdapter.kt:recordGauge",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/adapters/noop/ObservabilityMetricsNoOpAdapter.kt",
+      "target": "function:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/adapters/noop/ObservabilityMetricsNoOpAdapter.kt:recordDuration",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/adapters/noop/ObservabilityMetricsNoOpAdapter.kt",
+      "target": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/contracts/ObservabilityMetrics.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/adapters/noop/ObservabilityMetricsNoOpAdapter.kt",
+      "target": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/contracts/ObservabilityMetricsAdapter.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/adapters/noop/ObservabilityMetricsNoOpAdapter.kt:ObservabilityMetricsNoOpAdapter",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/contracts/ObservabilityMetricsAdapter.kt:ObservabilityMetricsAdapter",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/adapters/otel/ObservabilityMetricsOtelAdapter.kt",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/adapters/otel/ObservabilityMetricsOtelAdapter.kt:ObservabilityMetricsOtelAdapter",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/adapters/otel/ObservabilityMetricsOtelAdapter.kt",
+      "target": "function:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/adapters/otel/ObservabilityMetricsOtelAdapter.kt:incrementCounter",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/adapters/otel/ObservabilityMetricsOtelAdapter.kt",
+      "target": "function:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/adapters/otel/ObservabilityMetricsOtelAdapter.kt:recordGauge",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/adapters/otel/ObservabilityMetricsOtelAdapter.kt",
+      "target": "function:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/adapters/otel/ObservabilityMetricsOtelAdapter.kt:recordDuration",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/adapters/otel/ObservabilityMetricsOtelAdapter.kt",
+      "target": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/contracts/ObservabilityMetricsAdapter.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/adapters/otel/ObservabilityMetricsOtelAdapter.kt:ObservabilityMetricsOtelAdapter",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/contracts/ObservabilityMetricsAdapter.kt:ObservabilityMetricsAdapter",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "function:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/adapters/otel/ObservabilityMetricsOtelAdapter.kt:incrementCounter",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/adapters/otel/ObservabilityMetricsOtelAdapter.kt:ObservabilityMetricsOtelAdapter",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "function:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/adapters/otel/ObservabilityMetricsOtelAdapter.kt:recordGauge",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/adapters/otel/ObservabilityMetricsOtelAdapter.kt:ObservabilityMetricsOtelAdapter",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "function:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/adapters/otel/ObservabilityMetricsOtelAdapter.kt:recordDuration",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/adapters/otel/ObservabilityMetricsOtelAdapter.kt:ObservabilityMetricsOtelAdapter",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/contracts/ObservabilityMetrics.kt",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/contracts/ObservabilityMetrics.kt:ObservabilityMetrics",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/contracts/ObservabilityMetrics.kt:ObservabilityMetrics",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/contracts/ObservabilityMetricsShared.kt:ObservabilityMetricsShared",
+      "type": "inherits",
+      "weight": 0.9
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/contracts/ObservabilityMetricsAdapter.kt",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/contracts/ObservabilityMetricsAdapter.kt:ObservabilityMetricsAdapter",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/contracts/ObservabilityMetricsAdapter.kt:ObservabilityMetricsAdapter",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/contracts/ObservabilityMetricsShared.kt:ObservabilityMetricsShared",
+      "type": "inherits",
+      "weight": 0.9
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/contracts/ObservabilityMetricsShared.kt",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/contracts/ObservabilityMetricsShared.kt:ObservabilityMetricsShared",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/models/ObservabilityMetricsProperties.kt",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/models/ObservabilityMetricsProperties.kt:ObservabilityMetricsProperties",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/models/ObservabilityMetricsProperties.kt:ObservabilityMetricsProperties",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/models/ObservabilityMetricsType.kt:ObservabilityMetricsType",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/models/ObservabilityMetricsType.kt",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/models/ObservabilityMetricsType.kt:ObservabilityMetricsType",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/ObservabilityMetricsImpl.kt",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/ObservabilityMetricsImpl.kt:ObservabilityMetricsImpl",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/ObservabilityMetricsImpl.kt",
+      "target": "function:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/ObservabilityMetricsImpl.kt:incrementCounter",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/ObservabilityMetricsImpl.kt",
+      "target": "function:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/ObservabilityMetricsImpl.kt:recordGauge",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/ObservabilityMetricsImpl.kt",
+      "target": "function:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/ObservabilityMetricsImpl.kt:recordDuration",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/ObservabilityMetricsImpl.kt",
+      "target": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/contracts/ObservabilityMetrics.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/ObservabilityMetricsImpl.kt",
+      "target": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/contracts/ObservabilityMetricsAdapter.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/ObservabilityMetricsImpl.kt:ObservabilityMetricsImpl",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/contracts/ObservabilityMetrics.kt:ObservabilityMetrics",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "function:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/ObservabilityMetricsImpl.kt:incrementCounter",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/contracts/ObservabilityMetricsAdapter.kt:ObservabilityMetricsAdapter",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/ObservabilityMetricsImpl.kt:recordGauge",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/contracts/ObservabilityMetricsAdapter.kt:ObservabilityMetricsAdapter",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/ObservabilityMetricsImpl.kt:recordDuration",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/contracts/ObservabilityMetricsAdapter.kt:ObservabilityMetricsAdapter",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/otel/contracts/OtelSpan.kt",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/otel/contracts/OtelSpan.kt:OtelSpan",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/otel/contracts/OtelSpanEmitter.kt",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/otel/contracts/OtelSpanEmitter.kt:OtelSpanEmitter",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/adapters/otel/ObservabilityAuditOtelAdapter.kt:ObservabilityAuditOtelAdapter",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/otel/contracts/OtelSpanEmitter.kt:OtelSpanEmitter",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/adapters/otel/ObservabilityAuditOutcomeMapper.kt:toOtelSpanStatus",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditOutcome.kt:ObservabilityAuditOutcome",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditEntry.kt:ObservabilityAuditEntry",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditOutcome.kt:ObservabilityAuditOutcome",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditEntry.kt:ObservabilityAuditEntry",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditBaggage.kt:ObservabilityAuditBaggage",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "function:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/adapters/otel/ObservabilityAuditOtelAdapter.kt:record",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditEntry.kt:ObservabilityAuditEntry",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "function:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/ObservabilityAuditImpl.kt:record",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditEntry.kt:ObservabilityAuditEntry",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/contracts/ObservabilityAuditShared.kt:ObservabilityAuditShared",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditEntry.kt:ObservabilityAuditEntry",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/contracts/ObservabilityAuditBaggageFilter.kt:ObservabilityAuditBaggageFilter",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditBaggage.kt:ObservabilityAuditBaggage",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/adapters/otel/ObservabilityMetricsOtelAdapter.kt:ObservabilityMetricsOtelAdapter",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/adapters/otel/ObservabilityMetricsOtelAdapter.kt:incrementCounter",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/adapters/otel/ObservabilityMetricsOtelAdapter.kt:ObservabilityMetricsOtelAdapter",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/adapters/otel/ObservabilityMetricsOtelAdapter.kt:recordGauge",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/adapters/otel/ObservabilityMetricsOtelAdapter.kt:ObservabilityMetricsOtelAdapter",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/adapters/otel/ObservabilityMetricsOtelAdapter.kt:recordDuration",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/adapters/noop/ObservabilityMetricsNoOpAdapter.kt:ObservabilityMetricsNoOpAdapter",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/adapters/noop/ObservabilityMetricsNoOpAdapter.kt:incrementCounter",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/adapters/noop/ObservabilityMetricsNoOpAdapter.kt:ObservabilityMetricsNoOpAdapter",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/adapters/noop/ObservabilityMetricsNoOpAdapter.kt:recordGauge",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/adapters/noop/ObservabilityMetricsNoOpAdapter.kt:ObservabilityMetricsNoOpAdapter",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/adapters/noop/ObservabilityMetricsNoOpAdapter.kt:recordDuration",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/ObservabilityMetricsImpl.kt:ObservabilityMetricsImpl",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/ObservabilityMetricsImpl.kt:incrementCounter",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/ObservabilityMetricsImpl.kt:ObservabilityMetricsImpl",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/ObservabilityMetricsImpl.kt:recordGauge",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/ObservabilityMetricsImpl.kt:ObservabilityMetricsImpl",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/ObservabilityMetricsImpl.kt:recordDuration",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/ObservabilityAuditImpl.kt:ObservabilityAuditImpl",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/ObservabilityAuditImpl.kt:record",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/adapters/otel/ObservabilityAuditOtelAdapter.kt:ObservabilityAuditOtelAdapter",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/adapters/otel/ObservabilityAuditOtelAdapter.kt:record",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/adapters/noop/ObservabilityAuditNoOpAdapter.kt:ObservabilityAuditNoOpAdapter",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/adapters/noop/ObservabilityAuditNoOpAdapter.kt:record",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityAutoConfiguration.kt:ObservabilityAutoConfiguration",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityAutoConfiguration.kt:otelSpanEmitter",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityAutoConfiguration.kt:ObservabilityAutoConfiguration",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityAutoConfiguration.kt:tracer",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityAutoConfiguration.kt:ObservabilityAutoConfiguration",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityAutoConfiguration.kt:auditBaggageFilter",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityAutoConfiguration.kt:ObservabilityAutoConfiguration",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityAutoConfiguration.kt:audit",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityAutoConfiguration.kt:ObservabilityAutoConfiguration",
+      "target": "class:frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityAutoConfiguration.kt:metrics",
+      "type": "contains",
+      "weight": 1.0
+    }
+  ]
+}

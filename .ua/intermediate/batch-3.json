@@ -1,0 +1,852 @@
+{
+  "nodes": [
+    {
+      "id": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/CustomerGuid.kt",
+      "type": "file",
+      "name": "CustomerGuid.kt",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/CustomerGuid.kt",
+      "summary": "Inline value class wrapping a kotlin.uuid Uuid with generate/of(String)/of(Uuid) factory methods.",
+      "tags": ["valueobject", "domain"]
+    },
+    {
+      "id": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/DeviceFingerprint.kt",
+      "type": "file",
+      "name": "DeviceFingerprint.kt",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/DeviceFingerprint.kt",
+      "summary": "Inline value class wrapping a device fingerprint string with blank and max-512 length validation.",
+      "tags": ["valueobject", "domain"]
+    },
+    {
+      "id": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/IdempotencyKey.kt",
+      "type": "file",
+      "name": "IdempotencyKey.kt",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/IdempotencyKey.kt",
+      "summary": "Inline value class wrapping an idempotency key string with blank and max-128 length validation.",
+      "tags": ["valueobject", "domain", "idempotency"]
+    },
+    {
+      "id": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/PrincipalId.kt",
+      "type": "file",
+      "name": "PrincipalId.kt",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/PrincipalId.kt",
+      "summary": "Inline value class wrapping a principal identifier string with blank and max-128 length validation.",
+      "tags": ["valueobject", "domain"]
+    },
+    {
+      "id": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/PrincipalType.kt",
+      "type": "file",
+      "name": "PrincipalType.kt",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/PrincipalType.kt",
+      "summary": "Enum of principal kinds: USER, SERVICE, SYSTEM, and ANONYMOUS.",
+      "tags": ["valueobject", "domain", "enum"]
+    },
+    {
+      "id": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/RequestId.kt",
+      "type": "file",
+      "name": "RequestId.kt",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/RequestId.kt",
+      "summary": "Inline value class wrapping a kotlin.uuid Uuid with generate/of(String)/of(Uuid) factory methods.",
+      "tags": ["valueobject", "domain"]
+    },
+    {
+      "id": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/SessionId.kt",
+      "type": "file",
+      "name": "SessionId.kt",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/SessionId.kt",
+      "summary": "Inline value class wrapping a kotlin.uuid Uuid with generate/of(String)/of(Uuid) factory methods.",
+      "tags": ["valueobject", "domain"]
+    },
+    {
+      "id": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/TenantId.kt",
+      "type": "file",
+      "name": "TenantId.kt",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/TenantId.kt",
+      "summary": "Inline value class wrapping a tenant identifier string with blank and max-64 length validation.",
+      "tags": ["valueobject", "domain"]
+    },
+    {
+      "id": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/UserAgent.kt",
+      "type": "file",
+      "name": "UserAgent.kt",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/UserAgent.kt",
+      "summary": "Inline value class wrapping a user agent string with blank and max-512 length validation.",
+      "tags": ["valueobject", "domain"]
+    },
+    {
+      "id": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/adapters/AsyncCacheFactory.kt",
+      "type": "file",
+      "name": "AsyncCacheFactory.kt",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/adapters/AsyncCacheFactory.kt",
+      "summary": "Internal factory object creating Caffeine-backed FactoryCache instances.",
+      "tags": ["factory", "cache", "adapter"]
+    },
+    {
+      "id": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/adapters/caffeine/CaffeineFactoryCache.kt",
+      "type": "file",
+      "name": "CaffeineFactoryCache.kt",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/adapters/caffeine/CaffeineFactoryCache.kt",
+      "summary": "Coroutine Caffeine-backed FactoryCache implementation with eviction listener support.",
+      "tags": ["factory", "cache", "caffeine", "adapter"]
+    },
+    {
+      "id": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/adapters/caffeine/CaffeineFactoryCacheStats.kt",
+      "type": "file",
+      "name": "CaffeineFactoryCacheStats.kt",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/adapters/caffeine/CaffeineFactoryCacheStats.kt",
+      "summary": "Top-level extension mapping Caffeine CacheStats into FactoryCacheStats.",
+      "tags": ["factory", "cache", "caffeine"]
+    },
+    {
+      "id": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/adapters/noop/NoOpFactoryCache.kt",
+      "type": "file",
+      "name": "NoOpFactoryCache.kt",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/adapters/noop/NoOpFactoryCache.kt",
+      "summary": "No-op FactoryCache implementation delegating get/put/invalidate to the mapping function.",
+      "tags": ["factory", "cache", "noop", "adapter"]
+    },
+    {
+      "id": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/AsyncFactoryBuilder.kt",
+      "type": "file",
+      "name": "AsyncFactoryBuilder.kt",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/AsyncFactoryBuilder.kt",
+      "summary": "Builder composing caching, logging, and metrics decorators around an AsyncFactory.",
+      "tags": ["factory", "builder"]
+    },
+    {
+      "id": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/contracts/AsyncFactory.kt",
+      "type": "file",
+      "name": "AsyncFactory.kt",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/contracts/AsyncFactory.kt",
+      "summary": "Factory contract for creating and evicting named instances keyed by configuration.",
+      "tags": ["factory", "contract"]
+    },
+    {
+      "id": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/contracts/FactoryCache.kt",
+      "type": "file",
+      "name": "FactoryCache.kt",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/contracts/FactoryCache.kt",
+      "summary": "Generic cache contract with get/getIfPresent/put/invalidate/stats and eviction listener.",
+      "tags": ["factory", "contract", "cache"]
+    },
+    {
+      "id": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/decorators/CachingFactory.kt",
+      "type": "file",
+      "name": "CachingFactory.kt",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/decorators/CachingFactory.kt",
+      "summary": "AsyncFactory decorator adding caching with config-drift detection and per-name mutex locking.",
+      "tags": ["factory", "cache", "decorator", "resilience"]
+    },
+    {
+      "id": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/decorators/LoggingFactory.kt",
+      "type": "file",
+      "name": "LoggingFactory.kt",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/decorators/LoggingFactory.kt",
+      "summary": "AsyncFactory decorator logging getOrCreate, evict, and estimatedSize calls.",
+      "tags": ["factory", "decorator", "observability"]
+    },
+    {
+      "id": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/decorators/MetricsFactory.kt",
+      "type": "file",
+      "name": "MetricsFactory.kt",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/decorators/MetricsFactory.kt",
+      "summary": "AsyncFactory decorator forwarding all operations to a delegate factory.",
+      "tags": ["factory", "decorator", "metrics"]
+    },
+    {
+      "id": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/models/AsyncFactoryCachingConfig.kt",
+      "type": "file",
+      "name": "AsyncFactoryCachingConfig.kt",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/models/AsyncFactoryCachingConfig.kt",
+      "summary": "Config data class for the caching decorator with maxSize, expireAfterAccess, and matchesConfig.",
+      "tags": ["factory", "config"]
+    },
+    {
+      "id": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/models/AsyncFactoryLoggingConfig.kt",
+      "type": "file",
+      "name": "AsyncFactoryLoggingConfig.kt",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/models/AsyncFactoryLoggingConfig.kt",
+      "summary": "Config data class enabling or disabling the logging decorator.",
+      "tags": ["factory", "config"]
+    },
+    {
+      "id": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/models/AsyncFactoryMetricsConfig.kt",
+      "type": "file",
+      "name": "AsyncFactoryMetricsConfig.kt",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/models/AsyncFactoryMetricsConfig.kt",
+      "summary": "Config data class for the metrics decorator with a validated metricPrefix.",
+      "tags": ["factory", "config"]
+    },
+    {
+      "id": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/models/FactoryCacheStats.kt",
+      "type": "file",
+      "name": "FactoryCacheStats.kt",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/models/FactoryCacheStats.kt",
+      "summary": "Data class mirroring Caffeine cache statistics fields.",
+      "tags": ["factory", "model", "metrics"]
+    },
+    {
+      "id": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/repositories/LockedTransactionContext.kt",
+      "type": "file",
+      "name": "LockedTransactionContext.kt",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/repositories/LockedTransactionContext.kt",
+      "summary": "Context class for managing locked transactions.",
+      "tags": ["repository", "transaction", "lock"]
+    },
+    {
+      "id": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/serializers/adaptors/jackson/JacksonJsonSerializerImpl.kt",
+      "type": "file",
+      "name": "JacksonJsonSerializerImpl.kt",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/serializers/adaptors/jackson/JacksonJsonSerializerImpl.kt",
+      "summary": "Jackson-backed Serializer implementation mapping failures to SerializationException.",
+      "tags": ["serializer", "jackson", "adapter", "spring"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/CustomerGuid.kt:CustomerGuid",
+      "type": "class",
+      "name": "CustomerGuid",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/CustomerGuid.kt",
+      "summary": "Inline value class for a customer GUID backed by a kotlin.uuid Uuid.",
+      "tags": ["valueobject", "domain"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/DeviceFingerprint.kt:DeviceFingerprint",
+      "type": "class",
+      "name": "DeviceFingerprint",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/DeviceFingerprint.kt",
+      "summary": "Inline value class for a device fingerprint with blank and length validation.",
+      "tags": ["valueobject", "domain"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/IdempotencyKey.kt:IdempotencyKey",
+      "type": "class",
+      "name": "IdempotencyKey",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/IdempotencyKey.kt",
+      "summary": "Inline value class for an idempotency key with blank and length validation.",
+      "tags": ["valueobject", "domain", "idempotency"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/PrincipalId.kt:PrincipalId",
+      "type": "class",
+      "name": "PrincipalId",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/PrincipalId.kt",
+      "summary": "Inline value class for a principal identifier with blank and length validation.",
+      "tags": ["valueobject", "domain"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/PrincipalType.kt:PrincipalType",
+      "type": "class",
+      "name": "PrincipalType",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/PrincipalType.kt",
+      "summary": "Enum of principal kinds: USER, SERVICE, SYSTEM, ANONYMOUS.",
+      "tags": ["valueobject", "domain", "enum"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/RequestId.kt:RequestId",
+      "type": "class",
+      "name": "RequestId",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/RequestId.kt",
+      "summary": "Inline value class for a request UUID with generate and parse factory methods.",
+      "tags": ["valueobject", "domain"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/SessionId.kt:SessionId",
+      "type": "class",
+      "name": "SessionId",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/SessionId.kt",
+      "summary": "Inline value class for a session UUID with generate and parse factory methods.",
+      "tags": ["valueobject", "domain"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/TenantId.kt:TenantId",
+      "type": "class",
+      "name": "TenantId",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/TenantId.kt",
+      "summary": "Inline value class for a tenant identifier with blank and length validation.",
+      "tags": ["valueobject", "domain"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/UserAgent.kt:UserAgent",
+      "type": "class",
+      "name": "UserAgent",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/UserAgent.kt",
+      "summary": "Inline value class for a user agent string with blank and length validation.",
+      "tags": ["valueobject", "domain"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/adapters/AsyncCacheFactory.kt:AsyncCacheFactory",
+      "type": "class",
+      "name": "AsyncCacheFactory",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/adapters/AsyncCacheFactory.kt",
+      "summary": "Internal factory object creating Caffeine-backed FactoryCache instances.",
+      "tags": ["factory", "cache", "adapter"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/adapters/caffeine/CaffeineFactoryCache.kt:CaffeineFactoryCache",
+      "type": "class",
+      "name": "CaffeineFactoryCache",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/adapters/caffeine/CaffeineFactoryCache.kt",
+      "summary": "Coroutine Cache implementation backed by Caffeine with eviction listener support.",
+      "tags": ["factory", "cache", "caffeine", "adapter"]
+    },
+    {
+      "id": "function:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/adapters/caffeine/CaffeineFactoryCacheStats.kt:from",
+      "type": "function",
+      "name": "from",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/adapters/caffeine/CaffeineFactoryCacheStats.kt",
+      "summary": "Extension function mapping a Caffeine CacheStats into a FactoryCacheStats.",
+      "tags": ["factory", "cache", "caffeine"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/adapters/noop/NoOpFactoryCache.kt:NoOpFactoryCache",
+      "type": "class",
+      "name": "NoOpFactoryCache",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/adapters/noop/NoOpFactoryCache.kt",
+      "summary": "No-op FactoryCache implementation delegating all operations.",
+      "tags": ["factory", "cache", "noop", "adapter"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/AsyncFactoryBuilder.kt:AsyncFactoryBuilder",
+      "type": "class",
+      "name": "AsyncFactoryBuilder",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/AsyncFactoryBuilder.kt",
+      "summary": "Builder composing caching, logging, and metrics decorators around an AsyncFactory.",
+      "tags": ["factory", "builder"]
+    },
+    {
+      "id": "function:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/AsyncFactoryBuilder.kt:builder",
+      "type": "function",
+      "name": "builder",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/AsyncFactoryBuilder.kt",
+      "summary": "Builds a decorated AsyncFactory from a constructor with optional caching, logging, and metrics.",
+      "tags": ["factory", "builder"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/contracts/AsyncFactory.kt:AsyncFactory",
+      "type": "class",
+      "name": "AsyncFactory",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/contracts/AsyncFactory.kt",
+      "summary": "Factory contract for creating and evicting named instances keyed by configuration.",
+      "tags": ["factory", "contract"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/contracts/FactoryCache.kt:FactoryCache",
+      "type": "class",
+      "name": "FactoryCache",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/contracts/FactoryCache.kt",
+      "summary": "Generic cache contract with get/getIfPresent/put/invalidate/stats and eviction listener.",
+      "tags": ["factory", "contract", "cache"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/decorators/CachingFactory.kt:CachingFactory",
+      "type": "class",
+      "name": "CachingFactory",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/decorators/CachingFactory.kt",
+      "summary": "AsyncFactory decorator adding caching with config-drift detection and per-name mutex locking.",
+      "tags": ["factory", "cache", "decorator", "resilience"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/decorators/LoggingFactory.kt:LoggingFactory",
+      "type": "class",
+      "name": "LoggingFactory",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/decorators/LoggingFactory.kt",
+      "summary": "AsyncFactory decorator logging getOrCreate, evict, and estimatedSize calls.",
+      "tags": ["factory", "decorator", "observability"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/decorators/MetricsFactory.kt:MetricsFactory",
+      "type": "class",
+      "name": "MetricsFactory",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/decorators/MetricsFactory.kt",
+      "summary": "AsyncFactory decorator forwarding all operations to a delegate factory.",
+      "tags": ["factory", "decorator", "metrics"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/models/AsyncFactoryCachingConfig.kt:AsyncFactoryCachingConfig",
+      "type": "class",
+      "name": "AsyncFactoryCachingConfig",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/models/AsyncFactoryCachingConfig.kt",
+      "summary": "Config data class for the caching decorator with maxSize, expireAfterAccess, and matchesConfig.",
+      "tags": ["factory", "config"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/models/AsyncFactoryLoggingConfig.kt:AsyncFactoryLoggingConfig",
+      "type": "class",
+      "name": "AsyncFactoryLoggingConfig",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/models/AsyncFactoryLoggingConfig.kt",
+      "summary": "Config data class enabling or disabling the logging decorator.",
+      "tags": ["factory", "config"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/models/AsyncFactoryMetricsConfig.kt:AsyncFactoryMetricsConfig",
+      "type": "class",
+      "name": "AsyncFactoryMetricsConfig",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/models/AsyncFactoryMetricsConfig.kt",
+      "summary": "Config data class for the metrics decorator with a validated metricPrefix.",
+      "tags": ["factory", "config"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/models/FactoryCacheStats.kt:FactoryCacheStats",
+      "type": "class",
+      "name": "FactoryCacheStats",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/models/FactoryCacheStats.kt",
+      "summary": "Data class mirroring Caffeine cache statistics fields.",
+      "tags": ["factory", "model", "metrics"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/repositories/LockedTransactionContext.kt:LockedTransactionContext",
+      "type": "class",
+      "name": "LockedTransactionContext",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/repositories/LockedTransactionContext.kt",
+      "summary": "Context class for managing locked transactions.",
+      "tags": ["repository", "transaction", "lock"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/serializers/adaptors/jackson/JacksonJsonSerializerImpl.kt:JacksonJsonSerializerImpl",
+      "type": "class",
+      "name": "JacksonJsonSerializerImpl",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/serializers/adaptors/jackson/JacksonJsonSerializerImpl.kt",
+      "summary": "Jackson-backed Serializer implementation mapping failures to SerializationException.",
+      "tags": ["serializer", "jackson", "adapter", "spring"]
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/CustomerGuid.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/CustomerGuid.kt:CustomerGuid",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/DeviceFingerprint.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/DeviceFingerprint.kt:DeviceFingerprint",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/IdempotencyKey.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/IdempotencyKey.kt:IdempotencyKey",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/PrincipalId.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/PrincipalId.kt:PrincipalId",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/PrincipalType.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/PrincipalType.kt:PrincipalType",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/RequestId.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/RequestId.kt:RequestId",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/SessionId.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/SessionId.kt:SessionId",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/TenantId.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/TenantId.kt:TenantId",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/UserAgent.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/UserAgent.kt:UserAgent",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/adapters/AsyncCacheFactory.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/adapters/AsyncCacheFactory.kt:AsyncCacheFactory",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/adapters/caffeine/CaffeineFactoryCache.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/adapters/caffeine/CaffeineFactoryCache.kt:CaffeineFactoryCache",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/adapters/caffeine/CaffeineFactoryCacheStats.kt",
+      "target": "function:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/adapters/caffeine/CaffeineFactoryCacheStats.kt:from",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/adapters/noop/NoOpFactoryCache.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/adapters/noop/NoOpFactoryCache.kt:NoOpFactoryCache",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/AsyncFactoryBuilder.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/AsyncFactoryBuilder.kt:AsyncFactoryBuilder",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/AsyncFactoryBuilder.kt",
+      "target": "function:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/AsyncFactoryBuilder.kt:builder",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/contracts/AsyncFactory.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/contracts/AsyncFactory.kt:AsyncFactory",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/contracts/FactoryCache.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/contracts/FactoryCache.kt:FactoryCache",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/decorators/CachingFactory.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/decorators/CachingFactory.kt:CachingFactory",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/decorators/LoggingFactory.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/decorators/LoggingFactory.kt:LoggingFactory",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/decorators/MetricsFactory.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/decorators/MetricsFactory.kt:MetricsFactory",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/models/AsyncFactoryCachingConfig.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/models/AsyncFactoryCachingConfig.kt:AsyncFactoryCachingConfig",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/models/AsyncFactoryLoggingConfig.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/models/AsyncFactoryLoggingConfig.kt:AsyncFactoryLoggingConfig",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/models/AsyncFactoryMetricsConfig.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/models/AsyncFactoryMetricsConfig.kt:AsyncFactoryMetricsConfig",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/models/FactoryCacheStats.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/models/FactoryCacheStats.kt:FactoryCacheStats",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/repositories/LockedTransactionContext.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/repositories/LockedTransactionContext.kt:LockedTransactionContext",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/serializers/adaptors/jackson/JacksonJsonSerializerImpl.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/serializers/adaptors/jackson/JacksonJsonSerializerImpl.kt:JacksonJsonSerializerImpl",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/adapters/AsyncCacheFactory.kt",
+      "target": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/adapters/caffeine/CaffeineFactoryCache.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/adapters/AsyncCacheFactory.kt",
+      "target": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/contracts/FactoryCache.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/adapters/caffeine/CaffeineFactoryCache.kt",
+      "target": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/contracts/FactoryCache.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/adapters/caffeine/CaffeineFactoryCache.kt",
+      "target": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/models/FactoryCacheStats.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/adapters/caffeine/CaffeineFactoryCacheStats.kt",
+      "target": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/models/FactoryCacheStats.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/adapters/noop/NoOpFactoryCache.kt",
+      "target": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/contracts/FactoryCache.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/adapters/noop/NoOpFactoryCache.kt",
+      "target": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/models/FactoryCacheStats.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/AsyncFactoryBuilder.kt",
+      "target": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/adapters/AsyncCacheFactory.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/AsyncFactoryBuilder.kt",
+      "target": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/contracts/AsyncFactory.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/AsyncFactoryBuilder.kt",
+      "target": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/decorators/CachingFactory.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/AsyncFactoryBuilder.kt",
+      "target": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/decorators/LoggingFactory.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/AsyncFactoryBuilder.kt",
+      "target": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/decorators/MetricsFactory.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/AsyncFactoryBuilder.kt",
+      "target": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/models/AsyncFactoryCachingConfig.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/AsyncFactoryBuilder.kt",
+      "target": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/models/AsyncFactoryLoggingConfig.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/AsyncFactoryBuilder.kt",
+      "target": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/models/AsyncFactoryMetricsConfig.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/decorators/CachingFactory.kt",
+      "target": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/contracts/AsyncFactory.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/decorators/CachingFactory.kt",
+      "target": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/contracts/FactoryCache.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/decorators/LoggingFactory.kt",
+      "target": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/contracts/AsyncFactory.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/decorators/MetricsFactory.kt",
+      "target": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/contracts/AsyncFactory.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/serializers/adaptors/jackson/JacksonJsonSerializerImpl.kt",
+      "target": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Serializer.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/serializers/adaptors/jackson/JacksonJsonSerializerImpl.kt",
+      "target": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/SerializationException.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/adapters/caffeine/CaffeineFactoryCache.kt:CaffeineFactoryCache",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/contracts/FactoryCache.kt:FactoryCache",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/adapters/noop/NoOpFactoryCache.kt:NoOpFactoryCache",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/contracts/FactoryCache.kt:FactoryCache",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/decorators/CachingFactory.kt:CachingFactory",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/contracts/AsyncFactory.kt:AsyncFactory",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/decorators/LoggingFactory.kt:LoggingFactory",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/contracts/AsyncFactory.kt:AsyncFactory",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/decorators/MetricsFactory.kt:MetricsFactory",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/contracts/AsyncFactory.kt:AsyncFactory",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/serializers/adaptors/jackson/JacksonJsonSerializerImpl.kt:JacksonJsonSerializerImpl",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Serializer.kt:Serializer",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/AsyncFactoryBuilder.kt:AsyncFactoryBuilder",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/contracts/AsyncFactory.kt:AsyncFactory",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/AsyncFactoryBuilder.kt:AsyncFactoryBuilder",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/adapters/AsyncCacheFactory.kt:AsyncCacheFactory",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/AsyncFactoryBuilder.kt:AsyncFactoryBuilder",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/decorators/CachingFactory.kt:CachingFactory",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/AsyncFactoryBuilder.kt:AsyncFactoryBuilder",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/decorators/LoggingFactory.kt:LoggingFactory",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/AsyncFactoryBuilder.kt:AsyncFactoryBuilder",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/decorators/MetricsFactory.kt:MetricsFactory",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/AsyncFactoryBuilder.kt:AsyncFactoryBuilder",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/models/AsyncFactoryCachingConfig.kt:AsyncFactoryCachingConfig",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/AsyncFactoryBuilder.kt:AsyncFactoryBuilder",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/models/AsyncFactoryLoggingConfig.kt:AsyncFactoryLoggingConfig",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/AsyncFactoryBuilder.kt:AsyncFactoryBuilder",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/models/AsyncFactoryMetricsConfig.kt:AsyncFactoryMetricsConfig",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/decorators/CachingFactory.kt:CachingFactory",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/contracts/AsyncFactory.kt:AsyncFactory",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/decorators/CachingFactory.kt:CachingFactory",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/contracts/FactoryCache.kt:FactoryCache",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/decorators/LoggingFactory.kt:LoggingFactory",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/contracts/AsyncFactory.kt:AsyncFactory",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/decorators/MetricsFactory.kt:MetricsFactory",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/contracts/AsyncFactory.kt:AsyncFactory",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/adapters/caffeine/CaffeineFactoryCache.kt:CaffeineFactoryCache",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/contracts/FactoryCache.kt:FactoryCache",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/adapters/caffeine/CaffeineFactoryCache.kt:CaffeineFactoryCache",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/models/FactoryCacheStats.kt:FactoryCacheStats",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/adapters/noop/NoOpFactoryCache.kt:NoOpFactoryCache",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/contracts/FactoryCache.kt:FactoryCache",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/adapters/noop/NoOpFactoryCache.kt:NoOpFactoryCache",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/models/FactoryCacheStats.kt:FactoryCacheStats",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/adapters/AsyncCacheFactory.kt:AsyncCacheFactory",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/adapters/caffeine/CaffeineFactoryCache.kt:CaffeineFactoryCache",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/adapters/AsyncCacheFactory.kt:AsyncCacheFactory",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/contracts/FactoryCache.kt:FactoryCache",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/serializers/adaptors/jackson/JacksonJsonSerializerImpl.kt:JacksonJsonSerializerImpl",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Serializer.kt:Serializer",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/serializers/adaptors/jackson/JacksonJsonSerializerImpl.kt:JacksonJsonSerializerImpl",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/SerializationException.kt:SerializationException",
+      "type": "depends_on",
+      "weight": 0.6
+    }
+  ]
+}

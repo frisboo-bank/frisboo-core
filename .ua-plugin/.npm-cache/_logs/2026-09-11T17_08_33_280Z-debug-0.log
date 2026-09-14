@@ -1,0 +1,130 @@
+0 verbose cli /usr/local/bin/node /usr/local/bin/npm
+1 info using npm@12.0.2
+2 info using node@v26.8.2
+3 silly config load:file:/usr/local/lib/node_modules/npm/npmrc
+4 silly config load:file:/home/dsh/workspaces/frisboo-bank/frisboo-core/.ua-plugin/.npmrc
+5 silly config load:file:/home/dsh/.npmrc
+6 silly config load:file:/home/dsh/workspaces/frisboo-bank/frisboo-core/.ua-plugin/.npm-global/etc/npmrc
+7 verbose title npm install graphology graphology-communities-louvain
+8 verbose argv "install" "graphology" "graphology-communities-louvain"
+9 verbose logfile logs-max:10 dir:/home/dsh/workspaces/frisboo-bank/frisboo-core/.ua-plugin/.npm-cache/_logs/2026-09-11T17_08_33_280Z-
+10 verbose logfile /home/dsh/workspaces/frisboo-bank/frisboo-core/.ua-plugin/.npm-cache/_logs/2026-09-11T17_08_33_280Z-debug-0.log
+11 silly logfile done cleaning log files
+12 silly packumentCache heap:8690597888 maxSize:2172649472 maxEntrySize:1086324736
+13 silly idealTree buildDeps
+14 silly fetch manifest graphology@*
+15 silly packumentCache full:https://registry.npmjs.org/graphology cache-miss
+16 http fetch GET 200 https://registry.npmjs.org/graphology 64ms (cache miss)
+17 silly packumentCache full:https://registry.npmjs.org/graphology set size:undefined disposed:false
+18 silly fetch manifest graphology-types@>=0.24.0
+19 silly packumentCache full:https://registry.npmjs.org/graphology-types cache-miss
+20 http fetch GET 200 https://registry.npmjs.org/npm 118ms
+21 http fetch GET 200 https://registry.npmjs.org/graphology-types 171ms (cache miss)
+22 silly packumentCache full:https://registry.npmjs.org/graphology-types set size:undefined disposed:false
+23 silly fetch manifest graphology-communities-louvain@*
+24 silly packumentCache full:https://registry.npmjs.org/graphology-communities-louvain cache-miss
+25 http fetch GET 200 https://registry.npmjs.org/graphology-communities-louvain 27ms (cache miss)
+26 silly packumentCache full:https://registry.npmjs.org/graphology-communities-louvain set size:undefined disposed:false
+27 silly fetch manifest graphology-types@>=0.19.0
+28 silly packumentCache full:https://registry.npmjs.org/graphology-types cache-miss
+29 http cache https://registry.npmjs.org/graphology-types 3ms (cache hit)
+30 silly packumentCache full:https://registry.npmjs.org/graphology-types set size:70398 disposed:false
+31 silly placeDep ROOT graphology@0.26.0 OK for: @understand-anything/core@1.0.0 want: *
+32 silly placeDep ROOT graphology-types@0.24.8 OK for: graphology@0.26.0 want: >=0.24.0
+33 silly placeDep ROOT graphology-communities-louvain@2.0.2 OK for: @understand-anything/core@1.0.0 want: *
+34 silly fetch manifest events@^3.3.0
+35 silly packumentCache full:https://registry.npmjs.org/events cache-miss
+36 silly fetch manifest graphology-indices@^0.17.0
+37 silly packumentCache full:https://registry.npmjs.org/graphology-indices cache-miss
+38 silly fetch manifest graphology-utils@^2.4.4
+39 silly packumentCache full:https://registry.npmjs.org/graphology-utils cache-miss
+40 silly fetch manifest mnemonist@^0.39.0
+41 silly packumentCache full:https://registry.npmjs.org/mnemonist cache-miss
+42 silly fetch manifest pandemonium@^2.4.1
+43 silly packumentCache full:https://registry.npmjs.org/pandemonium cache-miss
+44 http fetch GET 200 https://registry.npmjs.org/events 30ms (cache miss)
+45 silly packumentCache full:https://registry.npmjs.org/events set size:undefined disposed:false
+46 http fetch GET 200 https://registry.npmjs.org/mnemonist 61ms (cache miss)
+47 silly packumentCache full:https://registry.npmjs.org/mnemonist set size:undefined disposed:false
+48 http fetch GET 200 https://registry.npmjs.org/graphology-indices 182ms (cache miss)
+49 silly packumentCache full:https://registry.npmjs.org/graphology-indices set size:undefined disposed:false
+50 http fetch GET 200 https://registry.npmjs.org/pandemonium 208ms (cache miss)
+51 silly packumentCache full:https://registry.npmjs.org/pandemonium set size:undefined disposed:false
+52 http fetch GET 200 https://registry.npmjs.org/graphology-utils 210ms (cache miss)
+53 silly packumentCache full:https://registry.npmjs.org/graphology-utils set size:undefined disposed:false
+54 silly placeDep ROOT events@3.3.0 OK for: graphology@0.26.0 want: ^3.3.0
+55 silly placeDep ROOT graphology-indices@0.17.0 OK for: graphology-communities-louvain@2.0.2 want: ^0.17.0
+56 silly placeDep ROOT graphology-utils@2.5.2 OK for: graphology-communities-louvain@2.0.2 want: ^2.4.4
+57 silly placeDep ROOT mnemonist@0.39.8 OK for: graphology-communities-louvain@2.0.2 want: ^0.39.0
+58 silly placeDep ROOT pandemonium@2.4.1 OK for: graphology-communities-louvain@2.0.2 want: ^2.4.1
+59 silly fetch manifest graphology-utils@^2.4.2
+60 silly packumentCache full:https://registry.npmjs.org/graphology-utils cache-miss
+61 silly fetch manifest obliterator@^2.0.1
+62 silly packumentCache full:https://registry.npmjs.org/obliterator cache-miss
+63 http cache https://registry.npmjs.org/graphology-utils 3ms (cache hit)
+64 silly packumentCache full:https://registry.npmjs.org/graphology-utils set size:75792 disposed:false
+65 http fetch GET 200 https://registry.npmjs.org/obliterator 179ms (cache miss)
+66 silly packumentCache full:https://registry.npmjs.org/obliterator set size:undefined disposed:false
+67 silly placeDep ROOT obliterator@2.0.5 OK for: mnemonist@0.39.8 want: ^2.0.1
+68 silly reify mark retired [
+68 silly reify   '/home/dsh/workspaces/frisboo-bank/frisboo-core/.ua-plugin/node_modules/@understand-anything/core'
+68 silly reify ]
+69 silly reify moves {
+69 silly reify   '/home/dsh/workspaces/frisboo-bank/frisboo-core/.ua-plugin/node_modules/@understand-anything/core': '/home/dsh/workspaces/frisboo-bank/frisboo-core/.ua-plugin/node_modules/@understand-anything/.core-SRpxOGio'
+69 silly reify }
+70 silly audit bulk request {
+70 silly audit   graphology: [ '0.26.0' ],
+70 silly audit   'graphology-types': [ '0.24.8' ],
+70 silly audit   'graphology-communities-louvain': [ '2.0.2' ],
+70 silly audit   events: [ '3.3.0' ],
+70 silly audit   'graphology-indices': [ '0.17.0' ],
+70 silly audit   'graphology-utils': [ '2.5.2' ],
+70 silly audit   mnemonist: [ '0.39.8' ],
+70 silly audit   pandemonium: [ '2.4.1' ],
+70 silly audit   obliterator: [ '2.0.5' ]
+70 silly audit }
+71 http cache obliterator@https://registry.npmjs.org/obliterator/-/obliterator-2.0.5.tgz 0ms (cache hit)
+72 http cache mnemonist@https://registry.npmjs.org/mnemonist/-/mnemonist-0.39.8.tgz 0ms (cache hit)
+73 http cache graphology-utils@https://registry.npmjs.org/graphology-utils/-/graphology-utils-2.5.2.tgz 0ms (cache hit)
+74 http cache pandemonium@https://registry.npmjs.org/pandemonium/-/pandemonium-2.4.1.tgz 0ms (cache hit)
+75 http cache events@https://registry.npmjs.org/events/-/events-3.3.0.tgz 0ms (cache hit)
+76 http cache graphology-communities-louvain@https://registry.npmjs.org/graphology-communities-louvain/-/graphology-communities-louvain-2.0.2.tgz 0ms (cache hit)
+77 http cache graphology-indices@https://registry.npmjs.org/graphology-indices/-/graphology-indices-0.17.0.tgz 0ms (cache hit)
+78 http cache graphology@https://registry.npmjs.org/graphology/-/graphology-0.26.0.tgz 0ms (cache hit)
+79 http cache graphology-types@https://registry.npmjs.org/graphology-types/-/graphology-types-0.24.8.tgz 0ms (cache hit)
+80 silly tarball no local data for obliterator@https://registry.npmjs.org/obliterator/-/obliterator-2.0.5.tgz. Extracting by manifest.
+81 silly tarball no local data for mnemonist@https://registry.npmjs.org/mnemonist/-/mnemonist-0.39.8.tgz. Extracting by manifest.
+82 silly tarball no local data for graphology-utils@https://registry.npmjs.org/graphology-utils/-/graphology-utils-2.5.2.tgz. Extracting by manifest.
+83 silly tarball no local data for pandemonium@https://registry.npmjs.org/pandemonium/-/pandemonium-2.4.1.tgz. Extracting by manifest.
+84 silly tarball no local data for events@https://registry.npmjs.org/events/-/events-3.3.0.tgz. Extracting by manifest.
+85 silly tarball no local data for graphology-communities-louvain@https://registry.npmjs.org/graphology-communities-louvain/-/graphology-communities-louvain-2.0.2.tgz. Extracting by manifest.
+86 silly tarball no local data for graphology-indices@https://registry.npmjs.org/graphology-indices/-/graphology-indices-0.17.0.tgz. Extracting by manifest.
+87 silly tarball no local data for graphology@https://registry.npmjs.org/graphology/-/graphology-0.26.0.tgz. Extracting by manifest.
+88 silly tarball no local data for graphology-types@https://registry.npmjs.org/graphology-types/-/graphology-types-0.24.8.tgz. Extracting by manifest.
+89 http fetch GET 200 https://registry.npmjs.org/obliterator/-/obliterator-2.0.5.tgz 55ms (cache miss)
+90 http fetch GET 200 https://registry.npmjs.org/graphology-utils/-/graphology-utils-2.5.2.tgz 59ms (cache miss)
+91 http fetch GET 200 https://registry.npmjs.org/pandemonium/-/pandemonium-2.4.1.tgz 62ms (cache miss)
+92 http fetch GET 200 https://registry.npmjs.org/graphology-indices/-/graphology-indices-0.17.0.tgz 69ms (cache miss)
+93 http fetch GET 200 https://registry.npmjs.org/graphology-communities-louvain/-/graphology-communities-louvain-2.0.2.tgz 73ms (cache miss)
+94 http fetch GET 200 https://registry.npmjs.org/graphology-types/-/graphology-types-0.24.8.tgz 80ms (cache miss)
+95 http fetch GET 200 https://registry.npmjs.org/mnemonist/-/mnemonist-0.39.8.tgz 91ms (cache miss)
+96 http fetch GET 200 https://registry.npmjs.org/events/-/events-3.3.0.tgz 97ms (cache miss)
+97 http fetch GET 200 https://registry.npmjs.org/graphology/-/graphology-0.26.0.tgz 111ms (cache miss)
+98 http fetch POST 200 https://registry.npmjs.org/-/npm/v1/security/advisories/bulk 190ms
+99 silly audit report {}
+100 silly ADD node_modules/obliterator
+101 silly ADD node_modules/pandemonium
+102 silly ADD node_modules/mnemonist
+103 silly ADD node_modules/graphology-utils
+104 silly ADD node_modules/graphology-indices
+105 silly ADD node_modules/events
+106 silly ADD node_modules/graphology-communities-louvain
+107 silly ADD node_modules/graphology-types
+108 silly ADD node_modules/graphology
+109 silly REMOVE node_modules/@understand-anything/core
+110 verbose cwd /home/dsh/workspaces/frisboo-bank/frisboo-core/.ua-plugin
+111 verbose os Linux 7.1.8-200.fc44.aarch64
+112 verbose node v26.8.2
+113 verbose npm  v12.0.2
+114 verbose exit 0
+115 info ok

@@ -1,0 +1,1114 @@
+{
+  "nodes": [
+    {
+      "id": "file:frisboo-core/build.gradle.kts",
+      "type": "file",
+      "name": "build.gradle.kts",
+      "filePath": "frisboo-core/build.gradle.kts",
+      "summary": "Gradle build script for the frisboo-core module declaring Kotlin conventions, Kover, Dokka, Maven publishing, and Arrow/Jackson/Reactor/Spring Boot BOM dependencies.",
+      "tags": ["config", "build", "gradle"]
+    },
+    {
+      "id": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/context/RequestContext.kt",
+      "type": "file",
+      "name": "RequestContext.kt",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/context/RequestContext.kt",
+      "summary": "Data class carrying per-request contextual metadata assembled from HTTP headers and value objects.",
+      "tags": ["context", "domain", "model"]
+    },
+    {
+      "id": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/context/RequestContextAccessor.kt",
+      "type": "file",
+      "name": "RequestContextAccessor.kt",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/context/RequestContextAccessor.kt",
+      "summary": "Suspension function retrieving the current RequestContext from the coroutine context.",
+      "tags": ["context", "coroutines"]
+    },
+    {
+      "id": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/context/RequestContextElement.kt",
+      "type": "file",
+      "name": "RequestContextElement.kt",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/context/RequestContextElement.kt",
+      "summary": "CoroutineContext.Element wrapping a RequestContext so it can be propagated through reactive streams.",
+      "tags": ["context", "coroutines"]
+    },
+    {
+      "id": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/context/RequestContextExtractor.kt",
+      "type": "file",
+      "name": "RequestContextExtractor.kt",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/context/RequestContextExtractor.kt",
+      "summary": "Object extracting a RequestContext from a Spring ServerWebExchange by parsing standard HTTP headers.",
+      "tags": ["context", "http", "adapter"]
+    },
+    {
+      "id": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/context/RequestContextWebFilter.kt",
+      "type": "file",
+      "name": "RequestContextWebFilter.kt",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/context/RequestContextWebFilter.kt",
+      "summary": "Spring WebFilter that extracts request context and injects it into the Reactor context for downstream handlers.",
+      "tags": ["context", "http", "middleware", "exposed"]
+    },
+    {
+      "id": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Command.kt",
+      "type": "file",
+      "name": "Command.kt",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Command.kt",
+      "summary": "Command-side CQRS contracts: Command marker, CommandHandler, and CommandBus dispatch interface.",
+      "tags": ["contract", "cqrs", "mediator", "messaging"]
+    },
+    {
+      "id": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Event.kt",
+      "type": "file",
+      "name": "Event.kt",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Event.kt",
+      "summary": "Event-side contracts: Event marker, EventHandler, and EventBus publish interface.",
+      "tags": ["contract", "cqrs", "messaging", "events"]
+    },
+    {
+      "id": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Mediator.kt",
+      "type": "file",
+      "name": "Mediator.kt",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Mediator.kt",
+      "summary": "Unified Mediator interface dispatching commands, queries, and events through a single entry point.",
+      "tags": ["contract", "mediator", "cqrs", "messaging"]
+    },
+    {
+      "id": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Query.kt",
+      "type": "file",
+      "name": "Query.kt",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Query.kt",
+      "summary": "Query-side CQRS contracts: Query marker, QueryHandler, and QueryBus dispatch interface.",
+      "tags": ["contract", "cqrs", "mediator", "messaging"]
+    },
+    {
+      "id": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Serializer.kt",
+      "type": "file",
+      "name": "Serializer.kt",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Serializer.kt",
+      "summary": "Generic Serializer contract for byte-array and string serialization/deserialization.",
+      "tags": ["contract", "serializer"]
+    },
+    {
+      "id": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/UuidValue.kt",
+      "type": "file",
+      "name": "UuidValue.kt",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/UuidValue.kt",
+      "summary": "UUIDValue contract and UUIDCompanion helper interface with create/fromString extension functions for typed UUID wrappers.",
+      "tags": ["contract", "valueobject", "factory"]
+    },
+    {
+      "id": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/coroutines/CoroutineContext.kt",
+      "type": "file",
+      "name": "CoroutineContext.kt",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/coroutines/CoroutineContext.kt",
+      "summary": "Helpers building CoroutineContext and CoroutineScope with SupervisorJob, CoroutineName, and IO dispatcher.",
+      "tags": ["coroutines", "resilience"]
+    },
+    {
+      "id": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/coroutines/ExecuteWithTimeout.kt",
+      "type": "file",
+      "name": "ExecuteWithTimeout.kt",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/coroutines/ExecuteWithTimeout.kt",
+      "summary": "Suspension wrapper around kotlinx.coroutines.withTimeout mapping timeouts and errors into an Arrow Either.",
+      "tags": ["coroutines", "resilience", "errorhandling"]
+    },
+    {
+      "id": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/coroutines/raise/ScopedEither.kt",
+      "type": "file",
+      "name": "ScopedEither.kt",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/coroutines/raise/ScopedEither.kt",
+      "summary": "Arrow Raise-based EitherContext, EitherCoroutine, and scopedEither/scopedEitherWithError execution helpers.",
+      "tags": ["coroutines", "errorhandling", "resilience"]
+    },
+    {
+      "id": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/AppError.kt",
+      "type": "file",
+      "name": "AppError.kt",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/AppError.kt",
+      "summary": "AppError sealed hierarchy: GenericAppError, InvalidVersion, EventVersionError (Lower/Same/Upper), InvalidTransactionError, SerializationError.",
+      "tags": ["domain", "error", "model"]
+    },
+    {
+      "id": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/SerializationException.kt",
+      "type": "file",
+      "name": "SerializationException.kt",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/SerializationException.kt",
+      "summary": "SerializationException extending IllegalArgumentException carrying the target class reference.",
+      "tags": ["domain", "error"]
+    },
+    {
+      "id": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/events/DomainEvent.kt",
+      "type": "file",
+      "name": "DomainEvent.kt",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/events/DomainEvent.kt",
+      "summary": "DomainEvent envelope interface carrying event sourcing metadata (eventId, aggregateId, version, timestamps).",
+      "tags": ["domain", "events", "model"]
+    },
+    {
+      "id": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/AcceptLanguage.kt",
+      "type": "file",
+      "name": "AcceptLanguage.kt",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/AcceptLanguage.kt",
+      "summary": "Inline value class wrapping an Accept-Language string with blank/length validation.",
+      "tags": ["valueobject", "domain"]
+    },
+    {
+      "id": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/AccountType.kt",
+      "type": "file",
+      "name": "AccountType.kt",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/AccountType.kt",
+      "summary": "Enum of all account types supported by the core banking system with an all() helper.",
+      "tags": ["valueobject", "domain", "enum"]
+    },
+    {
+      "id": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/ClientId.kt",
+      "type": "file",
+      "name": "ClientId.kt",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/ClientId.kt",
+      "summary": "Inline value class wrapping a client identifier string with blank/length validation.",
+      "tags": ["valueobject", "domain"]
+    },
+    {
+      "id": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/ClientIp.kt",
+      "type": "file",
+      "name": "ClientIp.kt",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/ClientIp.kt",
+      "summary": "Inline value class wrapping a client IP address string validated for IPv4/IPv6 length.",
+      "tags": ["valueobject", "domain"]
+    },
+    {
+      "id": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/CorrelationId.kt",
+      "type": "file",
+      "name": "CorrelationId.kt",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/CorrelationId.kt",
+      "summary": "Inline value class wrapping a kotlin.uuid Uuid with generate/of(String)/of(Uuid) factory methods.",
+      "tags": ["valueobject", "domain"]
+    },
+    {
+      "id": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/Countries.kt",
+      "type": "file",
+      "name": "Countries.kt",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/Countries.kt",
+      "summary": "Enum of 193 ISO countries with code/displayName, lookup helpers, and regional group sets.",
+      "tags": ["valueobject", "domain", "enum"]
+    },
+    {
+      "id": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/Currency.kt",
+      "type": "file",
+      "name": "Currency.kt",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/Currency.kt",
+      "summary": "Enum of global currencies with code/symbol/displayName, fromCode lookup, and regional group sets.",
+      "tags": ["valueobject", "domain", "enum"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/context/RequestContext.kt:RequestContext",
+      "type": "class",
+      "name": "RequestContext",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/context/RequestContext.kt",
+      "summary": "Data class aggregating per-request metadata derived from HTTP headers and value objects.",
+      "tags": ["context", "model"]
+    },
+    {
+      "id": "function:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/context/RequestContext.kt:toString",
+      "type": "function",
+      "name": "toString",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/context/RequestContext.kt",
+      "summary": "Custom toString rendering requestId, correlationId, tenantId, and principalType.",
+      "tags": ["observability"]
+    },
+    {
+      "id": "function:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/context/RequestContextAccessor.kt:currentRequestContext",
+      "type": "function",
+      "name": "currentRequestContext",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/context/RequestContextAccessor.kt",
+      "summary": "Suspension function reading RequestContextElement from the current coroutine context.",
+      "tags": ["context", "coroutines"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/context/RequestContextElement.kt:RequestContextElement",
+      "type": "class",
+      "name": "RequestContextElement",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/context/RequestContextElement.kt",
+      "summary": "CoroutineContext.Element key holding a RequestContext instance.",
+      "tags": ["context", "coroutines"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/context/RequestContextExtractor.kt:RequestContextExtractor",
+      "type": "class",
+      "name": "RequestContextExtractor",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/context/RequestContextExtractor.kt",
+      "summary": "Singleton object extracting a RequestContext from a Spring ServerWebExchange via HTTP headers.",
+      "tags": ["context", "http", "adapter"]
+    },
+    {
+      "id": "function:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/context/RequestContextExtractor.kt:extract",
+      "type": "function",
+      "name": "extract",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/context/RequestContextExtractor.kt",
+      "summary": "Builds a RequestContext from exchange headers, generating correlationId and requestId when absent.",
+      "tags": ["context", "http"]
+    },
+    {
+      "id": "function:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/context/RequestContextExtractor.kt:parseOrNull",
+      "type": "function",
+      "name": "parseOrNull",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/context/RequestContextExtractor.kt",
+      "summary": "Inline helper parsing a header value into a typed value object, returning null on blank or parse failure.",
+      "tags": ["context", "validation"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/context/RequestContextWebFilter.kt:RequestContextWebFilter",
+      "type": "class",
+      "name": "RequestContextWebFilter",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/context/RequestContextWebFilter.kt",
+      "summary": "Spring WebFilter extracting request context and placing it into the Reactor context write.",
+      "tags": ["context", "http", "middleware", "exposed"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Command.kt:Command",
+      "type": "class",
+      "name": "Command",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Command.kt",
+      "summary": "Marker interface for command messages in the CQRS mediator.",
+      "tags": ["contract", "cqrs", "messaging"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Command.kt:CommandHandler",
+      "type": "class",
+      "name": "CommandHandler",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Command.kt",
+      "summary": "Handler interface for a specific command type returning Either<AppError, R>.",
+      "tags": ["contract", "cqrs", "messaging"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Command.kt:CommandBus",
+      "type": "class",
+      "name": "CommandBus",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Command.kt",
+      "summary": "Bus interface dispatching commands to their registered handlers.",
+      "tags": ["contract", "cqrs", "messaging"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Event.kt:Event",
+      "type": "class",
+      "name": "Event",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Event.kt",
+      "summary": "Marker interface for in-process domain events.",
+      "tags": ["contract", "cqrs", "messaging", "events"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Event.ktEventHandler",
+      "type": "class",
+      "name": "EventHandler",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Event.kt",
+      "summary": "Handler interface for a specific event type.",
+      "tags": ["contract", "cqrs", "messaging", "events"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Event.kt:EventBus",
+      "type": "class",
+      "name": "EventBus",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Event.kt",
+      "summary": "Bus interface publishing events to all registered handlers.",
+      "tags": ["contract", "cqrs", "messaging", "events"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Mediator.kt:Mediator",
+      "type": "class",
+      "name": "Mediator",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Mediator.kt",
+      "summary": "Unified mediator dispatching commands, queries, and events through a single entry point.",
+      "tags": ["contract", "mediator", "cqrs", "messaging"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Query.kt:Query",
+      "type": "class",
+      "name": "Query",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Query.kt",
+      "summary": "Marker interface for read-only query messages parameterized by result type R.",
+      "tags": ["contract", "cqrs", "messaging"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Query.kt:QueryHandler",
+      "type": "class",
+      "name": "QueryHandler",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Query.kt",
+      "summary": "Handler interface for a specific query type returning Either<AppError, R>.",
+      "tags": ["contract", "cqrs", "messaging"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Query.kt:QueryBus",
+      "type": "class",
+      "name": "QueryBus",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Query.kt",
+      "summary": "Bus interface dispatching queries to their registered handlers.",
+      "tags": ["contract", "cqrs", "messaging"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Serializer.kt:Serializer",
+      "type": "class",
+      "name": "Serializer",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Serializer.kt",
+      "summary": "Serializer contract with deserialize, serializeToBytes, and serializeToString operations.",
+      "tags": ["contract", "serializer"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/UuidValue.kt:UUIDValue",
+      "type": "class",
+      "name": "UUIDValue",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/UuidValue.kt",
+      "summary": "Contract for typed UUID value objects exposing an id property and string() helper.",
+      "tags": ["contract", "valueobject"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/UuidValue.kt:UUIDCompanion",
+      "type": "class",
+      "name": "UUIDCompanion",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/UuidValue.kt",
+      "summary": "Generic companion marker interface enabling create/fromString extension functions.",
+      "tags": ["contract", "valueobject", "factory"]
+    },
+    {
+      "id": "function:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/UuidValue.kt:create",
+      "type": "function",
+      "name": "create",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/UuidValue.kt",
+      "summary": "Extension function creating a typed UUID value from a random UUID via a constructor.",
+      "tags": ["valueobject", "factory"]
+    },
+    {
+      "id": "function:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/UuidValue.kt:fromString",
+      "type": "function",
+      "name": "fromString",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/UuidValue.kt",
+      "summary": "Extension function building a typed UUID value from a nullable string, parsing when non-null.",
+      "tags": ["valueobject", "factory"]
+    },
+    {
+      "id": "function:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/coroutines/CoroutineContext.kt:withCoroutineContext",
+      "type": "function",
+      "name": "withCoroutineContext",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/coroutines/CoroutineContext.kt",
+      "summary": "Builds a CoroutineContext with SupervisorJob, CoroutineName, and IO dispatcher for a receiver.",
+      "tags": ["coroutines", "resilience"]
+    },
+    {
+      "id": "function:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/coroutines/CoroutineContext.kt:withPublisherCoroutineScope",
+      "type": "function",
+      "name": "withPublisherCoroutineScope",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/coroutines/CoroutineContext.kt",
+      "summary": "Builds a CoroutineScope with SupervisorJob, IO dispatcher, and CoroutineName for a receiver.",
+      "tags": ["coroutines", "resilience"]
+    },
+    {
+      "id": "function:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/coroutines/ExecuteWithTimeout.kt:executeWithTimeout",
+      "type": "function",
+      "name": "executeWithTimeout",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/coroutines/ExecuteWithTimeout.kt",
+      "summary": "Suspension function wrapping a block with a timeout, mapping TimeoutCancellationException and Throwable into Either.Left.",
+      "tags": ["coroutines", "resilience", "errorhandling"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/coroutines/raise/ScopedEither.kt:EitherContext",
+      "type": "class",
+      "name": "EitherContext",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/coroutines/raise/ScopedEither.kt",
+      "summary": "Interface combining Arrow Raise<Left> with CoroutineScope for scoped error-aware execution.",
+      "tags": ["coroutines", "errorhandling"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/coroutines/raise/ScopedEither.kt:EitherCoroutine",
+      "type": "class",
+      "name": "EitherCoroutine",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/coroutines/raise/ScopedEither.kt",
+      "summary": "Concrete EitherContext delegating Raise and CoroutineScope to provided instances.",
+      "tags": ["coroutines", "errorhandling"]
+    },
+    {
+      "id": "function:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/coroutines/raise/ScopedEither.kt:serviceScope",
+      "type": "function",
+      "name": "serviceScope",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/coroutines/raise/ScopedEither.kt",
+      "summary": "Runs a block within the shared service CoroutineScope augmented with an optional context.",
+      "tags": ["coroutines"]
+    },
+    {
+      "id": "function:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/coroutines/raise/ScopedEither.kt:scopedEither",
+      "type": "function",
+      "name": "scopedEither",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/coroutines/raise/ScopedEither.kt",
+      "summary": "Runs a block in an Arrow either context over a service scope, returning Either<L, R>.",
+      "tags": ["coroutines", "errorhandling"]
+    },
+    {
+      "id": "function:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/coroutines/raise/ScopedEither.kt:scopedEitherWithError",
+      "type": "function",
+      "name": "scopedEitherWithError",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/coroutines/raise/ScopedEither.kt",
+      "summary": "Specialization of scopedEither parameterized by AppError as the left type.",
+      "tags": ["coroutines", "errorhandling"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/AppError.kt:AppError",
+      "type": "class",
+      "name": "AppError",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/AppError.kt",
+      "summary": "Marker interface for all application errors returned through Either lefts.",
+      "tags": ["domain", "error"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/AppError.kt:GenericAppError",
+      "type": "class",
+      "name": "GenericAppError",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/AppError.kt",
+      "summary": "Data class wrapping a generic message, optional cause, and exception class for unknown errors.",
+      "tags": ["domain", "error"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/AppError.kt:InvalidVersion",
+      "type": "class",
+      "name": "InvalidVersion",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/AppError.kt",
+      "summary": "Data class for an invalid event version error.",
+      "tags": ["domain", "error"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/AppError.kt:EventVersionError",
+      "type": "class",
+      "name": "EventVersionError",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/AppError.kt",
+      "summary": "Sealed class for event version mismatch errors with Lower, Same, and Upper subtypes.",
+      "tags": ["domain", "error"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/AppError.kt:EventVersionError.Lower",
+      "type": "class",
+      "name": "EventVersionError.Lower",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/AppError.kt",
+      "summary": "Event version error when the incoming version is lower than expected.",
+      "tags": ["domain", "error"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/AppError.kt:EventVersionError.Same",
+      "type": "class",
+      "name": "EventVersionError.Same",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/AppError.kt",
+      "summary": "Event version error when the incoming version equals the expected version.",
+      "tags": ["domain", "error"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/AppError.kt:EventVersionError.Upper",
+      "type": "class",
+      "name": "EventVersionError.Upper",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/AppError.kt",
+      "summary": "Event version error when the incoming version is higher than expected.",
+      "tags": ["domain", "error"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/AppError.kt:InvalidTransactionError",
+      "type": "class",
+      "name": "InvalidTransactionError",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/AppError.kt",
+      "summary": "Data class for an invalid transaction error with an optional transaction id.",
+      "tags": ["domain", "error"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/AppError.kt:SerializationError",
+      "type": "class",
+      "name": "SerializationError",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/AppError.kt",
+      "summary": "Data class for a serialization failure carrying a message.",
+      "tags": ["domain", "error"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/SerializationException.kt:SerializationException",
+      "type": "class",
+      "name": "SerializationException",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/SerializationException.kt",
+      "summary": "Unchecked exception raised when serialization or deserialization fails for a specific class.",
+      "tags": ["domain", "error"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/events/DomainEvent.kt:DomainEvent",
+      "type": "class",
+      "name": "DomainEvent",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/events/DomainEvent.kt",
+      "summary": "Generic envelope interface for domain events carrying event sourcing and audit metadata.",
+      "tags": ["domain", "events", "model"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/AcceptLanguage.kt:AcceptLanguage",
+      "type": "class",
+      "name": "AcceptLanguage",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/AcceptLanguage.kt",
+      "summary": "Inline value class for Accept-Language header value with validation.",
+      "tags": ["valueobject", "domain"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/AccountType.kt:AccountType",
+      "type": "class",
+      "name": "AccountType",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/AccountType.kt",
+      "summary": "Enum of all supported account types in the core banking system.",
+      "tags": ["valueobject", "domain", "enum"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/ClientId.kt:ClientId",
+      "type": "class",
+      "name": "ClientId",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/ClientId.kt",
+      "summary": "Inline value class for a client identifier with validation.",
+      "tags": ["valueobject", "domain"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/ClientIp.kt:ClientIp",
+      "type": "class",
+      "name": "ClientIp",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/ClientIp.kt",
+      "summary": "Inline value class for a client IP address supporting IPv4 and IPv6.",
+      "tags": ["valueobject", "domain"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/CorrelationId.kt:CorrelationId",
+      "type": "class",
+      "name": "CorrelationId",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/CorrelationId.kt",
+      "summary": "Inline value class for a correlation UUID with generate and parse factory methods.",
+      "tags": ["valueobject", "domain"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/Countries.kt:Countries",
+      "type": "class",
+      "name": "Countries",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/Countries.kt",
+      "summary": "Enum of ISO 3166-1 alpha-2 countries with regional groupings and lookup helpers.",
+      "tags": ["valueobject", "domain", "enum"]
+    },
+    {
+      "id": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/Currency.kt:Currency",
+      "type": "class",
+      "name": "Currency",
+      "filePath": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/Currency.kt",
+      "summary": "Enum of global currencies with code, symbol, display name, and regional groupings.",
+      "tags": ["valueobject", "domain", "enum"]
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/context/RequestContext.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/context/RequestContext.kt:RequestContext",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/context/RequestContext.kt",
+      "target": "function:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/context/RequestContext.kt:toString",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/context/RequestContextAccessor.kt",
+      "target": "function:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/context/RequestContextAccessor.kt:currentRequestContext",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/context/RequestContextElement.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/context/RequestContextElement.kt:RequestContextElement",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/context/RequestContextExtractor.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/context/RequestContextExtractor.kt:RequestContextExtractor",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/context/RequestContextExtractor.kt",
+      "target": "function:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/context/RequestContextExtractor.kt:extract",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/context/RequestContextExtractor.kt",
+      "target": "function:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/context/RequestContextExtractor.kt:parseOrNull",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/context/RequestContextWebFilter.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/context/RequestContextWebFilter.kt:RequestContextWebFilter",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Command.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Command.kt:Command",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Command.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Command.kt:CommandHandler",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Command.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Command.kt:CommandBus",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Event.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Event.kt:Event",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Event.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Event.ktEventHandler",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Event.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Event.kt:EventBus",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Mediator.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Mediator.kt:Mediator",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Query.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Query.kt:Query",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Query.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Query.kt:QueryHandler",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Query.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Query.kt:QueryBus",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Serializer.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Serializer.kt:Serializer",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/UuidValue.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/UuidValue.kt:UUIDValue",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/UuidValue.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/UuidValue.kt:UUIDCompanion",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/UuidValue.kt",
+      "target": "function:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/UuidValue.kt:create",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/UuidValue.kt",
+      "target": "function:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/UuidValue.kt:fromString",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/coroutines/CoroutineContext.kt",
+      "target": "function:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/coroutines/CoroutineContext.kt:withCoroutineContext",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/coroutines/CoroutineContext.kt",
+      "target": "function:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/coroutines/CoroutineContext.kt:withPublisherCoroutineScope",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/coroutines/ExecuteWithTimeout.kt",
+      "target": "function:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/coroutines/ExecuteWithTimeout.kt:executeWithTimeout",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/coroutines/raise/ScopedEither.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/coroutines/raise/ScopedEither.kt:EitherContext",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/coroutines/raise/ScopedEither.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/coroutines/raise/ScopedEither.kt:EitherCoroutine",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/coroutines/raise/ScopedEither.kt",
+      "target": "function:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/coroutines/raise/ScopedEither.kt:serviceScope",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/coroutines/raise/ScopedEither.kt",
+      "target": "function:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/coroutines/raise/ScopedEither.kt:scopedEither",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/coroutines/raise/ScopedEither.kt",
+      "target": "function:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/coroutines/raise/ScopedEither.kt:scopedEitherWithError",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/AppError.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/AppError.kt:AppError",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/AppError.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/AppError.kt:GenericAppError",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/AppError.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/AppError.kt:InvalidVersion",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/AppError.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/AppError.kt:EventVersionError",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/AppError.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/AppError.kt:EventVersionError.Lower",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/AppError.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/AppError.kt:EventVersionError.Same",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/AppError.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/AppError.kt:EventVersionError.Upper",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/AppError.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/AppError.kt:InvalidTransactionError",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/AppError.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/AppError.kt:SerializationError",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/SerializationException.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/SerializationException.kt:SerializationException",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/events/DomainEvent.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/events/DomainEvent.kt:DomainEvent",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/AcceptLanguage.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/AcceptLanguage.kt:AcceptLanguage",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/AccountType.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/AccountType.kt:AccountType",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/ClientId.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/ClientId.kt:ClientId",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/ClientIp.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/ClientIp.kt:ClientIp",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/CorrelationId.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/CorrelationId.kt:CorrelationId",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/Countries.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/Countries.kt:Countries",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/Currency.kt",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/Currency.kt:Currency",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/context/RequestContext.kt",
+      "target": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/AcceptLanguage.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/context/RequestContext.kt",
+      "target": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/ClientId.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/context/RequestContext.kt",
+      "target": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/ClientIp.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/context/RequestContext.kt",
+      "target": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/CorrelationId.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/context/RequestContextExtractor.kt",
+      "target": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/AcceptLanguage.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/context/RequestContextExtractor.kt",
+      "target": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/ClientId.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/context/RequestContextExtractor.kt",
+      "target": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/ClientIp.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/context/RequestContextExtractor.kt",
+      "target": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/CorrelationId.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Mediator.kt",
+      "target": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Command.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Mediator.kt",
+      "target": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Query.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Mediator.kt",
+      "target": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Event.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Mediator.kt",
+      "target": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/AppError.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Serializer.kt",
+      "target": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/SerializationException.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/coroutines/raise/ScopedEither.kt",
+      "target": "file:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/AppError.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/AppError.kt:GenericAppError",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/AppError.kt:AppError",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/AppError.kt:InvalidVersion",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/AppError.kt:AppError",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/AppError.kt:EventVersionError",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/AppError.kt:AppError",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/AppError.kt:EventVersionError.Lower",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/AppError.kt:EventVersionError",
+      "type": "inherits",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/AppError.kt:EventVersionError.Same",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/AppError.kt:EventVersionError",
+      "type": "inherits",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/AppError.kt:EventVersionError.Upper",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/AppError.kt:EventVersionError",
+      "type": "inherits",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/AppError.kt:InvalidTransactionError",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/AppError.kt:AppError",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/AppError.kt:SerializationError",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/AppError.kt:AppError",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/coroutines/raise/ScopedEither.kt:EitherCoroutine",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/coroutines/raise/ScopedEither.kt:EitherContext",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/context/RequestContextWebFilter.kt:RequestContextWebFilter",
+      "target": "function:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/context/RequestContextExtractor.kt:extract",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/coroutines/raise/ScopedEither.kt:scopedEither",
+      "target": "function:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/coroutines/raise/ScopedEither.kt:serviceScope",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/coroutines/raise/ScopedEither.kt:scopedEitherWithError",
+      "target": "function:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/coroutines/raise/ScopedEither.kt:scopedEither",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Command.kt:CommandBus",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Command.kt:Command",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Command.kt:CommandBus",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Command.kt:CommandHandler",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Query.kt:QueryBus",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Query.kt:Query",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Query.kt:QueryBus",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Query.kt:QueryHandler",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Event.kt:EventBus",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Event.kt:Event",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Event.kt:EventBus",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Event.ktEventHandler",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Mediator.kt:Mediator",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Command.kt:Command",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Mediator.kt:Mediator",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Query.kt:Query",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Mediator.kt:Mediator",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Event.kt:Event",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Serializer.kt:Serializer",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/SerializationException.kt:SerializationException",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/coroutines/raise/ScopedEither.kt:EitherContext",
+      "target": "class:frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/AppError.kt:AppError",
+      "type": "depends_on",
+      "weight": 0.6
+    }
+  ]
+}

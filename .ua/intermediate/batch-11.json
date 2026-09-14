@@ -1,0 +1,1366 @@
+{
+  "nodes": [
+    {
+      "id": "file:frisboo-persistence/src/test/kotlin/com/frisboo/corebanking/persistence/triggers/SqlTriggerTest.kt",
+      "type": "file",
+      "name": "SqlTriggerTest.kt",
+      "filePath": "frisboo-persistence/src/test/kotlin/com/frisboo/corebanking/persistence/triggers/SqlTriggerTest.kt",
+      "summary": "Kotest StringSpec testing SQL trigger functions fcb_update_expired_at, fcb_handle_timestamps, and fcb_update_verification_status against a PostgreSQL test container",
+      "tags": [
+        "test",
+        "sql",
+        "trigger",
+        "persistence",
+        "postgres",
+        "kotest"
+      ]
+    },
+    {
+      "id": "class:frisboo-persistence/src/test/kotlin/com/frisboo/corebanking/persistence/triggers/SqlTriggerTest.kt:TestVerification",
+      "type": "class",
+      "name": "TestVerification",
+      "filePath": "frisboo-persistence/src/test/kotlin/com/frisboo/corebanking/persistence/triggers/SqlTriggerTest.kt",
+      "summary": "Exposed BaseTable object representing test_verification table with uuid id, nullable verified_at timestamp, and verification_status varchar column",
+      "tags": [
+        "test",
+        "sql",
+        "table",
+        "exposed"
+      ]
+    },
+    {
+      "id": "class:frisboo-persistence/src/test/kotlin/com/frisboo/corebanking/persistence/triggers/SqlTriggerTest.kt:SqlTriggerTest",
+      "type": "class",
+      "name": "SqlTriggerTest",
+      "filePath": "frisboo-persistence/src/test/kotlin/com/frisboo/corebanking/persistence/triggers/SqlTriggerTest.kt",
+      "summary": "Kotest StringSpec test class that sets up PostgreSQLTestFixture, runs migrations, and creates SQL triggers for verification status and timestamp handling",
+      "tags": [
+        "test",
+        "sql",
+        "trigger",
+        "kotest",
+        "integration"
+      ]
+    },
+    {
+      "id": "file:frisboo-persistence/src/test/kotlin/com/frisboo/corebanking/persistence/triggers/SqlTriggerTimestampedTest.kt",
+      "type": "file",
+      "name": "SqlTriggerTimestampedTest.kt",
+      "filePath": "frisboo-persistence/src/test/kotlin/com/frisboo/corebanking/persistence/triggers/SqlTriggerTimestampedTest.kt",
+      "summary": "Kotest StringSpec testing fcb_handle_timestamps trigger behavior for INSERT and UPDATE operations on timestamped tables",
+      "tags": [
+        "test",
+        "sql",
+        "trigger",
+        "persistence",
+        "postgres",
+        "kotest"
+      ]
+    },
+    {
+      "id": "class:frisboo-persistence/src/test/kotlin/com/frisboo/corebanking/persistence/triggers/SqlTriggerTimestampedTest.kt:TestTimestamped",
+      "type": "class",
+      "name": "TestTimestamped",
+      "filePath": "frisboo-persistence/src/test/kotlin/com/frisboo/corebanking/persistence/triggers/SqlTriggerTimestampedTest.kt",
+      "summary": "Exposed BaseTable object representing test_timestamped table with uuid id and name varchar column for timestamp trigger testing",
+      "tags": [
+        "test",
+        "sql",
+        "table",
+        "exposed"
+      ]
+    },
+    {
+      "id": "class:frisboo-persistence/src/test/kotlin/com/frisboo/corebanking/persistence/triggers/SqlTriggerTimestampedTest.kt:SqlTriggerTimestampedTest",
+      "type": "class",
+      "name": "SqlTriggerTimestampedTest",
+      "filePath": "frisboo-persistence/src/test/kotlin/com/frisboo/corebanking/persistence/triggers/SqlTriggerTimestampedTest.kt",
+      "summary": "Kotest StringSpec test class that conditionally runs integration tests based on RUN_INTEGRATION_TESTS env var, testing fcb_handle_timestamps trigger on INSERT and UPDATE",
+      "tags": [
+        "test",
+        "sql",
+        "trigger",
+        "kotest",
+        "integration"
+      ]
+    },
+    {
+      "id": "file:frisboo-persistence/src/testFixtures/kotlin/com/frisboo/corebanking/persistence/postgres/testing/PostgreSQLTestFixture.kt",
+      "type": "file",
+      "name": "PostgreSQLTestFixture.kt",
+      "filePath": "frisboo-persistence/src/testFixtures/kotlin/com/frisboo/corebanking/persistence/postgres/testing/PostgreSQLTestFixture.kt",
+      "summary": "Test container fixture wrapping PostgreSQLContainer with HikariCP connection pool and Flyway migration support for integration testing",
+      "tags": [
+        "testfixture",
+        "postgres",
+        "persistence",
+        "testing",
+        "testcontainers"
+      ]
+    },
+    {
+      "id": "class:frisboo-persistence/src/testFixtures/kotlin/com/frisboo/corebanking/persistence/postgres/testing/PostgreSQLTestFixture.kt:PostgreSQLPoolProps",
+      "type": "class",
+      "name": "PostgreSQLPoolProps",
+      "filePath": "frisboo-persistence/src/testFixtures/kotlin/com/frisboo/corebanking/persistence/postgres/testing/PostgreSQLTestFixture.kt",
+      "summary": "Data class configuring HikariCP pool size with maximumPoolSize default 10 and minimumIdle default 2",
+      "tags": [
+        "testfixture",
+        "postgres",
+        "config",
+        "valueobject"
+      ]
+    },
+    {
+      "id": "class:frisboo-persistence/src/testFixtures/kotlin/com/frisboo/corebanking/persistence/postgres/testing/PostgreSQLTestFixture.kt:PostgreSQLTestFixture",
+      "type": "class",
+      "name": "PostgreSQLTestFixture",
+      "filePath": "frisboo-persistence/src/testFixtures/kotlin/com/frisboo/corebanking/persistence/postgres/testing/PostgreSQLTestFixture.kt",
+      "summary": "Thread-safe test fixture managing PostgreSQLContainer lifecycle, HikariDataSource, and Flyway migrations with start/stop/migrate methods",
+      "tags": [
+        "testfixture",
+        "postgres",
+        "persistence",
+        "testcontainers"
+      ]
+    },
+    {
+      "id": "file:frisboo-persistence/src/testFixtures/kotlin/com/frisboo/corebanking/persistence/redis/testing/RedisTestFixture.kt",
+      "type": "file",
+      "name": "RedisTestFixture.kt",
+      "filePath": "frisboo-persistence/src/testFixtures/kotlin/com/frisboo/corebanking/persistence/redis/testing/RedisTestFixture.kt",
+      "summary": "Test container fixture wrapping RedisContainer with Lettuce async connection pool for Redis integration testing",
+      "tags": [
+        "testfixture",
+        "redis",
+        "persistence",
+        "testing",
+        "testcontainers"
+      ]
+    },
+    {
+      "id": "class:frisboo-persistence/src/testFixtures/kotlin/com/frisboo/corebanking/persistence/redis/testing/RedisTestFixture.kt:RedisPoolProps",
+      "type": "class",
+      "name": "RedisPoolProps",
+      "filePath": "frisboo-persistence/src/testFixtures/kotlin/com/frisboo/corebanking/persistence/redis/testing/RedisTestFixture.kt",
+      "summary": "Data class configuring Lettuce connection pool with maxTotal default 50 and maxIdle default 10",
+      "tags": [
+        "testfixture",
+        "redis",
+        "config",
+        "valueobject"
+      ]
+    },
+    {
+      "id": "class:frisboo-persistence/src/testFixtures/kotlin/com/frisboo/corebanking/persistence/redis/testing/RedisTestFixture.kt:RedisTestFixture",
+      "type": "class",
+      "name": "RedisTestFixture",
+      "filePath": "frisboo-persistence/src/testFixtures/kotlin/com/frisboo/corebanking/persistence/redis/testing/RedisTestFixture.kt",
+      "summary": "Thread-safe test fixture managing RedisContainer lifecycle and Lettuce async connection pool with start/stop/getConnection/getPool/withConnection/flushAll/deleteKeys methods",
+      "tags": [
+        "testfixture",
+        "redis",
+        "persistence",
+        "testcontainers"
+      ]
+    },
+    {
+      "id": "file:frisboo-quota/build.gradle.kts",
+      "type": "file",
+      "name": "build.gradle.kts",
+      "filePath": "frisboo-quota/build.gradle.kts",
+      "summary": "Gradle build script for frisboo-quota module applying kotlin-conventions, dokka, and maven-publish plugins with dependency on frisboo-core",
+      "tags": [
+        "gradle",
+        "build",
+        "config"
+      ]
+    },
+    {
+      "id": "file:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/contracts/ApiQuotaDecider.kt",
+      "type": "file",
+      "name": "ApiQuotaDecider.kt",
+      "filePath": "frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/contracts/ApiQuotaDecider.kt",
+      "summary": "Public interface defining API quota decision operations isAllowed and tryRecord using arrow.core.Either for error handling",
+      "tags": [
+        "api",
+        "contract",
+        "quota"
+      ]
+    },
+    {
+      "id": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/contracts/ApiQuotaDecider.kt:ApiQuotaDecider",
+      "type": "class",
+      "name": "ApiQuotaDecider",
+      "filePath": "frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/contracts/ApiQuotaDecider.kt",
+      "summary": "Public interface deciding whether API requests are allowed under current quota state with isAllowed and tryRecord methods",
+      "tags": [
+        "api",
+        "contract",
+        "quota",
+        "interface"
+      ]
+    },
+    {
+      "id": "file:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/contracts/ApiQuotaReader.kt",
+      "type": "file",
+      "name": "ApiQuotaReader.kt",
+      "filePath": "frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/contracts/ApiQuotaReader.kt",
+      "summary": "Public interface providing read-only access to API quota state with usage and remainingRequests methods returning ApiUsage",
+      "tags": [
+        "api",
+        "contract",
+        "quota"
+      ]
+    },
+    {
+      "id": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/contracts/ApiQuotaReader.kt:ApiQuotaReader",
+      "type": "class",
+      "name": "ApiQuotaReader",
+      "filePath": "frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/contracts/ApiQuotaReader.kt",
+      "summary": "Public interface providing read-only access to API quota state with usage and remainingRequests methods",
+      "tags": [
+        "api",
+        "contract",
+        "quota",
+        "interface"
+      ]
+    },
+    {
+      "id": "file:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/contracts/ApiQuotaWriter.kt",
+      "type": "file",
+      "name": "ApiQuotaWriter.kt",
+      "filePath": "frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/contracts/ApiQuotaWriter.kt",
+      "summary": "Public interface and sealed error hierarchy for API quota write operations including recordRequest and resetUsage with Either-based error handling",
+      "tags": [
+        "api",
+        "contract",
+        "quota"
+      ]
+    },
+    {
+      "id": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/contracts/ApiQuotaWriter.kt:ApiQuotaError",
+      "type": "class",
+      "name": "ApiQuotaError",
+      "filePath": "frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/contracts/ApiQuotaWriter.kt",
+      "summary": "Public sealed interface for API quota mutation failures with RateLimitExceeded and Unavailable data classes",
+      "tags": [
+        "api",
+        "contract",
+        "quota",
+        "error"
+      ]
+    },
+    {
+      "id": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/contracts/ApiQuotaWriter.kt:RateLimitExceeded",
+      "type": "class",
+      "name": "RateLimitExceeded",
+      "filePath": "frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/contracts/ApiQuotaWriter.kt",
+      "summary": "Data class indicating API rate limit exceeded for a specific key and endpoint with retryAfter duration",
+      "tags": [
+        "api",
+        "contract",
+        "quota",
+        "error"
+      ]
+    },
+    {
+      "id": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/contracts/ApiQuotaWriter.kt:Unavailable",
+      "type": "class",
+      "name": "Unavailable",
+      "filePath": "frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/contracts/ApiQuotaWriter.kt",
+      "summary": "Data class indicating the underlying quota system is unavailable with optional cause throwable",
+      "tags": [
+        "api",
+        "contract",
+        "quota",
+        "error"
+      ]
+    },
+    {
+      "id": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/contracts/ApiQuotaWriter.kt:ApiQuotaWriter",
+      "type": "class",
+      "name": "ApiQuotaWriter",
+      "filePath": "frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/contracts/ApiQuotaWriter.kt",
+      "summary": "Public interface providing write operations for API quota state with recordRequest and resetUsage methods",
+      "tags": [
+        "api",
+        "contract",
+        "quota",
+        "interface"
+      ]
+    },
+    {
+      "id": "file:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/model/ApiUsage.kt",
+      "type": "file",
+      "name": "ApiUsage.kt",
+      "filePath": "frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/model/ApiUsage.kt",
+      "summary": "Public data class representing API quota usage snapshot for a key and endpoint within a time window",
+      "tags": [
+        "api",
+        "model",
+        "quota"
+      ]
+    },
+    {
+      "id": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/model/ApiUsage.kt:ApiUsage",
+      "type": "class",
+      "name": "ApiUsage",
+      "filePath": "frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/model/ApiUsage.kt",
+      "summary": "Public data class representing API quota usage with apiKey, endpoint, requestCount, windowStart, and windowEnd fields",
+      "tags": [
+        "api",
+        "model",
+        "quota",
+        "dataclass"
+      ]
+    },
+    {
+      "id": "file:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/tracker/contracts/QuotaDecider.kt",
+      "type": "file",
+      "name": "QuotaDecider.kt",
+      "filePath": "frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/tracker/contracts/QuotaDecider.kt",
+      "summary": "Public interface deciding whether actions are allowed under current quota state with tryConsume method using Either-based error handling",
+      "tags": [
+        "tracker",
+        "contract",
+        "quota"
+      ]
+    },
+    {
+      "id": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/tracker/contracts/QuotaDecider.kt:QuotaDecider",
+      "type": "class",
+      "name": "QuotaDecider",
+      "filePath": "frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/tracker/contracts/QuotaDecider.kt",
+      "summary": "Public interface deciding quota consumption with tryConsume method returning Either<QuotaError, Boolean>",
+      "tags": [
+        "tracker",
+        "contract",
+        "quota",
+        "interface"
+      ]
+    },
+    {
+      "id": "file:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/tracker/contracts/QuotaReader.kt",
+      "type": "file",
+      "name": "QuotaReader.kt",
+      "filePath": "frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/tracker/contracts/QuotaReader.kt",
+      "summary": "Public interface providing read-only access to quota state with remaining, limit, and isExhausted methods",
+      "tags": [
+        "tracker",
+        "contract",
+        "quota"
+      ]
+    },
+    {
+      "id": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/tracker/contracts/QuotaReader.kt:QuotaReader",
+      "type": "class",
+      "name": "QuotaReader",
+      "filePath": "frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/tracker/contracts/QuotaReader.kt",
+      "summary": "Public interface providing read-only access to quota state with remaining, limit, and isExhausted methods",
+      "tags": [
+        "tracker",
+        "contract",
+        "quota",
+        "interface"
+      ]
+    },
+    {
+      "id": "file:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/tracker/contracts/QuotaTracker.kt",
+      "type": "file",
+      "name": "QuotaTracker.kt",
+      "filePath": "frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/tracker/contracts/QuotaTracker.kt",
+      "summary": "Public aggregate facade interface combining QuotaReader, QuotaWriter, and QuotaDecider capabilities",
+      "tags": [
+        "tracker",
+        "contract",
+        "quota"
+      ]
+    },
+    {
+      "id": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/tracker/contracts/QuotaTracker.kt:QuotaTracker",
+      "type": "class",
+      "name": "QuotaTracker",
+      "filePath": "frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/tracker/contracts/QuotaTracker.kt",
+      "summary": "Public aggregate facade interface combining read, write, and decision capabilities for quota management",
+      "tags": [
+        "tracker",
+        "contract",
+        "quota",
+        "interface",
+        "facade"
+      ]
+    },
+    {
+      "id": "file:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/tracker/contracts/QuotaWriter.kt",
+      "type": "file",
+      "name": "QuotaWriter.kt",
+      "filePath": "frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/tracker/contracts/QuotaWriter.kt",
+      "summary": "Public interface and sealed error hierarchy for quota write operations including consume, release, and reset with Either-based error handling",
+      "tags": [
+        "tracker",
+        "contract",
+        "quota"
+      ]
+    },
+    {
+      "id": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/tracker/contracts/QuotaWriter.kt:QuotaError",
+      "type": "class",
+      "name": "QuotaError",
+      "filePath": "frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/tracker/contracts/QuotaWriter.kt",
+      "summary": "Public sealed interface for quota mutation failures with Exhausted, NotFound, and Unavailable data classes",
+      "tags": [
+        "tracker",
+        "contract",
+        "quota",
+        "error"
+      ]
+    },
+    {
+      "id": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/tracker/contracts/QuotaWriter.kt:Exhausted",
+      "type": "class",
+      "name": "Exhausted",
+      "filePath": "frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/tracker/contracts/QuotaWriter.kt",
+      "summary": "Data class indicating quota consumption exceeded the configured limit for a specific quotaId",
+      "tags": [
+        "tracker",
+        "contract",
+        "quota",
+        "error"
+      ]
+    },
+    {
+      "id": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/tracker/contracts/QuotaWriter.kt:NotFound",
+      "type": "class",
+      "name": "NotFound",
+      "filePath": "frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/tracker/contracts/QuotaWriter.kt",
+      "summary": "Data class indicating the requested quota identifier does not exist",
+      "tags": [
+        "tracker",
+        "contract",
+        "quota",
+        "error"
+      ]
+    },
+    {
+      "id": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/tracker/contracts/QuotaWriter.kt:Unavailable",
+      "type": "class",
+      "name": "Unavailable",
+      "filePath": "frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/tracker/contracts/QuotaWriter.kt",
+      "summary": "Data class indicating the underlying quota system is unavailable with optional cause throwable",
+      "tags": [
+        "tracker",
+        "contract",
+        "quota",
+        "error"
+      ]
+    },
+    {
+      "id": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/tracker/contracts/QuotaWriter.kt:QuotaWriter",
+      "type": "class",
+      "name": "QuotaWriter",
+      "filePath": "frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/tracker/contracts/QuotaWriter.kt",
+      "summary": "Public interface providing write operations for quota state with consume, release, and reset methods",
+      "tags": [
+        "tracker",
+        "contract",
+        "quota",
+        "interface"
+      ]
+    },
+    {
+      "id": "file:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/contracts/ApiQuotaTracker.kt",
+      "type": "file",
+      "name": "ApiQuotaTracker.kt",
+      "filePath": "frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/contracts/ApiQuotaTracker.kt",
+      "summary": "Public aggregate API facade interface combining ApiQuotaReader, ApiQuotaWriter, and ApiQuotaDecider capabilities",
+      "tags": [
+        "api",
+        "contract",
+        "quota",
+        "interface"
+      ]
+    },
+    {
+      "id": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/contracts/ApiQuotaTracker.kt:ApiQuotaTracker",
+      "type": "class",
+      "name": "ApiQuotaTracker",
+      "filePath": "frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/contracts/ApiQuotaTracker.kt",
+      "summary": "Public aggregate facade interface combining read, write, and decision capabilities for API quota operations",
+      "tags": [
+        "api",
+        "contract",
+        "quota",
+        "interface"
+      ]
+    },
+    {
+      "id": "file:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/window/contracts/SlidingWindowCounter.kt",
+      "type": "file",
+      "name": "SlidingWindowCounter.kt",
+      "filePath": "frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/window/contracts/SlidingWindowCounter.kt",
+      "summary": "Public aggregate sliding window facade combining WindowReader and WindowWriter with isWithinLimit check",
+      "tags": [
+        "window",
+        "contract",
+        "quota",
+        "interface"
+      ]
+    },
+    {
+      "id": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/window/contracts/SlidingWindowCounter.kt:SlidingWindowCounter",
+      "type": "class",
+      "name": "SlidingWindowCounter",
+      "filePath": "frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/window/contracts/SlidingWindowCounter.kt",
+      "summary": "Public aggregate facade interface combining read and write operations for sliding window counters with isWithinLimit method",
+      "tags": [
+        "window",
+        "contract",
+        "quota",
+        "interface"
+      ]
+    },
+    {
+      "id": "file:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/window/contracts/WindowReader.kt",
+      "type": "file",
+      "name": "WindowReader.kt",
+      "filePath": "frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/window/contracts/WindowReader.kt",
+      "summary": "Public interface providing read operations for sliding window counters with count and countSince methods",
+      "tags": [
+        "window",
+        "contract",
+        "quota",
+        "interface",
+        "reader"
+      ]
+    },
+    {
+      "id": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/window/contracts/WindowReader.kt:WindowReader",
+      "type": "class",
+      "name": "WindowReader",
+      "filePath": "frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/window/contracts/WindowReader.kt",
+      "summary": "Public interface providing read-only access to sliding window counts via count and countSince methods",
+      "tags": [
+        "window",
+        "contract",
+        "quota",
+        "interface",
+        "reader"
+      ]
+    },
+    {
+      "id": "file:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/window/contracts/WindowWriter.kt",
+      "type": "file",
+      "name": "WindowWriter.kt",
+      "filePath": "frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/window/contracts/WindowWriter.kt",
+      "summary": "Public interface providing write operations for sliding window counters with WindowError sealed interface and record/trim methods",
+      "tags": [
+        "window",
+        "contract",
+        "quota",
+        "interface",
+        "writer",
+        "error"
+      ]
+    },
+    {
+      "id": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/window/contracts/WindowWriter.kt:WindowError",
+      "type": "class",
+      "name": "WindowError",
+      "filePath": "frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/window/contracts/WindowWriter.kt",
+      "summary": "Public sealed interface describing failures that can occur while mutating window state",
+      "tags": [
+        "window",
+        "contract",
+        "quota",
+        "error",
+        "sealed"
+      ]
+    },
+    {
+      "id": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/window/contracts/WindowWriter.kt:Unavailable",
+      "type": "class",
+      "name": "Unavailable",
+      "filePath": "frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/window/contracts/WindowWriter.kt",
+      "summary": "Data class indicating the underlying window storage is unavailable with optional cause throwable",
+      "tags": [
+        "window",
+        "contract",
+        "quota",
+        "error"
+      ]
+    },
+    {
+      "id": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/window/contracts/WindowWriter.kt:WindowWriter",
+      "type": "class",
+      "name": "WindowWriter",
+      "filePath": "frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/window/contracts/WindowWriter.kt",
+      "summary": "Public interface providing write operations for sliding window counters with record and trim methods returning Either<WindowError, ...>",
+      "tags": [
+        "window",
+        "contract",
+        "quota",
+        "interface",
+        "writer"
+      ]
+    },
+    {
+      "id": "file:frisboo-resilience/build.gradle.kts",
+      "type": "file",
+      "name": "build.gradle.kts",
+      "filePath": "frisboo-resilience/build.gradle.kts",
+      "summary": "Gradle build script for frisboo-resilience module applying kotlin-conventions, dokka, maven-publish; depends on frisboo-core, frisboo-statemanager, resilience4j circuitbreaker/ratelimiter/kotlin",
+      "tags": [
+        "gradle",
+        "build",
+        "config",
+        "resilience"
+      ]
+    },
+    {
+      "id": "file:frisboo-resilience/README.md",
+      "type": "file",
+      "name": "README.md",
+      "filePath": "frisboo-resilience/README.md",
+      "summary": "Module documentation describing circuit breaker states CLOSED/OPEN/HALF_OPEN, rate limiter usage, config resolution order, drift protection, eviction and test configuration",
+      "tags": [
+        "documentation",
+        "resilience",
+        "circuitbreaker",
+        "ratelimiter"
+      ]
+    },
+    {
+      "id": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/autoconfigure/ResilienceAutoConfiguration.kt",
+      "type": "file",
+      "name": "ResilienceAutoConfiguration.kt",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/autoconfigure/ResilienceAutoConfiguration.kt",
+      "summary": "Spring Boot auto-configuration declaring CircuitBreakerFactory and RateLimiterFactory beans conditional on resilience.enabled and circuit-breaker.rate-limiter flags",
+      "tags": [
+        "spring",
+        "autoconfigure",
+        "resilience",
+        "config"
+      ]
+    },
+    {
+      "id": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/autoconfigure/ResilienceAutoConfiguration.kt:ResilienceAutoConfiguration",
+      "type": "class",
+      "name": "ResilienceAutoConfiguration",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/autoconfigure/ResilienceAutoConfiguration.kt",
+      "summary": "Spring @AutoConfiguration class with @Bean methods circuitBreakerFactory and rateLimiterFactory building CircuitBreakerFactoryImpl and RateLimiterFactoryImpl from StateManager and ResilienceProperties",
+      "tags": [
+        "spring",
+        "autoconfigure",
+        "resilience",
+        "config"
+      ]
+    },
+    {
+      "id": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/autoconfigure/ResilienceProperties.kt",
+      "type": "file",
+      "name": "ResilienceProperties.kt",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/autoconfigure/ResilienceProperties.kt",
+      "summary": "Spring ConfigurationProperties binding frisboo.corebanking.resilience config with nested circuit breaker and rate limiter property groups and per-instance overrides",
+      "tags": [
+        "spring",
+        "config",
+        "properties",
+        "resilience"
+      ]
+    },
+    {
+      "id": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/autoconfigure/ResilienceProperties.kt:ResilienceProperties",
+      "type": "class",
+      "name": "ResilienceProperties",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/autoconfigure/ResilienceProperties.kt",
+      "summary": "Top-level @ConfigurationProperties data class holding enabled flag and nested CircuitBreakerProperties and RateLimiterProperties",
+      "tags": [
+        "spring",
+        "config",
+        "properties",
+        "resilience",
+        "dataclass"
+      ]
+    },
+    {
+      "id": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/autoconfigure/ResilienceProperties.kt:CircuitBreakerProperties",
+      "type": "class",
+      "name": "CircuitBreakerProperties",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/autoconfigure/ResilienceProperties.kt",
+      "summary": "Nested data class for circuit breaker config with defaults, maxBreakers validation and resolveConfig merging global and per-instance values into CircuitBreakerConfig",
+      "tags": [
+        "config",
+        "properties",
+        "resilience",
+        "circuitbreaker",
+        "dataclass"
+      ]
+    },
+    {
+      "id": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/autoconfigure/ResilienceProperties.kt:CircuitBreakerInstanceProperties",
+      "type": "class",
+      "name": "CircuitBreakerInstanceProperties",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/autoconfigure/ResilienceProperties.kt",
+      "summary": "Nested data class holding nullable per-instance circuit breaker overrides keyed by breaker name",
+      "tags": [
+        "config",
+        "properties",
+        "resilience",
+        "circuitbreaker",
+        "dataclass"
+      ]
+    },
+    {
+      "id": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/autoconfigure/ResilienceProperties.kt:RateLimiterProperties",
+      "type": "class",
+      "name": "RateLimiterProperties",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/autoconfigure/ResilienceProperties.kt",
+      "summary": "Nested data class for rate limiter config with defaults, maxLimiters validation and resolveConfig merging global and per-instance values into RateLimiterConfig",
+      "tags": [
+        "config",
+        "properties",
+        "resilience",
+        "ratelimiter",
+        "dataclass"
+      ]
+    },
+    {
+      "id": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/autoconfigure/ResilienceProperties.kt:RateLimiterInstanceProperties",
+      "type": "class",
+      "name": "RateLimiterInstanceProperties",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/autoconfigure/ResilienceProperties.kt",
+      "summary": "Nested data class holding nullable per-instance rate limiter overrides keyed by limiter name",
+      "tags": [
+        "config",
+        "properties",
+        "resilience",
+        "ratelimiter",
+        "dataclass"
+      ]
+    },
+    {
+      "id": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitBreaker.kt",
+      "type": "file",
+      "name": "Resilience4jCircuitBreaker.kt",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitBreaker.kt",
+      "summary": "Internal Resilience4j-backed CircuitBreaker implementation delegating permission acquisition, success/error recording and state transitions to R4jCircuitBreaker",
+      "tags": [
+        "resilience",
+        "circuitbreaker",
+        "adapter",
+        "resilience4j"
+      ]
+    },
+    {
+      "id": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitBreaker.kt:Resilience4jCircuitBreaker",
+      "type": "class",
+      "name": "Resilience4jCircuitBreaker",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitBreaker.kt",
+      "summary": "Internal class implementing CircuitBreaker<R4jConfig> wrapping R4jCircuitBreaker; executeSuspend never throws except CancellationException/VirtualMachineError and returns sealed CircuitBreakerResult",
+      "tags": [
+        "resilience",
+        "circuitbreaker",
+        "adapter",
+        "resilience4j"
+      ]
+    },
+    {
+      "id": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitBreakerCreator.kt",
+      "type": "file",
+      "name": "Resilience4jCircuitBreakerCreator.kt",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitBreakerCreator.kt",
+      "summary": "Internal suspend factory function building a Resilience4jCircuitBreaker from config, wiring state-transition persistence and restoring last persisted state on creation",
+      "tags": [
+        "resilience",
+        "circuitbreaker",
+        "adapter",
+        "resilience4j"
+      ]
+    },
+    {
+      "id": "function:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitBreakerCreator.kt:createResilience4jBreaker",
+      "type": "function",
+      "name": "createResilience4jBreaker",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitBreakerCreator.kt",
+      "summary": "Suspend function converting CircuitBreakerConfig to resilience4j config, creating R4jCircuitBreaker, subscribing state transitions for persistence and restoring persisted state before returning Resilience4jCircuitBreaker",
+      "tags": [
+        "resilience",
+        "circuitbreaker",
+        "adapter",
+        "resilience4j"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitBreakerMetrics.kt",
+      "type": "file",
+      "name": "Resilience4jCircuitBreakerMetrics.kt",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitBreakerMetrics.kt",
+      "summary": "Internal companion extension function mapping resilience4j CircuitBreaker metrics into the frisboo CircuitBreakerMetrics contract",
+      "tags": [
+        "resilience",
+        "circuitbreaker",
+        "adapter",
+        "resilience4j",
+        "metrics"
+      ]
+    },
+    {
+      "id": "function:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitBreakerMetrics.kt:from",
+      "type": "function",
+      "name": "from",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitBreakerMetrics.kt",
+      "summary": "Companion extension on CircuitBreakerMetrics.Companion building an anonymous CircuitBreakerMetrics delegating state and call counters to the underlying R4jCircuitBreaker metrics",
+      "tags": [
+        "resilience",
+        "circuitbreaker",
+        "adapter",
+        "resilience4j",
+        "metrics"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitConfig.kt",
+      "type": "file",
+      "name": "Resilience4jCircuitConfig.kt",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitConfig.kt",
+      "summary": "Internal extension function translating frisboo CircuitBreakerConfig into resilience4j CircuitBreakerConfig including exception recording/ignoring sets",
+      "tags": [
+        "resilience",
+        "circuitbreaker",
+        "adapter",
+        "resilience4j",
+        "config"
+      ]
+    },
+    {
+      "id": "function:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitConfig.kt:toResilience4jConfig",
+      "type": "function",
+      "name": "toResilience4jConfig",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitConfig.kt",
+      "summary": "Extension on CircuitBreakerConfig building a resilience4j CircuitBreakerConfig via custom builder mapping thresholds, sliding window, half-open and exception sets",
+      "tags": [
+        "resilience",
+        "circuitbreaker",
+        "adapter",
+        "resilience4j",
+        "config"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:frisboo-persistence/src/test/kotlin/com/frisboo/corebanking/persistence/triggers/SqlTriggerTest.kt",
+      "target": "class:frisboo-persistence/src/test/kotlin/com/frisboo/corebanking/persistence/triggers/SqlTriggerTest.kt:TestVerification",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "file:frisboo-persistence/src/test/kotlin/com/frisboo/corebanking/persistence/triggers/SqlTriggerTest.kt",
+      "target": "class:frisboo-persistence/src/test/kotlin/com/frisboo/corebanking/persistence/triggers/SqlTriggerTest.kt:SqlTriggerTest",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "file:frisboo-persistence/src/test/kotlin/com/frisboo/corebanking/persistence/triggers/SqlTriggerTest.kt",
+      "target": "file:frisboo-persistence/src/testFixtures/kotlin/com/frisboo/corebanking/persistence/postgres/testing/PostgreSQLTestFixture.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "class:frisboo-persistence/src/test/kotlin/com/frisboo/corebanking/persistence/triggers/SqlTriggerTest.kt:TestVerification",
+      "target": "class:frisboo-persistence/src/test/kotlin/com/frisboo/corebanking/persistence/triggers/SqlTriggerTest.kt:SqlTriggerTest",
+      "type": "related",
+      "weight": 0.5
+    },
+    {
+      "source": "file:frisboo-persistence/src/test/kotlin/com/frisboo/corebanking/persistence/triggers/SqlTriggerTimestampedTest.kt",
+      "target": "class:frisboo-persistence/src/test/kotlin/com/frisboo/corebanking/persistence/triggers/SqlTriggerTimestampedTest.kt:TestTimestamped",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "file:frisboo-persistence/src/test/kotlin/com/frisboo/corebanking/persistence/triggers/SqlTriggerTimestampedTest.kt",
+      "target": "class:frisboo-persistence/src/test/kotlin/com/frisboo/corebanking/persistence/triggers/SqlTriggerTimestampedTest.kt:SqlTriggerTimestampedTest",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "file:frisboo-persistence/src/test/kotlin/com/frisboo/corebanking/persistence/triggers/SqlTriggerTimestampedTest.kt",
+      "target": "file:frisboo-persistence/src/testFixtures/kotlin/com/frisboo/corebanking/persistence/postgres/testing/PostgreSQLTestFixture.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-persistence/src/testFixtures/kotlin/com/frisboo/corebanking/persistence/postgres/testing/PostgreSQLTestFixture.kt",
+      "target": "class:frisboo-persistence/src/testFixtures/kotlin/com/frisboo/corebanking/persistence/postgres/testing/PostgreSQLTestFixture.kt:PostgreSQLPoolProps",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "file:frisboo-persistence/src/testFixtures/kotlin/com/frisboo/corebanking/persistence/postgres/testing/PostgreSQLTestFixture.kt",
+      "target": "class:frisboo-persistence/src/testFixtures/kotlin/com/frisboo/corebanking/persistence/postgres/testing/PostgreSQLTestFixture.kt:PostgreSQLTestFixture",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "file:frisboo-persistence/src/testFixtures/kotlin/com/frisboo/corebanking/persistence/redis/testing/RedisTestFixture.kt",
+      "target": "class:frisboo-persistence/src/testFixtures/kotlin/com/frisboo/corebanking/persistence/redis/testing/RedisTestFixture.kt:RedisPoolProps",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "file:frisboo-persistence/src/testFixtures/kotlin/com/frisboo/corebanking/persistence/redis/testing/RedisTestFixture.kt",
+      "target": "class:frisboo-persistence/src/testFixtures/kotlin/com/frisboo/corebanking/persistence/redis/testing/RedisTestFixture.kt:RedisTestFixture",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "file:frisboo-quota/build.gradle.kts",
+      "target": "file:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/contracts/ApiQuotaDecider.kt",
+      "type": "configures",
+      "weight": 0.6
+    },
+    {
+      "source": "file:frisboo-quota/build.gradle.kts",
+      "target": "file:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/contracts/ApiQuotaReader.kt",
+      "type": "configures",
+      "weight": 0.6
+    },
+    {
+      "source": "file:frisboo-quota/build.gradle.kts",
+      "target": "file:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/contracts/ApiQuotaWriter.kt",
+      "type": "configures",
+      "weight": 0.6
+    },
+    {
+      "source": "file:frisboo-quota/build.gradle.kts",
+      "target": "file:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/model/ApiUsage.kt",
+      "type": "configures",
+      "weight": 0.6
+    },
+    {
+      "source": "file:frisboo-quota/build.gradle.kts",
+      "target": "file:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/tracker/contracts/QuotaDecider.kt",
+      "type": "configures",
+      "weight": 0.6
+    },
+    {
+      "source": "file:frisboo-quota/build.gradle.kts",
+      "target": "file:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/tracker/contracts/QuotaReader.kt",
+      "type": "configures",
+      "weight": 0.6
+    },
+    {
+      "source": "file:frisboo-quota/build.gradle.kts",
+      "target": "file:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/tracker/contracts/QuotaTracker.kt",
+      "type": "configures",
+      "weight": 0.6
+    },
+    {
+      "source": "file:frisboo-quota/build.gradle.kts",
+      "target": "file:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/tracker/contracts/QuotaWriter.kt",
+      "type": "configures",
+      "weight": 0.6
+    },
+    {
+      "source": "file:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/contracts/ApiQuotaDecider.kt",
+      "target": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/contracts/ApiQuotaDecider.kt:ApiQuotaDecider",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "file:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/contracts/ApiQuotaReader.kt",
+      "target": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/contracts/ApiQuotaReader.kt:ApiQuotaReader",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "file:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/contracts/ApiQuotaReader.kt",
+      "target": "file:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/model/ApiUsage.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/contracts/ApiQuotaWriter.kt",
+      "target": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/contracts/ApiQuotaWriter.kt:ApiQuotaError",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "file:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/contracts/ApiQuotaWriter.kt",
+      "target": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/contracts/ApiQuotaWriter.kt:RateLimitExceeded",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "file:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/contracts/ApiQuotaWriter.kt",
+      "target": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/contracts/ApiQuotaWriter.kt:Unavailable",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "file:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/contracts/ApiQuotaWriter.kt",
+      "target": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/contracts/ApiQuotaWriter.kt:ApiQuotaWriter",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "file:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/model/ApiUsage.kt",
+      "target": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/model/ApiUsage.kt:ApiUsage",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "file:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/tracker/contracts/QuotaDecider.kt",
+      "target": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/tracker/contracts/QuotaDecider.kt:QuotaDecider",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "file:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/tracker/contracts/QuotaReader.kt",
+      "target": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/tracker/contracts/QuotaReader.kt:QuotaReader",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "file:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/tracker/contracts/QuotaTracker.kt",
+      "target": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/tracker/contracts/QuotaTracker.kt:QuotaTracker",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "file:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/tracker/contracts/QuotaWriter.kt",
+      "target": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/tracker/contracts/QuotaWriter.kt:QuotaError",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "file:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/tracker/contracts/QuotaWriter.kt",
+      "target": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/tracker/contracts/QuotaWriter.kt:Exhausted",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "file:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/tracker/contracts/QuotaWriter.kt",
+      "target": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/tracker/contracts/QuotaWriter.kt:NotFound",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "file:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/tracker/contracts/QuotaWriter.kt",
+      "target": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/tracker/contracts/QuotaWriter.kt:Unavailable",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "file:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/tracker/contracts/QuotaWriter.kt",
+      "target": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/tracker/contracts/QuotaWriter.kt:QuotaWriter",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/tracker/contracts/QuotaTracker.kt:QuotaTracker",
+      "target": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/tracker/contracts/QuotaReader.kt:QuotaReader",
+      "type": "inherits",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/tracker/contracts/QuotaTracker.kt:QuotaTracker",
+      "target": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/tracker/contracts/QuotaWriter.kt:QuotaWriter",
+      "type": "inherits",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/tracker/contracts/QuotaTracker.kt:QuotaTracker",
+      "target": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/tracker/contracts/QuotaDecider.kt:QuotaDecider",
+      "type": "inherits",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/contracts/ApiQuotaWriter.kt:ApiQuotaError",
+      "target": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/contracts/ApiQuotaWriter.kt:RateLimitExceeded",
+      "type": "inherits",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/contracts/ApiQuotaWriter.kt:ApiQuotaError",
+      "target": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/contracts/ApiQuotaWriter.kt:Unavailable",
+      "type": "inherits",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/tracker/contracts/QuotaWriter.kt:QuotaError",
+      "target": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/tracker/contracts/QuotaWriter.kt:Exhausted",
+      "type": "inherits",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/tracker/contracts/QuotaWriter.kt:QuotaError",
+      "target": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/tracker/contracts/QuotaWriter.kt:NotFound",
+      "type": "inherits",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/tracker/contracts/QuotaWriter.kt:QuotaError",
+      "target": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/tracker/contracts/QuotaWriter.kt:Unavailable",
+      "type": "inherits",
+      "weight": 0.9
+    },
+    {
+      "source": "file:frisboo-persistence/src/test/kotlin/com/frisboo/corebanking/persistence/triggers/SqlTriggerTest.kt",
+      "target": "file:frisboo-persistence/src/test/kotlin/com/frisboo/corebanking/persistence/triggers/SqlTriggerTimestampedTest.kt",
+      "type": "similar_to",
+      "weight": 0.5
+    },
+    {
+      "source": "file:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/contracts/ApiQuotaReader.kt",
+      "target": "file:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/tracker/contracts/QuotaReader.kt",
+      "type": "similar_to",
+      "weight": 0.5
+    },
+    {
+      "source": "file:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/contracts/ApiQuotaWriter.kt",
+      "target": "file:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/tracker/contracts/QuotaWriter.kt",
+      "type": "similar_to",
+      "weight": 0.5
+    },
+    {
+      "source": "file:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/contracts/ApiQuotaDecider.kt",
+      "target": "file:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/tracker/contracts/QuotaDecider.kt",
+      "type": "similar_to",
+      "weight": 0.5
+    },
+    {
+      "source": "file:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/contracts/ApiQuotaTracker.kt",
+      "target": "file:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/tracker/contracts/QuotaTracker.kt",
+      "type": "similar_to",
+      "weight": 0.5
+    },
+    {
+      "source": "file:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/contracts/ApiQuotaTracker.kt",
+      "target": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/contracts/ApiQuotaTracker.kt:ApiQuotaTracker",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/contracts/ApiQuotaTracker.kt:ApiQuotaTracker",
+      "target": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/contracts/ApiQuotaReader.kt:ApiQuotaReader",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/contracts/ApiQuotaTracker.kt:ApiQuotaTracker",
+      "target": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/contracts/ApiQuotaWriter.kt:ApiQuotaWriter",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/contracts/ApiQuotaTracker.kt:ApiQuotaTracker",
+      "target": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/contracts/ApiQuotaDecider.kt:ApiQuotaDecider",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "file:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/window/contracts/SlidingWindowCounter.kt",
+      "target": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/window/contracts/SlidingWindowCounter.kt:SlidingWindowCounter",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/window/contracts/SlidingWindowCounter.kt:SlidingWindowCounter",
+      "target": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/window/contracts/WindowReader.kt:WindowReader",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/window/contracts/SlidingWindowCounter.kt:SlidingWindowCounter",
+      "target": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/window/contracts/WindowWriter.kt:WindowWriter",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "file:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/window/contracts/WindowReader.kt",
+      "target": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/window/contracts/WindowReader.kt:WindowReader",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "file:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/window/contracts/WindowWriter.kt",
+      "target": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/window/contracts/WindowWriter.kt:WindowError",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "file:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/window/contracts/WindowWriter.kt",
+      "target": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/window/contracts/WindowWriter.kt:Unavailable",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "file:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/window/contracts/WindowWriter.kt",
+      "target": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/window/contracts/WindowWriter.kt:WindowWriter",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/window/contracts/WindowWriter.kt:Unavailable",
+      "target": "class:frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/window/contracts/WindowWriter.kt:WindowError",
+      "type": "inherits",
+      "weight": 0.9
+    },
+    {
+      "source": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/autoconfigure/ResilienceAutoConfiguration.kt",
+      "target": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/autoconfigure/ResilienceAutoConfiguration.kt:ResilienceAutoConfiguration",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/autoconfigure/ResilienceProperties.kt",
+      "target": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/autoconfigure/ResilienceProperties.kt:ResilienceProperties",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/autoconfigure/ResilienceProperties.kt",
+      "target": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/autoconfigure/ResilienceProperties.kt:CircuitBreakerProperties",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/autoconfigure/ResilienceProperties.kt",
+      "target": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/autoconfigure/ResilienceProperties.kt:CircuitBreakerInstanceProperties",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/autoconfigure/ResilienceProperties.kt",
+      "target": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/autoconfigure/ResilienceProperties.kt:RateLimiterProperties",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/autoconfigure/ResilienceProperties.kt",
+      "target": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/autoconfigure/ResilienceProperties.kt:RateLimiterInstanceProperties",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitBreaker.kt",
+      "target": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitBreaker.kt:Resilience4jCircuitBreaker",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitBreakerCreator.kt",
+      "target": "function:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitBreakerCreator.kt:createResilience4jBreaker",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitBreakerMetrics.kt",
+      "target": "function:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitBreakerMetrics.kt:from",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitConfig.kt",
+      "target": "function:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitConfig.kt:toResilience4jConfig",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitBreakerCreator.kt",
+      "target": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitBreaker.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "function:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitBreakerCreator.kt:createResilience4jBreaker",
+      "target": "function:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitConfig.kt:toResilience4jConfig",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "function:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitBreakerCreator.kt:createResilience4jBreaker",
+      "target": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitBreaker.kt:Resilience4jCircuitBreaker",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frisboo-resilience/build.gradle.kts",
+      "target": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/autoconfigure/ResilienceAutoConfiguration.kt:ResilienceAutoConfiguration",
+      "type": "configures",
+      "weight": 0.6
+    },
+    {
+      "source": "file:frisboo-resilience/README.md",
+      "target": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitBreaker.kt:Resilience4jCircuitBreaker",
+      "type": "documents",
+      "weight": 0.5
+    },
+    {
+      "source": "file:frisboo-resilience/README.md",
+      "target": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/autoconfigure/ResilienceProperties.kt:ResilienceProperties",
+      "type": "documents",
+      "weight": 0.5
+    },
+    {
+      "source": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/autoconfigure/ResilienceAutoConfiguration.kt:ResilienceAutoConfiguration",
+      "target": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/autoconfigure/ResilienceProperties.kt:ResilienceProperties",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/autoconfigure/ResilienceProperties.kt:ResilienceProperties",
+      "target": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/autoconfigure/ResilienceProperties.kt:CircuitBreakerProperties",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/autoconfigure/ResilienceProperties.kt:CircuitBreakerProperties",
+      "target": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/autoconfigure/ResilienceProperties.kt:CircuitBreakerInstanceProperties",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/autoconfigure/ResilienceProperties.kt:ResilienceProperties",
+      "target": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/autoconfigure/ResilienceProperties.kt:RateLimiterProperties",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/autoconfigure/ResilienceProperties.kt:RateLimiterProperties",
+      "target": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/autoconfigure/ResilienceProperties.kt:RateLimiterInstanceProperties",
+      "type": "contains",
+      "weight": 1
+    },
+    {
+      "source": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitBreaker.kt:Resilience4jCircuitBreaker",
+      "target": "function:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitBreakerMetrics.kt:from",
+      "type": "calls",
+      "weight": 0.8
+    },
+    {
+      "source": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitBreaker.kt",
+      "target": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitBreakerMetrics.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-resilience/README.md",
+      "target": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/autoconfigure/ResilienceAutoConfiguration.kt:ResilienceAutoConfiguration",
+      "type": "documents",
+      "weight": 0.5
+    },
+    {
+      "source": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitBreakerCreator.kt",
+      "target": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitConfig.kt",
+      "type": "imports",
+      "weight": 0.7
+    }
+  ]
+}

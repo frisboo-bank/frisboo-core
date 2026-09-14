@@ -1,0 +1,1517 @@
+{
+  "nodes": [
+    {
+      "id": "file:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/featureflag/contracts/FeatureFlagReader.kt",
+      "type": "file",
+      "name": "FeatureFlagReader.kt",
+      "filePath": "frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/featureflag/contracts/FeatureFlagReader.kt",
+      "summary": "Read contract interface for feature flag state and rollout metadata.",
+      "tags": [
+        "featureflag",
+        "contract",
+        "api"
+      ]
+    },
+    {
+      "id": "class:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/featureflag/contracts/FeatureFlagReader.kt:FeatureFlagReader",
+      "type": "class",
+      "name": "FeatureFlagReader",
+      "filePath": "frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/featureflag/contracts/FeatureFlagReader.kt",
+      "summary": "Read contract interface providing feature flag global enablement, per-user enablement, rollout percentage, and full flag listing.",
+      "tags": [
+        "featureflag",
+        "contract",
+        "api"
+      ]
+    },
+    {
+      "id": "file:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/featureflag/contracts/FeatureFlagStore.kt",
+      "type": "file",
+      "name": "FeatureFlagStore.kt",
+      "filePath": "frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/featureflag/contracts/FeatureFlagStore.kt",
+      "summary": "Aggregate facade interface combining feature flag read and write contracts.",
+      "tags": [
+        "featureflag",
+        "contract",
+        "api"
+      ]
+    },
+    {
+      "id": "class:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/featureflag/contracts/FeatureFlagStore.kt:FeatureFlagStore",
+      "type": "class",
+      "name": "FeatureFlagStore",
+      "filePath": "frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/featureflag/contracts/FeatureFlagStore.kt",
+      "summary": "Aggregate facade interface that extends both FeatureFlagReader and FeatureFlagWriter.",
+      "tags": [
+        "featureflag",
+        "contract",
+        "api"
+      ]
+    },
+    {
+      "id": "file:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/featureflag/contracts/FeatureFlagWriter.kt",
+      "type": "file",
+      "name": "FeatureFlagWriter.kt",
+      "filePath": "frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/featureflag/contracts/FeatureFlagWriter.kt",
+      "summary": "Write contract interface for feature flag mutations plus the FeatureFlagError sealed hierarchy.",
+      "tags": [
+        "featureflag",
+        "contract",
+        "api"
+      ]
+    },
+    {
+      "id": "class:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/featureflag/contracts/FeatureFlagWriter.kt:FeatureFlagWriter",
+      "type": "class",
+      "name": "FeatureFlagWriter",
+      "filePath": "frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/featureflag/contracts/FeatureFlagWriter.kt",
+      "summary": "Write contract interface for enabling/disabling flags globally and per-user, and setting rollout percentages.",
+      "tags": [
+        "featureflag",
+        "contract",
+        "api"
+      ]
+    },
+    {
+      "id": "class:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/featureflag/contracts/FeatureFlagWriter.kt:FeatureFlagError",
+      "type": "class",
+      "name": "FeatureFlagError",
+      "filePath": "frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/featureflag/contracts/FeatureFlagWriter.kt",
+      "summary": "Sealed interface of domain errors for feature flag write operations: NotFound, InvalidPercentage, Unavailable.",
+      "tags": [
+        "featureflag",
+        "error",
+        "domain"
+      ]
+    },
+    {
+      "id": "file:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/scheduling/contracts/ScheduledTaskState.kt",
+      "type": "file",
+      "name": "ScheduledTaskState.kt",
+      "filePath": "frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/scheduling/contracts/ScheduledTaskState.kt",
+      "summary": "Aggregate facade interface combining scheduled task state read and write contracts.",
+      "tags": [
+        "scheduling",
+        "contract",
+        "api"
+      ]
+    },
+    {
+      "id": "class:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/scheduling/contracts/ScheduledTaskState.kt:ScheduledTaskState",
+      "type": "class",
+      "name": "ScheduledTaskState",
+      "filePath": "frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/scheduling/contracts/ScheduledTaskState.kt",
+      "summary": "Aggregate facade interface that extends both TaskStateReader and TaskStateWriter.",
+      "tags": [
+        "scheduling",
+        "contract",
+        "api"
+      ]
+    },
+    {
+      "id": "file:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/scheduling/contracts/TaskStateReader.kt",
+      "type": "file",
+      "name": "TaskStateReader.kt",
+      "filePath": "frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/scheduling/contracts/TaskStateReader.kt",
+      "summary": "Read contract interface for scheduled task state queries.",
+      "tags": [
+        "scheduling",
+        "contract",
+        "api"
+      ]
+    },
+    {
+      "id": "class:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/scheduling/contracts/TaskStateReader.kt:TaskStateReader",
+      "type": "class",
+      "name": "TaskStateReader",
+      "filePath": "frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/scheduling/contracts/TaskStateReader.kt",
+      "summary": "Read contract interface for retrieving task schedules, all schedules, and due-status checks.",
+      "tags": [
+        "scheduling",
+        "contract",
+        "api"
+      ]
+    },
+    {
+      "id": "file:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/scheduling/contracts/TaskStateWriter.kt",
+      "type": "file",
+      "name": "TaskStateWriter.kt",
+      "filePath": "frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/scheduling/contracts/TaskStateWriter.kt",
+      "summary": "Write contract interface for scheduled task lifecycle mutations plus the SchedulingError sealed hierarchy.",
+      "tags": [
+        "scheduling",
+        "contract",
+        "api"
+      ]
+    },
+    {
+      "id": "class:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/scheduling/contracts/TaskStateWriter.kt:TaskStateWriter",
+      "type": "class",
+      "name": "TaskStateWriter",
+      "filePath": "frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/scheduling/contracts/TaskStateWriter.kt",
+      "summary": "Write contract interface for registering/unregistering tasks, recording execution, and enabling/disabling scheduling.",
+      "tags": [
+        "scheduling",
+        "contract",
+        "api"
+      ]
+    },
+    {
+      "id": "class:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/scheduling/contracts/TaskStateWriter.kt:SchedulingError",
+      "type": "class",
+      "name": "SchedulingError",
+      "filePath": "frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/scheduling/contracts/TaskStateWriter.kt",
+      "summary": "Sealed interface of domain errors for scheduling state write operations: TaskNotFound, AlreadyRegistered, InvalidCron, Unavailable.",
+      "tags": [
+        "scheduling",
+        "error",
+        "domain"
+      ]
+    },
+    {
+      "id": "file:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/scheduling/model/TaskSchedule.kt",
+      "type": "file",
+      "name": "TaskSchedule.kt",
+      "filePath": "frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/scheduling/model/TaskSchedule.kt",
+      "summary": "Data model snapshot of scheduling configuration and execution pointers for a task.",
+      "tags": [
+        "scheduling",
+        "model",
+        "valueobject"
+      ]
+    },
+    {
+      "id": "class:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/scheduling/model/TaskSchedule.kt:TaskSchedule",
+      "type": "class",
+      "name": "TaskSchedule",
+      "filePath": "frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/scheduling/model/TaskSchedule.kt",
+      "summary": "Data class snapshot containing taskId, cronExpression, enabled flag, lastRun, and nextRun timestamps.",
+      "tags": [
+        "scheduling",
+        "model",
+        "valueobject"
+      ]
+    },
+    {
+      "id": "file:frisboo-config/build.gradle.kts",
+      "type": "file",
+      "name": "build.gradle.kts",
+      "filePath": "frisboo-config/build.gradle.kts",
+      "summary": "Gradle build configuration for the frisboo-config module.",
+      "tags": [
+        "config",
+        "build",
+        "gradle"
+      ]
+    },
+    {
+      "id": "file:frisboo-coordination/build.gradle.kts",
+      "type": "file",
+      "name": "build.gradle.kts",
+      "filePath": "frisboo-coordination/build.gradle.kts",
+      "summary": "Gradle build script configuring the frisboo-coordination module with Kotlin conventions, Dokka, and Maven publishing.",
+      "tags": [
+        "gradle",
+        "config",
+        "build"
+      ]
+    },
+    {
+      "id": "file:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaderElection.kt",
+      "type": "file",
+      "name": "LeaderElection.kt",
+      "filePath": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaderElection.kt",
+      "summary": "Leader election contract interface with single-leader semantics, candidacy, resignation, and leadership checks, plus ElectionError sealed hierarchy.",
+      "tags": [
+        "coordination",
+        "election",
+        "contract",
+        "api"
+      ]
+    },
+    {
+      "id": "file:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaseAcquirer.kt",
+      "type": "file",
+      "name": "LeaseAcquirer.kt",
+      "filePath": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaseAcquirer.kt",
+      "summary": "Lease acquisition and renewal contract interface with LeaseError sealed hierarchy.",
+      "tags": [
+        "coordination",
+        "election",
+        "contract",
+        "api"
+      ]
+    },
+    {
+      "id": "file:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaseMetrics.kt",
+      "type": "file",
+      "name": "LeaseMetrics.kt",
+      "filePath": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaseMetrics.kt",
+      "summary": "Read-only contract exposing current lease holder, expiry instant, and lease validity.",
+      "tags": [
+        "coordination",
+        "election",
+        "contract",
+        "api"
+      ]
+    },
+    {
+      "id": "file:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaseReleaser.kt",
+      "type": "file",
+      "name": "LeaseReleaser.kt",
+      "filePath": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaseReleaser.kt",
+      "summary": "Contract for releasing a leadership lease held by a candidate.",
+      "tags": [
+        "coordination",
+        "election",
+        "contract",
+        "api"
+      ]
+    },
+    {
+      "id": "file:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/lock/contracts/DistributedLock.kt",
+      "type": "file",
+      "name": "DistributedLock.kt",
+      "filePath": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/lock/contracts/DistributedLock.kt",
+      "summary": "Distributed lock contract interface providing mutual exclusion with acquire, release, and withLock scoped block, plus LockToken and LockError sealed hierarchy.",
+      "tags": [
+        "coordination",
+        "lock",
+        "contract",
+        "api"
+      ]
+    },
+    {
+      "id": "file:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/lock/contracts/LockAcquirer.kt",
+      "type": "file",
+      "name": "LockAcquirer.kt",
+      "filePath": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/lock/contracts/LockAcquirer.kt",
+      "summary": "Contract for distributed lock acquisition operations.",
+      "tags": [
+        "coordination",
+        "lock",
+        "contract",
+        "api"
+      ]
+    },
+    {
+      "id": "file:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/lock/contracts/LockMetrics.kt",
+      "type": "file",
+      "name": "LockMetrics.kt",
+      "filePath": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/lock/contracts/LockMetrics.kt",
+      "summary": "Read-only contract exposing distributed lock state, holder, and expiry metrics.",
+      "tags": [
+        "coordination",
+        "lock",
+        "contract",
+        "api"
+      ]
+    },
+    {
+      "id": "file:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/lock/contracts/LockReleaser.kt",
+      "type": "file",
+      "name": "LockReleaser.kt",
+      "filePath": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/lock/contracts/LockReleaser.kt",
+      "summary": "Contract for releasing a distributed lock via ownership token.",
+      "tags": [
+        "coordination",
+        "lock",
+        "contract",
+        "api"
+      ]
+    },
+    {
+      "id": "file:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/lock/model/LockConfig.kt",
+      "type": "file",
+      "name": "LockConfig.kt",
+      "filePath": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/lock/model/LockConfig.kt",
+      "summary": "Value object configuring lock timeout and acquire timeout durations with positive-value validation.",
+      "tags": [
+        "coordination",
+        "lock",
+        "model",
+        "valueobject"
+      ]
+    },
+    {
+      "id": "file:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/reservation/contracts/ReservationReader.kt",
+      "type": "file",
+      "name": "ReservationReader.kt",
+      "filePath": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/reservation/contracts/ReservationReader.kt",
+      "summary": "Read-only contract querying reservation state, holder, and expiry.",
+      "tags": [
+        "coordination",
+        "reservation",
+        "contract",
+        "api"
+      ]
+    },
+    {
+      "id": "file:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/reservation/contracts/ReservationWriter.kt",
+      "type": "file",
+      "name": "ReservationWriter.kt",
+      "filePath": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/reservation/contracts/ReservationWriter.kt",
+      "summary": "Write contract for reservation lifecycle operations with ReservationError sealed hierarchy.",
+      "tags": [
+        "coordination",
+        "reservation",
+        "contract",
+        "api"
+      ]
+    },
+    {
+      "id": "file:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/reservation/contracts/ResourceReservation.kt",
+      "type": "file",
+      "name": "ResourceReservation.kt",
+      "filePath": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/reservation/contracts/ResourceReservation.kt",
+      "summary": "Aggregate reservation facade combining read and write contracts with reserve-or-extend semantics.",
+      "tags": [
+        "coordination",
+        "reservation",
+        "contract",
+        "api"
+      ]
+    },
+    {
+      "id": "file:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/saga/contracts/Saga.kt",
+      "type": "file",
+      "name": "Saga.kt",
+      "filePath": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/saga/contracts/Saga.kt",
+      "summary": "Saga process-manager contract with state transition and compensation, SagaStore persistence contract, and SagaError sealed hierarchy.",
+      "tags": [
+        "coordination",
+        "saga",
+        "contract",
+        "api"
+      ]
+    },
+    {
+      "id": "file:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/session/contracts/SessionReader.kt",
+      "type": "file",
+      "name": "SessionReader.kt",
+      "filePath": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/session/contracts/SessionReader.kt",
+      "summary": "Read-only contract querying distributed session activity, attributes, and node ownership.",
+      "tags": [
+        "coordination",
+        "session",
+        "contract",
+        "api"
+      ]
+    },
+    {
+      "id": "file:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/session/contracts/SessionTracker.kt",
+      "type": "file",
+      "name": "SessionTracker.kt",
+      "filePath": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/session/contracts/SessionTracker.kt",
+      "summary": "Aggregate session facade combining session read and write contracts.",
+      "tags": [
+        "coordination",
+        "session",
+        "contract",
+        "api"
+      ]
+    },
+    {
+      "id": "file:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/session/contracts/SessionWriter.kt",
+      "type": "file",
+      "name": "SessionWriter.kt",
+      "filePath": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/session/contracts/SessionWriter.kt",
+      "summary": "Write contract for session lifecycle operations with SessionError sealed hierarchy.",
+      "tags": [
+        "coordination",
+        "session",
+        "contract",
+        "api"
+      ]
+    },
+    {
+      "id": "file:frisboo-core/api/frisboo-core.api",
+      "type": "file",
+      "name": "frisboo-core.api",
+      "filePath": "frisboo-core/api/frisboo-core.api",
+      "summary": "Binary API signature file declaring the public API surface of the frisboo-core module.",
+      "tags": [
+        "api",
+        "api-exports",
+        "public-api"
+      ]
+    },
+    {
+      "id": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaderElection.kt:LeaderElection",
+      "type": "class",
+      "name": "LeaderElection",
+      "filePath": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaderElection.kt",
+      "summary": "Contract interface for leader election implementations providing single-leader semantics with campaign, resign, and isLeader operations.",
+      "tags": [
+        "coordination",
+        "election",
+        "contract",
+        "api"
+      ]
+    },
+    {
+      "id": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaderElection.kt:ElectionError",
+      "type": "class",
+      "name": "ElectionError",
+      "filePath": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaderElection.kt",
+      "summary": "Sealed interface of errors that can occur during election operations.",
+      "tags": [
+        "coordination",
+        "election",
+        "error",
+        "valueobject"
+      ]
+    },
+    {
+      "id": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaderElection.kt:ElectionError:RegistrationFailed",
+      "type": "class",
+      "name": "ElectionError.RegistrationFailed",
+      "filePath": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaderElection.kt",
+      "summary": "Error indicating candidate registration failed.",
+      "tags": [
+        "coordination",
+        "election",
+        "error",
+        "valueobject"
+      ]
+    },
+    {
+      "id": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaderElection.kt:ElectionError:ResignationFailed",
+      "type": "class",
+      "name": "ElectionError.ResignationFailed",
+      "filePath": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaderElection.kt",
+      "summary": "Error indicating leadership resignation failed.",
+      "tags": [
+        "coordination",
+        "election",
+        "error",
+        "valueobject"
+      ]
+    },
+    {
+      "id": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaderElection.kt:ElectionError:Unavailable",
+      "type": "class",
+      "name": "ElectionError.Unavailable",
+      "filePath": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaderElection.kt",
+      "summary": "Error indicating the election backend is unavailable.",
+      "tags": [
+        "coordination",
+        "election",
+        "error",
+        "valueobject"
+      ]
+    },
+    {
+      "id": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaseAcquirer.kt:LeaseAcquirer",
+      "type": "class",
+      "name": "LeaseAcquirer",
+      "filePath": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaseAcquirer.kt",
+      "summary": "Contract interface for acquiring and renewing leadership leases.",
+      "tags": [
+        "coordination",
+        "election",
+        "contract",
+        "api"
+      ]
+    },
+    {
+      "id": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaseAcquirer.kt:LeaseError",
+      "type": "class",
+      "name": "LeaseError",
+      "filePath": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaseAcquirer.kt",
+      "summary": "Sealed interface of errors during lease acquisition and renewal.",
+      "tags": [
+        "coordination",
+        "election",
+        "error",
+        "valueobject"
+      ]
+    },
+    {
+      "id": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaseAcquirer.kt:LeaseError:AlreadyHeld",
+      "type": "class",
+      "name": "LeaseError.AlreadyHeld",
+      "filePath": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaseAcquirer.kt",
+      "summary": "Error indicating the lease is held by another candidate.",
+      "tags": [
+        "coordination",
+        "election",
+        "error",
+        "valueobject"
+      ]
+    },
+    {
+      "id": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaseAcquirer.kt:LeaseError:Expired",
+      "type": "class",
+      "name": "LeaseError.Expired",
+      "filePath": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaseAcquirer.kt",
+      "summary": "Error indicating the lease state has expired.",
+      "tags": [
+        "coordination",
+        "election",
+        "error",
+        "valueobject"
+      ]
+    },
+    {
+      "id": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaseAcquirer.kt:LeaseError:Unavailable",
+      "type": "class",
+      "name": "LeaseError.Unavailable",
+      "filePath": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaseAcquirer.kt",
+      "summary": "Error indicating the lease coordination backend is unavailable.",
+      "tags": [
+        "coordination",
+        "election",
+        "error",
+        "valueobject"
+      ]
+    },
+    {
+      "id": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaseMetrics.kt:LeaseMetrics",
+      "type": "class",
+      "name": "LeaseMetrics",
+      "filePath": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaseMetrics.kt",
+      "summary": "Read-only contract exposing current lease holder, expiry instant, and lease validity.",
+      "tags": [
+        "coordination",
+        "election",
+        "contract",
+        "api"
+      ]
+    },
+    {
+      "id": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaseReleaser.kt:LeaseReleaser",
+      "type": "class",
+      "name": "LeaseReleaser",
+      "filePath": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaseReleaser.kt",
+      "summary": "Contract for releasing a leadership lease held by a candidate.",
+      "tags": [
+        "coordination",
+        "election",
+        "contract",
+        "api"
+      ]
+    },
+    {
+      "id": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/lock/contracts/DistributedLock.kt:DistributedLock",
+      "type": "class",
+      "name": "DistributedLock",
+      "filePath": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/lock/contracts/DistributedLock.kt",
+      "summary": "Contract interface for distributed lock implementations providing mutual exclusion with acquire, release, and withLock scoped execution.",
+      "tags": [
+        "coordination",
+        "lock",
+        "contract",
+        "api"
+      ]
+    },
+    {
+      "id": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/lock/contracts/DistributedLock.kt:LockToken",
+      "type": "class",
+      "name": "LockToken",
+      "filePath": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/lock/contracts/DistributedLock.kt",
+      "summary": "Data class representing an acquired lock token used for ownership verification and release.",
+      "tags": [
+        "coordination",
+        "lock",
+        "model",
+        "valueobject"
+      ]
+    },
+    {
+      "id": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/lock/contracts/DistributedLock.kt:LockError",
+      "type": "class",
+      "name": "LockError",
+      "filePath": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/lock/contracts/DistributedLock.kt",
+      "summary": "Sealed interface of errors that can occur during lock operations.",
+      "tags": [
+        "coordination",
+        "lock",
+        "error",
+        "valueobject"
+      ]
+    },
+    {
+      "id": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/lock/contracts/DistributedLock.kt:LockError:AcquireTimeout",
+      "type": "class",
+      "name": "LockError.AcquireTimeout",
+      "filePath": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/lock/contracts/DistributedLock.kt",
+      "summary": "Error indicating lock acquisition timed out for a resource.",
+      "tags": [
+        "coordination",
+        "lock",
+        "error",
+        "valueobject"
+      ]
+    },
+    {
+      "id": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/lock/contracts/DistributedLock.kt:LockError:AlreadyReleased",
+      "type": "class",
+      "name": "LockError.AlreadyReleased",
+      "filePath": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/lock/contracts/DistributedLock.kt",
+      "summary": "Error indicating the lock was already released or expired.",
+      "tags": [
+        "coordination",
+        "lock",
+        "error",
+        "valueobject"
+      ]
+    },
+    {
+      "id": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/lock/contracts/DistributedLock.kt:LockError:Unavailable",
+      "type": "class",
+      "name": "LockError.Unavailable",
+      "filePath": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/lock/contracts/DistributedLock.kt",
+      "summary": "Error indicating the lock coordination backend is unavailable.",
+      "tags": [
+        "coordination",
+        "lock",
+        "error",
+        "valueobject"
+      ]
+    },
+    {
+      "id": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/lock/contracts/LockAcquirer.kt:LockAcquirer",
+      "type": "class",
+      "name": "LockAcquirer",
+      "filePath": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/lock/contracts/LockAcquirer.kt",
+      "summary": "Contract for distributed lock acquisition operations.",
+      "tags": [
+        "coordination",
+        "lock",
+        "contract",
+        "api"
+      ]
+    },
+    {
+      "id": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/lock/contracts/LockMetrics.kt:LockMetrics",
+      "type": "class",
+      "name": "LockMetrics",
+      "filePath": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/lock/contracts/LockMetrics.kt",
+      "summary": "Read-only contract exposing distributed lock state, holder identifier, and expiry instant.",
+      "tags": [
+        "coordination",
+        "lock",
+        "contract",
+        "api"
+      ]
+    },
+    {
+      "id": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/lock/contracts/LockReleaser.kt:LockReleaser",
+      "type": "class",
+      "name": "LockReleaser",
+      "filePath": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/lock/contracts/LockReleaser.kt",
+      "summary": "Contract for releasing a distributed lock via ownership token.",
+      "tags": [
+        "coordination",
+        "lock",
+        "contract",
+        "api"
+      ]
+    },
+    {
+      "id": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/lock/model/LockConfig.kt:LockConfig",
+      "type": "class",
+      "name": "LockConfig",
+      "filePath": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/lock/model/LockConfig.kt",
+      "summary": "Data class configuring distributed lock hold timeout and acquire timeout with positive-value validation.",
+      "tags": [
+        "coordination",
+        "lock",
+        "model",
+        "valueobject"
+      ]
+    },
+    {
+      "id": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/reservation/contracts/ReservationReader.kt:ReservationReader",
+      "type": "class",
+      "name": "ReservationReader",
+      "filePath": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/reservation/contracts/ReservationReader.kt",
+      "summary": "Read-only contract querying reservation state, holder identity, and expiry instant.",
+      "tags": [
+        "coordination",
+        "reservation",
+        "contract",
+        "api"
+      ]
+    },
+    {
+      "id": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/reservation/contracts/ReservationWriter.kt:ReservationWriter",
+      "type": "class",
+      "name": "ReservationWriter",
+      "filePath": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/reservation/contracts/ReservationWriter.kt",
+      "summary": "Write contract for reservation lifecycle operations including reserve and release.",
+      "tags": [
+        "coordination",
+        "reservation",
+        "contract",
+        "api"
+      ]
+    },
+    {
+      "id": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/reservation/contracts/ReservationWriter.kt:ReservationError",
+      "type": "class",
+      "name": "ReservationError",
+      "filePath": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/reservation/contracts/ReservationWriter.kt",
+      "summary": "Sealed interface of errors during reservation operations.",
+      "tags": [
+        "coordination",
+        "reservation",
+        "error",
+        "valueobject"
+      ]
+    },
+    {
+      "id": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/reservation/contracts/ReservationWriter.kt:ReservationError:AlreadyReserved",
+      "type": "class",
+      "name": "ReservationError.AlreadyReserved",
+      "filePath": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/reservation/contracts/ReservationWriter.kt",
+      "summary": "Error indicating the resource is already reserved by another holder.",
+      "tags": [
+        "coordination",
+        "reservation",
+        "error",
+        "valueobject"
+      ]
+    },
+    {
+      "id": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/reservation/contracts/ReservationWriter.kt:ReservationError:NotReserved",
+      "type": "class",
+      "name": "ReservationError.NotReserved",
+      "filePath": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/reservation/contracts/ReservationWriter.kt",
+      "summary": "Error indicating the resource has no active reservation.",
+      "tags": [
+        "coordination",
+        "reservation",
+        "error",
+        "valueobject"
+      ]
+    },
+    {
+      "id": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/reservation/contracts/ReservationWriter.kt:ReservationError:Unavailable",
+      "type": "class",
+      "name": "ReservationError.Unavailable",
+      "filePath": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/reservation/contracts/ReservationWriter.kt",
+      "summary": "Error indicating the reservation backend is unavailable.",
+      "tags": [
+        "coordination",
+        "reservation",
+        "error",
+        "valueobject"
+      ]
+    },
+    {
+      "id": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/reservation/contracts/ResourceReservation.kt:ResourceReservation",
+      "type": "class",
+      "name": "ResourceReservation",
+      "filePath": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/reservation/contracts/ResourceReservation.kt",
+      "summary": "Aggregate reservation facade combining read and write contracts with reserve-or-extend semantics.",
+      "tags": [
+        "coordination",
+        "reservation",
+        "contract",
+        "api"
+      ]
+    },
+    {
+      "id": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/saga/contracts/Saga.kt:Saga",
+      "type": "class",
+      "name": "Saga",
+      "filePath": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/saga/contracts/Saga.kt",
+      "summary": "Generic saga process-manager contract with saga ID, current state, transition, and compensation.",
+      "tags": [
+        "coordination",
+        "saga",
+        "contract",
+        "api"
+      ]
+    },
+    {
+      "id": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/saga/contracts/Saga.kt:SagaStore",
+      "type": "class",
+      "name": "SagaStore",
+      "filePath": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/saga/contracts/Saga.kt",
+      "summary": "Contract for persisting and retrieving saga instances by saga ID.",
+      "tags": [
+        "coordination",
+        "saga",
+        "contract",
+        "api"
+      ]
+    },
+    {
+      "id": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/saga/contracts/Saga.kt:SagaError",
+      "type": "class",
+      "name": "SagaError",
+      "filePath": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/saga/contracts/Saga.kt",
+      "summary": "Sealed interface of errors during saga operations.",
+      "tags": [
+        "coordination",
+        "saga",
+        "error",
+        "valueobject"
+      ]
+    },
+    {
+      "id": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/saga/contracts/Saga.kt:SagaError:InvalidTransition",
+      "type": "class",
+      "name": "SagaError.InvalidTransition",
+      "filePath": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/saga/contracts/Saga.kt",
+      "summary": "Error indicating the requested state transition is not allowed.",
+      "tags": [
+        "coordination",
+        "saga",
+        "error",
+        "valueobject"
+      ]
+    },
+    {
+      "id": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/saga/contracts/Saga.kt:SagaError:CompensationFailed",
+      "type": "class",
+      "name": "SagaError.CompensationFailed",
+      "filePath": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/saga/contracts/Saga.kt",
+      "summary": "Error indicating compensation for one or more steps failed.",
+      "tags": [
+        "coordination",
+        "saga",
+        "error",
+        "valueobject"
+      ]
+    },
+    {
+      "id": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/saga/contracts/Saga.kt:SagaError:NotFound",
+      "type": "class",
+      "name": "SagaError.NotFound",
+      "filePath": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/saga/contracts/Saga.kt",
+      "summary": "Error indicating the saga instance was not found.",
+      "tags": [
+        "coordination",
+        "saga",
+        "error",
+        "valueobject"
+      ]
+    },
+    {
+      "id": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/saga/contracts/Saga.kt:SagaError:StoreUnavailable",
+      "type": "class",
+      "name": "SagaError.StoreUnavailable",
+      "filePath": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/saga/contracts/Saga.kt",
+      "summary": "Error indicating the underlying saga store is unavailable.",
+      "tags": [
+        "coordination",
+        "saga",
+        "error",
+        "valueobject"
+      ]
+    },
+    {
+      "id": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/session/contracts/SessionReader.kt:SessionReader",
+      "type": "class",
+      "name": "SessionReader",
+      "filePath": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/session/contracts/SessionReader.kt",
+      "summary": "Read-only contract querying distributed session activity, attributes, and node ownership.",
+      "tags": [
+        "coordination",
+        "session",
+        "contract",
+        "api"
+      ]
+    },
+    {
+      "id": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/session/contracts/SessionTracker.kt:SessionTracker",
+      "type": "class",
+      "name": "SessionTracker",
+      "filePath": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/session/contracts/SessionTracker.kt",
+      "summary": "Aggregate session facade combining session read and write contracts.",
+      "tags": [
+        "coordination",
+        "session",
+        "contract",
+        "api"
+      ]
+    },
+    {
+      "id": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/session/contracts/SessionWriter.kt:SessionWriter",
+      "type": "class",
+      "name": "SessionWriter",
+      "filePath": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/session/contracts/SessionWriter.kt",
+      "summary": "Write contract for session lifecycle operations including create, touch, and destroy.",
+      "tags": [
+        "coordination",
+        "session",
+        "contract",
+        "api"
+      ]
+    },
+    {
+      "id": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/session/contracts/SessionWriter.kt:SessionError",
+      "type": "class",
+      "name": "SessionError",
+      "filePath": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/session/contracts/SessionWriter.kt",
+      "summary": "Sealed interface of errors during session operations.",
+      "tags": [
+        "coordination",
+        "session",
+        "error",
+        "valueobject"
+      ]
+    },
+    {
+      "id": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/session/contracts/SessionWriter.kt:SessionError:AlreadyExists",
+      "type": "class",
+      "name": "SessionError.AlreadyExists",
+      "filePath": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/session/contracts/SessionWriter.kt",
+      "summary": "Error indicating the session already exists and cannot be created again.",
+      "tags": [
+        "coordination",
+        "session",
+        "error",
+        "valueobject"
+      ]
+    },
+    {
+      "id": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/session/contracts/SessionWriter.kt:SessionError:NotFound",
+      "type": "class",
+      "name": "SessionError.NotFound",
+      "filePath": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/session/contracts/SessionWriter.kt",
+      "summary": "Error indicating the session does not exist.",
+      "tags": [
+        "coordination",
+        "session",
+        "error",
+        "valueobject"
+      ]
+    },
+    {
+      "id": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/session/contracts/SessionWriter.kt:SessionError:Unavailable",
+      "type": "class",
+      "name": "SessionError.Unavailable",
+      "filePath": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/session/contracts/SessionWriter.kt",
+      "summary": "Error indicating the session backend is unavailable.",
+      "tags": [
+        "coordination",
+        "session",
+        "error",
+        "valueobject"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/featureflag/contracts/FeatureFlagReader.kt",
+      "target": "class:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/featureflag/contracts/FeatureFlagReader.kt:FeatureFlagReader",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/featureflag/contracts/FeatureFlagStore.kt",
+      "target": "class:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/featureflag/contracts/FeatureFlagStore.kt:FeatureFlagStore",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/featureflag/contracts/FeatureFlagWriter.kt",
+      "target": "class:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/featureflag/contracts/FeatureFlagWriter.kt:FeatureFlagWriter",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/featureflag/contracts/FeatureFlagWriter.kt",
+      "target": "class:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/featureflag/contracts/FeatureFlagWriter.kt:FeatureFlagError",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/scheduling/contracts/ScheduledTaskState.kt",
+      "target": "class:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/scheduling/contracts/ScheduledTaskState.kt:ScheduledTaskState",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/scheduling/contracts/TaskStateReader.kt",
+      "target": "class:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/scheduling/contracts/TaskStateReader.kt:TaskStateReader",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/scheduling/contracts/TaskStateWriter.kt",
+      "target": "class:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/scheduling/contracts/TaskStateWriter.kt:TaskStateWriter",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/scheduling/contracts/TaskStateWriter.kt",
+      "target": "class:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/scheduling/contracts/TaskStateWriter.kt:SchedulingError",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/scheduling/model/TaskSchedule.kt",
+      "target": "class:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/scheduling/model/TaskSchedule.kt:TaskSchedule",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "class:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/featureflag/contracts/FeatureFlagStore.kt:FeatureFlagStore",
+      "target": "class:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/featureflag/contracts/FeatureFlagReader.kt:FeatureFlagReader",
+      "type": "inherits",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/featureflag/contracts/FeatureFlagStore.kt:FeatureFlagStore",
+      "target": "class:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/featureflag/contracts/FeatureFlagWriter.kt:FeatureFlagWriter",
+      "type": "inherits",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/scheduling/contracts/ScheduledTaskState.kt:ScheduledTaskState",
+      "target": "class:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/scheduling/contracts/TaskStateReader.kt:TaskStateReader",
+      "type": "inherits",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/scheduling/contracts/ScheduledTaskState.kt:ScheduledTaskState",
+      "target": "class:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/scheduling/contracts/TaskStateWriter.kt:TaskStateWriter",
+      "type": "inherits",
+      "weight": 0.9
+    },
+    {
+      "source": "file:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/scheduling/contracts/TaskStateWriter.kt",
+      "target": "file:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/scheduling/model/TaskSchedule.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/scheduling/contracts/TaskStateReader.kt",
+      "target": "file:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/scheduling/model/TaskSchedule.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-config/build.gradle.kts",
+      "target": "file:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/featureflag/contracts/FeatureFlagReader.kt",
+      "type": "configures",
+      "weight": 0.6
+    },
+    {
+      "source": "file:frisboo-config/build.gradle.kts",
+      "target": "file:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/scheduling/contracts/ScheduledTaskState.kt",
+      "type": "configures",
+      "weight": 0.6
+    },
+    {
+      "source": "file:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaderElection.kt",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaderElection.kt:LeaderElection",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaderElection.kt",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaderElection.kt:ElectionError",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaderElection.kt",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaderElection.kt:ElectionError:RegistrationFailed",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaderElection.kt",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaderElection.kt:ElectionError:ResignationFailed",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaderElection.kt",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaderElection.kt:ElectionError:Unavailable",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaseAcquirer.kt",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaseAcquirer.kt:LeaseAcquirer",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaseAcquirer.kt",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaseAcquirer.kt:LeaseError",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaseAcquirer.kt",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaseAcquirer.kt:LeaseError:AlreadyHeld",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaseAcquirer.kt",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaseAcquirer.kt:LeaseError:Expired",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaseAcquirer.kt",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaseAcquirer.kt:LeaseError:Unavailable",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaseMetrics.kt",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaseMetrics.kt:LeaseMetrics",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaseReleaser.kt",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaseReleaser.kt:LeaseReleaser",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/lock/contracts/DistributedLock.kt",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/lock/contracts/DistributedLock.kt:DistributedLock",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/lock/contracts/DistributedLock.kt",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/lock/contracts/DistributedLock.kt:LockToken",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/lock/contracts/DistributedLock.kt",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/lock/contracts/DistributedLock.kt:LockError",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/lock/contracts/DistributedLock.kt",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/lock/contracts/DistributedLock.kt:LockError:AcquireTimeout",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/lock/contracts/DistributedLock.kt",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/lock/contracts/DistributedLock.kt:LockError:AlreadyReleased",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/lock/contracts/DistributedLock.kt",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/lock/contracts/DistributedLock.kt:LockError:Unavailable",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/lock/contracts/LockAcquirer.kt",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/lock/contracts/LockAcquirer.kt:LockAcquirer",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/lock/contracts/LockMetrics.kt",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/lock/contracts/LockMetrics.kt:LockMetrics",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/lock/contracts/LockReleaser.kt",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/lock/contracts/LockReleaser.kt:LockReleaser",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/lock/model/LockConfig.kt",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/lock/model/LockConfig.kt:LockConfig",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/reservation/contracts/ReservationReader.kt",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/reservation/contracts/ReservationReader.kt:ReservationReader",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/reservation/contracts/ReservationWriter.kt",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/reservation/contracts/ReservationWriter.kt:ReservationWriter",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/reservation/contracts/ReservationWriter.kt",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/reservation/contracts/ReservationWriter.kt:ReservationError",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/reservation/contracts/ReservationWriter.kt",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/reservation/contracts/ReservationWriter.kt:ReservationError:AlreadyReserved",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/reservation/contracts/ReservationWriter.kt",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/reservation/contracts/ReservationWriter.kt:ReservationError:NotReserved",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/reservation/contracts/ReservationWriter.kt",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/reservation/contracts/ReservationWriter.kt:ReservationError:Unavailable",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/reservation/contracts/ResourceReservation.kt",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/reservation/contracts/ResourceReservation.kt:ResourceReservation",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/saga/contracts/Saga.kt",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/saga/contracts/Saga.kt:Saga",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/saga/contracts/Saga.kt",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/saga/contracts/Saga.kt:SagaStore",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/saga/contracts/Saga.kt",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/saga/contracts/Saga.kt:SagaError",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/saga/contracts/Saga.kt",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/saga/contracts/Saga.kt:SagaError:InvalidTransition",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/saga/contracts/Saga.kt",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/saga/contracts/Saga.kt:SagaError:CompensationFailed",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/saga/contracts/Saga.kt",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/saga/contracts/Saga.kt:SagaError:NotFound",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/saga/contracts/Saga.kt",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/saga/contracts/Saga.kt:SagaError:StoreUnavailable",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/session/contracts/SessionReader.kt",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/session/contracts/SessionReader.kt:SessionReader",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/session/contracts/SessionTracker.kt",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/session/contracts/SessionTracker.kt:SessionTracker",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/session/contracts/SessionWriter.kt",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/session/contracts/SessionWriter.kt:SessionWriter",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/session/contracts/SessionWriter.kt",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/session/contracts/SessionWriter.kt:SessionError",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/session/contracts/SessionWriter.kt",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/session/contracts/SessionWriter.kt:SessionError:AlreadyExists",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/session/contracts/SessionWriter.kt",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/session/contracts/SessionWriter.kt:SessionError:NotFound",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/session/contracts/SessionWriter.kt",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/session/contracts/SessionWriter.kt:SessionError:Unavailable",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/lock/contracts/DistributedLock.kt",
+      "target": "file:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/lock/model/LockConfig.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/lock/contracts/LockAcquirer.kt",
+      "target": "file:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/lock/model/LockConfig.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaderElection.kt:ElectionError:RegistrationFailed",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaderElection.kt:ElectionError",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaderElection.kt:ElectionError:ResignationFailed",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaderElection.kt:ElectionError",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaderElection.kt:ElectionError:Unavailable",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaderElection.kt:ElectionError",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaseAcquirer.kt:LeaseError:AlreadyHeld",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaseAcquirer.kt:LeaseError",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaseAcquirer.kt:LeaseError:Expired",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaseAcquirer.kt:LeaseError",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaseAcquirer.kt:LeaseError:Unavailable",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaseAcquirer.kt:LeaseError",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/lock/contracts/DistributedLock.kt:LockError:AcquireTimeout",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/lock/contracts/DistributedLock.kt:LockError",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/lock/contracts/DistributedLock.kt:LockError:AlreadyReleased",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/lock/contracts/DistributedLock.kt:LockError",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/lock/contracts/DistributedLock.kt:LockError:Unavailable",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/lock/contracts/DistributedLock.kt:LockError",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/reservation/contracts/ReservationWriter.kt:ReservationError:AlreadyReserved",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/reservation/contracts/ReservationWriter.kt:ReservationError",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/reservation/contracts/ReservationWriter.kt:ReservationError:NotReserved",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/reservation/contracts/ReservationWriter.kt:ReservationError",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/reservation/contracts/ReservationWriter.kt:ReservationError:Unavailable",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/reservation/contracts/ReservationWriter.kt:ReservationError",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/saga/contracts/Saga.kt:SagaError:InvalidTransition",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/saga/contracts/Saga.kt:SagaError",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/saga/contracts/Saga.kt:SagaError:CompensationFailed",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/saga/contracts/Saga.kt:SagaError",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/saga/contracts/Saga.kt:SagaError:NotFound",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/saga/contracts/Saga.kt:SagaError",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/saga/contracts/Saga.kt:SagaError:StoreUnavailable",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/saga/contracts/Saga.kt:SagaError",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/session/contracts/SessionWriter.kt:SessionError:AlreadyExists",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/session/contracts/SessionWriter.kt:SessionError",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/session/contracts/SessionWriter.kt:SessionError:NotFound",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/session/contracts/SessionWriter.kt:SessionError",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/session/contracts/SessionWriter.kt:SessionError:Unavailable",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/session/contracts/SessionWriter.kt:SessionError",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/reservation/contracts/ResourceReservation.kt:ResourceReservation",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/reservation/contracts/ReservationReader.kt:ReservationReader",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/reservation/contracts/ResourceReservation.kt:ResourceReservation",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/reservation/contracts/ReservationWriter.kt:ReservationWriter",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/session/contracts/SessionTracker.kt:SessionTracker",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/session/contracts/SessionReader.kt:SessionReader",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/session/contracts/SessionTracker.kt:SessionTracker",
+      "target": "class:frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/session/contracts/SessionWriter.kt:SessionWriter",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "file:frisboo-coordination/build.gradle.kts",
+      "target": "module:frisboo-coordination",
+      "type": "configures",
+      "weight": 0.6
+    }
+  ]
+}

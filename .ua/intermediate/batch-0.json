@@ -1,0 +1,576 @@
+{
+  "nodes": [
+    {
+      "id": "file:.editorconfig",
+      "type": "file",
+      "name": ".editorconfig",
+      "filePath": ".editorconfig",
+      "summary": "EditorConfig defining charset, LF endings, 4-space indent, 120-char line length, and Kotlin formatter settings.",
+      "tags": ["config", "editor", "lint"]
+    },
+    {
+      "id": "file:.gitattributes",
+      "type": "file",
+      "name": ".gitattributes",
+      "filePath": ".gitattributes",
+      "summary": "Git attributes normalizing line endings for gradlew and marking jar files as binary.",
+      "tags": ["config", "git", "lint"]
+    },
+    {
+      "id": "file:.github/workflows/ci.yaml",
+      "type": "file",
+      "name": "ci.yaml",
+      "filePath": ".github/workflows/ci.yaml",
+      "summary": "GitHub Actions CI pipeline running ./gradlew build test on push and pull requests to main.",
+      "tags": ["ci", "config", "build"]
+    },
+    {
+      "id": "file:.gitignore",
+      "type": "file",
+      "name": ".gitignore",
+      "filePath": ".gitignore",
+      "summary": "Git ignore rules covering build outputs, IDE files, and Kotlin metadata.",
+      "tags": ["config", "git", "lint"]
+    },
+    {
+      "id": "file:build-logic/build.gradle.kts",
+      "type": "file",
+      "name": "build.gradle.kts",
+      "filePath": "build-logic/build.gradle.kts",
+      "summary": "Build plugin convention applying java-gradle-plugin, version-catalog, and kotlin-dsl with explicit API and strict compiler flags.",
+      "tags": ["gradle", "build", "convention"]
+    },
+    {
+      "id": "file:build-logic/settings.gradle.kts",
+      "type": "file",
+      "name": "settings.gradle.kts",
+      "filePath": "build-logic/settings.gradle.kts",
+      "summary": "Build logic settings declaring the build-logic project name, repository resolution, and the baseLibs version catalog.",
+      "tags": ["gradle", "build", "settings"]
+    },
+    {
+      "id": "file:build-logic/src/main/kotlin/GenerateCatalogVersionConstants.kt",
+      "type": "file",
+      "name": "GenerateCatalogVersionConstants.kt",
+      "filePath": "build-logic/src/main/kotlin/GenerateCatalogVersionConstants.kt",
+      "summary": "Gradle task generating Kotlin version-catalog constant objects from version, plugin, library, and bundle aliases.",
+      "tags": ["gradle", "build", "generator", "kotlin"]
+    },
+    {
+      "id": "file:build-logic/src/main/kotlin/kotlin-conventions.gradle.kts",
+      "type": "file",
+      "name": "kotlin-conventions.gradle.kts",
+      "filePath": "build-logic/src/main/kotlin/kotlin-conventions.gradle.kts",
+      "summary": "Kotlin JVM convention plugin configuring toolchain, explicit API, progressive mode, and ABI validation.",
+      "tags": ["gradle", "build", "convention", "kotlin"]
+    },
+    {
+      "id": "file:build-logic/src/main/kotlin/quality-conventions.gradle.kts",
+      "type": "file",
+      "name": "quality-conventions.gradle.kts",
+      "filePath": "build-logic/src/main/kotlin/quality-conventions.gradle.kts",
+      "summary": "Quality convention plugin configuring Spotless formatting and Detekt static analysis with the project license header and editor config.",
+      "tags": ["gradle", "build", "convention", "quality", "spotless", "detekt"]
+    },
+    {
+      "id": "file:build-logic/src/main/kotlin/VersionCatalog.kt",
+      "type": "file",
+      "name": "VersionCatalog.kt",
+      "filePath": "build-logic/src/main/kotlin/VersionCatalog.kt",
+      "summary": "Extension functions on Gradle VersionCatalog providing fail-fast lookups for versions, libraries, and plugins.",
+      "tags": ["gradle", "build", "kotlin", "version-catalog"]
+    },
+    {
+      "id": "file:build.gradle.kts",
+      "type": "file",
+      "name": "build.gradle.kts",
+      "filePath": "build.gradle.kts",
+      "summary": "Root project build file applying Kotlin, quality, Dokka, and Kover conventions and aggregating documentation and coverage across modules.",
+      "tags": ["gradle", "build", "root"]
+    },
+    {
+      "id": "file:config/detekt/detekt-baseline.xml",
+      "type": "file",
+      "name": "detekt-baseline.xml",
+      "filePath": "config/detekt/detekt-baseline.xml",
+      "summary": "Detekt smell baseline listing currently suppressed issues for specific files.",
+      "tags": ["config", "detekt", "lint", "quality"]
+    },
+    {
+      "id": "file:config/detekt/detekt.yml",
+      "type": "file",
+      "name": "detekt.yml",
+      "filePath": "config/detekt/detekt.yml",
+      "summary": "Detekt configuration enabling validation, complexity, coroutines, and style rules with warnings-as-errors.",
+      "tags": ["config", "detekt", "lint", "quality"]
+    },
+    {
+      "id": "file:config/license-header.txt",
+      "type": "file",
+      "name": "license-header.txt",
+      "filePath": "config/license-header.txt",
+      "summary": "Apache 2.0 license header applied by Spotless to all source files.",
+      "tags": ["config", "license", "quality"]
+    },
+    {
+      "id": "file:frisboo-auth/build.gradle.kts",
+      "type": "file",
+      "name": "build.gradle.kts",
+      "filePath": "frisboo-auth/build.gradle.kts",
+      "summary": "frisboo-auth module build file applying Kotlin, Dokka, and Maven Publish conventions and depending on frisboo-core.",
+      "tags": ["gradle", "build", "module", "auth"]
+    },
+    {
+      "id": "file:frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/contracts/AuthorizationPolicy.kt",
+      "type": "file",
+      "name": "AuthorizationPolicy.kt",
+      "filePath": "frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/contracts/AuthorizationPolicy.kt",
+      "summary": "Authorization contracts defining the policy interface, decision enum, and sealed error hierarchy.",
+      "tags": ["auth", "contract", "authorization", "kotlin"]
+    },
+    {
+      "id": "file:frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/contracts/PrincipalProvider.kt",
+      "type": "file",
+      "name": "PrincipalProvider.kt",
+      "filePath": "frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/contracts/PrincipalProvider.kt",
+      "summary": "Contract for resolving the current authenticated Principal from the transport request context.",
+      "tags": ["auth", "contract", "principal", "kotlin"]
+    },
+    {
+      "id": "file:frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/model/Permission.kt",
+      "type": "file",
+      "name": "Permission.kt",
+      "filePath": "frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/model/Permission.kt",
+      "summary": "Auth model defining the Permission value object and the Role aggregate with its permission set.",
+      "tags": ["auth", "model", "permission", "role", "valueobject", "kotlin"]
+    },
+    {
+      "id": "file:frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/model/Principal.kt",
+      "type": "file",
+      "name": "Principal.kt",
+      "filePath": "frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/model/Principal.kt",
+      "summary": "Auth model defining the sealed Principal interface with UserPrincipal and ServicePrincipal implementations.",
+      "tags": ["auth", "model", "principal", "sealed", "kotlin"]
+    },
+    {
+      "id": "file:frisboo-bom/build.gradle.kts",
+      "type": "file",
+      "name": "build.gradle.kts",
+      "filePath": "frisboo-bom/build.gradle.kts",
+      "summary": "Bill of Materials module enforcing dependency constraints across all published subprojects.",
+      "tags": ["gradle", "build", "bom", "module"]
+    },
+    {
+      "id": "file:frisboo-config/build.gradle.kts",
+      "type": "file",
+      "name": "build.gradle.kts",
+      "filePath": "frisboo-config/build.gradle.kts",
+      "summary": "frisboo-config module build file applying Kotlin, Dokka, and Maven Publish conventions and depending on frisboo-core.",
+      "tags": ["gradle", "build", "module", "config"]
+    },
+    {
+      "id": "file:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistMetrics.kt",
+      "type": "file",
+      "name": "BlacklistMetrics.kt",
+      "filePath": "frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistMetrics.kt",
+      "summary": "Blacklist metrics contract exposing total size and additions since a given instant.",
+      "tags": ["config", "blacklist", "contract", "observability", "kotlin"]
+    },
+    {
+      "id": "file:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistReader.kt",
+      "type": "file",
+      "name": "BlacklistReader.kt",
+      "filePath": "frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistReader.kt",
+      "summary": "Blacklist read contract checking whether a token is blacklisted and retrieving its reason.",
+      "tags": ["config", "blacklist", "contract", "read", "kotlin"]
+    },
+    {
+      "id": "file:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistWriter.kt",
+      "type": "file",
+      "name": "BlacklistWriter.kt",
+      "filePath": "frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistWriter.kt",
+      "summary": "Blacklist write contract adding/removing tokens with TTL and purging expired entries, plus its sealed error hierarchy.",
+      "tags": ["config", "blacklist", "contract", "write", "kotlin"]
+    },
+    {
+      "id": "file:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/TokenBlacklist.kt",
+      "type": "file",
+      "name": "TokenBlacklist.kt",
+      "filePath": "frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/TokenBlacklist.kt",
+      "summary": "Aggregate facade interface composing the reader, writer, and metrics blacklist contracts.",
+      "tags": ["config", "blacklist", "contract", "facade", "kotlin"]
+    },
+    {
+      "id": "class:build-logic/src/main/kotlin/GenerateCatalogVersionConstants.kt:GenerateCatalogVersionConstants",
+      "type": "class",
+      "name": "GenerateCatalogVersionConstants",
+      "filePath": "build-logic/src/main/kotlin/GenerateCatalogVersionConstants.kt",
+      "summary": "Abstract Gradle task generating Kotlin version-catalog constant objects from catalog aliases.",
+      "tags": ["gradle", "build", "generator"]
+    },
+    {
+      "id": "function:build-logic/src/main/kotlin/GenerateCatalogVersionConstants.kt:generate",
+      "type": "function",
+      "name": "generate",
+      "filePath": "build-logic/src/main/kotlin/GenerateCatalogVersionConstants.kt",
+      "summary": "Task action writing generated version, plugin, library, and bundle constant objects to the output directory.",
+      "tags": ["gradle", "build", "generator"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:build-logic/src/main/kotlin/GenerateCatalogVersionConstants.kt:toConstantName",
+      "type": "function",
+      "name": "toConstantName",
+      "filePath": "build-logic/src/main/kotlin/GenerateCatalogVersionConstants.kt",
+      "summary": "Private extension converting a version alias into an UPPER_SNAKE_CASE constant name.",
+      "tags": ["gradle", "build", "helper"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:build-logic/src/main/kotlin/VersionCatalog.kt:getVersionOrFail",
+      "type": "function",
+      "name": "getVersionOrFail",
+      "filePath": "build-logic/src/main/kotlin/VersionCatalog.kt",
+      "summary": "Extension returning a version alias's required version or throwing IllegalStateException when missing.",
+      "tags": ["gradle", "build", "version-catalog"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:build-logic/src/main/kotlin/VersionCatalog.kt:optionalVersion",
+      "type": "function",
+      "name": "optionalVersion",
+      "filePath": "build-logic/src/main/kotlin/VersionCatalog.kt",
+      "summary": "Extension returning a version alias's required version or null when absent.",
+      "tags": ["gradle", "build", "version-catalog"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:build-logic/src/main/kotlin/VersionCatalog.kt:libraryOrThrow",
+      "type": "function",
+      "name": "libraryOrThrow",
+      "filePath": "build-logic/src/main/kotlin/VersionCatalog.kt",
+      "summary": "Extension returning a library dependency provider or throwing IllegalStateException when missing.",
+      "tags": ["gradle", "build", "version-catalog"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:build-logic/src/main/kotlin/VersionCatalog.kt:pluginOrThrow",
+      "type": "function",
+      "name": "pluginOrThrow",
+      "filePath": "build-logic/src/main/kotlin/VersionCatalog.kt",
+      "summary": "Extension returning a plugin dependency provider or throwing IllegalStateException when missing.",
+      "tags": ["gradle", "build", "version-catalog"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:build-logic/src/main/kotlin/VersionCatalog.kt:pluginIdOrThrow",
+      "type": "function",
+      "name": "pluginIdOrThrow",
+      "filePath": "build-logic/src/main/kotlin/VersionCatalog.kt",
+      "summary": "Extension resolving a plugin alias to its Gradle plugin id string.",
+      "tags": ["gradle", "build", "version-catalog"],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/contracts/AuthorizationPolicy.kt:AuthorizationPolicy",
+      "type": "class",
+      "name": "AuthorizationPolicy",
+      "filePath": "frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/contracts/AuthorizationPolicy.kt",
+      "summary": "Interface evaluating whether a Principal is authorized to perform an action on a resource.",
+      "tags": ["auth", "contract", "authorization", "policy"]
+    },
+    {
+      "id": "function:frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/contracts/AuthorizationPolicy.kt:evaluate",
+      "type": "function",
+      "name": "evaluate",
+      "filePath": "frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/contracts/AuthorizationPolicy.kt",
+      "summary": "Suspend evaluation returning Either an authorization decision or an evaluation error.",
+      "tags": ["auth", "contract", "authorization"],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/contracts/AuthorizationPolicy.kt:AuthorizationDecision",
+      "type": "class",
+      "name": "AuthorizationDecision",
+      "filePath": "frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/contracts/AuthorizationPolicy.kt",
+      "summary": "Enum with PERMIT and DENY outcomes of an authorization evaluation.",
+      "tags": ["auth", "contract", "authorization", "enum"]
+    },
+    {
+      "id": "class:frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/contracts/AuthorizationPolicy.kt:AuthorizationError",
+      "type": "class",
+      "name": "AuthorizationError",
+      "filePath": "frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/contracts/AuthorizationPolicy.kt",
+      "summary": "Sealed interface of authorization evaluation failures.",
+      "tags": ["auth", "contract", "authorization", "sealed", "error"]
+    },
+    {
+      "id": "class:frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/contracts/AuthorizationPolicy.kt:PolicyUnavailable",
+      "type": "class",
+      "name": "PolicyUnavailable",
+      "filePath": "frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/contracts/AuthorizationPolicy.kt",
+      "summary": "Authorization error indicating the policy could not be evaluated.",
+      "tags": ["auth", "contract", "authorization", "error"]
+    },
+    {
+      "id": "class:frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/contracts/AuthorizationPolicy.kt:InvalidPrincipal",
+      "type": "class",
+      "name": "InvalidPrincipal",
+      "filePath": "frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/contracts/AuthorizationPolicy.kt",
+      "summary": "Authorization error indicating the supplied principal is invalid.",
+      "tags": ["auth", "contract", "authorization", "error"]
+    },
+    {
+      "id": "class:frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/contracts/PrincipalProvider.kt:PrincipalProvider",
+      "type": "class",
+      "name": "PrincipalProvider",
+      "filePath": "frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/contracts/PrincipalProvider.kt",
+      "summary": "Interface resolving the current authenticated Principal from the request context.",
+      "tags": ["auth", "contract", "principal"]
+    },
+    {
+      "id": "function:frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/contracts/PrincipalProvider.kt:current",
+      "type": "function",
+      "name": "current",
+      "filePath": "frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/contracts/PrincipalProvider.kt",
+      "summary": "Suspend function returning the current Principal or null when unauthenticated.",
+      "tags": ["auth", "contract", "principal"],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/model/Permission.kt:Permission",
+      "type": "class",
+      "name": "Permission",
+      "filePath": "frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/model/Permission.kt",
+      "summary": "Value object representing a fine-grained resource action permission string.",
+      "tags": ["auth", "model", "permission", "valueobject"]
+    },
+    {
+      "id": "class:frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/model/Permission.kt:Role",
+      "type": "class",
+      "name": "Role",
+      "filePath": "frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/model/Permission.kt",
+      "summary": "Data class aggregating a named role with its set of permissions.",
+      "tags": ["auth", "model", "role"]
+    },
+    {
+      "id": "class:frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/model/Principal.kt:Principal",
+      "type": "class",
+      "name": "Principal",
+      "filePath": "frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/model/Principal.kt",
+      "summary": "Sealed interface representing an authenticated identity in the system.",
+      "tags": ["auth", "model", "principal", "sealed"]
+    },
+    {
+      "id": "class:frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/model/Principal.kt:UserPrincipal",
+      "type": "class",
+      "name": "UserPrincipal",
+      "filePath": "frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/model/Principal.kt",
+      "summary": "Data class implementing Principal for human users with tenant id and roles.",
+      "tags": ["auth", "model", "principal"]
+    },
+    {
+      "id": "class:frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/model/Principal.kt:ServicePrincipal",
+      "type": "class",
+      "name": "ServicePrincipal",
+      "filePath": "frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/model/Principal.kt",
+      "summary": "Data class implementing Principal for inter-service identities with direct permissions.",
+      "tags": ["auth", "model", "principal"]
+    },
+    {
+      "id": "class:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistMetrics.kt:BlacklistMetrics",
+      "type": "class",
+      "name": "BlacklistMetrics",
+      "filePath": "frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistMetrics.kt",
+      "summary": "Interface exposing blacklist observability metrics such as total size and recent additions.",
+      "tags": ["config", "blacklist", "contract", "observability"]
+    },
+    {
+      "id": "function:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistMetrics.kt:size",
+      "type": "function",
+      "name": "size",
+      "filePath": "frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistMetrics.kt",
+      "summary": "Suspend function returning the current number of blacklisted tokens.",
+      "tags": ["config", "blacklist", "contract"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistMetrics.kt:addedSince",
+      "type": "function",
+      "name": "addedSince",
+      "filePath": "frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistMetrics.kt",
+      "summary": "Suspend function returning how many tokens were added since a given instant.",
+      "tags": ["config", "blacklist", "contract"],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistReader.kt:BlacklistReader",
+      "type": "class",
+      "name": "BlacklistReader",
+      "filePath": "frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistReader.kt",
+      "summary": "Interface providing read operations for querying the token blacklist.",
+      "tags": ["config", "blacklist", "contract", "read"]
+    },
+    {
+      "id": "function:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistReader.kt:isBlacklisted",
+      "type": "function",
+      "name": "isBlacklisted",
+      "filePath": "frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistReader.kt",
+      "summary": "Suspend function returning whether a token is currently blacklisted.",
+      "tags": ["config", "blacklist", "contract"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistReader.kt:reason",
+      "type": "function",
+      "name": "reason",
+      "filePath": "frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistReader.kt",
+      "summary": "Suspend function returning the recorded reason for a blacklisted token, if any.",
+      "tags": ["config", "blacklist", "contract"],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistWriter.kt:BlacklistWriter",
+      "type": "class",
+      "name": "BlacklistWriter",
+      "filePath": "frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistWriter.kt",
+      "summary": "Interface providing write operations for mutating the token blacklist.",
+      "tags": ["config", "blacklist", "contract", "write"]
+    },
+    {
+      "id": "function:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistWriter.kt:add",
+      "type": "function",
+      "name": "add",
+      "filePath": "frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistWriter.kt",
+      "summary": "Suspend function adding a token to the blacklist with a reason and optional TTL.",
+      "tags": ["config", "blacklist", "contract"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistWriter.kt:remove",
+      "type": "function",
+      "name": "remove",
+      "filePath": "frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistWriter.kt",
+      "summary": "Suspend function removing a token from the blacklist.",
+      "tags": ["config", "blacklist", "contract"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistWriter.kt:purgeExpired",
+      "type": "function",
+      "name": "purgeExpired",
+      "filePath": "frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistWriter.kt",
+      "summary": "Suspend function purging expired blacklist entries and returning how many were removed.",
+      "tags": ["config", "blacklist", "contract"],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistWriter.kt:BlacklistError",
+      "type": "class",
+      "name": "BlacklistError",
+      "filePath": "frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistWriter.kt",
+      "summary": "Sealed interface of domain errors for blacklist write operations.",
+      "tags": ["config", "blacklist", "contract", "sealed", "error"]
+    },
+    {
+      "id": "class:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistWriter.kt:AlreadyBlacklisted",
+      "type": "class",
+      "name": "AlreadyBlacklisted",
+      "filePath": "frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistWriter.kt",
+      "summary": "Blacklist error indicating the token already exists in the blacklist.",
+      "tags": ["config", "blacklist", "contract", "error"]
+    },
+    {
+      "id": "class:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistWriter.kt:NotFound",
+      "type": "class",
+      "name": "NotFound",
+      "filePath": "frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistWriter.kt",
+      "summary": "Blacklist error indicating the token was not found in the blacklist.",
+      "tags": ["config", "blacklist", "contract", "error"]
+    },
+    {
+      "id": "class:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistWriter.kt:Unavailable",
+      "type": "class",
+      "name": "Unavailable",
+      "filePath": "frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistWriter.kt",
+      "summary": "Blacklist error indicating the underlying blacklist store is unavailable.",
+      "tags": ["config", "blacklist", "contract", "error"]
+    },
+    {
+      "id": "class:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/TokenBlacklist.kt:TokenBlacklist",
+      "type": "class",
+      "name": "TokenBlacklist",
+      "filePath": "frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/TokenBlacklist.kt",
+      "summary": "Aggregate facade interface composing the reader, writer, and metrics blacklist contracts.",
+      "tags": ["config", "blacklist", "contract", "facade"]
+    }
+  ],
+  "edges": [
+    { "source": "file:build-logic/src/main/kotlin/GenerateCatalogVersionConstants.kt", "target": "class:build-logic/src/main/kotlin/GenerateCatalogVersionConstants.kt:GenerateCatalogVersionConstants", "type": "contains", "weight": 1.0 },
+    { "source": "file:build-logic/src/main/kotlin/GenerateCatalogVersionConstants.kt", "target": "function:build-logic/src/main/kotlin/GenerateCatalogVersionConstants.kt:generate", "type": "contains", "weight": 1.0 },
+    { "source": "file:build-logic/src/main/kotlin/GenerateCatalogVersionConstants.kt", "target": "function:build-logic/src/main/kotlin/GenerateCatalogVersionConstants.kt:toConstantName", "type": "contains", "weight": 1.0 },
+    { "source": "file:build-logic/src/main/kotlin/VersionCatalog.kt", "target": "function:build-logic/src/main/kotlin/VersionCatalog.kt:getVersionOrFail", "type": "contains", "weight": 1.0 },
+    { "source": "file:build-logic/src/main/kotlin/VersionCatalog.kt", "target": "function:build-logic/src/main/kotlin/VersionCatalog.kt:optionalVersion", "type": "contains", "weight": 1.0 },
+    { "source": "file:build-logic/src/main/kotlin/VersionCatalog.kt", "target": "function:build-logic/src/main/kotlin/VersionCatalog.kt:libraryOrThrow", "type": "contains", "weight": 1.0 },
+    { "source": "file:build-logic/src/main/kotlin/VersionCatalog.kt", "target": "function:build-logic/src/main/kotlin/VersionCatalog.kt:pluginOrThrow", "type": "contains", "weight": 1.0 },
+    { "source": "file:build-logic/src/main/kotlin/VersionCatalog.kt", "target": "function:build-logic/src/main/kotlin/VersionCatalog.kt:pluginIdOrThrow", "type": "contains", "weight": 1.0 },
+    { "source": "file:frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/contracts/AuthorizationPolicy.kt", "target": "class:frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/contracts/AuthorizationPolicy.kt:AuthorizationPolicy", "type": "contains", "weight": 1.0 },
+    { "source": "file:frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/contracts/AuthorizationPolicy.kt", "target": "function:frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/contracts/AuthorizationPolicy.kt:evaluate", "type": "contains", "weight": 1.0 },
+    { "source": "file:frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/contracts/AuthorizationPolicy.kt", "target": "class:frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/contracts/AuthorizationPolicy.kt:AuthorizationDecision", "type": "contains", "weight": 1.0 },
+    { "source": "file:frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/contracts/AuthorizationPolicy.kt", "target": "class:frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/contracts/AuthorizationPolicy.kt:AuthorizationError", "type": "contains", "weight": 1.0 },
+    { "source": "file:frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/contracts/AuthorizationPolicy.kt", "target": "class:frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/contracts/AuthorizationPolicy.kt:PolicyUnavailable", "type": "contains", "weight": 1.0 },
+    { "source": "file:frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/contracts/AuthorizationPolicy.kt", "target": "class:frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/contracts/AuthorizationPolicy.kt:InvalidPrincipal", "type": "contains", "weight": 1.0 },
+    { "source": "file:frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/contracts/PrincipalProvider.kt", "target": "class:frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/contracts/PrincipalProvider.kt:PrincipalProvider", "type": "contains", "weight": 1.0 },
+    { "source": "file:frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/contracts/PrincipalProvider.kt", "target": "function:frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/contracts/PrincipalProvider.kt:current", "type": "contains", "weight": 1.0 },
+    { "source": "file:frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/model/Permission.kt", "target": "class:frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/model/Permission.kt:Permission", "type": "contains", "weight": 1.0 },
+    { "source": "file:frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/model/Permission.kt", "target": "class:frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/model/Permission.kt:Role", "type": "contains", "weight": 1.0 },
+    { "source": "file:frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/model/Principal.kt", "target": "class:frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/model/Principal.kt:Principal", "type": "contains", "weight": 1.0 },
+    { "source": "file:frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/model/Principal.kt", "target": "class:frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/model/Principal.kt:UserPrincipal", "type": "contains", "weight": 1.0 },
+    { "source": "file:frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/model/Principal.kt", "target": "class:frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/model/Principal.kt:ServicePrincipal", "type": "contains", "weight": 1.0 },
+    { "source": "file:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistMetrics.kt", "target": "class:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistMetrics.kt:BlacklistMetrics", "type": "contains", "weight": 1.0 },
+    { "source": "file:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistMetrics.kt", "target": "function:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistMetrics.kt:size", "type": "contains", "weight": 1.0 },
+    { "source": "file:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistMetrics.kt", "target": "function:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistMetrics.kt:addedSince", "type": "contains", "weight": 1.0 },
+    { "source": "file:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistReader.kt", "target": "class:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistReader.kt:BlacklistReader", "type": "contains", "weight": 1.0 },
+    { "source": "file:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistReader.kt", "target": "function:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistReader.kt:isBlacklisted", "type": "contains", "weight": 1.0 },
+    { "source": "file:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistReader.kt", "target": "function:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistReader.kt:reason", "type": "contains", "weight": 1.0 },
+    { "source": "file:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistWriter.kt", "target": "class:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistWriter.kt:BlacklistWriter", "type": "contains", "weight": 1.0 },
+    { "source": "file:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistWriter.kt", "target": "function:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistWriter.kt:add", "type": "contains", "weight": 1.0 },
+    { "source": "file:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistWriter.kt", "target": "function:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistWriter.kt:remove", "type": "contains", "weight": 1.0 },
+    { "source": "file:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistWriter.kt", "target": "function:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistWriter.kt:purgeExpired", "type": "contains", "weight": 1.0 },
+    { "source": "file:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistWriter.kt", "target": "class:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistWriter.kt:BlacklistError", "type": "contains", "weight": 1.0 },
+    { "source": "file:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistWriter.kt", "target": "class:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistWriter.kt:AlreadyBlacklisted", "type": "contains", "weight": 1.0 },
+    { "source": "file:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistWriter.kt", "target": "class:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistWriter.kt:NotFound", "type": "contains", "weight": 1.0 },
+    { "source": "file:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistWriter.kt", "target": "class:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistWriter.kt:Unavailable", "type": "contains", "weight": 1.0 },
+    { "source": "file:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/TokenBlacklist.kt", "target": "class:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/TokenBlacklist.kt:TokenBlacklist", "type": "contains", "weight": 1.0 },
+
+    { "source": "file:frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/contracts/AuthorizationPolicy.kt", "target": "file:frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/model/Principal.kt", "type": "imports", "weight": 0.7 },
+    { "source": "file:frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/contracts/PrincipalProvider.kt", "target": "file:frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/model/Principal.kt", "type": "imports", "weight": 0.7 },
+
+    { "source": "class:frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/model/Principal.kt:UserPrincipal", "target": "class:frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/model/Principal.kt:Principal", "type": "implements", "weight": 0.9 },
+    { "source": "class:frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/model/Principal.kt:ServicePrincipal", "target": "class:frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/model/Principal.kt:Principal", "type": "implements", "weight": 0.9 },
+    { "source": "class:frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/contracts/AuthorizationPolicy.kt:PolicyUnavailable", "target": "class:frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/contracts/AuthorizationPolicy.kt:AuthorizationError", "type": "implements", "weight": 0.9 },
+    { "source": "class:frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/contracts/AuthorizationPolicy.kt:InvalidPrincipal", "target": "class:frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/contracts/AuthorizationPolicy.kt:AuthorizationError", "type": "implements", "weight": 0.9 },
+    { "source": "class:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistWriter.kt:AlreadyBlacklisted", "target": "class:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistWriter.kt:BlacklistError", "type": "implements", "weight": 0.9 },
+    { "source": "class:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistWriter.kt:NotFound", "target": "class:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistWriter.kt:BlacklistError", "type": "implements", "weight": 0.9 },
+    { "source": "class:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistWriter.kt:Unavailable", "target": "class:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistWriter.kt:BlacklistError", "type": "implements", "weight": 0.9 },
+    { "source": "class:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/TokenBlacklist.kt:TokenBlacklist", "target": "class:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistReader.kt:BlacklistReader", "type": "implements", "weight": 0.9 },
+    { "source": "class:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/TokenBlacklist.kt:TokenBlacklist", "target": "class:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistWriter.kt:BlacklistWriter", "type": "implements", "weight": 0.9 },
+    { "source": "class:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/TokenBlacklist.kt:TokenBlacklist", "target": "class:frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistMetrics.kt:BlacklistMetrics", "type": "implements", "weight": 0.9 },
+
+    { "source": "file:build-logic/src/main/kotlin/quality-conventions.gradle.kts", "target": "file:.editorconfig", "type": "configures", "weight": 0.6 },
+    { "source": "file:build-logic/src/main/kotlin/quality-conventions.gradle.kts", "target": "file:config/license-header.txt", "type": "configures", "weight": 0.6 },
+    { "source": "file:build-logic/src/main/kotlin/quality-conventions.gradle.kts", "target": "file:config/detekt/detekt.yml", "type": "configures", "weight": 0.6 },
+    { "source": "file:build-logic/src/main/kotlin/quality-conventions.gradle.kts", "target": "file:config/detekt/detekt-baseline.xml", "type": "configures", "weight": 0.6 },
+    { "source": "file:build-logic/src/main/kotlin/quality-conventions.gradle.kts", "target": "file:build-logic/src/main/kotlin/VersionCatalog.kt", "type": "depends_on", "weight": 0.6 },
+    { "source": "file:build-logic/src/main/kotlin/kotlin-conventions.gradle.kts", "target": "file:build-logic/src/main/kotlin/VersionCatalog.kt", "type": "depends_on", "weight": 0.6 },
+    { "source": "file:build-logic/build.gradle.kts", "target": "file:build-logic/src/main/kotlin/VersionCatalog.kt", "type": "depends_on", "weight": 0.6 },
+    { "source": "file:build-logic/settings.gradle.kts", "target": "file:build-logic/build.gradle.kts", "type": "provisions", "weight": 0.5 },
+    { "source": "file:build.gradle.kts", "target": "file:build-logic/build.gradle.kts", "type": "depends_on", "weight": 0.6 },
+    { "source": "file:frisboo-auth/build.gradle.kts", "target": "file:build-logic/src/main/kotlin/kotlin-conventions.gradle.kts", "type": "configures", "weight": 0.6 },
+    { "source": "file:frisboo-auth/build.gradle.kts", "target": "file:build-logic/src/main/kotlin/quality-conventions.gradle.kts", "type": "configures", "weight": 0.6 },
+    { "source": "file:frisboo-config/build.gradle.kts", "target": "file:build-logic/src/main/kotlin/kotlin-conventions.gradle.kts", "type": "configures", "weight": 0.6 },
+    { "source": "file:frisboo-config/build.gradle.kts", "target": "file:build-logic/src/main/kotlin/quality-conventions.gradle.kts", "type": "configures", "weight": 0.6 },
+    { "source": "file:frisboo-bom/build.gradle.kts", "target": "file:build-logic/build.gradle.kts", "type": "depends_on", "weight": 0.6 },
+    { "source": "file:.github/workflows/ci.yaml", "target": "file:build.gradle.kts", "type": "triggers", "weight": 0.6 }
+  ]
+}

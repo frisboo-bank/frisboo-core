@@ -1,0 +1,746 @@
+{
+  "nodes": [
+    {
+      "id": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitBreaker.kt",
+      "type": "file",
+      "name": "Resilience4jCircuitBreaker.kt",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitBreaker.kt",
+      "summary": "Resilience4j-backed CircuitBreaker implementation with atomic permission lifecycle.",
+      "tags": ["resilience", "circuitbreaker", "adapter"]
+    },
+    {
+      "id": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitBreakerCreator.kt",
+      "type": "file",
+      "name": "Resilience4jCircuitBreakerCreator.kt",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitBreakerCreator.kt",
+      "summary": "Factory function that creates a Resilience4j circuit breaker with state persistence.",
+      "tags": ["resilience", "circuitbreaker", "factory"]
+    },
+    {
+      "id": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitBreakerMetrics.kt",
+      "type": "file",
+      "name": "Resilience4jCircuitBreakerMetrics.kt",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitBreakerMetrics.kt",
+      "summary": "Maps Resilience4j breaker metrics into the domain CircuitBreakerMetrics contract.",
+      "tags": ["resilience", "circuitbreaker", "metrics"]
+    },
+    {
+      "id": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitConfig.kt",
+      "type": "file",
+      "name": "Resilience4jCircuitConfig.kt",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitConfig.kt",
+      "summary": "Converts domain CircuitBreakerConfig into a Resilience4j CircuitBreakerConfig.",
+      "tags": ["resilience", "circuitbreaker", "config"]
+    },
+    {
+      "id": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitState.kt",
+      "type": "file",
+      "name": "Resilience4jCircuitState.kt",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitState.kt",
+      "summary": "Bidirectional mapping between domain CircuitBreakerState and Resilience4j states.",
+      "tags": ["resilience", "circuitbreaker", "adapter"]
+    },
+    {
+      "id": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreaker.kt",
+      "type": "file",
+      "name": "CircuitBreaker.kt",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreaker.kt",
+      "summary": "Public CircuitBreaker interface combining decision, recorder, and configured contracts.",
+      "tags": ["resilience", "circuitbreaker", "contract"]
+    },
+    {
+      "id": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerConfigSource.kt",
+      "type": "file",
+      "name": "CircuitBreakerConfigSource.kt",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerConfigSource.kt",
+      "summary": "Resolves CircuitBreakerConfig by name from an external source.",
+      "tags": ["resilience", "circuitbreaker", "contract"]
+    },
+    {
+      "id": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerConfigured.kt",
+      "type": "file",
+      "name": "CircuitBreakerConfigured.kt",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerConfigured.kt",
+      "summary": "Exposes the adapter's native configuration object type-safely.",
+      "tags": ["resilience", "circuitbreaker", "contract"]
+    },
+    {
+      "id": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerDecision.kt",
+      "type": "file",
+      "name": "CircuitBreakerDecision.kt",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerDecision.kt",
+      "summary": "Decision-oriented circuit breaker operations: permission, trip, reset.",
+      "tags": ["resilience", "circuitbreaker", "contract"]
+    },
+    {
+      "id": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerFactory.kt",
+      "type": "file",
+      "name": "CircuitBreakerFactory.kt",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerFactory.kt",
+      "summary": "Factory contract for creating and managing CircuitBreaker instances.",
+      "tags": ["resilience", "circuitbreaker", "contract"]
+    },
+    {
+      "id": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerMetrics.kt",
+      "type": "file",
+      "name": "CircuitBreakerMetrics.kt",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerMetrics.kt",
+      "summary": "Read-only metrics and state contract for a circuit breaker.",
+      "tags": ["resilience", "circuitbreaker", "contract"]
+    },
+    {
+      "id": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerRecorder.kt",
+      "type": "file",
+      "name": "CircuitBreakerRecorder.kt",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerRecorder.kt",
+      "summary": "Write-only contract for recording circuit breaker call outcomes.",
+      "tags": ["resilience", "circuitbreaker", "contract"]
+    },
+    {
+      "id": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerResult.kt",
+      "type": "file",
+      "name": "CircuitBreakerResult.kt",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerResult.kt",
+      "summary": "Sealed result type for circuit breaker-protected operations (Success/Failure/Rejected).",
+      "tags": ["resilience", "circuitbreaker", "contract"]
+    },
+    {
+      "id": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerState.kt",
+      "type": "file",
+      "name": "CircuitBreakerState.kt",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerState.kt",
+      "summary": "Circuit breaker state machine enum with documented transitions.",
+      "tags": ["resilience", "circuitbreaker", "enum"]
+    },
+    {
+      "id": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/errors/CircuitBreakerError.kt",
+      "type": "file",
+      "name": "CircuitBreakerError.kt",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/errors/CircuitBreakerError.kt",
+      "summary": "Sealed error type for circuit breaker failures (call not permitted, state sync failed).",
+      "tags": ["resilience", "circuitbreaker", "error"]
+    },
+    {
+      "id": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/models/CircuitBreakerConfig.kt",
+      "type": "file",
+      "name": "CircuitBreakerConfig.kt",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/models/CircuitBreakerConfig.kt",
+      "summary": "Data class for circuit breaker configuration with construction-time validation.",
+      "tags": ["resilience", "circuitbreaker", "model"]
+    },
+    {
+      "id": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/models/CircuitBreakerPersistenceContext.kt",
+      "type": "file",
+      "name": "CircuitBreakerPersistenceContext.kt",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/models/CircuitBreakerPersistenceContext.kt",
+      "summary": "Carries StateManager and coroutine scope for circuit breaker state persistence.",
+      "tags": ["resilience", "circuitbreaker", "model"]
+    },
+    {
+      "id": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/models/PropertiesCircuitBreakerConfigSource.kt",
+      "type": "file",
+      "name": "PropertiesCircuitBreakerConfigSource.kt",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/models/PropertiesCircuitBreakerConfigSource.kt",
+      "summary": "CircuitBreakerConfigSource backed by ResilienceProperties.",
+      "tags": ["resilience", "circuitbreaker", "config"]
+    },
+    {
+      "id": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/models/SlidingWindowType.kt",
+      "type": "file",
+      "name": "SlidingWindowType.kt",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/models/SlidingWindowType.kt",
+      "summary": "Enum for sliding window aggregation strategy (count-based or time-based).",
+      "tags": ["resilience", "circuitbreaker", "enum"]
+    },
+    {
+      "id": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/ratelimiter/RateLimiterFactoryImpl.kt",
+      "type": "file",
+      "name": "RateLimiterFactoryImpl.kt",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/ratelimiter/RateLimiterFactoryImpl.kt",
+      "summary": "RateLimiterFactory implementation with caching, logging, and optional config source.",
+      "tags": ["resilience", "ratelimiter", "factory"]
+    },
+    {
+      "id": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/ratelimiter/adapters/resilience4j/Resilience4jRateLimiter.kt",
+      "type": "file",
+      "name": "Resilience4jRateLimiter.kt",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/ratelimiter/adapters/resilience4j/Resilience4jRateLimiter.kt",
+      "summary": "Resilience4j-backed RateLimiter implementation with success/rejection counters.",
+      "tags": ["resilience", "ratelimiter", "adapter"]
+    },
+    {
+      "id": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/ratelimiter/adapters/resilience4j/Resilience4jRateLimiterConfig.kt",
+      "type": "file",
+      "name": "Resilience4jRateLimiterConfig.kt",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/ratelimiter/adapters/resilience4j/Resilience4jRateLimiterConfig.kt",
+      "summary": "Converts domain RateLimiterConfig into a Resilience4j RateLimiterConfig.",
+      "tags": ["resilience", "ratelimiter", "config"]
+    },
+    {
+      "id": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/ratelimiter/adapters/resilience4j/Resilience4jRateLimiterCreator.kt",
+      "type": "file",
+      "name": "Resilience4jRateLimiterCreator.kt",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/ratelimiter/adapters/resilience4j/Resilience4jRateLimiterCreator.kt",
+      "summary": "Factory function that creates a Resilience4j rate limiter with config persistence.",
+      "tags": ["resilience", "ratelimiter", "factory"]
+    },
+    {
+      "id": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/ratelimiter/adapters/resilience4j/Resilience4jRateLimiterMetrics.kt",
+      "type": "file",
+      "name": "Resilience4jRateLimiterMetrics.kt",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/ratelimiter/adapters/resilience4j/Resilience4jRateLimiterMetrics.kt",
+      "summary": "Maps Resilience4j rate limiter metrics into the domain RateLimiterMetrics contract.",
+      "tags": ["resilience", "ratelimiter", "metrics"]
+    },
+    {
+      "id": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/ratelimiter/autoconfigure/PropertiesRateLimiterConfigSource.kt",
+      "type": "file",
+      "name": "PropertiesRateLimiterConfigSource.kt",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/ratelimiter/autoconfigure/PropertiesRateLimiterConfigSource.kt",
+      "summary": "RateLimiterConfigSource backed by ResilienceProperties.",
+      "tags": ["resilience", "ratelimiter", "config"]
+    },
+    {
+      "id": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitBreaker.kt:Resilience4jCircuitBreaker",
+      "type": "class",
+      "name": "Resilience4jCircuitBreaker",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitBreaker.kt",
+      "summary": "Resilience4j-backed CircuitBreaker implementation with atomic permission lifecycle.",
+      "tags": ["resilience", "circuitbreaker", "adapter"]
+    },
+    {
+      "id": "function:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitBreakerCreator.kt:createResilience4jBreaker",
+      "type": "function",
+      "name": "createResilience4jBreaker",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitBreakerCreator.kt",
+      "summary": "Creates a Resilience4j circuit breaker, wires state transitions to persistence, and restores last known state.",
+      "tags": ["resilience", "circuitbreaker", "factory"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitBreakerMetrics.kt:from",
+      "type": "function",
+      "name": "from",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitBreakerMetrics.kt",
+      "summary": "Companion factory that adapts a Resilience4j breaker into the domain CircuitBreakerMetrics.",
+      "tags": ["resilience", "circuitbreaker", "metrics"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitConfig.kt:toResilience4jConfig",
+      "type": "function",
+      "name": "toResilience4jConfig",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitConfig.kt",
+      "summary": "Converts domain CircuitBreakerConfig into a Resilience4j CircuitBreakerConfig builder.",
+      "tags": ["resilience", "circuitbreaker", "config"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitState.kt:from",
+      "type": "function",
+      "name": "from",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitState.kt",
+      "summary": "Maps a Resilience4j circuit breaker state into the domain CircuitBreakerState enum.",
+      "tags": ["resilience", "circuitbreaker", "adapter"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitState.kt:transitionTo",
+      "type": "function",
+      "name": "transitionTo",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitState.kt",
+      "summary": "Transitions a Resilience4j circuit breaker to the given domain CircuitBreakerState.",
+      "tags": ["resilience", "circuitbreaker", "adapter"],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreaker.kt:CircuitBreaker",
+      "type": "class",
+      "name": "CircuitBreaker",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreaker.kt",
+      "summary": "Public interface combining decision, recorder, and configured circuit breaker contracts.",
+      "tags": ["resilience", "circuitbreaker", "contract"]
+    },
+    {
+      "id": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerConfigSource.kt:CircuitBreakerConfigSource",
+      "type": "class",
+      "name": "CircuitBreakerConfigSource",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerConfigSource.kt",
+      "summary": "Fun interface resolving CircuitBreakerConfig by name from an external source.",
+      "tags": ["resilience", "circuitbreaker", "contract"]
+    },
+    {
+      "id": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerConfigured.kt:CircuitBreakerConfigured",
+      "type": "class",
+      "name": "CircuitBreakerConfigured",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerConfigured.kt",
+      "summary": "Interface exposing the adapter's native configuration object type-safely.",
+      "tags": ["resilience", "circuitbreaker", "contract"]
+    },
+    {
+      "id": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerDecision.kt:CircuitBreakerDecision",
+      "type": "class",
+      "name": "CircuitBreakerDecision",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerDecision.kt",
+      "summary": "Decision-oriented circuit breaker operations: permission acquisition, trip, and reset.",
+      "tags": ["resilience", "circuitbreaker", "contract"]
+    },
+    {
+      "id": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerFactory.kt:CircuitBreakerFactory",
+      "type": "class",
+      "name": "CircuitBreakerFactory",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerFactory.kt",
+      "summary": "Factory contract for creating and managing CircuitBreaker instances.",
+      "tags": ["resilience", "circuitbreaker", "contract"]
+    },
+    {
+      "id": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerMetrics.kt:CircuitBreakerMetrics",
+      "type": "class",
+      "name": "CircuitBreakerMetrics",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerMetrics.kt",
+      "summary": "Read-only metrics and state contract for a circuit breaker.",
+      "tags": ["resilience", "circuitbreaker", "contract"]
+    },
+    {
+      "id": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerRecorder.kt:CircuitBreakerRecorder",
+      "type": "class",
+      "name": "CircuitBreakerRecorder",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerRecorder.kt",
+      "summary": "Write-only contract for recording circuit breaker call outcomes.",
+      "tags": ["resilience", "circuitbreaker", "contract"]
+    },
+    {
+      "id": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerResult.kt:CircuitBreakerResult",
+      "type": "class",
+      "name": "CircuitBreakerResult",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerResult.kt",
+      "summary": "Sealed result type for circuit breaker-protected operations (Success/Failure/Rejected).",
+      "tags": ["resilience", "circuitbreaker", "contract"]
+    },
+    {
+      "id": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerState.kt:CircuitBreakerState",
+      "type": "class",
+      "name": "CircuitBreakerState",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerState.kt",
+      "summary": "Circuit breaker state machine enum with documented transitions.",
+      "tags": ["resilience", "circuitbreaker", "enum"]
+    },
+    {
+      "id": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/errors/CircuitBreakerError.kt:CircuitBreakerError",
+      "type": "class",
+      "name": "CircuitBreakerError",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/errors/CircuitBreakerError.kt",
+      "summary": "Sealed error type for circuit breaker failures (call not permitted, state sync failed).",
+      "tags": ["resilience", "circuitbreaker", "error"]
+    },
+    {
+      "id": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/models/CircuitBreakerConfig.kt:CircuitBreakerConfig",
+      "type": "class",
+      "name": "CircuitBreakerConfig",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/models/CircuitBreakerConfig.kt",
+      "summary": "Data class for circuit breaker configuration with construction-time validation.",
+      "tags": ["resilience", "circuitbreaker", "model"]
+    },
+    {
+      "id": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/models/CircuitBreakerPersistenceContext.kt:CircuitBreakerPersistenceContext",
+      "type": "class",
+      "name": "CircuitBreakerPersistenceContext",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/models/CircuitBreakerPersistenceContext.kt",
+      "summary": "Carries StateManager and coroutine scope for circuit breaker state persistence.",
+      "tags": ["resilience", "circuitbreaker", "model"]
+    },
+    {
+      "id": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/models/PropertiesCircuitBreakerConfigSource.kt:PropertiesCircuitBreakerConfigSource",
+      "type": "class",
+      "name": "PropertiesCircuitBreakerConfigSource",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/models/PropertiesCircuitBreakerConfigSource.kt",
+      "summary": "CircuitBreakerConfigSource backed by ResilienceProperties.",
+      "tags": ["resilience", "circuitbreaker", "config"]
+    },
+    {
+      "id": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/models/SlidingWindowType.kt:SlidingWindowType",
+      "type": "class",
+      "name": "SlidingWindowType",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/models/SlidingWindowType.kt",
+      "summary": "Enum for sliding window aggregation strategy (count-based or time-based).",
+      "tags": ["resilience", "circuitbreaker", "enum"]
+    },
+    {
+      "id": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/ratelimiter/RateLimiterFactoryImpl.kt:RateLimiterFactoryImpl",
+      "type": "class",
+      "name": "RateLimiterFactoryImpl",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/ratelimiter/RateLimiterFactoryImpl.kt",
+      "summary": "RateLimiterFactory implementation with caching, logging, and optional config source.",
+      "tags": ["resilience", "ratelimiter", "factory"]
+    },
+    {
+      "id": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/ratelimiter/adapters/resilience4j/Resilience4jRateLimiter.kt:Resilience4jRateLimiter",
+      "type": "class",
+      "name": "Resilience4jRateLimiter",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/ratelimiter/adapters/resilience4j/Resilience4jRateLimiter.kt",
+      "summary": "Resilience4j-backed RateLimiter implementation with success/rejection counters.",
+      "tags": ["resilience", "ratelimiter", "adapter"]
+    },
+    {
+      "id": "function:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/ratelimiter/adapters/resilience4j/Resilience4jRateLimiterConfig.kt:toResilience4jConfig",
+      "type": "function",
+      "name": "toResilience4jConfig",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/ratelimiter/adapters/resilience4j/Resilience4jRateLimiterConfig.kt",
+      "summary": "Converts domain RateLimiterConfig into a Resilience4j RateLimiterConfig builder.",
+      "tags": ["resilience", "ratelimiter", "config"],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/ratelimiter/adapters/resilience4j/Resilience4jRateLimiterCreator.kt:createResilience4jLimiter",
+      "type": "function",
+      "name": "createResilience4jLimiter",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/ratelimiter/adapters/resilience4j/Resilience4jRateLimiterCreator.kt",
+      "summary": "Creates a Resilience4j rate limiter and persists its config to the StateManager.",
+      "tags": ["resilience", "ratelimiter", "factory"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/ratelimiter/adapters/resilience4j/Resilience4jRateLimiterMetrics.kt:from",
+      "type": "function",
+      "name": "from",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/ratelimiter/adapters/resilience4j/Resilience4jRateLimiterMetrics.kt",
+      "summary": "Companion factory that adapts a Resilience4j rate limiter into the domain RateLimiterMetrics.",
+      "tags": ["resilience", "ratelimiter", "metrics"],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/ratelimiter/autoconfigure/PropertiesRateLimiterConfigSource.kt:PropertiesRateLimiterConfigSource",
+      "type": "class",
+      "name": "PropertiesRateLimiterConfigSource",
+      "filePath": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/ratelimiter/autoconfigure/PropertiesRateLimiterConfigSource.kt",
+      "summary": "RateLimiterConfigSource backed by ResilienceProperties.",
+      "tags": ["resilience", "ratelimiter", "config"]
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitBreaker.kt",
+      "target": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitBreaker.kt:Resilience4jCircuitBreaker",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitBreakerCreator.kt",
+      "target": "function:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitBreakerCreator.kt:createResilience4jBreaker",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitBreakerMetrics.kt",
+      "target": "function:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitBreakerMetrics.kt:from",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitConfig.kt",
+      "target": "function:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitConfig.kt:toResilience4jConfig",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitState.kt",
+      "target": "function:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitState.kt:from",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitState.kt",
+      "target": "function:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitState.kt:transitionTo",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreaker.kt",
+      "target": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreaker.kt:CircuitBreaker",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerConfigSource.kt",
+      "target": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerConfigSource.kt:CircuitBreakerConfigSource",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerConfigured.kt",
+      "target": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerConfigured.kt:CircuitBreakerConfigured",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerDecision.kt",
+      "target": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerDecision.kt:CircuitBreakerDecision",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerFactory.kt",
+      "target": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerFactory.kt:CircuitBreakerFactory",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerMetrics.kt",
+      "target": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerMetrics.kt:CircuitBreakerMetrics",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerRecorder.kt",
+      "target": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerRecorder.kt:CircuitBreakerRecorder",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerResult.kt",
+      "target": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerResult.kt:CircuitBreakerResult",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerState.kt",
+      "target": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerState.kt:CircuitBreakerState",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/errors/CircuitBreakerError.kt",
+      "target": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/errors/CircuitBreakerError.kt:CircuitBreakerError",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/models/CircuitBreakerConfig.kt",
+      "target": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/models/CircuitBreakerConfig.kt:CircuitBreakerConfig",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/models/CircuitBreakerPersistenceContext.kt",
+      "target": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/models/CircuitBreakerPersistenceContext.kt:CircuitBreakerPersistenceContext",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/models/PropertiesCircuitBreakerConfigSource.kt",
+      "target": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/models/PropertiesCircuitBreakerConfigSource.kt:PropertiesCircuitBreakerConfigSource",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/models/SlidingWindowType.kt",
+      "target": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/models/SlidingWindowType.kt:SlidingWindowType",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/ratelimiter/RateLimiterFactoryImpl.kt",
+      "target": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/ratelimiter/RateLimiterFactoryImpl.kt:RateLimiterFactoryImpl",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/ratelimiter/adapters/resilience4j/Resilience4jRateLimiter.kt",
+      "target": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/ratelimiter/adapters/resilience4j/Resilience4jRateLimiter.kt:Resilience4jRateLimiter",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/ratelimiter/adapters/resilience4j/Resilience4jRateLimiterConfig.kt",
+      "target": "function:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/ratelimiter/adapters/resilience4j/Resilience4jRateLimiterConfig.kt:toResilience4jConfig",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/ratelimiter/adapters/resilience4j/Resilience4jRateLimiterCreator.kt",
+      "target": "function:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/ratelimiter/adapters/resilience4j/Resilience4jRateLimiterCreator.kt:createResilience4jLimiter",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/ratelimiter/adapters/resilience4j/Resilience4jRateLimiterMetrics.kt",
+      "target": "function:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/ratelimiter/adapters/resilience4j/Resilience4jRateLimiterMetrics.kt:from",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/ratelimiter/autoconfigure/PropertiesRateLimiterConfigSource.kt",
+      "target": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/ratelimiter/autoconfigure/PropertiesRateLimiterConfigSource.kt:PropertiesRateLimiterConfigSource",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitBreaker.kt:Resilience4jCircuitBreaker",
+      "target": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreaker.kt:CircuitBreaker",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreaker.kt:CircuitBreaker",
+      "target": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerDecision.kt:CircuitBreakerDecision",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreaker.kt:CircuitBreaker",
+      "target": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerRecorder.kt:CircuitBreakerRecorder",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreaker.kt:CircuitBreaker",
+      "target": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerConfigured.kt:CircuitBreakerConfigured",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/models/PropertiesCircuitBreakerConfigSource.kt:PropertiesCircuitBreakerConfigSource",
+      "target": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerConfigSource.kt:CircuitBreakerConfigSource",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/ratelimiter/RateLimiterFactoryImpl.kt:RateLimiterFactoryImpl",
+      "target": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/ratelimiter/contracts/RateLimiterFactory.kt:RateLimiterFactory",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/ratelimiter/adapters/resilience4j/Resilience4jRateLimiter.kt:Resilience4jRateLimiter",
+      "target": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/ratelimiter/contracts/RateLimiter.kt:RateLimiter",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/ratelimiter/autoconfigure/PropertiesRateLimiterConfigSource.kt:PropertiesRateLimiterConfigSource",
+      "target": "class:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/ratelimiter/contracts/RateLimiterConfigSource.kt:RateLimiterConfigSource",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitBreaker.kt",
+      "target": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreaker.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitBreaker.kt",
+      "target": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerMetrics.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitBreaker.kt",
+      "target": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerResult.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitBreaker.kt",
+      "target": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/errors/CircuitBreakerError.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitBreaker.kt",
+      "target": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/models/CircuitBreakerConfig.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitBreakerCreator.kt",
+      "target": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerState.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitBreakerCreator.kt",
+      "target": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/models/CircuitBreakerConfig.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitBreakerCreator.kt",
+      "target": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/models/CircuitBreakerPersistenceContext.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitBreakerMetrics.kt",
+      "target": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerMetrics.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitBreakerMetrics.kt",
+      "target": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerState.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitConfig.kt",
+      "target": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/models/CircuitBreakerConfig.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitConfig.kt",
+      "target": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/models/SlidingWindowType.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitState.kt",
+      "target": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerState.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreaker.kt",
+      "target": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/models/CircuitBreakerConfig.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerConfigSource.kt",
+      "target": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/models/CircuitBreakerConfig.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerFactory.kt",
+      "target": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/models/CircuitBreakerConfig.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerMetrics.kt",
+      "target": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerState.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerResult.kt",
+      "target": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/errors/CircuitBreakerError.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/models/PropertiesCircuitBreakerConfigSource.kt",
+      "target": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerConfigSource.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/ratelimiter/RateLimiterFactoryImpl.kt",
+      "target": "file:frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/ratelimiter/adapters/resilience4j/Resilience4jRateLimiterCreator.kt",
+      "type": "imports",
+      "weight": 0.7
+    }
+  ]
+}

@@ -1,0 +1,2443 @@
+{
+  "scriptCompleted": true,
+  "contentDigest": "6ae6bba27b2b2e68f510f443f22a84b61eea01740874536957b840367cadc80a",
+  "files": [
+    {
+      "path": ".editorconfig",
+      "language": "unknown",
+      "sizeLines": 26,
+      "fileCategory": "code"
+    },
+    {
+      "path": ".gitattributes",
+      "language": "unknown",
+      "sizeLines": 3,
+      "fileCategory": "code"
+    },
+    {
+      "path": ".github/workflows/ci.yaml",
+      "language": "yaml",
+      "sizeLines": 16,
+      "fileCategory": "infra"
+    },
+    {
+      "path": ".gitignore",
+      "language": "unknown",
+      "sizeLines": 41,
+      "fileCategory": "code"
+    },
+    {
+      "path": ".ua-plugin/index.js",
+      "language": "javascript",
+      "sizeLines": 247,
+      "fileCategory": "code"
+    },
+    {
+      "path": ".ua-plugin/node_modules/@understand-anything/core/index.js",
+      "language": "javascript",
+      "sizeLines": 247,
+      "fileCategory": "code"
+    },
+    {
+      "path": ".ua-plugin/node_modules/@understand-anything/core/package.json",
+      "language": "json",
+      "sizeLines": 5,
+      "fileCategory": "config"
+    },
+    {
+      "path": ".ua-plugin/package.json",
+      "language": "json",
+      "sizeLines": 10,
+      "fileCategory": "config"
+    },
+    {
+      "path": "build-logic/build.gradle.kts",
+      "language": "kotlin",
+      "sizeLines": 46,
+      "fileCategory": "code"
+    },
+    {
+      "path": "build-logic/settings.gradle.kts",
+      "language": "kotlin",
+      "sizeLines": 28,
+      "fileCategory": "code"
+    },
+    {
+      "path": "build-logic/src/main/kotlin/GenerateCatalogVersionConstants.kt",
+      "language": "kotlin",
+      "sizeLines": 106,
+      "fileCategory": "code"
+    },
+    {
+      "path": "build-logic/src/main/kotlin/VersionCatalog.kt",
+      "language": "kotlin",
+      "sizeLines": 41,
+      "fileCategory": "code"
+    },
+    {
+      "path": "build-logic/src/main/kotlin/kotlin-conventions.gradle.kts",
+      "language": "kotlin",
+      "sizeLines": 61,
+      "fileCategory": "code"
+    },
+    {
+      "path": "build-logic/src/main/kotlin/quality-conventions.gradle.kts",
+      "language": "kotlin",
+      "sizeLines": 89,
+      "fileCategory": "code"
+    },
+    {
+      "path": "build.gradle.kts",
+      "language": "kotlin",
+      "sizeLines": 62,
+      "fileCategory": "code"
+    },
+    {
+      "path": "config/detekt/detekt-baseline.xml",
+      "language": "xml",
+      "sizeLines": 11,
+      "fileCategory": "config"
+    },
+    {
+      "path": "config/detekt/detekt.yml",
+      "language": "yaml",
+      "sizeLines": 776,
+      "fileCategory": "config"
+    },
+    {
+      "path": "config/license-header.txt",
+      "language": "txt",
+      "sizeLines": 15,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "frisboo-auth/build.gradle.kts",
+      "language": "kotlin",
+      "sizeLines": 24,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/contracts/AuthorizationPolicy.kt",
+      "language": "kotlin",
+      "sizeLines": 61,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/contracts/PrincipalProvider.kt",
+      "language": "kotlin",
+      "sizeLines": 31,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/model/Permission.kt",
+      "language": "kotlin",
+      "sizeLines": 38,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-auth/src/main/kotlin/com/frisboo/corebanking/auth/model/Principal.kt",
+      "language": "kotlin",
+      "sizeLines": 41,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-bom/build.gradle.kts",
+      "language": "kotlin",
+      "sizeLines": 39,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-config/build.gradle.kts",
+      "language": "kotlin",
+      "sizeLines": 24,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistMetrics.kt",
+      "language": "kotlin",
+      "sizeLines": 33,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistReader.kt",
+      "language": "kotlin",
+      "sizeLines": 31,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/BlacklistWriter.kt",
+      "language": "kotlin",
+      "sizeLines": 69,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/blacklist/contracts/TokenBlacklist.kt",
+      "language": "kotlin",
+      "sizeLines": 24,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/featureflag/contracts/FeatureFlagReader.kt",
+      "language": "kotlin",
+      "sizeLines": 44,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/featureflag/contracts/FeatureFlagStore.kt",
+      "language": "kotlin",
+      "sizeLines": 23,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/featureflag/contracts/FeatureFlagWriter.kt",
+      "language": "kotlin",
+      "sizeLines": 84,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/scheduling/contracts/ScheduledTaskState.kt",
+      "language": "kotlin",
+      "sizeLines": 23,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/scheduling/contracts/TaskStateReader.kt",
+      "language": "kotlin",
+      "sizeLines": 38,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/scheduling/contracts/TaskStateWriter.kt",
+      "language": "kotlin",
+      "sizeLines": 87,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-config/src/main/kotlin/com/frisboo/corebanking/config/scheduling/model/TaskSchedule.kt",
+      "language": "kotlin",
+      "sizeLines": 29,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-coordination/build.gradle.kts",
+      "language": "kotlin",
+      "sizeLines": 24,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaderElection.kt",
+      "language": "kotlin",
+      "sizeLines": 68,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaseAcquirer.kt",
+      "language": "kotlin",
+      "sizeLines": 83,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaseMetrics.kt",
+      "language": "kotlin",
+      "sizeLines": 44,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/election/contracts/LeaseReleaser.kt",
+      "language": "kotlin",
+      "sizeLines": 31,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/lock/contracts/DistributedLock.kt",
+      "language": "kotlin",
+      "sizeLines": 89,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/lock/contracts/LockAcquirer.kt",
+      "language": "kotlin",
+      "sizeLines": 36,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/lock/contracts/LockMetrics.kt",
+      "language": "kotlin",
+      "sizeLines": 47,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/lock/contracts/LockReleaser.kt",
+      "language": "kotlin",
+      "sizeLines": 31,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/lock/model/LockConfig.kt",
+      "language": "kotlin",
+      "sizeLines": 34,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/reservation/contracts/ReservationReader.kt",
+      "language": "kotlin",
+      "sizeLines": 47,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/reservation/contracts/ReservationWriter.kt",
+      "language": "kotlin",
+      "sizeLines": 84,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/reservation/contracts/ResourceReservation.kt",
+      "language": "kotlin",
+      "sizeLines": 40,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/saga/contracts/Saga.kt",
+      "language": "kotlin",
+      "sizeLines": 113,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/session/contracts/SessionReader.kt",
+      "language": "kotlin",
+      "sizeLines": 45,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/session/contracts/SessionTracker.kt",
+      "language": "kotlin",
+      "sizeLines": 23,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-coordination/src/main/kotlin/com/frisboo/corebanking/coordination/session/contracts/SessionWriter.kt",
+      "language": "kotlin",
+      "sizeLines": 92,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-core/api/frisboo-core.api",
+      "language": "api",
+      "sizeLines": 0,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-core/build.gradle.kts",
+      "language": "kotlin",
+      "sizeLines": 58,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/context/RequestContext.kt",
+      "language": "kotlin",
+      "sizeLines": 39,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/context/RequestContextAccessor.kt",
+      "language": "kotlin",
+      "sizeLines": 6,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/context/RequestContextElement.kt",
+      "language": "kotlin",
+      "sizeLines": 11,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/context/RequestContextExtractor.kt",
+      "language": "kotlin",
+      "sizeLines": 82,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/context/RequestContextWebFilter.kt",
+      "language": "kotlin",
+      "sizeLines": 17,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Command.kt",
+      "language": "kotlin",
+      "sizeLines": 59,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Event.kt",
+      "language": "kotlin",
+      "sizeLines": 43,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Mediator.kt",
+      "language": "kotlin",
+      "sizeLines": 35,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Query.kt",
+      "language": "kotlin",
+      "sizeLines": 45,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/Serializer.kt",
+      "language": "kotlin",
+      "sizeLines": 60,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/contracts/UuidValue.kt",
+      "language": "kotlin",
+      "sizeLines": 33,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/coroutines/CoroutineContext.kt",
+      "language": "kotlin",
+      "sizeLines": 28,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/coroutines/ExecuteWithTimeout.kt",
+      "language": "kotlin",
+      "sizeLines": 42,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/coroutines/raise/ScopedEither.kt",
+      "language": "kotlin",
+      "sizeLines": 108,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/AppError.kt",
+      "language": "kotlin",
+      "sizeLines": 61,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/errors/SerializationException.kt",
+      "language": "kotlin",
+      "sizeLines": 24,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/events/DomainEvent.kt",
+      "language": "kotlin",
+      "sizeLines": 42,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/AcceptLanguage.kt",
+      "language": "kotlin",
+      "sizeLines": 12,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/AccountType.kt",
+      "language": "kotlin",
+      "sizeLines": 117,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/ClientId.kt",
+      "language": "kotlin",
+      "sizeLines": 12,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/ClientIp.kt",
+      "language": "kotlin",
+      "sizeLines": 12,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/CorrelationId.kt",
+      "language": "kotlin",
+      "sizeLines": 22,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/Countries.kt",
+      "language": "kotlin",
+      "sizeLines": 547,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/Currency.kt",
+      "language": "kotlin",
+      "sizeLines": 364,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/CustomerGuid.kt",
+      "language": "kotlin",
+      "sizeLines": 21,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/DeviceFingerprint.kt",
+      "language": "kotlin",
+      "sizeLines": 12,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/IdempotencyKey.kt",
+      "language": "kotlin",
+      "sizeLines": 12,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/PrincipalId.kt",
+      "language": "kotlin",
+      "sizeLines": 12,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/PrincipalType.kt",
+      "language": "kotlin",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/RequestId.kt",
+      "language": "kotlin",
+      "sizeLines": 23,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/SessionId.kt",
+      "language": "kotlin",
+      "sizeLines": 23,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/TenantId.kt",
+      "language": "kotlin",
+      "sizeLines": 12,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/domain/valueobjects/UserAgent.kt",
+      "language": "kotlin",
+      "sizeLines": 12,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/AsyncFactoryBuilder.kt",
+      "language": "kotlin",
+      "sizeLines": 71,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/adapters/AsyncCacheFactory.kt",
+      "language": "kotlin",
+      "sizeLines": 28,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/adapters/caffeine/CaffeineFactoryCache.kt",
+      "language": "kotlin",
+      "sizeLines": 95,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/adapters/caffeine/CaffeineFactoryCacheStats.kt",
+      "language": "kotlin",
+      "sizeLines": 30,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/adapters/noop/NoOpFactoryCache.kt",
+      "language": "kotlin",
+      "sizeLines": 41,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/contracts/AsyncFactory.kt",
+      "language": "kotlin",
+      "sizeLines": 39,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/contracts/FactoryCache.kt",
+      "language": "kotlin",
+      "sizeLines": 47,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/decorators/CachingFactory.kt",
+      "language": "kotlin",
+      "sizeLines": 81,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/decorators/LoggingFactory.kt",
+      "language": "kotlin",
+      "sizeLines": 52,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/decorators/MetricsFactory.kt",
+      "language": "kotlin",
+      "sizeLines": 31,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/models/AsyncFactoryCachingConfig.kt",
+      "language": "kotlin",
+      "sizeLines": 38,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/models/AsyncFactoryLoggingConfig.kt",
+      "language": "kotlin",
+      "sizeLines": 20,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/models/AsyncFactoryMetricsConfig.kt",
+      "language": "kotlin",
+      "sizeLines": 31,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/factory/models/FactoryCacheStats.kt",
+      "language": "kotlin",
+      "sizeLines": 28,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/repositories/LockedTransactionContext.kt",
+      "language": "kotlin",
+      "sizeLines": 25,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/serializers/adaptors/jackson/JacksonJsonSerializerImpl.kt",
+      "language": "kotlin",
+      "sizeLines": 61,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/validation/contracts/ValidationRule.kt",
+      "language": "kotlin",
+      "sizeLines": 30,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/validation/contracts/Validator.kt",
+      "language": "kotlin",
+      "sizeLines": 33,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-core/src/main/kotlin/com/frisboo/corebanking/core/validation/model/ValidationResult.kt",
+      "language": "kotlin",
+      "sizeLines": 39,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-core/src/test/kotlin/com/frisboo/corebanking/core/factory/adapters/caffeine/CaffeineFactoryCacheTest.kt",
+      "language": "kotlin",
+      "sizeLines": 321,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-core/src/test/kotlin/com/frisboo/corebanking/core/factory/decorators/CachingFactoryTest.kt",
+      "language": "kotlin",
+      "sizeLines": 291,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-core/src/test/kotlin/com/frisboo/corebanking/core/serializers/adaptors/jackson/BigDecimalNumericSerializerTest.kt",
+      "language": "kotlin",
+      "sizeLines": 85,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-core/src/test/kotlin/com/frisboo/corebanking/core/serializers/adaptors/jackson/JacksonJsonSerializerImplTest.kt",
+      "language": "kotlin",
+      "sizeLines": 123,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-crypto/README.md",
+      "language": "markdown",
+      "sizeLines": 227,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "frisboo-crypto/build.gradle.kts",
+      "language": "kotlin",
+      "sizeLines": 40,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkCryptoInitializer.kt",
+      "language": "kotlin",
+      "sizeLines": 46,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkCryptoService.kt",
+      "language": "kotlin",
+      "sizeLines": 60,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkExceptionMapping.kt",
+      "language": "kotlin",
+      "sizeLines": 65,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/adapters/tink/TinkHybridCryptoService.kt",
+      "language": "kotlin",
+      "sizeLines": 72,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/autoconfigure/CryptoAutoConfiguration.kt",
+      "language": "kotlin",
+      "sizeLines": 73,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/autoconfigure/CryptoProperties.kt",
+      "language": "kotlin",
+      "sizeLines": 33,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/contracts/CryptoService.kt",
+      "language": "kotlin",
+      "sizeLines": 51,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/contracts/HybridCryptoService.kt",
+      "language": "kotlin",
+      "sizeLines": 57,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-crypto/src/main/kotlin/com/frisboo/corebanking/crypto/errors/CryptoException.kt",
+      "language": "kotlin",
+      "sizeLines": 57,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-crypto/src/main/resources/META-INF/spring-configuration-metadata.json",
+      "language": "json",
+      "sizeLines": 22,
+      "fileCategory": "config"
+    },
+    {
+      "path": "frisboo-crypto/src/main/resources/META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports",
+      "language": "imports",
+      "sizeLines": 1,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-crypto/src/test/kotlin/com/frisboo/corebanking/crypto/KeysetHandleFactory.kt",
+      "language": "kotlin",
+      "sizeLines": 41,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-crypto/src/test/kotlin/com/frisboo/corebanking/crypto/TinkCryptoServiceTest.kt",
+      "language": "kotlin",
+      "sizeLines": 229,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-crypto/src/test/kotlin/com/frisboo/corebanking/crypto/TinkHybridCryptoServiceTest.kt",
+      "language": "kotlin",
+      "sizeLines": 184,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-data/build.gradle.kts",
+      "language": "kotlin",
+      "sizeLines": 35,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-data/src/main/kotlin/com/frisboo/corebanking/data/deduplication/contracts/BatchDedupReader.kt",
+      "language": "kotlin",
+      "sizeLines": 41,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-data/src/main/kotlin/com/frisboo/corebanking/data/deduplication/contracts/BatchDedupWriter.kt",
+      "language": "kotlin",
+      "sizeLines": 55,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-data/src/main/kotlin/com/frisboo/corebanking/data/deduplication/contracts/BatchDeduplication.kt",
+      "language": "kotlin",
+      "sizeLines": 23,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-data/src/main/kotlin/com/frisboo/corebanking/data/deduplication/contracts/BatchStatus.kt",
+      "language": "kotlin",
+      "sizeLines": 26,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-data/src/main/kotlin/com/frisboo/corebanking/data/deduplication/contracts/DeduplicationStore.kt",
+      "language": "kotlin",
+      "sizeLines": 53,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-data/src/main/kotlin/com/frisboo/corebanking/data/deduplication/contracts/MessageDedupReader.kt",
+      "language": "kotlin",
+      "sizeLines": 36,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-data/src/main/kotlin/com/frisboo/corebanking/data/deduplication/contracts/MessageDedupWriter.kt",
+      "language": "kotlin",
+      "sizeLines": 43,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-data/src/main/kotlin/com/frisboo/corebanking/data/deduplication/contracts/MessageDeduplication.kt",
+      "language": "kotlin",
+      "sizeLines": 23,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-data/src/main/kotlin/com/frisboo/corebanking/data/eventsourcing/contracts/EventStore.kt",
+      "language": "kotlin",
+      "sizeLines": 96,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-data/src/main/kotlin/com/frisboo/corebanking/data/idempotency/contracts/IdempotencyAtomic.kt",
+      "language": "kotlin",
+      "sizeLines": 31,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-data/src/main/kotlin/com/frisboo/corebanking/data/idempotency/contracts/IdempotencyChecker.kt",
+      "language": "kotlin",
+      "sizeLines": 37,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-data/src/main/kotlin/com/frisboo/corebanking/data/idempotency/contracts/IdempotencyMarker.kt",
+      "language": "kotlin",
+      "sizeLines": 51,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-data/src/main/kotlin/com/frisboo/corebanking/data/idempotency/contracts/IdempotencyStore.kt",
+      "language": "kotlin",
+      "sizeLines": 35,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-data/src/main/kotlin/com/frisboo/corebanking/data/idempotency/contracts/IdempotentReceiver.kt",
+      "language": "kotlin",
+      "sizeLines": 23,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-data/src/main/kotlin/com/frisboo/corebanking/data/idempotency/contracts/IdempotentReceiverReader.kt",
+      "language": "kotlin",
+      "sizeLines": 41,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-data/src/main/kotlin/com/frisboo/corebanking/data/idempotency/contracts/IdempotentReceiverWriter.kt",
+      "language": "kotlin",
+      "sizeLines": 43,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-data/src/main/kotlin/com/frisboo/corebanking/data/mocks/AccountEventArb.kt",
+      "language": "kotlin",
+      "sizeLines": 322,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-data/src/main/kotlin/com/frisboo/corebanking/data/mocks/SagaEventArb.kt",
+      "language": "kotlin",
+      "sizeLines": 66,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-data/src/main/kotlin/com/frisboo/corebanking/data/mocks/Utils.kt",
+      "language": "kotlin",
+      "sizeLines": 135,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-data/src/main/kotlin/com/frisboo/corebanking/data/mocks/events/MockAccountEvent.kt",
+      "language": "kotlin",
+      "sizeLines": 256,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-data/src/main/kotlin/com/frisboo/corebanking/data/mocks/events/MockCustomerEvent.kt",
+      "language": "kotlin",
+      "sizeLines": 123,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-data/src/main/kotlin/com/frisboo/corebanking/data/mocks/events/MockSagaEvent.kt",
+      "language": "kotlin",
+      "sizeLines": 220,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-data/src/main/kotlin/com/frisboo/corebanking/data/mocks/events/MockTransactionEvent.kt",
+      "language": "kotlin",
+      "sizeLines": 109,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-grpc/README.md",
+      "language": "markdown",
+      "sizeLines": 3,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "frisboo-grpc/build.gradle.kts",
+      "language": "kotlin",
+      "sizeLines": 35,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-grpc/src/main/kotlin/com/frisboo/corebanking/grpc/domain/dtos/Instant.kt",
+      "language": "kotlin",
+      "sizeLines": 26,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-grpc/src/main/kotlin/com/frisboo/corebanking/grpc/domain/dtos/ProtoTimestamp.kt",
+      "language": "kotlin",
+      "sizeLines": 21,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-grpc/src/main/kotlin/com/frisboo/corebanking/grpc/interceptors/GlobalInterceptorConfiguration.kt",
+      "language": "kotlin",
+      "sizeLines": 28,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-grpc/src/main/kotlin/com/frisboo/corebanking/grpc/interceptors/LoggingInterceptor.kt",
+      "language": "kotlin",
+      "sizeLines": 66,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-grpc/src/test/kotlin/com/frisboo/corebanking/grpc/domain/dtos/ProtoTimestampTest.kt",
+      "language": "kotlin",
+      "sizeLines": 37,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-grpc/src/test/resources/logback-test.xml",
+      "language": "xml",
+      "sizeLines": 19,
+      "fileCategory": "config"
+    },
+    {
+      "path": "frisboo-http/api/frisboo-http.api",
+      "language": "api",
+      "sizeLines": 0,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-http/build.gradle.kts",
+      "language": "kotlin",
+      "sizeLines": 24,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-http/src/main/kotlin/com/frisboo/corebanking/http/domain/models/HTTPErrorResponse.kt",
+      "language": "kotlin",
+      "sizeLines": 68,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-messaging/build.gradle.kts",
+      "language": "kotlin",
+      "sizeLines": 25,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/dlq/contracts/DlqDedupReader.kt",
+      "language": "kotlin",
+      "sizeLines": 31,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/dlq/contracts/DlqDedupWriter.kt",
+      "language": "kotlin",
+      "sizeLines": 54,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/dlq/contracts/DlqDeduplication.kt",
+      "language": "kotlin",
+      "sizeLines": 23,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/IdempotentOutbox.kt",
+      "language": "kotlin",
+      "sizeLines": 23,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/IdempotentOutboxReader.kt",
+      "language": "kotlin",
+      "sizeLines": 33,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/IdempotentOutboxWriter.kt",
+      "language": "kotlin",
+      "sizeLines": 34,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/OutboxAtomic.kt",
+      "language": "kotlin",
+      "sizeLines": 32,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/OutboxReader.kt",
+      "language": "kotlin",
+      "sizeLines": 40,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/OutboxStore.kt",
+      "language": "kotlin",
+      "sizeLines": 35,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/contracts/OutboxWriter.kt",
+      "language": "kotlin",
+      "sizeLines": 50,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/model/OutboxMessage.kt",
+      "language": "kotlin",
+      "sizeLines": 54,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-messaging/src/main/kotlin/com/frisboo/corebanking/messaging/outbox/model/OutboxStatus.kt",
+      "language": "kotlin",
+      "sizeLines": 23,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-messaging/src/main/resources/META-INF/spring-configuration-metadata.json",
+      "language": "json",
+      "sizeLines": 24,
+      "fileCategory": "config"
+    },
+    {
+      "path": "frisboo-messaging/src/main/resources/META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports",
+      "language": "imports",
+      "sizeLines": 1,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-observability/build.gradle.kts",
+      "language": "kotlin",
+      "sizeLines": 30,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/ObservabilityAuditImpl.kt",
+      "language": "kotlin",
+      "sizeLines": 20,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/adapters/kafka/ObservabilityAuditKafkaAdapter.kt",
+      "language": "kotlin",
+      "sizeLines": 10,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/adapters/noop/ObservabilityAuditNoOpAdapter.kt",
+      "language": "kotlin",
+      "sizeLines": 10,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/adapters/otel/ObservabilityAuditOtelAdapter.kt",
+      "language": "kotlin",
+      "sizeLines": 50,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/adapters/otel/ObservabilityAuditOutcomeMapper.kt",
+      "language": "kotlin",
+      "sizeLines": 14,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/contracts/ObservabilityAudit.kt",
+      "language": "kotlin",
+      "sizeLines": 18,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/contracts/ObservabilityAuditAdapter.kt",
+      "language": "kotlin",
+      "sizeLines": 18,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/contracts/ObservabilityAuditBaggageFilter.kt",
+      "language": "kotlin",
+      "sizeLines": 7,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/contracts/ObservabilityAuditShared.kt",
+      "language": "kotlin",
+      "sizeLines": 7,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditBaggage.kt",
+      "language": "kotlin",
+      "sizeLines": 15,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditEntry.kt",
+      "language": "kotlin",
+      "sizeLines": 72,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditOutcome.kt",
+      "language": "kotlin",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditProperties.kt",
+      "language": "kotlin",
+      "sizeLines": 5,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/audit/models/ObservabilityAuditType.kt",
+      "language": "kotlin",
+      "sizeLines": 7,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityAutoConfiguration.kt",
+      "language": "kotlin",
+      "sizeLines": 103,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/autoconfigure/ObservabilityProperties.kt",
+      "language": "kotlin",
+      "sizeLines": 14,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/ObservabilityMetricsImpl.kt",
+      "language": "kotlin",
+      "sizeLines": 23,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/adapters/noop/ObservabilityMetricsNoOpAdapter.kt",
+      "language": "kotlin",
+      "sizeLines": 27,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/adapters/otel/ObservabilityMetricsOtelAdapter.kt",
+      "language": "kotlin",
+      "sizeLines": 32,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/contracts/ObservabilityMetrics.kt",
+      "language": "kotlin",
+      "sizeLines": 18,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/contracts/ObservabilityMetricsAdapter.kt",
+      "language": "kotlin",
+      "sizeLines": 18,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/contracts/ObservabilityMetricsShared.kt",
+      "language": "kotlin",
+      "sizeLines": 37,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/models/ObservabilityMetricsProperties.kt",
+      "language": "kotlin",
+      "sizeLines": 5,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/metrics/models/ObservabilityMetricsType.kt",
+      "language": "kotlin",
+      "sizeLines": 6,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/otel/OtelSpanEmitterImpl.kt",
+      "language": "kotlin",
+      "sizeLines": 23,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/otel/OtelSpanImpl.kt",
+      "language": "kotlin",
+      "sizeLines": 14,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/otel/contracts/OtelSpan.kt",
+      "language": "kotlin",
+      "sizeLines": 11,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/otel/contracts/OtelSpanEmitter.kt",
+      "language": "kotlin",
+      "sizeLines": 9,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/otel/models/OtelSpanStatus.kt",
+      "language": "kotlin",
+      "sizeLines": 14,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/ObservabilityTracerImpl.kt",
+      "language": "kotlin",
+      "sizeLines": 16,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/adapters/noop/ObservabilityTracerNoOpAdapter.kt",
+      "language": "kotlin",
+      "sizeLines": 12,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/adapters/noop/ObservabilityTracerNoopOperation.kt",
+      "language": "kotlin",
+      "sizeLines": 17,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/adapters/otel/ObservabilityTracerOtelAdapter.kt",
+      "language": "kotlin",
+      "sizeLines": 20,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/adapters/otel/OtelToTracerOperationMapping.kt",
+      "language": "kotlin",
+      "sizeLines": 22,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/contracts/ObservabilityTracer.kt",
+      "language": "kotlin",
+      "sizeLines": 19,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/contracts/ObservabilityTracerAdapter.kt",
+      "language": "kotlin",
+      "sizeLines": 19,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/contracts/ObservabilityTracerOperation.kt",
+      "language": "kotlin",
+      "sizeLines": 7,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/contracts/ObservabilityTracerShared.kt",
+      "language": "kotlin",
+      "sizeLines": 25,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/models/ObservabilityTracerProperties.kt",
+      "language": "kotlin",
+      "sizeLines": 5,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-observability/src/main/kotlin/com/frisboo/corebanking/observability/tracer/models/ObservabilityTracerType.kt",
+      "language": "kotlin",
+      "sizeLines": 6,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-persistence/README.md",
+      "language": "markdown",
+      "sizeLines": 221,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "frisboo-persistence/build.gradle.kts",
+      "language": "kotlin",
+      "sizeLines": 69,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/autoconfigure/PersistenceAutoConfiguration.kt",
+      "language": "kotlin",
+      "sizeLines": 45,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/autoconfigure/PersistenceProperties.kt",
+      "language": "kotlin",
+      "sizeLines": 32,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/constants/PersistenceConstants.kt",
+      "language": "kotlin",
+      "sizeLines": 19,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/contracts/PersistenceSerializer.kt",
+      "language": "kotlin",
+      "sizeLines": 22,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/errors/PersistenceError.kt",
+      "language": "kotlin",
+      "sizeLines": 55,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/models/KeyValuePutResult.kt",
+      "language": "kotlin",
+      "sizeLines": 25,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/models/PersistenceScope.kt",
+      "language": "kotlin",
+      "sizeLines": 43,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/serializers/PersistenceEncryptingSerializerImpl.kt",
+      "language": "kotlin",
+      "sizeLines": 47,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/serializers/PersistenceStringSerializerImpl.kt",
+      "language": "kotlin",
+      "sizeLines": 24,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/core/utils/toSafeSqlIdentifier.kt",
+      "language": "kotlin",
+      "sizeLines": 45,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/exposed/abstracts/BaseTable.kt",
+      "language": "kotlin",
+      "sizeLines": 33,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/exposed/errors/ExposedError.kt",
+      "language": "kotlin",
+      "sizeLines": 41,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/exposed/extensions/WithOptimisticLocking.kt",
+      "language": "kotlin",
+      "sizeLines": 92,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsFactoryImpl.kt",
+      "language": "kotlin",
+      "sizeLines": 51,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImpl.kt",
+      "language": "kotlin",
+      "sizeLines": 329,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/adapters/lettuce/RedisLettuceCommandsImpl.kt",
+      "language": "kotlin",
+      "sizeLines": 323,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/adapters/lettuce/RedisLettuceConnectionImpl.kt",
+      "language": "kotlin",
+      "sizeLines": 55,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/adapters/lettuce/RedisScanCursor.kt",
+      "language": "kotlin",
+      "sizeLines": 10,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/constants/RedisConstants.kt",
+      "language": "kotlin",
+      "sizeLines": 27,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisAtomicOperations.kt",
+      "language": "kotlin",
+      "sizeLines": 47,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisLockOperations.kt",
+      "language": "kotlin",
+      "sizeLines": 44,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisOperations.kt",
+      "language": "kotlin",
+      "sizeLines": 22,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisOperationsFactory.kt",
+      "language": "kotlin",
+      "sizeLines": 26,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisReadOperations.kt",
+      "language": "kotlin",
+      "sizeLines": 38,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisWriteOperations.kt",
+      "language": "kotlin",
+      "sizeLines": 41,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/internal/RedisAtomicCommands.kt",
+      "language": "kotlin",
+      "sizeLines": 37,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/internal/RedisCommands.kt",
+      "language": "kotlin",
+      "sizeLines": 23,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/internal/RedisConnection.kt",
+      "language": "kotlin",
+      "sizeLines": 20,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/internal/RedisLockCommands.kt",
+      "language": "kotlin",
+      "sizeLines": 34,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/internal/RedisManageCommands.kt",
+      "language": "kotlin",
+      "sizeLines": 25,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/internal/RedisReadCommands.kt",
+      "language": "kotlin",
+      "sizeLines": 30,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/internal/RedisWriteCommands.kt",
+      "language": "kotlin",
+      "sizeLines": 32,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/internal/results/RedisCommandsAcquireLockResult.kt",
+      "language": "kotlin",
+      "sizeLines": 18,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/internal/results/RedisCommandsCompareAndSetResult.kt",
+      "language": "kotlin",
+      "sizeLines": 19,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/internal/results/RedisCommandsReleaseLockResult.kt",
+      "language": "kotlin",
+      "sizeLines": 7,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/internal/results/RedisCommandsSetWithLockResult.kt",
+      "language": "kotlin",
+      "sizeLines": 19,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/observability/RedisOperationsMetrics.kt",
+      "language": "kotlin",
+      "sizeLines": 9,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisCompareAndSetResult.kt",
+      "language": "kotlin",
+      "sizeLines": 32,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisDeleteResult.kt",
+      "language": "kotlin",
+      "sizeLines": 28,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisExistsResult.kt",
+      "language": "kotlin",
+      "sizeLines": 22,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisGetResult.kt",
+      "language": "kotlin",
+      "sizeLines": 28,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisLockAcquireResult.kt",
+      "language": "kotlin",
+      "sizeLines": 32,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisLockReleaseResult.kt",
+      "language": "kotlin",
+      "sizeLines": 24,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisScanPageResult.kt",
+      "language": "kotlin",
+      "sizeLines": 25,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisSetIfAbsentResult.kt",
+      "language": "kotlin",
+      "sizeLines": 22,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisSetResult.kt",
+      "language": "kotlin",
+      "sizeLines": 32,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/RedisCodec.kt",
+      "language": "kotlin",
+      "sizeLines": 98,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/RedisScanCursor.kt",
+      "language": "kotlin",
+      "sizeLines": 42,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/observability/RedisOperationsAuditOutcome.kt",
+      "language": "kotlin",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/observability/RedisOperationsOperation.kt",
+      "language": "kotlin",
+      "sizeLines": 21,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/observability/decorators/RedisOperationsAuditDecorator.kt",
+      "language": "kotlin",
+      "sizeLines": 186,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/observability/decorators/RedisOperationsMetricsDecorator.kt",
+      "language": "kotlin",
+      "sizeLines": 132,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-persistence/src/main/resources/META-INF/spring-configuration-metadata.json",
+      "language": "json",
+      "sizeLines": 35,
+      "fileCategory": "config"
+    },
+    {
+      "path": "frisboo-persistence/src/main/resources/META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports",
+      "language": "imports",
+      "sizeLines": 1,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-persistence/src/main/resources/db/migration/postgres/V00000000000100__extensions.sql",
+      "language": "sql",
+      "sizeLines": 3,
+      "fileCategory": "data"
+    },
+    {
+      "path": "frisboo-persistence/src/main/resources/db/migration/postgres/V00000000000101__functions.sql",
+      "language": "sql",
+      "sizeLines": 73,
+      "fileCategory": "data"
+    },
+    {
+      "path": "frisboo-persistence/src/test/kotlin/com/frisboo/corebanking/persistence/exposed/extensions/WithOptimisticLockingTest.kt",
+      "language": "kotlin",
+      "sizeLines": 418,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-persistence/src/test/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImplTest.kt",
+      "language": "kotlin",
+      "sizeLines": 407,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-persistence/src/test/kotlin/com/frisboo/corebanking/persistence/triggers/SqlTriggerExpiredTest.kt",
+      "language": "kotlin",
+      "sizeLines": 140,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-persistence/src/test/kotlin/com/frisboo/corebanking/persistence/triggers/SqlTriggerTest.kt",
+      "language": "kotlin",
+      "sizeLines": 195,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-persistence/src/test/kotlin/com/frisboo/corebanking/persistence/triggers/SqlTriggerTimestampedTest.kt",
+      "language": "kotlin",
+      "sizeLines": 203,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-persistence/src/testFixtures/kotlin/com/frisboo/corebanking/persistence/postgres/testing/PostgreSQLTestFixture.kt",
+      "language": "kotlin",
+      "sizeLines": 123,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-persistence/src/testFixtures/kotlin/com/frisboo/corebanking/persistence/redis/testing/RedisTestFixture.kt",
+      "language": "kotlin",
+      "sizeLines": 183,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-quota/build.gradle.kts",
+      "language": "kotlin",
+      "sizeLines": 24,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/contracts/ApiQuotaDecider.kt",
+      "language": "kotlin",
+      "sizeLines": 39,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/contracts/ApiQuotaReader.kt",
+      "language": "kotlin",
+      "sizeLines": 39,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/contracts/ApiQuotaTracker.kt",
+      "language": "kotlin",
+      "sizeLines": 24,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/contracts/ApiQuotaWriter.kt",
+      "language": "kotlin",
+      "sizeLines": 61,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/api/model/ApiUsage.kt",
+      "language": "kotlin",
+      "sizeLines": 29,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/tracker/contracts/QuotaDecider.kt",
+      "language": "kotlin",
+      "sizeLines": 31,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/tracker/contracts/QuotaReader.kt",
+      "language": "kotlin",
+      "sizeLines": 36,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/tracker/contracts/QuotaTracker.kt",
+      "language": "kotlin",
+      "sizeLines": 24,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/tracker/contracts/QuotaWriter.kt",
+      "language": "kotlin",
+      "sizeLines": 71,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/window/contracts/SlidingWindowCounter.kt",
+      "language": "kotlin",
+      "sizeLines": 31,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/window/contracts/WindowReader.kt",
+      "language": "kotlin",
+      "sizeLines": 36,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-quota/src/main/kotlin/com/frisboo/corebanking/quota/window/contracts/WindowWriter.kt",
+      "language": "kotlin",
+      "sizeLines": 49,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-resilience/README.md",
+      "language": "markdown",
+      "sizeLines": 457,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "frisboo-resilience/build.gradle.kts",
+      "language": "kotlin",
+      "sizeLines": 47,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/autoconfigure/ResilienceAutoConfiguration.kt",
+      "language": "kotlin",
+      "sizeLines": 77,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/autoconfigure/ResilienceProperties.kt",
+      "language": "kotlin",
+      "sizeLines": 164,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/CircuitBreakerFactoryImpl.kt",
+      "language": "kotlin",
+      "sizeLines": 82,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitBreaker.kt",
+      "language": "kotlin",
+      "sizeLines": 88,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitBreakerCreator.kt",
+      "language": "kotlin",
+      "sizeLines": 70,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitBreakerMetrics.kt",
+      "language": "kotlin",
+      "sizeLines": 37,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitConfig.kt",
+      "language": "kotlin",
+      "sizeLines": 51,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitState.kt",
+      "language": "kotlin",
+      "sizeLines": 46,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreaker.kt",
+      "language": "kotlin",
+      "sizeLines": 37,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerConfigSource.kt",
+      "language": "kotlin",
+      "sizeLines": 34,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerConfigured.kt",
+      "language": "kotlin",
+      "sizeLines": 27,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerDecision.kt",
+      "language": "kotlin",
+      "sizeLines": 38,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerFactory.kt",
+      "language": "kotlin",
+      "sizeLines": 33,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerMetrics.kt",
+      "language": "kotlin",
+      "sizeLines": 56,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerRecorder.kt",
+      "language": "kotlin",
+      "sizeLines": 36,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerResult.kt",
+      "language": "kotlin",
+      "sizeLines": 40,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/contracts/CircuitBreakerState.kt",
+      "language": "kotlin",
+      "sizeLines": 46,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/errors/CircuitBreakerError.kt",
+      "language": "kotlin",
+      "sizeLines": 29,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/models/CircuitBreakerConfig.kt",
+      "language": "kotlin",
+      "sizeLines": 88,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/models/CircuitBreakerPersistenceContext.kt",
+      "language": "kotlin",
+      "sizeLines": 24,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/models/PropertiesCircuitBreakerConfigSource.kt",
+      "language": "kotlin",
+      "sizeLines": 10,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/models/SlidingWindowType.kt",
+      "language": "kotlin",
+      "sizeLines": 27,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/ratelimiter/RateLimiterFactoryImpl.kt",
+      "language": "kotlin",
+      "sizeLines": 90,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/ratelimiter/adapters/resilience4j/Resilience4jRateLimiter.kt",
+      "language": "kotlin",
+      "sizeLines": 99,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/ratelimiter/adapters/resilience4j/Resilience4jRateLimiterConfig.kt",
+      "language": "kotlin",
+      "sizeLines": 28,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/ratelimiter/adapters/resilience4j/Resilience4jRateLimiterCreator.kt",
+      "language": "kotlin",
+      "sizeLines": 59,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/ratelimiter/adapters/resilience4j/Resilience4jRateLimiterMetrics.kt",
+      "language": "kotlin",
+      "sizeLines": 35,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/ratelimiter/autoconfigure/PropertiesRateLimiterConfigSource.kt",
+      "language": "kotlin",
+      "sizeLines": 26,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/ratelimiter/contracts/RateLimiter.kt",
+      "language": "kotlin",
+      "sizeLines": 29,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/ratelimiter/contracts/RateLimiterAcquirer.kt",
+      "language": "kotlin",
+      "sizeLines": 31,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/ratelimiter/contracts/RateLimiterConfigSource.kt",
+      "language": "kotlin",
+      "sizeLines": 22,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/ratelimiter/contracts/RateLimiterConfigured.kt",
+      "language": "kotlin",
+      "sizeLines": 20,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/ratelimiter/contracts/RateLimiterFactory.kt",
+      "language": "kotlin",
+      "sizeLines": 30,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/ratelimiter/contracts/RateLimiterMetrics.kt",
+      "language": "kotlin",
+      "sizeLines": 28,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/ratelimiter/contracts/RateLimiterRecorder.kt",
+      "language": "kotlin",
+      "sizeLines": 22,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/ratelimiter/contracts/RateLimiterResult.kt",
+      "language": "kotlin",
+      "sizeLines": 32,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/ratelimiter/errors/RateLimiterError.kt",
+      "language": "kotlin",
+      "sizeLines": 29,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/ratelimiter/model/RateLimiterConfig.kt",
+      "language": "kotlin",
+      "sizeLines": 37,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/ratelimiter/model/RateLimiterPersistenceContext.kt",
+      "language": "kotlin",
+      "sizeLines": 24,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/retry/contracts/RetryDecider.kt",
+      "language": "kotlin",
+      "sizeLines": 29,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/retry/contracts/RetryPolicy.kt",
+      "language": "kotlin",
+      "sizeLines": 38,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/retry/contracts/RetryPolicyStore.kt",
+      "language": "kotlin",
+      "sizeLines": 36,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/retry/contracts/RetryStateReader.kt",
+      "language": "kotlin",
+      "sizeLines": 31,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/retry/contracts/RetryStateWriter.kt",
+      "language": "kotlin",
+      "sizeLines": 50,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/retry/model/RetryContext.kt",
+      "language": "kotlin",
+      "sizeLines": 31,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/retry/model/RetryDecision.kt",
+      "language": "kotlin",
+      "sizeLines": 31,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/stampede/contracts/CacheStampedePrevention.kt",
+      "language": "kotlin",
+      "sizeLines": 35,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/stampede/contracts/StampedeReader.kt",
+      "language": "kotlin",
+      "sizeLines": 31,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-resilience/src/main/kotlin/com/frisboo/corebanking/resilience/stampede/contracts/StampedeWriter.kt",
+      "language": "kotlin",
+      "sizeLines": 60,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-resilience/src/main/resources/META-INF/spring-configuration-metadata.json",
+      "language": "json",
+      "sizeLines": 87,
+      "fileCategory": "config"
+    },
+    {
+      "path": "frisboo-resilience/src/main/resources/META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports",
+      "language": "imports",
+      "sizeLines": 1,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-resilience/src/test/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/CircuitBreakerFactoryImplTest.kt",
+      "language": "kotlin",
+      "sizeLines": 187,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-resilience/src/test/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/adapters/resilience4j/Resilience4jCircuitBreakerTest.kt",
+      "language": "kotlin",
+      "sizeLines": 166,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-resilience/src/test/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/models/CircuitBreakerConfigTest.kt",
+      "language": "kotlin",
+      "sizeLines": 214,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-resilience/src/test/kotlin/com/frisboo/corebanking/resilience/circuitbreaker/testutils/createCircuitBreakerConfigArb.kt",
+      "language": "kotlin",
+      "sizeLines": 59,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-resilience/src/test/kotlin/com/frisboo/corebanking/resilience/ratelimiter/RateLimiterFactoryImplTest.kt",
+      "language": "kotlin",
+      "sizeLines": 186,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-resilience/src/test/kotlin/com/frisboo/corebanking/resilience/ratelimiter/adapters/resilience4j/Resilience4jRateLimiterTest.kt",
+      "language": "kotlin",
+      "sizeLines": 170,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-resilience/src/test/kotlin/com/frisboo/corebanking/resilience/ratelimiter/model/RateLimiterConfigTest.kt",
+      "language": "kotlin",
+      "sizeLines": 89,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-resilience/src/test/kotlin/com/frisboo/corebanking/resilience/ratelimiter/testutils/createRateLimiterConfigArb.kt",
+      "language": "kotlin",
+      "sizeLines": 36,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-statemanager/README.md",
+      "language": "markdown",
+      "sizeLines": 347,
+      "fileCategory": "docs"
+    },
+    {
+      "path": "frisboo-statemanager/build.gradle.kts",
+      "language": "kotlin",
+      "sizeLines": 53,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/adapters/distributed/redis/StateManagerRedisImpl.kt",
+      "language": "kotlin",
+      "sizeLines": 265,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/adapters/local/caffeine/StateManagerCaffeineImpl.kt",
+      "language": "kotlin",
+      "sizeLines": 286,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/contracts/DistributedStateManager.kt",
+      "language": "kotlin",
+      "sizeLines": 31,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/contracts/LocalStateManager.kt",
+      "language": "kotlin",
+      "sizeLines": 26,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/contracts/StateManager.kt",
+      "language": "kotlin",
+      "sizeLines": 30,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/contracts/StateManagerAdmin.kt",
+      "language": "kotlin",
+      "sizeLines": 50,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/contracts/StateManagerAuditEmitter.kt",
+      "language": "kotlin",
+      "sizeLines": 26,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/contracts/StateManagerMetrics.kt",
+      "language": "kotlin",
+      "sizeLines": 52,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/contracts/StateManagerReader.kt",
+      "language": "kotlin",
+      "sizeLines": 44,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/contracts/StateManagerResilienceExecutor.kt",
+      "language": "kotlin",
+      "sizeLines": 34,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/contracts/StateManagerWriter.kt",
+      "language": "kotlin",
+      "sizeLines": 59,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/decorators/StateManagerAuditingImpl.kt",
+      "language": "kotlin",
+      "sizeLines": 104,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/decorators/StateManagerInstrumentedImpl.kt",
+      "language": "kotlin",
+      "sizeLines": 183,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/decorators/StateManagerResilientImpl.kt",
+      "language": "kotlin",
+      "sizeLines": 201,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/errors/StateManagerError.kt",
+      "language": "kotlin",
+      "sizeLines": 71,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerAuditAction.kt",
+      "language": "kotlin",
+      "sizeLines": 28,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerAuditEvent.kt",
+      "language": "kotlin",
+      "sizeLines": 24,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerConstants.kt",
+      "language": "kotlin",
+      "sizeLines": 22,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerContainsResult.kt",
+      "language": "kotlin",
+      "sizeLines": 22,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerEvictResult.kt",
+      "language": "kotlin",
+      "sizeLines": 28,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerGetOrPutResult.kt",
+      "language": "kotlin",
+      "sizeLines": 38,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerGetResult.kt",
+      "language": "kotlin",
+      "sizeLines": 28,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerIsHealthyResult.kt",
+      "language": "kotlin",
+      "sizeLines": 24,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerPage.kt",
+      "language": "kotlin",
+      "sizeLines": 21,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerPutResult.kt",
+      "language": "kotlin",
+      "sizeLines": 32,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerSetTtlResult.kt",
+      "language": "kotlin",
+      "sizeLines": 22,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerSizeResult.kt",
+      "language": "kotlin",
+      "sizeLines": 24,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/adapters/StateManagerTestTemplates.kt",
+      "language": "kotlin",
+      "sizeLines": 591,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/adapters/distributed/redis/StateManagerRedisImplTest.kt",
+      "language": "kotlin",
+      "sizeLines": 427,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/adapters/local/caffeine/StateManagerCaffeineImplTest.kt",
+      "language": "kotlin",
+      "sizeLines": 143,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/decorators/StateManagerResilientImplTest.kt",
+      "language": "kotlin",
+      "sizeLines": 152,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerScopeTest.kt",
+      "language": "kotlin",
+      "sizeLines": 123,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/serialization/StateManagerEncryptingSerializerImplTest.kt",
+      "language": "kotlin",
+      "sizeLines": 175,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-tests/build.gradle.kts",
+      "language": "kotlin",
+      "sizeLines": 63,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-tests/src/main/kotlin/com/frisboo/corebanking/tests/constants/TestContants.kt",
+      "language": "kotlin",
+      "sizeLines": 19,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-tests/src/main/kotlin/com/frisboo/corebanking/tests/testcontainers/WithChaosProxyContainer.kt",
+      "language": "kotlin",
+      "sizeLines": 99,
+      "fileCategory": "code"
+    },
+    {
+      "path": "frisboo-tests/src/main/kotlin/com/frisboo/corebanking/tests/testcontainers/WithPostgresDatabase.kt",
+      "language": "kotlin",
+      "sizeLines": 102,
+      "fileCategory": "code"
+    },
+    {
+      "path": "gradle/wrapper/gradle-wrapper.jar",
+      "language": "jar",
+      "sizeLines": 159,
+      "fileCategory": "code"
+    },
+    {
+      "path": "gradle/wrapper/gradle-wrapper.properties",
+      "language": "properties",
+      "sizeLines": 7,
+      "fileCategory": "config"
+    },
+    {
+      "path": "gradlew",
+      "language": "unknown",
+      "sizeLines": 248,
+      "fileCategory": "code"
+    },
+    {
+      "path": "gradlew.bat",
+      "language": "batch",
+      "sizeLines": 93,
+      "fileCategory": "script"
+    },
+    {
+      "path": "settings.gradle.kts",
+      "language": "kotlin",
+      "sizeLines": 72,
+      "fileCategory": "code"
+    }
+  ],
+  "totalFiles": 401,
+  "filteredByIgnore": 0,
+  "estimatedComplexity": "large",
+  "failures": [],
+  "stats": {
+    "filesScanned": 401,
+    "byCategory": {
+      "code": 381,
+      "infra": 1,
+      "config": 10,
+      "docs": 6,
+      "data": 2,
+      "script": 1
+    },
+    "byLanguage": {
+      "unknown": 4,
+      "yaml": 2,
+      "javascript": 2,
+      "json": 6,
+      "kotlin": 368,
+      "xml": 2,
+      "txt": 1,
+      "api": 2,
+      "markdown": 5,
+      "imports": 4,
+      "sql": 2,
+      "jar": 1,
+      "properties": 1,
+      "batch": 1
+    }
+  }
+}

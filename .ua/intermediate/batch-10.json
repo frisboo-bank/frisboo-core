@@ -1,0 +1,634 @@
+{
+  "nodes": [
+    {
+      "id": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisAtomicOperations.kt",
+      "type": "file",
+      "name": "RedisAtomicOperations.kt",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisAtomicOperations.kt",
+      "summary": "Redis atomic operations contract: compare-and-set, increment, decrement.",
+      "tags": ["persistence", "redis", "contract"]
+    },
+    {
+      "id": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisAtomicOperations.kt:RedisAtomicOperations",
+      "type": "class",
+      "name": "RedisAtomicOperations",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisAtomicOperations.kt",
+      "summary": "Interface for atomic Redis operations including compare-and-set and increment/decrement.",
+      "tags": ["persistence", "redis", "contract", "interface"]
+    },
+    {
+      "id": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisLockOperations.kt",
+      "type": "file",
+      "name": "RedisLockOperations.kt",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisLockOperations.kt",
+      "summary": "Redis distributed-lock operations contract: set-with-lock, acquire, release.",
+      "tags": ["persistence", "redis", "contract"]
+    },
+    {
+      "id": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisLockOperations.kt:RedisLockOperations",
+      "type": "class",
+      "name": "RedisLockOperations",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisLockOperations.kt",
+      "summary": "Interface for Redis distributed-lock operations.",
+      "tags": ["persistence", "redis", "contract", "interface"]
+    },
+    {
+      "id": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisOperations.kt",
+      "type": "file",
+      "name": "RedisOperations.kt",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisOperations.kt",
+      "summary": "Composite Redis operations interface combining read, write, atomic, and lock operations.",
+      "tags": ["persistence", "redis", "contract"]
+    },
+    {
+      "id": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisOperations.kt:RedisOperations",
+      "type": "class",
+      "name": "RedisOperations",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisOperations.kt",
+      "summary": "Unified Redis operations interface extending read, write, atomic, and lock sub-interfaces.",
+      "tags": ["persistence", "redis", "contract", "interface"]
+    },
+    {
+      "id": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisOperationsFactory.kt",
+      "type": "file",
+      "name": "RedisOperationsFactory.kt",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisOperationsFactory.kt",
+      "summary": "Factory contract for creating parameterized RedisOperations instances.",
+      "tags": ["persistence", "redis", "contract", "factory"]
+    },
+    {
+      "id": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisOperationsFactory.kt:RedisOperationsFactory",
+      "type": "class",
+      "name": "RedisOperationsFactory",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisOperationsFactory.kt",
+      "summary": "Interface producing RedisOperations configured with a prefix and serializers.",
+      "tags": ["persistence", "redis", "contract", "factory", "interface"]
+    },
+    {
+      "id": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisReadOperations.kt",
+      "type": "file",
+      "name": "RedisReadOperations.kt",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisReadOperations.kt",
+      "summary": "Redis read operations contract: ping, get, exists, scan.",
+      "tags": ["persistence", "redis", "contract"]
+    },
+    {
+      "id": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisReadOperations.kt:RedisReadOperations",
+      "type": "class",
+      "name": "RedisReadOperations",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisReadOperations.kt",
+      "summary": "Interface for Redis read operations including ping, get, exists, and scan.",
+      "tags": ["persistence", "redis", "contract", "interface"]
+    },
+    {
+      "id": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisWriteOperations.kt",
+      "type": "file",
+      "name": "RedisWriteOperations.kt",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisWriteOperations.kt",
+      "summary": "Redis write operations contract: set, del, pexpire.",
+      "tags": ["persistence", "redis", "contract"]
+    },
+    {
+      "id": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisWriteOperations.kt:RedisWriteOperations",
+      "type": "class",
+      "name": "RedisWriteOperations",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisWriteOperations.kt",
+      "summary": "Interface for Redis write operations including set, delete, and expire.",
+      "tags": ["persistence", "redis", "contract", "interface"]
+    },
+    {
+      "id": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/observability/RedisOperationsMetrics.kt",
+      "type": "file",
+      "name": "RedisOperationsMetrics.kt",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/observability/RedisOperationsMetrics.kt",
+      "summary": "Metrics contract for recording Redis operation latency and conflict counts.",
+      "tags": ["persistence", "redis", "observability", "contract"]
+    },
+    {
+      "id": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/observability/RedisOperationsMetrics.kt:RedisOperationsMetrics",
+      "type": "class",
+      "name": "RedisOperationsMetrics",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/observability/RedisOperationsMetrics.kt",
+      "summary": "Interface for recording Redis operation latency and lock/CAS conflict metrics.",
+      "tags": ["persistence", "redis", "observability", "contract", "interface"]
+    },
+    {
+      "id": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisCompareAndSetResult.kt",
+      "type": "file",
+      "name": "RedisCompareAndSetResult.kt",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisCompareAndSetResult.kt",
+      "summary": "Sealed result type for Redis compare-and-set operations.",
+      "tags": ["persistence", "redis", "result", "valueobject"]
+    },
+    {
+      "id": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisCompareAndSetResult.kt:RedisCompareAndSetResult",
+      "type": "class",
+      "name": "RedisCompareAndSetResult",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisCompareAndSetResult.kt",
+      "summary": "Sealed interface with Success, Mismatch, and KeyNotFound outcomes for CAS.",
+      "tags": ["persistence", "redis", "result", "valueobject", "sealed"]
+    },
+    {
+      "id": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisDeleteResult.kt",
+      "type": "file",
+      "name": "RedisDeleteResult.kt",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisDeleteResult.kt",
+      "summary": "Sealed result type for Redis delete operations.",
+      "tags": ["persistence", "redis", "result", "valueobject"]
+    },
+    {
+      "id": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisDeleteResult.kt:RedisDeleteResult",
+      "type": "class",
+      "name": "RedisDeleteResult",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisDeleteResult.kt",
+      "summary": "Sealed interface with Deleted and NotFound outcomes for delete.",
+      "tags": ["persistence", "redis", "result", "valueobject", "sealed"]
+    },
+    {
+      "id": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisExistsResult.kt",
+      "type": "file",
+      "name": "RedisExistsResult.kt",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisExistsResult.kt",
+      "summary": "Sealed result type for Redis exists checks.",
+      "tags": ["persistence", "redis", "result", "valueobject"]
+    },
+    {
+      "id": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisExistsResult.kt:RedisExistsResult",
+      "type": "class",
+      "name": "RedisExistsResult",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisExistsResult.kt",
+      "summary": "Sealed interface with Exists and NotFound outcomes for exists queries.",
+      "tags": ["persistence", "redis", "result", "valueobject", "sealed"]
+    },
+    {
+      "id": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisGetResult.kt",
+      "type": "file",
+      "name": "RedisGetResult.kt",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisGetResult.kt",
+      "summary": "Sealed result type for Redis get operations.",
+      "tags": ["persistence", "redis", "result", "valueobject"]
+    },
+    {
+      "id": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisGetResult.kt:RedisGetResult",
+      "type": "class",
+      "name": "RedisGetResult",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisGetResult.kt",
+      "summary": "Sealed interface with Found and NotFound outcomes for get.",
+      "tags": ["persistence", "redis", "result", "valueobject", "sealed"]
+    },
+    {
+      "id": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisLockAcquireResult.kt",
+      "type": "file",
+      "name": "RedisLockAcquireResult.kt",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisLockAcquireResult.kt",
+      "summary": "Sealed result type for Redis lock acquisition.",
+      "tags": ["persistence", "redis", "result", "valueobject"]
+    },
+    {
+      "id": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisLockAcquireResult.kt:RedisLockAcquireResult",
+      "type": "class",
+      "name": "RedisLockAcquireResult",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisLockAcquireResult.kt",
+      "summary": "Sealed interface with Acquired (with token) and AlreadyHeld outcomes.",
+      "tags": ["persistence", "redis", "result", "valueobject", "sealed"]
+    },
+    {
+      "id": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisLockReleaseResult.kt",
+      "type": "file",
+      "name": "RedisLockReleaseResult.kt",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisLockReleaseResult.kt",
+      "summary": "Sealed result type for Redis lock release.",
+      "tags": ["persistence", "redis", "result", "valueobject"]
+    },
+    {
+      "id": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisLockReleaseResult.kt:RedisLockReleaseResult",
+      "type": "class",
+      "name": "RedisLockReleaseResult",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisLockReleaseResult.kt",
+      "summary": "Sealed interface with Released, Mismatch, and NotHeld outcomes.",
+      "tags": ["persistence", "redis", "result", "valueobject", "sealed"]
+    },
+    {
+      "id": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisScanPageResult.kt",
+      "type": "file",
+      "name": "RedisScanPageResult.kt",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisScanPageResult.kt",
+      "summary": "Sealed result type for paginated Redis scan operations.",
+      "tags": ["persistence", "redis", "result", "valueobject"]
+    },
+    {
+      "id": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisScanPageResult.kt:RedisScanPageResult",
+      "type": "class",
+      "name": "RedisScanPageResult",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisScanPageResult.kt",
+      "summary": "Sealed interface with Success holding keys and next cursor.",
+      "tags": ["persistence", "redis", "result", "valueobject", "sealed"]
+    },
+    {
+      "id": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisSetIfAbsentResult.kt",
+      "type": "file",
+      "name": "RedisSetIfAbsentResult.kt",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisSetIfAbsentResult.kt",
+      "summary": "Sealed result type for Redis set-if-absent operations.",
+      "tags": ["persistence", "redis", "result", "valueobject"]
+    },
+    {
+      "id": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisSetIfAbsentResult.kt:RedisSetIfAbsentResult",
+      "type": "class",
+      "name": "RedisSetIfAbsentResult",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisSetIfAbsentResult.kt",
+      "summary": "Sealed interface with Success and AlreadyExists outcomes.",
+      "tags": ["persistence", "redis", "result", "valueobject", "sealed"]
+    },
+    {
+      "id": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisSetResult.kt",
+      "type": "file",
+      "name": "RedisSetResult.kt",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisSetResult.kt",
+      "summary": "Sealed result type for Redis set operations.",
+      "tags": ["persistence", "redis", "result", "valueobject"]
+    },
+    {
+      "id": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisSetResult.kt:RedisSetResult",
+      "type": "class",
+      "name": "RedisSetResult",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisSetResult.kt",
+      "summary": "Sealed interface with Success, LockNotHeld, and LockMissing outcomes.",
+      "tags": ["persistence", "redis", "result", "valueobject", "sealed"]
+    },
+    {
+      "id": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/observability/RedisOperationsAuditOutcome.kt",
+      "type": "file",
+      "name": "RedisOperationsAuditOutcome.kt",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/observability/RedisOperationsAuditOutcome.kt",
+      "summary": "Enum of audit outcomes for Redis operations.",
+      "tags": ["persistence", "redis", "observability", "enum", "model"]
+    },
+    {
+      "id": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/observability/RedisOperationsAuditOutcome.kt:RedisOperationsAuditOutcome",
+      "type": "class",
+      "name": "RedisOperationsAuditOutcome",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/observability/RedisOperationsAuditOutcome.kt",
+      "summary": "Enum: CONNECTION_FAILED, FAILURE, SUCCESS, TIMEOUT for Redis audit events.",
+      "tags": ["persistence", "redis", "observability", "enum"]
+    },
+    {
+      "id": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/observability/RedisOperationsOperation.kt",
+      "type": "file",
+      "name": "RedisOperationsOperation.kt",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/observability/RedisOperationsOperation.kt",
+      "summary": "Enum of named Redis operations for metrics and audit recording.",
+      "tags": ["persistence", "redis", "observability", "enum", "model"]
+    },
+    {
+      "id": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/observability/RedisOperationsOperation.kt:RedisOperationsOperation",
+      "type": "class",
+      "name": "RedisOperationsOperation",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/observability/RedisOperationsOperation.kt",
+      "summary": "Enum of all Redis operation names (ping, get, set, lock, CAS, increment, etc.) used by metrics/audit.",
+      "tags": ["persistence", "redis", "observability", "enum"]
+    },
+    {
+      "id": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/RedisCodec.kt",
+      "type": "file",
+      "name": "RedisCodec.kt",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/RedisCodec.kt",
+      "summary": "Codec that serializes/deserializes keys and values with prefix handling and validation.",
+      "tags": ["persistence", "redis", "model", "codec"]
+    },
+    {
+      "id": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/RedisCodec.kt:RedisCodec",
+      "type": "class",
+      "name": "RedisCodec",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/RedisCodec.kt",
+      "summary": "Class wrapping key/value serializers with prefix, lock prefix, and size validation.",
+      "tags": ["persistence", "redis", "model", "codec"]
+    },
+    {
+      "id": "function:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/RedisCodec.kt:serializeKey",
+      "type": "function",
+      "name": "serializeKey",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/RedisCodec.kt",
+      "summary": "Serializes and prefixes a key, validating non-empty and size limits.",
+      "tags": ["persistence", "redis", "codec", "serialization"]
+    },
+    {
+      "id": "function:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/RedisCodec.kt:deserializeKey",
+      "type": "function",
+      "name": "deserializeKey",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/RedisCodec.kt",
+      "summary": "Strips prefix from a raw key bytes and deserializes it.",
+      "tags": ["persistence", "redis", "codec", "serialization"]
+    },
+    {
+      "id": "function:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/RedisCodec.kt:serializeValue",
+      "type": "function",
+      "name": "serializeValue",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/RedisCodec.kt",
+      "summary": "Serializes a value to bytes with error wrapping.",
+      "tags": ["persistence", "redis", "codec", "serialization"]
+    },
+    {
+      "id": "function:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/RedisCodec.kt:deserializeValue",
+      "type": "function",
+      "name": "deserializeValue",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/RedisCodec.kt",
+      "summary": "Deserializes raw value bytes into a typed value with error wrapping.",
+      "tags": ["persistence", "redis", "codec", "serialization"]
+    },
+    {
+      "id": "function:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/RedisCodec.kt:serializeLockKey",
+      "type": "function",
+      "name": "serializeLockKey",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/RedisCodec.kt",
+      "summary": "Serializes a key with the lock prefix for distributed-lock storage.",
+      "tags": ["persistence", "redis", "codec", "serialization", "lock"]
+    },
+    {
+      "id": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/RedisScanCursor.kt",
+      "type": "file",
+      "name": "RedisScanCursor.kt",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/RedisScanCursor.kt",
+      "summary": "Inline value class representing a Redis SCAN cursor with finished flag.",
+      "tags": ["persistence", "redis", "model", "valueobject"]
+    },
+    {
+      "id": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/RedisScanCursor.kt:RedisScanCursor",
+      "type": "class",
+      "name": "RedisScanCursor",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/RedisScanCursor.kt",
+      "summary": "JvmInline value class wrapping a Long cursor with INITIAL/FINISHED companions.",
+      "tags": ["persistence", "redis", "model", "valueobject"]
+    },
+    {
+      "id": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/observability/decorators/RedisOperationsAuditDecorator.kt",
+      "type": "file",
+      "name": "RedisOperationsAuditDecorator.kt",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/observability/decorators/RedisOperationsAuditDecorator.kt",
+      "summary": "Audit decorator wrapping RedisOperations with ObservabilityAudit and tracing.",
+      "tags": ["persistence", "redis", "observability", "decorator", "audit"]
+    },
+    {
+      "id": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/observability/decorators/RedisOperationsAuditDecorator.kt:RedisOperationsAuditDecorator",
+      "type": "class",
+      "name": "RedisOperationsAuditDecorator",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/observability/decorators/RedisOperationsAuditDecorator.kt",
+      "summary": "Internal decorator implementing RedisOperations that audits each operation via ObservabilityAudit and ObservabilityTracer.",
+      "tags": ["persistence", "redis", "observability", "decorator", "audit"]
+    },
+    {
+      "id": "function:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/observability/decorators/RedisOperationsAuditDecorator.kt:audit",
+      "type": "function",
+      "name": "audit",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/observability/decorators/RedisOperationsAuditDecorator.kt",
+      "summary": "Generic helper that runs a block under audit with operation name and params.",
+      "tags": ["persistence", "redis", "observability", "audit"]
+    },
+    {
+      "id": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/observability/decorators/RedisOperationsMetricsDecorator.kt",
+      "type": "file",
+      "name": "RedisOperationsMetricsDecorator.kt",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/observability/decorators/RedisOperationsMetricsDecorator.kt",
+      "summary": "Metrics decorator wrapping RedisOperations with latency and conflict recording.",
+      "tags": ["persistence", "redis", "observability", "decorator", "metrics"]
+    },
+    {
+      "id": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/observability/decorators/RedisOperationsMetricsDecorator.kt:RedisOperationsMetricsDecorator",
+      "type": "class",
+      "name": "RedisOperationsMetricsDecorator",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/observability/decorators/RedisOperationsMetricsDecorator.kt",
+      "summary": "Internal decorator implementing RedisOperations that meters latency and records lock/CAS conflicts.",
+      "tags": ["persistence", "redis", "observability", "decorator", "metrics"]
+    },
+    {
+      "id": "function:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/observability/decorators/RedisOperationsMetricsDecorator.kt:meter",
+      "type": "function",
+      "name": "meter",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/observability/decorators/RedisOperationsMetricsDecorator.kt",
+      "summary": "Generic helper that measures block duration and records operation latency metrics.",
+      "tags": ["persistence", "redis", "observability", "metrics"]
+    },
+    {
+      "id": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsFactoryImpl.kt",
+      "type": "file",
+      "name": "RedisOperationsFactoryImpl.kt",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsFactoryImpl.kt",
+      "summary": "Implementation of RedisOperationsFactory creating RedisOperationsImpl with a shared lettuce connection and codec.",
+      "tags": ["persistence", "redis", "factory", "impl"]
+    },
+    {
+      "id": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsFactoryImpl.kt:RedisOperationsFactoryImpl",
+      "type": "class",
+      "name": "RedisOperationsFactoryImpl",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsFactoryImpl.kt",
+      "summary": "Factory producing RedisOperations instances backed by a shared lettuce connection pool and codec.",
+      "tags": ["persistence", "redis", "factory", "impl"]
+    },
+    {
+      "id": "function:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsFactoryImpl.kt:create",
+      "type": "function",
+      "name": "create",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsFactoryImpl.kt",
+      "summary": "Creates a RedisOperations instance with the given prefix and serializers.",
+      "tags": ["persistence", "redis", "factory"]
+    },
+    {
+      "id": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImpl.kt",
+      "type": "file",
+      "name": "RedisOperationsImpl.kt",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImpl.kt",
+      "summary": "Internal implementation of RedisOperations backed by lettuce with timeout and codec.",
+      "tags": ["persistence", "redis", "impl"]
+    },
+    {
+      "id": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImpl.kt:RedisOperationsImpl",
+      "type": "class",
+      "name": "RedisOperationsImpl",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImpl.kt",
+      "summary": "Internal implementation of RedisOperations using lettuce connection, codec, and timeout.",
+      "tags": ["persistence", "redis", "impl"]
+    },
+    {
+      "id": "function:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImpl.kt:doSet",
+      "type": "function",
+      "name": "doSet",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImpl.kt",
+      "summary": "Private helper performing a Redis SET with optional TTL and returning previous value.",
+      "tags": ["persistence", "redis", "impl"]
+    },
+    {
+      "id": "function:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImpl.kt:doSetWithLock",
+      "type": "function",
+      "name": "doSetWithLock",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImpl.kt",
+      "summary": "Private helper performing a locked Redis SET mapping internal results to public sealed types.",
+      "tags": ["persistence", "redis", "impl", "lock"]
+    },
+    {
+      "id": "function:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImpl.kt:doCompareAndSet",
+      "type": "function",
+      "name": "doCompareAndSet",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImpl.kt",
+      "summary": "Private helper performing a Redis compare-and-set via EVAL and mapping results.",
+      "tags": ["persistence", "redis", "impl", "cas"]
+    },
+    {
+      "id": "function:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImpl.kt:doExecuteOperation",
+      "type": "function",
+      "name": "doExecuteOperation",
+      "filePath": "frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImpl.kt",
+      "summary": "Private helper executing a Redis command with timeout and error mapping.",
+      "tags": ["persistence", "redis", "impl", "resilience"]
+    },
+    {
+      "id": "file:frisboo-persistence/src/test/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImplTest.kt",
+      "type": "file",
+      "name": "RedisOperationsImplTest.kt",
+      "filePath": "frisboo-persistence/src/test/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImplTest.kt",
+      "summary": "Kotest property-based tests for RedisOperationsImpl covering CRUD, TTL, scan, locking, and concurrency.",
+      "tags": ["persistence", "redis", "test"]
+    },
+    {
+      "id": "class:frisboo-persistence/src/test/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImplTest.kt:RedisOperationsImplTest",
+      "type": "class",
+      "name": "RedisOperationsImplTest",
+      "filePath": "frisboo-persistence/src/test/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImplTest.kt",
+      "summary": "StringSpec test class exercising RedisOperationsImpl against an embedded Redis fixture.",
+      "tags": ["persistence", "redis", "test"]
+    }
+  ],
+  "edges": [
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisAtomicOperations.kt", "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisAtomicOperations.kt:RedisAtomicOperations", "type": "contains", "weight": 1.0 },
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisAtomicOperations.kt", "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisCompareAndSetResult.kt", "type": "imports", "weight": 0.7 },
+
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisLockOperations.kt", "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisLockOperations.kt:RedisLockOperations", "type": "contains", "weight": 1.0 },
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisLockOperations.kt", "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisLockAcquireResult.kt", "type": "imports", "weight": 0.7 },
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisLockOperations.kt", "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisLockReleaseResult.kt", "type": "imports", "weight": 0.7 },
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisLockOperations.kt", "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisSetResult.kt", "type": "imports", "weight": 0.7 },
+
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisOperations.kt", "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisOperations.kt:RedisOperations", "type": "contains", "weight": 1.0 },
+    { "source": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisOperations.kt:RedisOperations", "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisReadOperations.kt:RedisReadOperations", "type": "inherits", "weight": 0.9 },
+    { "source": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisOperations.kt:RedisOperations", "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisWriteOperations.kt:RedisWriteOperations", "type": "inherits", "weight": 0.9 },
+    { "source": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisOperations.kt:RedisOperations", "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisAtomicOperations.kt:RedisAtomicOperations", "type": "inherits", "weight": 0.9 },
+    { "source": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisOperations.kt:RedisOperations", "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisLockOperations.kt:RedisLockOperations", "type": "inherits", "weight": 0.9 },
+
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisOperationsFactory.kt", "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisOperationsFactory.kt:RedisOperationsFactory", "type": "contains", "weight": 1.0 },
+
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisReadOperations.kt", "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisReadOperations.kt:RedisReadOperations", "type": "contains", "weight": 1.0 },
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisReadOperations.kt", "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisExistsResult.kt", "type": "imports", "weight": 0.7 },
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisReadOperations.kt", "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisGetResult.kt", "type": "imports", "weight": 0.7 },
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisReadOperations.kt", "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisScanPageResult.kt", "type": "imports", "weight": 0.7 },
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisReadOperations.kt", "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/RedisScanCursor.kt", "type": "imports", "weight": 0.7 },
+
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisWriteOperations.kt", "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisWriteOperations.kt:RedisWriteOperations", "type": "contains", "weight": 1.0 },
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisWriteOperations.kt", "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisDeleteResult.kt", "type": "imports", "weight": 0.7 },
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisWriteOperations.kt", "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisSetResult.kt", "type": "imports", "weight": 0.7 },
+
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/observability/RedisOperationsMetrics.kt", "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/observability/RedisOperationsMetrics.kt:RedisOperationsMetrics", "type": "contains", "weight": 1.0 },
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/observability/RedisOperationsMetrics.kt", "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/observability/RedisOperationsOperation.kt", "type": "imports", "weight": 0.7 },
+
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisCompareAndSetResult.kt", "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisCompareAndSetResult.kt:RedisCompareAndSetResult", "type": "contains", "weight": 1.0 },
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisDeleteResult.kt", "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisDeleteResult.kt:RedisDeleteResult", "type": "contains", "weight": 1.0 },
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisExistsResult.kt", "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisExistsResult.kt:RedisExistsResult", "type": "contains", "weight": 1.0 },
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisGetResult.kt", "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisGetResult.kt:RedisGetResult", "type": "contains", "weight": 1.0 },
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisLockAcquireResult.kt", "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisLockAcquireResult.kt:RedisLockAcquireResult", "type": "contains", "weight": 1.0 },
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisLockReleaseResult.kt", "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisLockReleaseResult.kt:RedisLockReleaseResult", "type": "contains", "weight": 1.0 },
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisScanPageResult.kt", "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisScanPageResult.kt:RedisScanPageResult", "type": "contains", "weight": 1.0 },
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisScanPageResult.kt", "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/RedisScanCursor.kt", "type": "imports", "weight": 0.7 },
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisSetIfAbsentResult.kt", "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisSetIfAbsentResult.kt:RedisSetIfAbsentResult", "type": "contains", "weight": 1.0 },
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisSetResult.kt", "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisSetResult.kt:RedisSetResult", "type": "contains", "weight": 1.0 },
+
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/observability/RedisOperationsAuditOutcome.kt", "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/observability/RedisOperationsAuditOutcome.kt:RedisOperationsAuditOutcome", "type": "contains", "weight": 1.0 },
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/observability/RedisOperationsOperation.kt", "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/observability/RedisOperationsOperation.kt:RedisOperationsOperation", "type": "contains", "weight": 1.0 },
+
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/RedisCodec.kt", "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/RedisCodec.kt:RedisCodec", "type": "contains", "weight": 1.0 },
+    { "source": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/RedisCodec.kt:RedisCodec", "target": "function:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/RedisCodec.kt:serializeKey", "type": "contains", "weight": 1.0 },
+    { "source": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/RedisCodec.kt:RedisCodec", "target": "function:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/RedisCodec.kt:deserializeKey", "type": "contains", "weight": 1.0 },
+    { "source": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/RedisCodec.kt:RedisCodec", "target": "function:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/RedisCodec.kt:serializeValue", "type": "contains", "weight": 1.0 },
+    { "source": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/RedisCodec.kt:RedisCodec", "target": "function:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/RedisCodec.kt:deserializeValue", "type": "contains", "weight": 1.0 },
+    { "source": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/RedisCodec.kt:RedisCodec", "target": "function:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/RedisCodec.kt:serializeLockKey", "type": "contains", "weight": 1.0 },
+
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/RedisScanCursor.kt", "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/RedisScanCursor.kt:RedisScanCursor", "type": "contains", "weight": 1.0 },
+
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/observability/decorators/RedisOperationsAuditDecorator.kt", "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/observability/decorators/RedisOperationsAuditDecorator.kt:RedisOperationsAuditDecorator", "type": "contains", "weight": 1.0 },
+    { "source": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/observability/decorators/RedisOperationsAuditDecorator.kt:RedisOperationsAuditDecorator", "target": "function:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/observability/decorators/RedisOperationsAuditDecorator.kt:audit", "type": "contains", "weight": 1.0 },
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/observability/decorators/RedisOperationsAuditDecorator.kt", "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisOperations.kt", "type": "imports", "weight": 0.7 },
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/observability/decorators/RedisOperationsAuditDecorator.kt", "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisCompareAndSetResult.kt", "type": "imports", "weight": 0.7 },
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/observability/decorators/RedisOperationsAuditDecorator.kt", "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisDeleteResult.kt", "type": "imports", "weight": 0.7 },
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/observability/decorators/RedisOperationsAuditDecorator.kt", "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisExistsResult.kt", "type": "imports", "weight": 0.7 },
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/observability/decorators/RedisOperationsAuditDecorator.kt", "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisGetResult.kt", "type": "imports", "weight": 0.7 },
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/observability/decorators/RedisOperationsAuditDecorator.kt", "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisLockAcquireResult.kt", "type": "imports", "weight": 0.7 },
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/observability/decorators/RedisOperationsAuditDecorator.kt", "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisLockReleaseResult.kt", "type": "imports", "weight": 0.7 },
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/observability/decorators/RedisOperationsAuditDecorator.kt", "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisScanPageResult.kt", "type": "imports", "weight": 0.7 },
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/observability/decorators/RedisOperationsAuditDecorator.kt", "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisSetResult.kt", "type": "imports", "weight": 0.7 },
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/observability/decorators/RedisOperationsAuditDecorator.kt", "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/RedisScanCursor.kt", "type": "imports", "weight": 0.7 },
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/observability/decorators/RedisOperationsAuditDecorator.kt", "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/observability/RedisOperationsOperation.kt", "type": "imports", "weight": 0.7 },
+    { "source": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/observability/decorators/RedisOperationsAuditDecorator.kt:RedisOperationsAuditDecorator", "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisOperations.kt:RedisOperations", "type": "implements", "weight": 0.9 },
+
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/observability/decorators/RedisOperationsMetricsDecorator.kt", "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/observability/decorators/RedisOperationsMetricsDecorator.kt:RedisOperationsMetricsDecorator", "type": "contains", "weight": 1.0 },
+    { "source": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/observability/decorators/RedisOperationsMetricsDecorator.kt:RedisOperationsMetricsDecorator", "target": "function:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/observability/decorators/RedisOperationsMetricsDecorator.kt:meter", "type": "contains", "weight": 1.0 },
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/observability/decorators/RedisOperationsMetricsDecorator.kt", "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisOperations.kt", "type": "imports", "weight": 0.7 },
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/observability/decorators/RedisOperationsMetricsDecorator.kt", "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/observability/RedisOperationsMetrics.kt", "type": "imports", "weight": 0.7 },
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/observability/decorators/RedisOperationsMetricsDecorator.kt", "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisCompareAndSetResult.kt", "type": "imports", "weight": 0.7 },
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/observability/decorators/RedisOperationsMetricsDecorator.kt", "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisDeleteResult.kt", "type": "imports", "weight": 0.7 },
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/observability/decorators/RedisOperationsMetricsDecorator.kt", "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisExistsResult.kt", "type": "imports", "weight": 0.7 },
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/observability/decorators/RedisOperationsMetricsDecorator.kt", "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisGetResult.kt", "type": "imports", "weight": 0.7 },
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/observability/decorators/RedisOperationsMetricsDecorator.kt", "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisLockAcquireResult.kt", "type": "imports", "weight": 0.7 },
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/observability/decorators/RedisOperationsMetricsDecorator.kt", "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisLockReleaseResult.kt", "type": "imports", "weight": 0.7 },
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/observability/decorators/RedisOperationsMetricsDecorator.kt", "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisScanPageResult.kt", "type": "imports", "weight": 0.7 },
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/observability/decorators/RedisOperationsMetricsDecorator.kt", "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisSetResult.kt", "type": "imports", "weight": 0.7 },
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/observability/decorators/RedisOperationsMetricsDecorator.kt", "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/RedisScanCursor.kt", "type": "imports", "weight": 0.7 },
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/observability/decorators/RedisOperationsMetricsDecorator.kt", "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/observability/RedisOperationsOperation.kt", "type": "imports", "weight": 0.7 },
+    { "source": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/observability/decorators/RedisOperationsMetricsDecorator.kt:RedisOperationsMetricsDecorator", "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisOperations.kt:RedisOperations", "type": "implements", "weight": 0.9 },
+
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsFactoryImpl.kt", "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsFactoryImpl.kt:RedisOperationsFactoryImpl", "type": "contains", "weight": 1.0 },
+    { "source": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsFactoryImpl.kt:RedisOperationsFactoryImpl", "target": "function:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsFactoryImpl.kt:create", "type": "contains", "weight": 1.0 },
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsFactoryImpl.kt", "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisOperations.kt", "type": "imports", "weight": 0.7 },
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsFactoryImpl.kt", "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisOperationsFactory.kt", "type": "imports", "weight": 0.7 },
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsFactoryImpl.kt", "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/RedisCodec.kt", "type": "imports", "weight": 0.7 },
+    { "source": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsFactoryImpl.kt:RedisOperationsFactoryImpl", "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisOperationsFactory.kt:RedisOperationsFactory", "type": "implements", "weight": 0.9 },
+    { "source": "function:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsFactoryImpl.kt:create", "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImpl.kt:RedisOperationsImpl", "type": "calls", "weight": 0.8 },
+    { "source": "function:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsFactoryImpl.kt:create", "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/RedisCodec.kt:RedisCodec", "type": "calls", "weight": 0.8 },
+
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImpl.kt", "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImpl.kt:RedisOperationsImpl", "type": "contains", "weight": 1.0 },
+    { "source": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImpl.kt:RedisOperationsImpl", "target": "function:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImpl.kt:doSet", "type": "contains", "weight": 1.0 },
+    { "source": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImpl.kt:RedisOperationsImpl", "target": "function:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImpl.kt:doSetWithLock", "type": "contains", "weight": 1.0 },
+    { "source": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImpl.kt:RedisOperationsImpl", "target": "function:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImpl.kt:doCompareAndSet", "type": "contains", "weight": 1.0 },
+    { "source": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImpl.kt:RedisOperationsImpl", "target": "function:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImpl.kt:doExecuteOperation", "type": "contains", "weight": 1.0 },
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImpl.kt", "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisOperations.kt", "type": "imports", "weight": 0.7 },
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImpl.kt", "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisCompareAndSetResult.kt", "type": "imports", "weight": 0.7 },
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImpl.kt", "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisDeleteResult.kt", "type": "imports", "weight": 0.7 },
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImpl.kt", "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisExistsResult.kt", "type": "imports", "weight": 0.7 },
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImpl.kt", "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisGetResult.kt", "type": "imports", "weight": 0.7 },
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImpl.kt", "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisLockAcquireResult.kt", "type": "imports", "weight": 0.7 },
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImpl.kt", "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisLockReleaseResult.kt", "type": "imports", "weight": 0.7 },
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImpl.kt", "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisScanPageResult.kt", "type": "imports", "weight": 0.7 },
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImpl.kt", "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisSetResult.kt", "type": "imports", "weight": 0.7 },
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImpl.kt", "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/RedisCodec.kt", "type": "imports", "weight": 0.7 },
+    { "source": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImpl.kt", "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/RedisScanCursor.kt", "type": "imports", "weight": 0.7 },
+    { "source": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImpl.kt:RedisOperationsImpl", "target": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/RedisOperations.kt:RedisOperations", "type": "implements", "weight": 0.9 },
+    { "source": "function:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImpl.kt:doSet", "target": "function:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/RedisCodec.kt:serializeKey", "type": "calls", "weight": 0.8 },
+    { "source": "function:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImpl.kt:doSet", "target": "function:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/RedisCodec.kt:serializeValue", "type": "calls", "weight": 0.8 },
+    { "source": "function:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImpl.kt:doSet", "target": "function:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImpl.kt:doExecuteOperation", "type": "calls", "weight": 0.8 },
+    { "source": "function:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImpl.kt:doSetWithLock", "target": "function:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/RedisCodec.kt:serializeKey", "type": "calls", "weight": 0.8 },
+    { "source": "function:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImpl.kt:doSetWithLock", "target": "function:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/RedisCodec.kt:serializeValue", "type": "calls", "weight": 0.8 },
+    { "source": "function:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImpl.kt:doSetWithLock", "target": "function:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/RedisCodec.kt:serializeLockKey", "type": "calls", "weight": 0.8 },
+    { "source": "function:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImpl.kt:doSetWithLock", "target": "function:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImpl.kt:doExecuteOperation", "type": "calls", "weight": 0.8 },
+    { "source": "function:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImpl.kt:doCompareAndSet", "target": "function:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/RedisCodec.kt:serializeKey", "type": "calls", "weight": 0.8 },
+    { "source": "function:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImpl.kt:doCompareAndSet", "target": "function:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/RedisCodec.kt:serializeValue", "type": "calls", "weight": 0.8 },
+    { "source": "function:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImpl.kt:doCompareAndSet", "target": "function:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImpl.kt:doExecuteOperation", "type": "calls", "weight": 0.8 },
+
+    { "source": "file:frisboo-persistence/src/test/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImplTest.kt", "target": "class:frisboo-persistence/src/test/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImplTest.kt:RedisOperationsImplTest", "type": "contains", "weight": 1.0 },
+    { "source": "file:frisboo-persistence/src/test/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImplTest.kt", "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisDeleteResult.kt", "type": "imports", "weight": 0.7 },
+    { "source": "file:frisboo-persistence/src/test/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImplTest.kt", "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisExistsResult.kt", "type": "imports", "weight": 0.7 },
+    { "source": "file:frisboo-persistence/src/test/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImplTest.kt", "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisGetResult.kt", "type": "imports", "weight": 0.7 },
+    { "source": "file:frisboo-persistence/src/test/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImplTest.kt", "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisLockAcquireResult.kt", "type": "imports", "weight": 0.7 },
+    { "source": "file:frisboo-persistence/src/test/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImplTest.kt", "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisLockReleaseResult.kt", "type": "imports", "weight": 0.7 },
+    { "source": "file:frisboo-persistence/src/test/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImplTest.kt", "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisScanPageResult.kt", "type": "imports", "weight": 0.7 },
+    { "source": "file:frisboo-persistence/src/test/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImplTest.kt", "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/contracts/results/RedisSetResult.kt", "type": "imports", "weight": 0.7 },
+    { "source": "file:frisboo-persistence/src/test/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImplTest.kt", "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/models/RedisScanCursor.kt", "type": "imports", "weight": 0.7 },
+    { "source": "file:frisboo-persistence/src/test/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImplTest.kt", "target": "file:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsFactoryImpl.kt", "type": "imports", "weight": 0.7 },
+    { "source": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImpl.kt:RedisOperationsImpl", "target": "file:frisboo-persistence/src/test/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImplTest.kt", "type": "tested_by", "weight": 0.5 },
+    { "source": "class:frisboo-persistence/src/main/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsFactoryImpl.kt:RedisOperationsFactoryImpl", "target": "file:frisboo-persistence/src/test/kotlin/com/frisboo/corebanking/persistence/redis/RedisOperationsImplTest.kt", "type": "tested_by", "weight": 0.5 }
+  ]
+}

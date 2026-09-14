@@ -1,0 +1,902 @@
+{
+  "nodes": [
+    {
+      "id": "file:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerGetOrPutResult.kt",
+      "type": "file",
+      "name": "StateManagerGetOrPutResult.kt",
+      "filePath": "frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerGetOrPutResult.kt",
+      "summary": "Sealed interface modelling getOrPut outcomes: Created, Updated, Found with previous/newValue pairs",
+      "tags": ["statemanager", "model", "valueobject", "sealed"]
+    },
+    {
+      "id": "class:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerGetOrPutResult.kt:StateManagerGetOrPutResult",
+      "type": "class",
+      "name": "StateManagerGetOrPutResult",
+      "filePath": "frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerGetOrPutResult.kt",
+      "summary": "Sealed interface for getOrPut operations exposing previousValue and newValue",
+      "tags": ["statemanager", "model", "valueobject", "sealed"]
+    },
+    {
+      "id": "class:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerGetOrPutResult.kt:StateManagerGetOrPutResult.Created",
+      "type": "class",
+      "name": "StateManagerGetOrPutResult.Created",
+      "filePath": "frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerGetOrPutResult.kt",
+      "summary": "getOrPut outcome when the key was created for the first time",
+      "tags": ["statemanager", "model", "valueobject"]
+    },
+    {
+      "id": "class:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerGetOrPutResult.kt:StateManagerGetOrPutResult.Updated",
+      "type": "class",
+      "name": "StateManagerGetOrPutResult.Updated",
+      "filePath": "frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerGetOrPutResult.kt",
+      "summary": "getOrPut outcome when an existing key was overwritten",
+      "tags": ["statemanager", "model", "valueobject"]
+    },
+    {
+      "id": "class:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerGetOrPutResult.kt:StateManagerGetOrPutResult.Found",
+      "type": "class",
+      "name": "StateManagerGetOrPutResult.Found",
+      "filePath": "frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerGetOrPutResult.kt",
+      "summary": "getOrPut outcome when the key already existed and the factory was not invoked",
+      "tags": ["statemanager", "model", "valueobject"]
+    },
+    {
+      "id": "file:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerGetResult.kt",
+      "type": "file",
+      "name": "StateManagerGetResult.kt",
+      "filePath": "frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerGetResult.kt",
+      "summary": "Sealed interface modelling get outcomes: Found with value or NotFound singleton",
+      "tags": ["statemanager", "model", "valueobject", "sealed"]
+    },
+    {
+      "id": "class:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerGetResult.kt:StateManagerGetResult",
+      "type": "class",
+      "name": "StateManagerGetResult",
+      "filePath": "frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerGetResult.kt",
+      "summary": "Sealed interface for get operations exposing an optional value",
+      "tags": ["statemanager", "model", "valueobject", "sealed"]
+    },
+    {
+      "id": "class:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerGetResult.kt:StateManagerGetResult.Found",
+      "type": "class",
+      "name": "StateManagerGetResult.Found",
+      "filePath": "frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerGetResult.kt",
+      "summary": "get outcome when the key exists and returns its value",
+      "tags": ["statemanager", "model", "valueobject"]
+    },
+    {
+      "id": "class:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerGetResult.kt:StateManagerGetResult.NotFound",
+      "type": "class",
+      "name": "StateManagerGetResult.NotFound",
+      "filePath": "frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerGetResult.kt",
+      "summary": "get outcome when the key does not exist",
+      "tags": ["statemanager", "model", "valueobject"]
+    },
+    {
+      "id": "file:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerIsHealthyResult.kt",
+      "type": "file",
+      "name": "StateManagerIsHealthyResult.kt",
+      "filePath": "frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerIsHealthyResult.kt",
+      "summary": "Sealed interface modelling health-check outcomes: Up singleton or Down with message",
+      "tags": ["statemanager", "model", "valueobject", "sealed", "health"]
+    },
+    {
+      "id": "class:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerIsHealthyResult.kt:StateManagerIsHealthyResult",
+      "type": "class",
+      "name": "StateManagerIsHealthyResult",
+      "filePath": "frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerIsHealthyResult.kt",
+      "summary": "Sealed interface for state manager health checks",
+      "tags": ["statemanager", "model", "valueobject", "sealed", "health"]
+    },
+    {
+      "id": "class:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerIsHealthyResult.kt:StateManagerIsHealthyResult.Up",
+      "type": "class",
+      "name": "StateManagerIsHealthyResult.Up",
+      "filePath": "frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerIsHealthyResult.kt",
+      "summary": "Health outcome when the state manager is reachable",
+      "tags": ["statemanager", "model", "valueobject", "health"]
+    },
+    {
+      "id": "class:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerIsHealthyResult.kt:StateManagerIsHealthyResult.Down",
+      "type": "class",
+      "name": "StateManagerIsHealthyResult.Down",
+      "filePath": "frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerIsHealthyResult.kt",
+      "summary": "Health outcome when the state manager is unreachable, carrying a message",
+      "tags": ["statemanager", "model", "valueobject", "health"]
+    },
+    {
+      "id": "file:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerPage.kt",
+      "type": "file",
+      "name": "StateManagerPage.kt",
+      "filePath": "frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerPage.kt",
+      "summary": "Generic paginated result type holding items and an opaque next cursor",
+      "tags": ["statemanager", "model", "valueobject", "pagination"]
+    },
+    {
+      "id": "class:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerPage.kt:StateManagerPage",
+      "type": "class",
+      "name": "StateManagerPage",
+      "filePath": "frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerPage.kt",
+      "summary": "Generic paginated result holding a list of items and a nullable next cursor",
+      "tags": ["statemanager", "model", "valueobject", "pagination"]
+    },
+    {
+      "id": "file:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerPutResult.kt",
+      "type": "file",
+      "name": "StateManagerPutResult.kt",
+      "filePath": "frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerPutResult.kt",
+      "summary": "Sealed interface modelling put outcomes: Created or Updated with previous/newValue pairs",
+      "tags": ["statemanager", "model", "valueobject", "sealed"]
+    },
+    {
+      "id": "class:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerPutResult.kt:StateManagerPutResult",
+      "type": "class",
+      "name": "StateManagerPutResult",
+      "filePath": "frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerPutResult.kt",
+      "summary": "Sealed interface for put operations exposing previousValue and newValue",
+      "tags": ["statemanager", "model", "valueobject", "sealed"]
+    },
+    {
+      "id": "class:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerPutResult.kt:StateManagerPutResult.Created",
+      "type": "class",
+      "name": "StateManagerPutResult.Created",
+      "filePath": "frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerPutResult.kt",
+      "summary": "put outcome when the key was created for the first time",
+      "tags": ["statemanager", "model", "valueobject"]
+    },
+    {
+      "id": "class:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerPutResult.kt:StateManagerPutResult.Updated",
+      "type": "class",
+      "name": "StateManagerPutResult.Updated",
+      "filePath": "frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerPutResult.kt",
+      "summary": "put outcome when an existing key was overwritten",
+      "tags": ["statemanager", "model", "valueobject"]
+    },
+    {
+      "id": "file:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerSetTtlResult.kt",
+      "type": "file",
+      "name": "StateManagerSetTtlResult.kt",
+      "filePath": "frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerSetTtlResult.kt",
+      "summary": "Sealed interface modelling setTTL outcomes: Applied or NotFound",
+      "tags": ["statemanager", "model", "valueobject", "sealed", "ttl"]
+    },
+    {
+      "id": "class:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerSetTtlResult.kt:StateManagerSetTtlResult",
+      "type": "class",
+      "name": "StateManagerSetTtlResult",
+      "filePath": "frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerSetTtlResult.kt",
+      "summary": "Sealed interface for setTTL operations",
+      "tags": ["statemanager", "model", "valueobject", "sealed", "ttl"]
+    },
+    {
+      "id": "class:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerSetTtlResult.kt:StateManagerSetTtlResult.Applied",
+      "type": "class",
+      "name": "StateManagerSetTtlResult.Applied",
+      "filePath": "frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerSetTtlResult.kt",
+      "summary": "setTTL outcome when the TTL was applied to an existing record",
+      "tags": ["statemanager", "model", "valueobject", "ttl"]
+    },
+    {
+      "id": "class:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerSetTtlResult.kt:StateManagerSetTtlResult.NotFound",
+      "type": "class",
+      "name": "StateManagerSetTtlResult.NotFound",
+      "filePath": "frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerSetTtlResult.kt",
+      "summary": "setTTL outcome when no record matched the key",
+      "tags": ["statemanager", "model", "valueobject", "ttl"]
+    },
+    {
+      "id": "file:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerSizeResult.kt",
+      "type": "file",
+      "name": "StateManagerSizeResult.kt",
+      "filePath": "frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerSizeResult.kt",
+      "summary": "Sealed interface modelling size outcomes: Size carrying a Long count",
+      "tags": ["statemanager", "model", "valueobject", "sealed"]
+    },
+    {
+      "id": "class:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerSizeResult.kt:StateManagerSizeResult",
+      "type": "class",
+      "name": "StateManagerSizeResult",
+      "filePath": "frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerSizeResult.kt",
+      "summary": "Sealed interface for size operations exposing a Long count",
+      "tags": ["statemanager", "model", "valueobject", "sealed"]
+    },
+    {
+      "id": "class:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerSizeResult.kt:StateManagerSizeResult.Size",
+      "type": "class",
+      "name": "StateManagerSizeResult.Size",
+      "filePath": "frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerSizeResult.kt",
+      "summary": "size outcome carrying the number of records in the scope",
+      "tags": ["statemanager", "model", "valueobject"]
+    },
+    {
+      "id": "file:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/adapters/distributed/redis/StateManagerRedisImplTest.kt",
+      "type": "file",
+      "name": "StateManagerRedisImplTest.kt",
+      "filePath": "frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/adapters/distributed/redis/StateManagerRedisImplTest.kt",
+      "summary": "Kotest StringSpec testing StateManagerRedisImpl against a real Redis container with chaos proxy",
+      "tags": ["test", "statemanager", "redis", "lettuce", "integration", "kotest", "testcontainers"]
+    },
+    {
+      "id": "class:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/adapters/distributed/redis/StateManagerRedisImplTest.kt:StateManagerRedisImplTest",
+      "type": "class",
+      "name": "StateManagerRedisImplTest",
+      "filePath": "frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/adapters/distributed/redis/StateManagerRedisImplTest.kt",
+      "summary": "Kotest test class exercising Redis-backed state manager concurrency, health, and lifecycle",
+      "tags": ["test", "statemanager", "redis", "lettuce", "kotest"]
+    },
+    {
+      "id": "file:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/adapters/local/caffeine/StateManagerCaffeineImplTest.kt",
+      "type": "file",
+      "name": "StateManagerCaffeineImplTest.kt",
+      "filePath": "frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/adapters/local/caffeine/StateManagerCaffeineImplTest.kt",
+      "summary": "Kotest StringSpec running common state manager templates against the Caffeine in-memory implementation",
+      "tags": ["test", "statemanager", "caffeine", "local", "kotest"]
+    },
+    {
+      "id": "class:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/adapters/local/caffeine/StateManagerCaffeineImplTest.kt:StateManagerCaffeineImplTest",
+      "type": "class",
+      "name": "StateManagerCaffeineImplTest",
+      "filePath": "frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/adapters/local/caffeine/StateManagerCaffeineImplTest.kt",
+      "summary": "Kotest test class exercising the Caffeine in-memory state manager implementation",
+      "tags": ["test", "statemanager", "caffeine", "local", "kotest"]
+    },
+    {
+      "id": "file:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/adapters/StateManagerTestTemplates.kt",
+      "type": "file",
+      "name": "StateManagerTestTemplates.kt",
+      "filePath": "frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/adapters/StateManagerTestTemplates.kt",
+      "summary": "Shared Kotest property-based test templates reused by both Redis and Caffeine state manager tests",
+      "tags": ["test", "statemanager", "kotest", "property", "testutils"]
+    },
+    {
+      "id": "class:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/adapters/StateManagerTestTemplates.kt:StateManagerTestTemplates",
+      "type": "class",
+      "name": "StateManagerTestTemplates",
+      "filePath": "frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/adapters/StateManagerTestTemplates.kt",
+      "summary": "Object providing reusable suspend test lambdas covering put/get/evict/getOrPut/size/keysPage/setTTL",
+      "tags": ["test", "statemanager", "kotest", "property", "testutils"]
+    },
+    {
+      "id": "file:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/decorators/StateManagerResilientImplTest.kt",
+      "type": "file",
+      "name": "StateManagerResilientImplTest.kt",
+      "filePath": "frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/decorators/StateManagerResilientImplTest.kt",
+      "summary": "Kotest StringSpec verifying StateManagerResilientImpl falls back when the primary fails",
+      "tags": ["test", "statemanager", "resilience", "decorator", "kotest"]
+    },
+    {
+      "id": "class:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/decorators/StateManagerResilientImplTest.kt:StateManagerResilientImplTest",
+      "type": "class",
+      "name": "StateManagerResilientImplTest",
+      "filePath": "frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/decorators/StateManagerResilientImplTest.kt",
+      "summary": "Kotest test class for the resilient state manager decorator with failing/passing fakes",
+      "tags": ["test", "statemanager", "resilience", "decorator", "kotest"]
+    },
+    {
+      "id": "file:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerScopeTest.kt",
+      "type": "file",
+      "name": "StateManagerScopeTest.kt",
+      "filePath": "frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerScopeTest.kt",
+      "summary": "Kotest StringSpec validating StateManagerScope name/team constraints and prefix formatting",
+      "tags": ["test", "statemanager", "model", "validation", "kotest"]
+    },
+    {
+      "id": "class:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerScopeTest.kt:StateManagerScopeTest",
+      "type": "class",
+      "name": "StateManagerScopeTest",
+      "filePath": "frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerScopeTest.kt",
+      "summary": "Kotest test class for StateManagerScope validation rules and prefix derivation",
+      "tags": ["test", "statemanager", "model", "validation", "kotest"]
+    },
+    {
+      "id": "file:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/serialization/StateManagerEncryptingSerializerImplTest.kt",
+      "type": "file",
+      "name": "StateManagerEncryptingSerializerImplTest.kt",
+      "filePath": "frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/serialization/StateManagerEncryptingSerializerImplTest.kt",
+      "summary": "Kotest StringSpec verifying AEAD encrypting serializer round-trips, rejects wrong AAD and tampered ciphertext",
+      "tags": ["test", "statemanager", "serialization", "crypto", "encrypting", "kotest", "property"]
+    },
+    {
+      "id": "class:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/serialization/StateManagerEncryptingSerializerImplTest.kt:StateManagerEncryptingSerializerImplTest",
+      "type": "class",
+      "name": "StateManagerEncryptingSerializerImplTest",
+      "filePath": "frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/serialization/StateManagerEncryptingSerializerImplTest.kt",
+      "summary": "Kotest test class for the encrypting serializer with a fake AEAD crypto service",
+      "tags": ["test", "statemanager", "serialization", "crypto", "encrypting", "kotest"]
+    },
+    {
+      "id": "file:frisboo-tests/build.gradle.kts",
+      "type": "file",
+      "name": "build.gradle.kts",
+      "filePath": "frisboo-tests/build.gradle.kts",
+      "summary": "Gradle build script for the frisboo-tests integration module depending on core, Exposed, Flyway, testcontainers",
+      "tags": ["config", "gradle", "build"]
+    },
+    {
+      "id": "file:frisboo-tests/src/main/kotlin/com/frisboo/corebanking/tests/constants/TestContants.kt",
+      "type": "file",
+      "name": "TestContants.kt",
+      "filePath": "frisboo-tests/src/main/kotlin/com/frisboo/corebanking/tests/constants/TestContants.kt",
+      "summary": "Constants holding Docker image names for Toxiproxy and Redis used by integration tests",
+      "tags": ["test", "constants", "config", "testcontainers"]
+    },
+    {
+      "id": "class:frisboo-tests/src/main/kotlin/com/frisboo/corebanking/tests/constants/TestContants.kt:TestContants",
+      "type": "class",
+      "name": "TestContants",
+      "filePath": "frisboo-tests/src/main/kotlin/com/frisboo/corebanking/tests/constants/TestContants.kt",
+      "summary": "Public constants exposing Toxiproxy and Redis container image identifiers",
+      "tags": ["test", "constants", "config"]
+    },
+    {
+      "id": "file:frisboo-tests/src/main/kotlin/com/frisboo/corebanking/tests/testcontainers/WithChaosProxyContainer.kt",
+      "type": "file",
+      "name": "WithChaosProxyContainer.kt",
+      "filePath": "frisboo-tests/src/main/kotlin/com/frisboo/corebanking/tests/testcontainers/WithChaosProxyContainer.kt",
+      "summary": "Suspension utility running a block inside a Toxiproxy chaos proxy wrapping a target container",
+      "tags": ["test", "testcontainers", "chaos", "toxiproxy", "integration", "utility"]
+    },
+    {
+      "id": "class:frisboo-tests/src/main/kotlin/com/frisboo/corebanking/tests/testcontainers/WithChaosProxyContainer.kt:ChaosProxyContext",
+      "type": "class",
+      "name": "ChaosProxyContext",
+      "filePath": "frisboo-tests/src/main/kotlin/com/frisboo/corebanking/tests/testcontainers/WithChaosProxyContainer.kt",
+      "summary": "Data class exposing proxy host, port, Toxiproxy Proxy instance and the upstream container",
+      "tags": ["test", "testcontainers", "chaos", "toxiproxy", "model"]
+    },
+    {
+      "id": "file:frisboo-tests/src/main/kotlin/com/frisboo/corebanking/tests/testcontainers/WithPostgresDatabase.kt",
+      "type": "file",
+      "name": "WithPostgresDatabase.kt",
+      "filePath": "frisboo-tests/src/main/kotlin/com/frisboo/corebanking/tests/testcontainers/WithPostgresDatabase.kt",
+      "summary": "Commented-out stub for a PostgreSQL testcontainer base class with Flyway migrations",
+      "tags": ["test", "testcontainers", "postgres", "flyway", "stub", "commented"]
+    },
+    {
+      "id": "file:gradle/wrapper/gradle-wrapper.jar",
+      "type": "file",
+      "name": "gradle-wrapper.jar",
+      "filePath": "gradle/wrapper/gradle-wrapper.jar",
+      "summary": "Gradle distribution wrapper JAR used by the gradlew/gradlew.bat launcher scripts",
+      "tags": ["gradle", "wrapper", "build", "infra"]
+    },
+    {
+      "id": "file:gradle/wrapper/gradle-wrapper.properties",
+      "type": "file",
+      "name": "gradle-wrapper.properties",
+      "filePath": "gradle/wrapper/gradle-wrapper.properties",
+      "summary": "Gradle wrapper configuration pinning Gradle 9.4.1 distribution URL and cache paths",
+      "tags": ["gradle", "wrapper", "config", "build"]
+    },
+    {
+      "id": "file:gradlew",
+      "type": "file",
+      "name": "gradlew",
+      "filePath": "gradlew",
+      "summary": "POSIX shell launcher that execs java against the Gradle wrapper JAR",
+      "tags": ["gradle", "wrapper", "build", "script"]
+    },
+    {
+      "id": "file:gradlew.bat",
+      "type": "file",
+      "name": "gradlew.bat",
+      "filePath": "gradlew.bat",
+      "summary": "Windows batch launcher that execs java.exe against the Gradle wrapper JAR",
+      "tags": ["gradle", "wrapper", "build", "script"]
+    },
+    {
+      "id": "file:settings.gradle.kts",
+      "type": "file",
+      "name": "settings.gradle.kts",
+      "filePath": "settings.gradle.kts",
+      "summary": "Root settings script including all frisboo subprojects and configuring plugin/version catalogs",
+      "tags": ["config", "gradle", "build", "settings"]
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerGetOrPutResult.kt",
+      "target": "class:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerGetOrPutResult.kt:StateManagerGetOrPutResult",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerGetOrPutResult.kt",
+      "target": "class:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerGetOrPutResult.kt:StateManagerGetOrPutResult.Created",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerGetOrPutResult.kt",
+      "target": "class:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerGetOrPutResult.kt:StateManagerGetOrPutResult.Updated",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerGetOrPutResult.kt",
+      "target": "class:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerGetOrPutResult.kt:StateManagerGetOrPutResult.Found",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "class:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerGetOrPutResult.kt:StateManagerGetOrPutResult.Created",
+      "target": "class:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerGetOrPutResult.kt:StateManagerGetOrPutResult",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerGetOrPutResult.kt:StateManagerGetOrPutResult.Updated",
+      "target": "class:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerGetOrPutResult.kt:StateManagerGetOrPutResult",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerGetOrPutResult.kt:StateManagerGetOrPutResult.Found",
+      "target": "class:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerGetOrPutResult.kt:StateManagerGetOrPutResult",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "file:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerGetResult.kt",
+      "target": "class:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerGetResult.kt:StateManagerGetResult",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerGetResult.kt",
+      "target": "class:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerGetResult.kt:StateManagerGetResult.Found",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerGetResult.kt",
+      "target": "class:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerGetResult.kt:StateManagerGetResult.NotFound",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "class:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerGetResult.kt:StateManagerGetResult.Found",
+      "target": "class:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerGetResult.kt:StateManagerGetResult",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerGetResult.kt:StateManagerGetResult.NotFound",
+      "target": "class:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerGetResult.kt:StateManagerGetResult",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "file:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerIsHealthyResult.kt",
+      "target": "class:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerIsHealthyResult.kt:StateManagerIsHealthyResult",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerIsHealthyResult.kt",
+      "target": "class:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerIsHealthyResult.kt:StateManagerIsHealthyResult.Up",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerIsHealthyResult.kt",
+      "target": "class:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerIsHealthyResult.kt:StateManagerIsHealthyResult.Down",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "class:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerIsHealthyResult.kt:StateManagerIsHealthyResult.Up",
+      "target": "class:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerIsHealthyResult.kt:StateManagerIsHealthyResult",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerIsHealthyResult.kt:StateManagerIsHealthyResult.Down",
+      "target": "class:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerIsHealthyResult.kt:StateManagerIsHealthyResult",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "file:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerPage.kt",
+      "target": "class:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerPage.kt:StateManagerPage",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerPutResult.kt",
+      "target": "class:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerPutResult.kt:StateManagerPutResult",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerPutResult.kt",
+      "target": "class:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerPutResult.kt:StateManagerPutResult.Created",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerPutResult.kt",
+      "target": "class:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerPutResult.kt:StateManagerPutResult.Updated",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "class:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerPutResult.kt:StateManagerPutResult.Created",
+      "target": "class:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerPutResult.kt:StateManagerPutResult",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerPutResult.kt:StateManagerPutResult.Updated",
+      "target": "class:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerPutResult.kt:StateManagerPutResult",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "file:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerSetTtlResult.kt",
+      "target": "class:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerSetTtlResult.kt:StateManagerSetTtlResult",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerSetTtlResult.kt",
+      "target": "class:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerSetTtlResult.kt:StateManagerSetTtlResult.Applied",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerSetTtlResult.kt",
+      "target": "class:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerSetTtlResult.kt:StateManagerSetTtlResult.NotFound",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "class:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerSetTtlResult.kt:StateManagerSetTtlResult.Applied",
+      "target": "class:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerSetTtlResult.kt:StateManagerSetTtlResult",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "class:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerSetTtlResult.kt:StateManagerSetTtlResult.NotFound",
+      "target": "class:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerSetTtlResult.kt:StateManagerSetTtlResult",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "file:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerSizeResult.kt",
+      "target": "class:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerSizeResult.kt:StateManagerSizeResult",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerSizeResult.kt",
+      "target": "class:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerSizeResult.kt:StateManagerSizeResult.Size",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "class:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerSizeResult.kt:StateManagerSizeResult.Size",
+      "target": "class:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerSizeResult.kt:StateManagerSizeResult",
+      "type": "implements",
+      "weight": 0.9
+    },
+    {
+      "source": "file:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/adapters/distributed/redis/StateManagerRedisImplTest.kt",
+      "target": "class:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/adapters/distributed/redis/StateManagerRedisImplTest.kt:StateManagerRedisImplTest",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/adapters/distributed/redis/StateManagerRedisImplTest.kt",
+      "target": "file:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/adapters/StateManagerTestTemplates.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/adapters/distributed/redis/StateManagerRedisImplTest.kt",
+      "target": "file:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerScopeTest.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/adapters/distributed/redis/StateManagerRedisImplTest.kt",
+      "target": "file:frisboo-tests/src/main/kotlin/com/frisboo/corebanking/tests/testcontainers/WithChaosProxyContainer.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/adapters/distributed/redis/StateManagerRedisImplTest.kt",
+      "target": "file:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/serialization/StateManagerEncryptingSerializerImplTest.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/adapters/distributed/redis/StateManagerRedisImplTest.kt",
+      "target": "file:frisboo-tests/src/main/kotlin/com/frisboo/corebanking/tests/constants/TestContants.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/adapters/distributed/redis/StateManagerRedisImplTest.kt",
+      "target": "file:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerIsHealthyResult.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/adapters/distributed/redis/StateManagerRedisImplTest.kt",
+      "target": "file:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerGetOrPutResult.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/adapters/distributed/redis/StateManagerRedisImplTest.kt",
+      "target": "file:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerGetResult.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/adapters/distributed/redis/StateManagerRedisImplTest.kt",
+      "target": "file:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerPutResult.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/adapters/distributed/redis/StateManagerRedisImplTest.kt",
+      "target": "file:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerSizeResult.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/adapters/distributed/redis/StateManagerRedisImplTest.kt",
+      "target": "file:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerSetTtlResult.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/adapters/distributed/redis/StateManagerRedisImplTest.kt",
+      "target": "file:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerScopeTest.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/adapters/distributed/redis/StateManagerRedisImplTest.kt",
+      "target": "file:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/decorators/StateManagerResilientImplTest.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/adapters/distributed/redis/StateManagerRedisImplTest.kt",
+      "target": "file:frisboo-tests/build.gradle.kts",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/adapters/local/caffeine/StateManagerCaffeineImplTest.kt",
+      "target": "class:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/adapters/local/caffeine/StateManagerCaffeineImplTest.kt:StateManagerCaffeineImplTest",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/adapters/local/caffeine/StateManagerCaffeineImplTest.kt",
+      "target": "file:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/adapters/StateManagerTestTemplates.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/adapters/local/caffeine/StateManagerCaffeineImplTest.kt",
+      "target": "file:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerScopeTest.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/adapters/local/caffeine/StateManagerCaffeineImplTest.kt",
+      "target": "file:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/serialization/StateManagerEncryptingSerializerImplTest.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/adapters/local/caffeine/StateManagerCaffeineImplTest.kt",
+      "target": "file:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/decorators/StateManagerResilientImplTest.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/adapters/StateManagerTestTemplates.kt",
+      "target": "class:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/adapters/StateManagerTestTemplates.kt:StateManagerTestTemplates",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/adapters/StateManagerTestTemplates.kt",
+      "target": "file:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerGetOrPutResult.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/adapters/StateManagerTestTemplates.kt",
+      "target": "file:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerGetResult.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/adapters/StateManagerTestTemplates.kt",
+      "target": "file:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerPutResult.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/adapters/StateManagerTestTemplates.kt",
+      "target": "file:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerSizeResult.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/adapters/StateManagerTestTemplates.kt",
+      "target": "file:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerSetTtlResult.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/adapters/StateManagerTestTemplates.kt",
+      "target": "file:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerEvictResult.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/adapters/StateManagerTestTemplates.kt",
+      "target": "file:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerContainsResult.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/adapters/StateManagerTestTemplates.kt",
+      "target": "file:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerPage.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/adapters/StateManagerTestTemplates.kt",
+      "target": "file:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerIsHealthyResult.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/adapters/StateManagerTestTemplates.kt",
+      "target": "file:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/errors/StateManagerError.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/decorators/StateManagerResilientImplTest.kt",
+      "target": "class:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/decorators/StateManagerResilientImplTest.kt:StateManagerResilientImplTest",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/decorators/StateManagerResilientImplTest.kt",
+      "target": "file:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/contracts/StateManager.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/decorators/StateManagerResilientImplTest.kt",
+      "target": "file:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/contracts/StateManagerResilienceExecutor.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/decorators/StateManagerResilientImplTest.kt",
+      "target": "file:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/errors/StateManagerError.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/decorators/StateManagerResilientImplTest.kt",
+      "target": "file:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerGetOrPutResult.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/decorators/StateManagerResilientImplTest.kt",
+      "target": "file:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerGetResult.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/decorators/StateManagerResilientImplTest.kt",
+      "target": "file:frisboo-statemanager/src/main/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerPutResult.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerScopeTest.kt",
+      "target": "class:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerScopeTest.kt:StateManagerScopeTest",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerScopeTest.kt",
+      "target": "file:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/serialization/StateManagerEncryptingSerializerImplTest.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/serialization/StateManagerEncryptingSerializerImplTest.kt",
+      "target": "class:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/serialization/StateManagerEncryptingSerializerImplTest.kt:StateManagerEncryptingSerializerImplTest",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/serialization/StateManagerEncryptingSerializerImplTest.kt",
+      "target": "file:frisboo-statemanager/src/test/kotlin/com/frisboo/corebanking/statemanager/models/StateManagerScopeTest.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-tests/build.gradle.kts",
+      "target": "file:frisboo-tests/src/main/kotlin/com/frisboo/corebanking/tests/constants/TestContants.kt",
+      "type": "configures",
+      "weight": 0.6
+    },
+    {
+      "source": "file:frisboo-tests/build.gradle.kts",
+      "target": "file:frisboo-tests/src/main/kotlin/com/frisboo/corebanking/tests/testcontainers/WithChaosProxyContainer.kt",
+      "type": "configures",
+      "weight": 0.6
+    },
+    {
+      "source": "file:frisboo-tests/build.gradle.kts",
+      "target": "file:frisboo-tests/src/main/kotlin/com/frisboo/corebanking/tests/testcontainers/WithPostgresDatabase.kt",
+      "type": "configures",
+      "weight": 0.6
+    },
+    {
+      "source": "file:frisboo-tests/src/main/kotlin/com/frisboo/corebanking/tests/constants/TestContants.kt",
+      "target": "class:frisboo-tests/src/main/kotlin/com/frisboo/corebanking/tests/constants/TestContants.kt:TestContants",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-tests/src/main/kotlin/com/frisboo/corebanking/tests/testcontainers/WithChaosProxyContainer.kt",
+      "target": "class:frisboo-tests/src/main/kotlin/com/frisboo/corebanking/tests/testcontainers/WithChaosProxyContainer.kt:ChaosProxyContext",
+      "type": "contains",
+      "weight": 1.0
+    },
+    {
+      "source": "file:frisboo-tests/src/main/kotlin/com/frisboo/corebanking/tests/testcontainers/WithChaosProxyContainer.kt",
+      "target": "file:frisboo-tests/src/main/kotlin/com/frisboo/corebanking/tests/constants/TestContants.kt",
+      "type": "imports",
+      "weight": 0.7
+    },
+    {
+      "source": "file:frisboo-tests/src/main/kotlin/com/frisboo/corebanking/tests/testcontainers/WithPostgresDatabase.kt",
+      "target": "file:frisboo-tests/build.gradle.kts",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "file:gradle/wrapper/gradle-wrapper.jar",
+      "target": "file:gradle/wrapper/gradle-wrapper.properties",
+      "type": "configures",
+      "weight": 0.6
+    },
+    {
+      "source": "file:gradlew",
+      "target": "file:gradle/wrapper/gradle-wrapper.jar",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "file:gradlew.bat",
+      "target": "file:gradle/wrapper/gradle-wrapper.jar",
+      "type": "depends_on",
+      "weight": 0.6
+    },
+    {
+      "source": "file:settings.gradle.kts",
+      "target": "file:frisboo-tests/build.gradle.kts",
+      "type": "configures",
+      "weight": 0.6
+    }
+  ]
+}
